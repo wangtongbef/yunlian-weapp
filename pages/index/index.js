@@ -9,7 +9,7 @@ Page({
   data: {
     userInfo:{},
     list:[
-      { text: '签到', icon: '../../img/icon-signIndex.svg', arrow: '../../img/icon-arrowRB.svg'},
+      { text: '签到1', icon: '../../img/icon-signIndex.svg', arrow: '../../img/icon-arrowRB.svg'},
       { text: '签约', icon: '../../img/icon-signing.svg', arrow: '../../img/icon-arrowRB.svg'},
       { text: '门店', icon: '../../img/icon-store.svg', arrow: '../../img/icon-arrowRB.svg' },
       { text: '售后扫码', icon: '../../img/icon-scanCode.svg', arrow: '../../img/icon-arrowRB.svg' },
