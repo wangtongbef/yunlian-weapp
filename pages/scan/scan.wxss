@@ -1,0 +1,47 @@
+page{
+  background: #eee;
+  position: relative
+}
+.state{
+  text-align: center;
+  padding: 100rpx 0;
+  font-size: 30rpx
+}
+.state image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.state text{
+  display: block;
+  margin: 10rpx 0
+}
+.background{
+  background: #fff
+}
+.blue{
+  color: #0072b1
+}
+.stateInfo > view{
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx #eee solid;
+  width: 90%;
+  padding: 20rpx 5%
+}
+.complete{
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 140rpx
+}
+.complete button{
+  display: inline-block;
+  width: 80%;
+  padding: 0 5%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff;
+  font-size: 30rpx
+}

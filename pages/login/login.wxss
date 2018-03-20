@@ -1,0 +1,81 @@
+
+page{
+  background-color: #eee;
+}
+button,input{
+  border: none
+}
+.flexCenter{
+  display: flex;
+  justify-content: center;
+}
+.fontsize28{
+  font-size: 30rpx
+}
+
+.login{
+  width: 600rpx;
+  margin: 0 auto;
+}
+.logo{ 
+  margin-top: 40rpx;
+  text-align: center
+}
+.logo image{
+  width: 180rpx;
+  height: 180rpx;
+  margin-bottom: 30rpx
+}
+.logo text{
+  display: block
+}
+.phoneNum{
+  margin-top: 140rpx
+}
+
+.phoneNum input,.phoneCode input{
+  background-color: #fff;
+  height: 100rpx;
+  width: 100%;
+  border-radius:10rpx;
+  padding: 0 0 0 10rpx;
+}
+.phoneNum text{
+  display: block;
+  text-align: right;
+  font-size: 24rpx
+}
+.phoneCode{
+  margin-top: 60rpx;
+  font-size: 30rpx
+}
+.phoneCode > button{
+  width: 210rpx;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx
+}
+.phoneCode > button[disabled]{
+  background-color: #C7C7C7;
+  color: #fff
+}
+.phoneCode > input{
+  width: 360rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  padding: 0 10rpx
+}
+.fromBtn > button{
+  border:none;
+  background-color: #C7C7C7;
+  margin-top: 100rpx;
+  /*background: linear-gradient(#018fe8,#0072b1);*/
+  color: #fff;
+  border-radius: 10rpx;
+}
+.fromBtn > button[disabled]{
+  background-color: #C7C7C7;
+  color: #fff
+}

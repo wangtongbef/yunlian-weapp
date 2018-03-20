@@ -1,0 +1,47 @@
+<!--商务专员-->
+<view style='display:block'>
+    <view class="swiper-tab">
+      <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">待签约</view>
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">已签约</view>
+  </view>
+
+    <!--待签约-->
+    <view class="swiper-item" hidden="{{!isShow}}">
+      <block wx:for='{{waiting}}'>
+          <view class='borderBtm' bindtap='waitingDetail' data-id='{{index}}'>
+              <text>{{item.name}}</text>
+              <image src='../../../img/icon-arrowRB.svg'></image>
+          </view>
+      </block>
+      <view class='nodata' wx:if="{{waiting.length == 0}}">
+          <image src='../../../img/nodata.svg'></image>
+          <text>暂无数据</text>
+      </view>
+      <view class='addStore'>
+          <navigator url='../addStore/addStore'><button class='height'>新增</button></navigator>
+      </view>
+    </view>
+
+    <!--已签约-->
+    <view class="swiper-item" hidden="{{isShow}}">
+      <block wx:for='{{waited}}'>
+          <view class='borderBtm'>
+              <text class='width'>{{item.name}}</text>
+          </view>
+      </block>
+      <view class='nodata' wx:if="{{waited.length == 0}}">
+          <image src='../../../img/nodata.svg'></image>
+          <text>暂无数据</text>
+      </view>
+    </view>
+</view>
+
+<!--门店负责人-->
+<!--<view>
+  <block wx:for='{{chargePstore}}'>
+      <view class='borderBtm'>
+        <text>{{item.name}}</text>
+        <image src='../../../img/icon-arrowRB.svg'></image>
+      </view>
+  </block>   
+</view>-->

@@ -1,0 +1,29 @@
+<!--pages/addPerson/addPerson.wxml-->
+<view class='{{previewHidden == false ? "show" : "hide"}}'>
+    <form bindsubmit="formSubmit">
+        <view class='addPhone'>
+            <input class='phoneNumVal' type='number' maxlength='11' placeholder='填写要添加的手机号码' bindinput='phoneVal'/>
+            <text style='color:{{promptColor}}'>{{phonePrompt}}</text>
+            <button formType="submit" disabled='{{disabled}}' style='background:{{btnBackground}}'>下一步</button>
+        </view> 
+    </form>
+</view>
+
+<view class='{{previewHidden == true ? "show" : "hide"}}   preview'>
+     <view>确认所填信息</view>
+     <view class='background'>
+          <view class='previewInfo width'>
+              <text>姓    名:</text>
+              <text>手机号码:</text>
+          </view> 
+          <view class='previewBtn width'>
+              <button bindtap='refill'>重新填写</button>
+              <button class='confirm' bindtap='confirm'>确认添加</button>
+          </view>
+     </view>
+     
+</view> 
+
+
+
+

@@ -1,0 +1,17 @@
+<form>
+    <view class='unbindPhone'>
+        <view class='phoneNum'>
+            <input class='phoneVal' type='number' maxlength='11' placeholder='请输入新的手机号码' bindinput='phoneVal'/>
+            <text wx:if='{{flag}}' style='color:{{promptColor}}'>{{phonePrompt}}</text>
+        </view>
+        <view class='phoneCode flexCenter'>
+            <input type='number' maxlength='4' placeholder='请输入验证码'/>
+            <button disabled='{{codeDis}}' style='background:{{btnBackground}}' bindtap='getCode'>
+                <text>{{codeText}}</text>
+            </button>
+        </view>
+        <view class='formSubmit'>
+            <button disabled='{{submitDis}}'>绑定</button>
+        </view>
+    </view>
+</form>

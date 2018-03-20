@@ -1,0 +1,12 @@
+<!--pages/wallet/walletDetail/walletDetail.wxml-->
+<view class='background'>
+    <block wx:for='{{detail}}'>
+       <view class='detail width' bindtap='linkDetail'>
+          <view class='left'>
+              <text>{{item.type}}</text>
+              <text>{{item.time}}</text>
+          </view>
+          <view>+{{item.money}}</view>
+       </view> 
+    </block>
+</view>

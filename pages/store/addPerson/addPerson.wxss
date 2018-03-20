@@ -1,0 +1,80 @@
+/* pages/addPerson/addPerson.wxss */
+page{
+  background-color: #eee;
+  width: 90%;
+  margin: 240rpx auto 0 auto
+}
+.width{
+  width: 90%;
+  margin: 0 auto;
+}
+.addPhone > input{
+  background-color: #fff;
+  height: 100rpx;
+  width: 96%;
+  padding: 0 2%;
+  border-radius:10rpx;
+  font-size: 30rpx
+}
+.addPhone > button{
+  border:none;
+  background-color: #C7C7C7;
+  margin-top: 100rpx;
+  /*background: linear-gradient(#018fe8,#0072b1);*/
+  color: #fff;
+  border-radius: 10rpx;
+}
+.addPhone > button[disabled]{
+  background-color: #C7C7C7;
+  color: #fff;
+  margin-top: 100rpx;
+  font-size: 30rpx;
+}
+
+.addPhone > text{
+  display: block;
+  text-align: right;
+  font-size: 24rpx
+  
+}
+.preview view text{
+  display: block;
+  margin: 10rpx 0;
+}
+.background{
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 40rpx 0;
+  margin-top: 10rpx
+}
+.preview{
+  font-size: 30rpx
+}
+.previewInfo{
+  
+}
+.previewBtn{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60rpx
+}
+.previewBtn button{
+  width: 40%;
+  display: inline-block;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 26rpx;
+  border: none;
+  background: #fff;
+  color: #0072b1
+}
+.previewBtn .confirm{
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff 
+}
+.hide{
+  display: none
+}
+.show{
+  display: block
+}

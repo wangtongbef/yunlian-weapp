@@ -1,0 +1,89 @@
+<!--门店负责人-->
+<view>
+    <view class='detailTitle'>基本信息</view>
+    <view class='backgroundColor'>
+
+        <view>
+            <text>编号</text>
+            <text>{{store.id}}</text>
+        </view>
+        <view>
+            <text>名称</text>
+            <text>{{store.name}}</text>
+        </view>
+        <view class='addressDetail' bindtap='linkMap'>
+            <text>位置</text>
+            <view>
+                <text>{{store.address}}</text>
+                <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+            </view>  
+        </view>
+        <view>
+            <text>合作状态</text>
+            <text>未签约</text>
+        </view>
+    </view>
+    <!--<view>
+        <view class='detailTitle'>门店销售员</view>
+        <view class='backgroundColor'>
+            <block wx:for='{{saleList}}'>
+                <view bindtap='salePhoneBtn' id='{{index}}'>
+                    <text>{{item.name}}</text>
+                    <text>{{item.phoneNum}}</text>
+                </view>
+            </block>
+            <view wx:if='{{nameList.length == 0}}' class='noData'>暂无数据</view>
+        </view>
+    </view>
+    
+    <view>
+        <view class='detailTitle'>商户专员</view>
+        <view class='backgroundColor'>
+            <block wx:for='{{businessList}}'>
+                <view bindtap='businessPhoneBtn' id='{{index}}'>
+                    <text>{{item.name}}</text>
+                    <text>{{item.phoneNum}}</text>
+                </view>
+            </block>
+            <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
+        </view>
+    </view>-->
+    <!--商务专员-->
+    <view>
+        <view>
+            <view class='detailTitle'>门店负责人</view>
+            <view class='backgroundColor'>
+                <block wx:for='{{chargePersonList}}'>
+                    <view bindtap='chargePersonBtn' id='{{index}}' >
+                        <text>{{item.name}}</text>
+                        <view>
+                            <text>{{item.phoneNum}}</text>
+                            <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{item.id}}'></image>
+                        </view>   
+                    </view>
+                </block>
+                <view class='addBtn' bindtap='addPerson' wx:if='{{chargePersonList.length == 0}}'> + 添加</view>
+            </view>
+        </view>
+        <view>
+            <view class='detailTitle'>门店销售员</view>
+            <view class='backgroundColor'>
+                <block wx:for='{{chargePersonList}}'>
+                    <view bindtap='chargePersonBtn' id='{{index}}'>
+                        <text>{{item.name}}</text>
+                        <view>
+                            <text>{{item.phoneNum}}</text>
+                            <image src='../../../img/icon-rubbish.svg' class='iconRubbish' bindtap='delete'></image>
+                        </view>
+                    </view>
+                </block>
+                <view class='addBtn marginBtm' bindtap='addPerson'>+ 添加</view>
+            </view>
+        </view>
+        <view class='giveUp'>
+            <button>放弃此店</button>
+            <!--<button>解约此店</button>-->
+        </view>
+    </view>
+    
+</view>

@@ -1,0 +1,68 @@
+/* pages/wallet/takecash/takecash.wxss */
+page{
+  background: #eee
+}
+.float{
+  float: left;
+  margin-right: 40rpx
+}
+.blue{
+  color: #0072b1
+}
+.gray{
+  color: #a7a7a7;
+}
+.takeCash{
+  width: 90%;
+  margin: 80rpx auto;
+  background: #fff;
+  font-size: 30rpx;
+}
+.takecashInfo{
+  width:90%;
+  padding:0 5% 6% 5%
+}
+.cashPath{
+  width: 90%;
+  padding: 5%;
+  background: #FBFBFB;
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx
+}
+.cashPath > view{
+  display: inline-block
+}
+.pathInfo text{
+  display: block
+}
+.num{
+  border-bottom: 1rpx #ddd solid;
+  padding: 20rpx 0;
+  display: flex
+}
+.num text{
+  font-size: 46rpx;
+}
+.num input{
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 48rpx;
+}
+.showNum{
+  padding: 40rpx 0
+}
+.takeCashBtn{
+  text-align: center
+}
+.takeCashBtn button{
+  display: inline-block;
+  width: 100%;
+  background: #a7a7a7;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx
+}
+.showNum .blue{
+  margin-left: 20rpx
+}

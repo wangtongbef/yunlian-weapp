@@ -1,0 +1,27 @@
+<!--pages/index/index.wxml-->
+<view>
+    <view class='userInfo' bindtap='userInfo'>
+        <view>
+            <view class='userImg'><image src='{{userInfo.img}}'></image></view>
+            <view class='userText'>
+                <text>阿拉蕾</text>
+                <text class='margin20'>15012630722</text>
+                <text>商务专员</text>
+            </view> 
+        </view> 
+        <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view>
+    </view>
+    <view class='operateList'>
+        <view class='operateList-1' >
+            <block wx:for='{{list}}'>
+              <view class='operateInfo'>
+                  <view class='operateText'>
+                      <image src='{{item.icon}}'></image>
+                      <text>{{item.text}}</text>
+                  </view>
+                  <view class='arrow'><image src='{{item.arrow}}'></image></view>
+              </view>
+            </block> 
+        </view>
+    </view>
+</view>

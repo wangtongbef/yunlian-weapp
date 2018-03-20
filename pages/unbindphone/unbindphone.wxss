@@ -1,0 +1,47 @@
+page{
+  background: #eee
+}
+.flexCenter{
+  display: flex;
+  justify-content: center
+}
+.unbindPhone{
+  width: 600rpx;
+  margin: 100rpx auto 0 auto;
+}
+.phoneNum text{
+  font-size: 24rpx;
+  display: block;
+  text-align: right;
+}
+.phoneNum input,.phoneCode input{
+  background-color: #fff;
+  height: 100rpx;
+  width: 100%;
+  border-radius:10rpx;
+  padding: 0 0 0 10rpx;
+  font-size: 28rpx
+}
+.phoneCode{
+  margin: 60rpx 0 100rpx 0;
+}
+.phoneCode button{
+  font-size: 28rpx;
+  width: 210rpx;
+  color: #fff;
+  align-items: center;
+  justify-content: center
+}
+.phoneCode button text{
+  display: inline-block;
+  height:100rpx;
+  line-height:100rpx;
+}
+.phoneCode input{
+  width: 380rpx;
+  margin-right: 10rpx
+}
+.formSubmit button[disabled],.phoneCode button[disabled]{
+  background-color: #C7C7C7;
+  color: #fff
+}

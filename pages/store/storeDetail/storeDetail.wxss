@@ -1,0 +1,70 @@
+/* pages/storeDetail/storeDetail.wxss */
+page{
+  background-color: #eee
+}
+.backgroundColor{
+  background-color: #fff 
+}
+.detailTitle{
+  width: 90%;
+  padding: 0 5%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 30rpx
+}
+.backgroundColor > view{
+  width: 90%;
+  padding: 0 5%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 30rpx;
+  border-bottom: 1rpx #eee solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+.addressDetail{
+  width: 100%;
+  display: flex;
+  justify-content: space-between
+}
+.addressDetail image{
+  height: 36rpx;
+  width: 36rpx;
+  margin-left: 6rpx;
+  position: relative;
+  top: 6rpx
+}
+.backgroundColor .noData{
+  justify-content: center;
+  color: #A7A7A7
+}
+.backgroundColor .addBtn{
+  display: flex;
+  justify-content: center;
+  color: #0072b1;
+}
+.giveUp{
+  width: 80%;
+  padding: 0 10%;
+  position: fixed;
+  bottom:100rpx;
+  display: flex;
+  justify-content: center
+}
+.giveUp button{
+  width: 100%;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff;
+  font-size: 32rpx;
+  height: 90rpx
+}
+.iconRubbish{
+  height: 40rpx;
+  width: 54rpx;
+  position: relative;
+  top: 10rpx
+}
+view.marginBtm{
+  margin-bottom: 260rpx
+}

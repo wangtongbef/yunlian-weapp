@@ -1,0 +1,134 @@
+page{
+  background: #eee
+}
+.backgroundColor{
+  background: #fff;
+}
+.photoInfo{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1rpx #C7C7C7 solid
+}
+.photoInfo .photoBtn{
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  padding: 100rpx 0
+}
+.photoInfo .photo{
+  width: 90%;
+  height: 380rpx;
+  padding: 50rpx 0
+}
+.addressInfo{
+  
+}
+.padding{
+  padding: 26rpx 5%;
+}
+.flexBetween{
+  display: flex;
+  justify-content: space-between
+}
+.addressInfo .iconAddress{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 8rpx;
+  position: relative;
+  top: 8rpx
+}
+.addressInfo text{
+  font-size: 30rpx
+}
+.addressInfo > view{
+  display: inline-block
+}
+.addressInfo .iconArrow{
+  width: 40rpx;
+  height: 36rpx;
+  position: relative;
+  top: 4rpx
+}
+.checkBtn{
+  display: flex;
+  justify-content: center;
+  margin-top: 200rpx
+}
+.checkBtn button{
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  border-radius: 50%;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff
+}
+.swiper-tab{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 100rpx;
+  border-bottom: 1rpx #ccc solid;
+  background: #fff;
+  z-index: 99
+}
+.swiper-tab > view {
+  font-size: 34rpx;
+  display: inline-block;
+  border-bottom: 0rpx;
+  width: 50%;
+  box-sizing: border-box
+}
+.swiper-tab > view:first-child{
+  border-right:1rpx #C7C7C7 solid;
+  
+}
+.swiper-tab .active {
+  color: #0072b1;
+}
+.swiper-tab view{
+  
+}
+.swiper-tab view image{
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 4rpx
+}
+.signed{
+  
+}
+.signed > text{
+  display: block;
+  font-size: 30rpx;
+  color: #A7A7A7;
+  margin-bottom: 10rpx
+}
+.width{
+  width: 90%;
+  padding: 20rpx 5%
+}
+.signed image{
+  width: 100%;
+  height: 400rpx
+}
+.signed{
+  margin-bottom: 30rpx;
+  width: 90%
+}
+.checkedList .signed:last-child{
+  margin-bottom: 200rpx
+}
+.nodata{
+  text-align: center;
+  margin-top: 100rpx
+}
+.nodata image{
+  width: 180rpx;
+  height: 180rpx
+}
+.nodata text{
+  display: block;
+  color: #777;
+  font-size: 32rpx
+}

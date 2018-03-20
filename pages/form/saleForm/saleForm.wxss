@@ -1,0 +1,76 @@
+/* pages/saleForm/saleForm.wxss */
+.flex{
+  display: flex;
+  justify-content: space-between
+}
+.section{
+   font-size:28rpx;
+   margin: 30rpx 0 0 50rpx
+}
+.width{
+  display: block;
+  width: 90%;
+  padding:5%;
+  background-color: #eee
+}
+.background{
+  background: #fff;
+  font-size: 30rpx
+}
+
+.saleForm > view{
+  
+}
+  .choose{
+    width: 200rpx;
+    padding: 0 10rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    border: 1rpx #C7C7C7 solid;
+    font-size: 26rpx;
+    margin-right: 4rpx;
+    display: flex;
+    align-content: center;
+    justify-content: space-between
+  }
+  .choose image{
+    width: 50rpx;
+    height: 30rpx;
+    position: relative;
+    top: 16rpx
+  }
+  .storeChoose{
+    width: 290rpx;
+  }
+  .storeChoose text{
+    display: inline-block;
+    width: 240rpx;
+    overflow: hidden;
+  }
+  .timeChoose{
+    width: 120rpx
+  }
+  .submit{
+    text-align: right
+  }
+  .submit button{
+    display: inline-block;
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin-top: 40rpx;
+    background: linear-gradient(#018fe8,#0072b1);
+    color: #fff;
+    font-size: 26rpx
+  }
+.productInfo{
+  width: 90%;
+  padding: 5%;
+  border-bottom: 1rpx #ddd solid
+}
+.title{
+  width: 90%;
+  padding: 5%;
+  border-bottom: 1rpx #0072b1 solid;
+  color: #0072b1
+}

@@ -1,0 +1,40 @@
+/* pages/personal/personal.wxss */
+.flex{
+  display: flex;
+  justify-content: space-between
+}
+.borderBt{
+  border-bottom: 1rpx #ccc solid;
+  box-sizing: border-box;
+}
+.grey{
+  color: grey;
+}
+.personalPhone view image{
+  width: 30rpx;
+  height: 32rpx;
+  position: relative;
+  top: 4rpx;
+  margin-left: 14rpx  
+}
+.width90{
+  width: 90%;
+  padding: 0 5%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx
+}
+.loginOut{
+  justify-content: center;
+}
+ .loginOut button{
+  width: 90%;
+  padding: 0 5%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff;
+  position: absolute;
+  bottom: 130rpx;
+  border-radius: 10rpx
+}

@@ -1,0 +1,30 @@
+<!--pages/wallet/walletDetail/walletDetail.wxml-->
+<view class='detail'>
+   <view class='width'>基本信息</view>
+   <view class='detailInfo'>
+        <view>
+            <text>流水号</text>
+            <text>454554</text>
+        </view>
+        <view>
+            <text>收支类型</text>
+            <text>销售收入</text>
+        </view>
+        <view>
+            <text>金额</text>
+            <text>￥200</text>
+        </view>
+        <view>
+            <text>时间</text>
+            <text>2018-12-12  10:52:03</text>
+        </view>
+   </view> 
+   <!--当收支类型为提现支出时，不显示以下部分-->
+   <view class='width'>门店信息</view>
+   <view class='detailInfo'>
+        <view>
+            <text>售出门店</text>
+            <text>大浪店</text>
+        </view>
+   </view>
+</view>

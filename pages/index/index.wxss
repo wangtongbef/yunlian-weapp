@@ -1,0 +1,77 @@
+/* pages/index/index.wxss */
+.userInfo{
+  width: 90%;
+  padding: 0 5%;
+  height: 300rpx;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.margin20{
+  margin: 10rpx 0
+}
+.userImg{
+  display: inline-block;
+  margin-right: 24rpx
+}
+.userImg image{
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%
+}
+.userText{
+  display: inline-block;
+  align-items: center
+}
+.userText text{
+  display: block;
+  font-size: 34rpx
+}
+.arrow{
+  width: 30rpx;
+  height: 40rpx
+}
+.arrow image{
+  width: 40rpx;
+  height: 50rpx
+}
+.operateList{
+  
+}
+.operateList-1{
+  
+}
+.operateList-1 > .operateInfo{
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx #eee solid;
+  box-sizing: border-box;
+}
+.operateText{
+  margin-left: 5%
+}
+.operateText image{
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 12rpx;
+  position: relative;
+  top: 10rpx
+}
+.operateText text{
+  font-size: 30rpx
+}
+.operateInfo{
+  display: flex;
+  justify-content: space-between
+}
+.operateInfo .arrow image{
+  width: 30rpx;
+  height: 40rpx;
+  
+}
+.operateInfo .arrow{
+  margin-right: 5%
+}

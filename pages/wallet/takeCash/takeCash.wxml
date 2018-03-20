@@ -1,0 +1,27 @@
+<!--pages/wallet/takecash/takecash.wxml-->
+<view class='takeCash'>
+    <view class='cashPath'>
+        <view class='float'>入账方式</view>
+        <view class='pathInfo'>
+            <text class='blue'>零钱</text>
+            <text class='gray'>立即到账</text>
+        </view>
+    </view>
+    <view class='takecashInfo'>
+        <view class='takeCashNum'>
+          <text>提现金额</text>
+          <view class='num'>
+              <text>￥</text>
+              <input type='number'></input>
+          </view>
+        </view>
+        <view class='showNum'>
+            <text class='gray'>余额  51.00</text>
+            <text class='blue'>全部提现</text>
+        </view>
+        <view class='takeCashBtn'>
+            <button>提现</button>
+        </view>
+    </view>
+    
+</view>

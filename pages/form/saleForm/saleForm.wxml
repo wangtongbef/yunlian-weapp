@@ -1,0 +1,53 @@
+<!--pages/saleForm/saleForm.wxml-->
+<form class='width'>
+  <view class='flex saleForm'>
+    <view>
+        <picker bindchange="bindStoreChange" value="{{storeIndex}}" range="{{storeArray}}">
+          <view class='choose storeChoose'>
+              <text>{{storeArray[storeIndex]}}</text>
+              <image src='../../../img/icon-arrowDG.svg'></image>
+          </view>
+        </picker>
+    </view>
+      
+    <view hidden="{{isShow}}">
+        <picker bindchange="bindSaleChange" value="{{saleIndex1}}" range="{{saleArray}}">
+          <view class='choose'>
+              <text>{{saleArray[saleIndex]}}</text>
+              <image src='../../../img/icon-arrowDG.svg'></image>
+          </view>
+      </picker>
+    </view>
+
+    <view>
+      <picker bindchange="bindTimeChange" value="{{timeIndex1}}" range="{{timeArray}}">
+          <view class='choose timeChoose'>
+              <text>{{timeArray[timeIndex]}}</text>
+              <image src='../../../img/icon-arrowDG.svg'></image>
+          </view>
+      </picker>
+    </view>
+  </view>
+  <view class='submit'>
+    <button>查询</button>
+  </view>
+</form>
+<view class='background'>
+    <view class='flex title'>
+        <text>产品名称</text>
+        <text>数量</text>
+    </view>
+    <block wx:for='{{productInfo}}'>
+      <view class='flex productInfo'>
+        <text>{{item.name}}</text>
+        <text>{{item.num}}个</text>
+      </view>
+    </block>
+    
+</view>
+
+  
+    
+<!--<view class="section {{reply?'on':'off'}}">
+    <input name="other" placeholder="请输入所预约项目" type="text"/>
+</view>-->

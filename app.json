@@ -1,0 +1,27 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/login/login",
+    "pages/sign/sign",
+    "pages/checkIn/checkIn",
+    "pages/store/storeList/storeList",
+    "pages/scan/scan",
+    "pages/wallet/walletCenter/walletCenter",
+    "pages/wallet/walletDetail/walletDetail",
+    "pages/store/storeDetail/storeDetail",
+    "pages/wallet/walletList/walletList",
+    "pages/wallet/takeCash/takeCash",
+    "pages/form/signForm/signForm",
+    "pages/form/saleForm/saleForm",
+    "pages/form/formList/formList",
+    "pages/store/addPerson/addPerson",
+    "pages/store/addStore/addStore",
+    "pages/personal/personal",
+    "pages/unbindphone/unbindphone"
+  ],
+  "window":{
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTextStyle": "white"
+  }
+}

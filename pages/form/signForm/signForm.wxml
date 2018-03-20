@@ -1,0 +1,24 @@
+<!--pages/signForm/signForm.wxml-->
+<view id="panel" class="flex-column">
+  <view class="flex-cell flex-row">
+    <text class="flex-cell flex-row">周期</text>
+    <text class="flex-cell flex-row">签约数量(家)</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">今天</text>
+    <text class="flex-cell flex-row">9</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">本周</text>
+    <text class="flex-cell flex-row">23</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">本月</text>
+    <text class="flex-cell flex-row">76</text>
+  </view>
+  <view class="flex-row flex-cell">
+    <text class="flex-cell flex-row">本年</text>
+    <text class="flex-cell flex-row">284</text>
+  </view>
+</view>
+

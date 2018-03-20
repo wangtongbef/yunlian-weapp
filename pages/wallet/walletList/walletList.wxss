@@ -1,0 +1,26 @@
+/* pages/wallet/walletDetail/walletDetail.wxss */
+page{
+  background: #eee
+}
+.background{
+  background: #fff
+}
+.width{
+  width: 90%;
+  padding: 16rpx 5%;
+}
+.detail{
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1rpx #eee solid
+}
+.detail > view{
+  display: inline-block
+}
+.left text:last-child{
+  display: block;
+  color: #c7c7c7;
+  font-size: 24rpx
+}

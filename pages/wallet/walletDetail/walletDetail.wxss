@@ -1,0 +1,21 @@
+/* pages/wallet/walletDetail/walletDetail.wxss */
+page{
+  background: #eee
+}
+.width{
+  width: 90%;
+  padding: 20rpx 5%
+}
+.detail{
+  font-size: 30rpx
+}
+.detailInfo{
+  background: #fff;
+}
+.detailInfo > view{
+  width: 90%;
+  border-bottom: 1rpx #eee solid;
+  padding: 20rpx 5%;
+  display: flex;
+  justify-content: space-between
+}
