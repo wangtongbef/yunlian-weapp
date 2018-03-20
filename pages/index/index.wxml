@@ -13,7 +13,7 @@
     </view>
     <view class='operateList'>
         <view class='operateList-1' >
-            <block wx:for='{{list}}'>
+            <block wx:for='{{list}}' wx:key="text">
               <view class='operateInfo'>
                   <view class='operateText'>
                       <image src='{{item.icon}}'></image>

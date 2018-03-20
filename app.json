@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/personal/personal",
     "pages/login/login",
     "pages/sign/sign",
     "pages/checkIn/checkIn",
@@ -16,7 +17,6 @@
     "pages/form/formList/formList",
     "pages/store/addPerson/addPerson",
     "pages/store/addStore/addStore",
-    "pages/personal/personal",
     "pages/unbindphone/unbindphone"
   ],
   "window":{
