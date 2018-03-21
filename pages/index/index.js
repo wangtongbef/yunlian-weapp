@@ -1,6 +1,8 @@
 // pages/index/index.js
 
 var getUser = require('../../utils/getUser.js');
+
+var API = require('../../utils/api.js')
 Page({
 
   /**
@@ -23,6 +25,14 @@ Page({
    */
   onLoad: function (options) {
     getUser();
+    var that = this
+    API.getlist('', function (res) {
+      //这里既可以获取模拟的res
+      console.log(res)
+      that.setData({
+        List: res.data
+      })
+    });
   },
   userInfo(){
     wx.navigateTo({
