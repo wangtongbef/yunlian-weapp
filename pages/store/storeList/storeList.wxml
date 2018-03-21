@@ -7,7 +7,7 @@
 
     <!--待签约-->
     <view class="swiper-item" hidden="{{!isShow}}">
-      <block wx:for='{{waiting}}'>
+      <block wx:for='{{waiting}}' wx:key="id">
           <view class='borderBtm' bindtap='waitingDetail' data-id='{{index}}'>
               <text>{{item.name}}</text>
               <image src='../../../img/icon-arrowRB.svg'></image>
@@ -24,7 +24,7 @@
 
     <!--已签约-->
     <view class="swiper-item" hidden="{{isShow}}">
-      <block wx:for='{{waited}}'>
+      <block wx:for='{{waited}}' wx:key="id">
           <view class='borderBtm'>
               <text class='width'>{{item.name}}</text>
           </view>
