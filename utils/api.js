@@ -1,4 +1,4 @@
-let API_HOST = "";
+let API_HOST = '';
 let DEBUG = true;//切换数据入口
 var Mock = require('mock.js')
 
