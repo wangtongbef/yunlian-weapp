@@ -73,7 +73,6 @@ Page({
           that.setData({
             time: time
           })
-          console.log(time)
           if(time === 0){
             clearInterval(timer)
             that.setData({

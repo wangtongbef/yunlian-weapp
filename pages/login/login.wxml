@@ -7,7 +7,7 @@
   <form bindsubmit='formSubmit'>
     <view class='phoneNum fontsize28'>
       <input class='phoneNumVal' placeholder='请输入手机号码' type='number' maxlength='11' bindinput='phoneVal'/>
-      <text wx:if='{{flag}}' style='color:{{promptColor}}'>{{phonePrompt}}</text>
+      <text wx:if='{{flag}}' style='color:{{promptColor}};position:absolute;left:85rpx'>{{phonePrompt}}</text>
     </view>
     <view class='phoneCode flexCenter'>
        <input placeholder='请输入验证码' maxlength='6' bindinput='codeVal' type='number'/>

@@ -4,7 +4,7 @@
         <view>
             <view class='userImg'><image src='{{userInfo.img}}'></image></view>
             <view class='userText'>
-                <text>阿拉蕾</text>
+                <text>{{userInfo.name}}</text>
                 <text class='margin20'>15012630722</text>
                 <text>商务专员</text>
             </view> 
@@ -14,13 +14,13 @@
     <view class='operateList'>
         <view class='operateList-1' >
             <block wx:for='{{list}}' wx:key="text">
-              <view class='operateInfo'>
+              <navigator class='operateInfo' url='{{item.url}}'>
                   <view class='operateText'>
                       <image src='{{item.icon}}'></image>
                       <text>{{item.text}}</text>
                   </view>
-                  <view class='arrow'><image src='{{item.arrow}}'></image></view>
-              </view>
+                  <view class='arrow'><image src='../../img/icon-arrowRB.svg'></image></view>
+              </navigator>
             </block> 
         </view>
     </view>

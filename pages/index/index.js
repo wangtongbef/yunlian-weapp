@@ -9,12 +9,12 @@ Page({
   data: {
     userInfo:{},
     list:[
-      { text: '签到1', icon: '../../img/icon-signIndex.svg', arrow: '../../img/icon-arrowRB.svg'},
-      { text: '签约', icon: '../../img/icon-signing.svg', arrow: '../../img/icon-arrowRB.svg'},
-      { text: '门店', icon: '../../img/icon-store.svg', arrow: '../../img/icon-arrowRB.svg' },
-      { text: '售后扫码', icon: '../../img/icon-scanCode.svg', arrow: '../../img/icon-arrowRB.svg' },
-      { text: '资金', icon: '../../img/icon-money.svg', arrow: '../../img/icon-arrowRB.svg' },
-      { text: '报表', icon: '../../img/icon-reportForm.svg', arrow: '../../img/icon-arrowRB.svg' }
+      { text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn'},
+      { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/sign'},
+      { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
+      { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
+      { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' },
+      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' }
     ]
   },
 
