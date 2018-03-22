@@ -1,3 +1,4 @@
+var API = require('../../../utils/api.js')
 Page({
 
   /**
@@ -6,24 +7,9 @@ Page({
   data: {
     isShow: true,
     currentTab: 0,
-    chargePstore:[
-      { id: 1, name: '分就考虑到', address: '深圳市马尔库和贷款时间' },
-      { id: 2, name: '开发了开发了', address: '返回晶方科技' },
-      { id: 3, name: '发廊是了多少放声', address: '大家看见的' },
-      { id: 4, name: '辅导老师开发的', address: '大口径的斯科拉的' }
-    ],
-    waiting:[
-      {id:1, name: '分就考虑到',address:'深圳市马尔库和贷款时间' },
-      { id: 2, name: '开发了开发了', address: '返回晶方科技' },
-      { id: 3,name: '发廊是了多少放声', address: '大家看见的' },
-      { id: 4,name: '辅导老师开发的', address: '大口径的斯科拉的' }
-    ],
-    waited:[
-      /*{name:'分就考虑到就开始了接口都是'},
-      { name: '开发了开发了' },
-      { name: '发廊是了多少放声大哭莲富大厦' },
-      { name: '辅导老师开发的啦上课' },*/
-    ]
+    chargePstore:[],
+    waiting:[],
+    waited:[]
   },
 
   /**
@@ -47,6 +33,21 @@ Page({
         })
       }
     })*/
+    var that = this
+    API.getTosign('', function (res) {
+      //这里既可以获取模拟的res
+      console.log(res)
+      that.setData({
+        waiting: res.data
+      })
+    });
+    API.getSigned('', function (res) {
+      //这里既可以获取模拟的res
+      console.log(res)
+      that.setData({
+        waited: res.data
+      })
+    });
   },
   swichNav: function (e) {
     if (this.data.currentTab === e.target.dataset.current) {

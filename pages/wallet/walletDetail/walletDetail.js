@@ -5,14 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    walletDetail:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    wx.request({
+      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/detail',
+      method: 'POST',
+      data: {
+        trade_id: 1,
+        token: 'abc123'
+      },
+      success: function (res) {
+        console.log(res)
+        console.log(res.data.data)
+        that.setData({
+          walletDetail: res.data.data
+        })
+      }
+    })
   },
 
   /**

@@ -26,7 +26,7 @@ Page({
       var that = this; 
       //console.log(e.detail.value);
       var telephone = e.detail.value;
-      if (/^1[34578]\d{9}$/.test(telephone)){
+      if (/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$/.test(telephone)){
         console.log('手机验证通过啦')
         that.setData({
           flag: true,

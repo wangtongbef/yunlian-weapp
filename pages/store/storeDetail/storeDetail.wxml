@@ -5,22 +5,22 @@
 
         <view>
             <text>编号</text>
-            <text>{{store.id}}</text>
+            <text>{{storeDetail.id}}</text>
         </view>
         <view>
             <text>名称</text>
-            <text>{{store.name}}</text>
+            <text>{{storeDetail.name}}</text>
         </view>
         <view class='addressDetail' bindtap='linkMap'>
             <text>位置</text>
             <view>
-                <text>{{store.address}}</text>
+                <text>{{storeDetail.address}}</text>
                 <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
             </view>  
         </view>
         <view>
             <text>合作状态</text>
-            <text>未签约</text>
+            <text>{{storeDetail.status}}</text>
         </view>
     </view>
     <!--<view>

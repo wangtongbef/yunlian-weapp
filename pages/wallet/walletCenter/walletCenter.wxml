@@ -4,7 +4,7 @@
         <text>钱包(元)</text>
         <image src='../../../img/icon-wallet.svg' bindtap='linkList'></image>
     </view>
-    <view class='money'>52.00</view>
+    <view class='money'>{{balance}}</view>
 </view>
 
 <view class='nearby'>
@@ -12,10 +12,10 @@
     <block wx:for='{{nearby}}'>
       <view class='detail flex' bindtap='linkDetail'>
         <view class='left'>
-            <text class='gray'>{{item.time}}</text>
-            <text>{{item.type}}</text>
+            <text class='gray'>{{item.create_time}}</text>
+            <text>{{item.type_name}}</text>
         </view>
-        <view class='red moneyType'>{{item.money}}</view>
+        <view class='red moneyType'>{{item.amount}}</view>
       </view>
     </block>
 </view>

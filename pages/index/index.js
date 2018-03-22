@@ -16,7 +16,8 @@ Page({
       { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
       { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
       { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' },
-      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' }
+      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' },
+      { text: '登录', icon: '', url: '../login/login' }
     ]
   },
 
@@ -25,14 +26,14 @@ Page({
    */
   onLoad: function (options) {
     getUser();
-    var that = this
-    API.getlist('', function (res) {
-      //这里既可以获取模拟的res
-      console.log(res)
-      that.setData({
-        List: res.data
-      })
-    });
+    // var that = this
+    // API.getlist('', function (res) {
+    //   //这里既可以获取模拟的res
+    //   console.log(res)
+    //   that.setData({
+    //     List: res.data
+    //   })
+    // });
   },
   userInfo(){
     wx.navigateTo({

@@ -5,14 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    postCashBalance:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    wx.request({
+      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/withdraw',
+      method: 'POST',
+      data: {
+        amount: 0.01,
+        token: 'abc123'
+      },
+      success: function (res) {
+        console.log(res)
+        console.log(res.data.data)
+        that.setData({
+          postCashBalance: res.data.data
+        })
+      }
+    })
   },
 
   /**

@@ -7,7 +7,7 @@
 
     <!--待签约-->
     <view class="swiper-item" hidden="{{!isShow}}">
-      <block wx:for='{{waiting}}' wx:key="id">
+      <block wx:for='{{waiting}}' wx:key="index">
           <view class='borderBtm' bindtap='waitingDetail' data-id='{{index}}'>
               <text>{{item.name}}</text>
               <image src='../../../img/icon-arrowRB.svg'></image>
@@ -17,22 +17,24 @@
           <image src='../../../img/nodata.svg'></image>
           <text>暂无数据</text>
       </view>
-      <view class='addStore'>
-          <navigator url='../addStore/addStore'><button class='height'>新增</button></navigator>
-      </view>
     </view>
 
     <!--已签约-->
     <view class="swiper-item" hidden="{{isShow}}">
-      <block wx:for='{{waited}}' wx:key="id">
-          <view class='borderBtm'>
-              <text class='width'>{{item.name}}</text>
+      <block wx:for='{{waited}}' wx:key="index">
+          <view class='borderBtm' bindtap='waitingDetail' data-id='{{index}}'>
+              <text>{{item.name}}</text>
+              <image src='../../../img/icon-arrowRB.svg'></image>
           </view>
       </block>
       <view class='nodata' wx:if="{{waited.length == 0}}">
           <image src='../../../img/nodata.svg'></image>
           <text>暂无数据</text>
       </view>
+    </view>
+
+    <view class='addStore'>
+      <navigator url='../addStore/addStore'><button class='height'>新增</button></navigator>
     </view>
 </view>
 

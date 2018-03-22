@@ -1,5 +1,6 @@
 var getLocation = require('../../../utils/getLocation.js');
 // pages/storeDetail/storeDetail.js
+var API = require('../../../utils/api.js')
 Page({
 
   /**
@@ -20,7 +21,8 @@ Page({
       ],
       chargePersonList:[
         { name: '陈1真', id:0, phoneNum: '15678938978' },
-      ]
+      ],
+      storeDetail:{}
   },
 
   /**
@@ -29,15 +31,15 @@ Page({
   onLoad: function (options) {
     getLocation();
     var that = this;
-    wx.getStorage({
-      key: 'store',
-      success: function(res) {
-        console.log(res.data)
-        that.setData({
-          store:res.data
-        })
-      },
-    })
+    // wx.getStorage({
+    //   key: 'store',
+    //   success: function(res) {
+    //     console.log(res.data)
+    //     that.setData({
+    //       store:res.data
+    //     })
+    //   },
+    // })
     /*console.log(options);
     wx.request({
       url: 'http://dev2.lystrong.cn/api/weapp/v1/shops/getShop/',
@@ -46,6 +48,13 @@ Page({
         console.log(res)
       }
     })*/
+    API.getStoredetail('', function (res) {
+      //这里既可以获取模拟的res
+      console.log(res)
+      that.setData({
+        storeDetail: res.data
+      })
+    });
   },
   linkMap(){
     wx.navigateTo({
