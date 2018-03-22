@@ -9,7 +9,7 @@
 
 <view class='nearby'>
     <view class='title'>最近两笔交易明细</view>
-    <block wx:for='{{nearby}}'>
+    <block wx:for='{{nearby}}' wx:key='{{index}}'>
       <view class='detail flex' bindtap='linkDetail'>
         <view class='left'>
             <text class='gray'>{{item.create_time}}</text>
