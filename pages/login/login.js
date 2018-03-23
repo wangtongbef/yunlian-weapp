@@ -173,7 +173,7 @@ Page({
     var that = this;
     console.log(that.data.telephone)
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/login/login',
+      url: getApp().data.servsers + 'login/login',
       method: 'POST',
       data:{
         phone_number:that.data.telephone, 
