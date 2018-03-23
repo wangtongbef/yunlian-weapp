@@ -271,9 +271,9 @@ Page({
             duration: 1000
           });
           var t = setTimeout(function(){
-            // wx.redirectTo({
-            //   url: '../rolesCheck/rolesCheck',
-            // })
+            wx.redirectTo({
+              url: '../rolesCheck/rolesCheck?token=' + e.data.data.token,
+            })
           },1000)
         }
         if (statusCode == -1) {

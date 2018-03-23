@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/rolesCheck/rolesCheck",
     "pages/login/login",
+    "pages/rolesCheck/rolesCheck",
     "pages/store/storeList/storeList",
     "pages/wallet/walletCenter/walletCenter",
     "pages/wallet/walletList/walletList",
