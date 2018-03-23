@@ -18,7 +18,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/index',
+      url: getApp().data.servsers + 'finance/index',
       method: 'POST',
       data: {
         token: 'abc123'
@@ -31,7 +31,7 @@ Page({
       }
     })
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/trade',
+      url: getApp().data.servsers + 'finance/trade',
       method: 'POST',
       data: {
         page: 1,
@@ -56,9 +56,11 @@ Page({
       url: '../takeCash/takeCash',
     })
   },
-  linkDetail(){
+  linkDetail(e){
+    console.log(e)
+    var trade_id = e.currentTarget.dataset.trade_id
     wx.navigateTo({
-      url: '../walletDetail/walletDetail',
+      url: '../walletDetail/walletDetail?trade_id=' + trade_id,
     })
   },
   /**

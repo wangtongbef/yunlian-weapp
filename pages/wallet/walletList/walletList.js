@@ -19,32 +19,35 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/trade',
+      url: getApp().data.servsers + 'finance/trade',
       method: 'POST',
       data: {
-        page: 1,
+        page: 0,
         token: 'abc123'
       },
       success: function (res) {
         console.log(res)
+        var list = res.data.data.list
+        for (var i= 0; i< list.length; i++) {
+          if (list[i].type=== 1){
+            list[i].status = true
+          } else if (list[i].type === 2){
+            list[i].status = false
+          }
+        }
+        console.log(list)
         that.setData({
-          wallList: res.data.data.list
+          wallList: list
         })
-        // var wallList = that.data.wallList
-        // for (var i = 0; i < wallList.length;i++){
-        //   if (item.type === 1){
-        //     wallList[i].amountStatus = true
-        //   } else if (item.type === 2){
-        //     wallList[i].amountStatus = false
-        //   }
-        // }
         console.log(that.data.wallList)
       }
     })
   },
-  linkDetail(){
+  linkDetail(e){
+    console.log(e)
+    var trade_id = e.currentTarget.dataset.trade_id
     wx.navigateTo({
-      url: '../walletDetail/walletDetail',
+      url: '../walletDetail/walletDetail?trade_id=' + trade_id,
     })
   },
   /**

@@ -14,7 +14,7 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/withdraw',
+      url: getApp().data.servsers+'finance/withdraw',
       method: 'POST',
       data: {
         amount: 0.01,

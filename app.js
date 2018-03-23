@@ -1,5 +1,8 @@
 //app.js
 App({
+  data:{
+    servsers:"http://dev2.lystrong.cn/api/weapp/v1/"
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

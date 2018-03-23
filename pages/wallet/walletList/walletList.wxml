@@ -1,13 +1,12 @@
 <!--pages/wallet/walletDetail/walletDetail.wxml-->
 <view class='background'>
-    <block wx:for='{{wallList}}'>
-       <view class='detail width' bindtap='linkDetail'>
+    <block wx:for='{{wallList}}' wx:key="{{index}}">
+       <view class='detail width' bindtap='linkDetail' data-trade_id="{{item.trade_id}}">
           <view class='left'>
               <text>{{item.type_name}}</text>
               <text>{{item.create_time}}</text>
           </view>
-          <!-- <view hidden='{{item.amountStatus}}'>-{{item.amount}}</view>
-          <view hidden='{{!item.amountStatus}}'>+{{item.amount}}</view> -->
+          <view>{{item.type===1?'+':'-'}}{{item.amount}}</view> 
        </view> 
     </block>
 </view>

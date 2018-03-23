@@ -14,10 +14,10 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/finance/detail',
+      url: getApp().data.servsers + 'finance/detail',
       method: 'POST',
       data: {
-        trade_id: 1,
+        trade_id: options.trade_id,
         token: 'abc123'
       },
       success: function (res) {

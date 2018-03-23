@@ -4,13 +4,13 @@
         <text>钱包(元)</text>
         <image src='../../../img/icon-wallet.svg' bindtap='linkList'></image>
     </view>
-    <view class='money'>{{balance}}</view>
+    <view class='money'>￥{{balance}}</view>
 </view>
 
 <view class='nearby'>
     <view class='title'>最近两笔交易明细</view>
-    <block wx:for='{{nearby}}' wx:key='{{index}}'>
-      <view class='detail flex' bindtap='linkDetail'>
+    <block wx:for='{{nearby}}' wx:key='{{index}}' wx:if="{{index<2}}">
+      <view class='detail flex' bindtap='linkDetail'  data-trade_id="{{item.trade_id}}">
         <view class='left'>
             <text class='gray'>{{item.create_time}}</text>
             <text>{{item.type_name}}</text>
