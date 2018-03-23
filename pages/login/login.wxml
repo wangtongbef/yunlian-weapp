@@ -1,5 +1,5 @@
 <!--登录页-->
-<view class='login'>
+<!--<view class='login'>
   <view class='logo'>
     <image src='../../img/logo.png'></image>
     <view>卡儿酷</view>
@@ -19,6 +19,29 @@
     </view>
     <view class='fromBtn'>
         <button form-type='submit' bindtap='navigatorBtn' disabled='{{submitDis}}' style='background:{{submitBg}}' bindtap='navigatorBtn'>登录</button>
+    </view>
+  </form>
+</view>-->
+<view class='login' hidden='{{isHiddenLogin}}'>
+  <view class='logo'>
+    <image src='../../img/logo.png'></image>
+    <view>卡儿酷</view>
+  </view>
+  <form bindsubmit='formSubmit'>
+    <view class='phoneNum fontsize28'>
+      <input class='phoneNumVal' placeholder='请输入手机号码' type='number' maxlength='11' bindinput='phoneVal'/>
+      <text wx:if='{{flag}}' style='color:{{promptColor}}'>{{phonePrompt}}</text>
+    </view>
+    <view class='phoneCode flexCenter'>
+       <input placeholder='请输入验证码' maxlength='6' bindinput='codeVal' type='number'/>
+       <button bindtap='sendCode' disabled='{{codeDis}}' style='background:{{btnBackground}}'>
+         <text hidden='{{codeShow}}'>{{codeText}}</text>
+         <text hidden='{{!codeShow}}'>{{time}}  s</text>
+       </button>
+       <text></text>
+    </view>
+    <view class='fromBtn'>
+        <button form-type='submit' bindtap='login' disabled='{{submitDis}}' style='background:{{submitBg}}' >登录</button>
     </view>
   </form>
 </view>

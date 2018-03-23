@@ -1,0 +1,11 @@
+<view>
+  <text class='width'>选择角色</text>
+  <view class='background'>
+      <block wx:for='{{roles}}' wx:key="{{index}}"> 
+        <view class='list' bindtap=''>
+            <text>{{roles[index]}}</text>
+            <image src='../../img/icon-arrowRG.png'></image>
+        </view>
+      </block> 
+  </view>
+</view>

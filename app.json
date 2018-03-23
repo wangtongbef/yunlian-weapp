@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/rolesCheck/rolesCheck",
     "pages/login/login",
     "pages/store/storeList/storeList",
     "pages/wallet/walletCenter/walletCenter",
