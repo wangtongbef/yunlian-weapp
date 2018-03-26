@@ -208,7 +208,11 @@ Page({
             }
           }, 1000)
         } else if(e.data.code === -1){
-          console.log("手机号不存在")
+          wx.showToast({
+            title: '手机号码不存在',
+            icon: 'loading',
+            duration: 2000
+          })
         }
       }
     })
@@ -277,7 +281,11 @@ Page({
           },1000)
         }
         if (statusCode == -1) {
-          console.log('登录失败')
+          wx.showToast({
+            title: '该手机已绑定其它微信,不可登录',
+            icon: 'none',
+            duration: 2000
+          })
         }
       }
     })

@@ -1,7 +1,7 @@
 //app.js
 App({
   data:{
-    servsers:"http://dev2.lystrong.cn/api/weapp/v1/"
+    servsers:"https://dev2.lystrong.cn/api/weapp/v1/"
   },
   onLaunch: function () {
     // 展示本地存储能力
