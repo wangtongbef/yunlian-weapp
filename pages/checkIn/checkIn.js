@@ -100,14 +100,14 @@ Page({
     
   },
 
-  getadress() {
+  getadress:function() {
     console.log('aaaa')
     wx.chooseLocation({
       success: function (res) {
         console.log(res)
       },
-      fail: function (err) {
-        this.getadress()
+      fail: function (getadress) {
+        getadress()
       }
     })
   },
