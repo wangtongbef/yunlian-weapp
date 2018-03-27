@@ -15,9 +15,9 @@
   <view class='backgroundColor'>
     <view class='photoInfo'>
        <image wx:if='{{imgList.length == 0}}' src='../../img/photograph.svg' bindtap='photo' class='photoBtn'></image>
-       <image wx:if='{{imgList.length !== 0}}' src='{{imgList}}' data-src="{{imgList}}" class='photo' bindtap='photograph'></image>
+       <image wx:if='{{imgList.length !== 0}}' src='{{imgList}}' data-src="{{imgList}}" class='photo' bindtap='photo'></image>
     </view>
-    <view class='addressInfo flexBetween padding'>
+    <view class='addressInfo flexBetween padding' bindtap='getadress'>
         <view>
             <image src='../../img/icon-address.svg' class='iconAddress'></image>
             <text>{{address}}</text>
@@ -34,10 +34,10 @@
 
 <!--签到记录-->
 <view class="swiper-item" hidden="{{isShow}}" class='checkedList'>
-    <block wx:for='{{checkList}}'>
+    <block wx:for='{{checkList}}' wx:key='{{index}}'>
       <view class='backgroundColor signed width'> 
             <text>时间:{{item.time}}</text>
-            <image src='{{item.photo}}' class='signedImg' data-id='{{index}}' bindtap='signedImg' data-img='{{item.photo}}'></image>
+            <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='signedImg' data-img='{{item.image}}'></image>
             <view class='addressInfo'>
                   <image src='../../img/icon-address.svg' class='iconAddress'></image> 
                   <text>{{item.address}}</text>

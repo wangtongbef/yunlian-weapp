@@ -163,6 +163,7 @@ var getUser = function(){
           },
           fail: function (err) {
             wx.showModal({
+              // 少了一个判断，确定用户是否授权
               title: '温馨提示',
               showCancel: false,
               confirmText: '授权',

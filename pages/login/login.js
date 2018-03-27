@@ -139,6 +139,27 @@ Page({
   },
   onLoad:function(){
     getUser();
+    wx.login({
+      success: function (res) {
+        console.log(res)
+        console.log(res)
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: getApp().data.servsers + 'login/openId',
+            method: 'POST',
+            data: {
+              wx_code: res.code
+            },
+            success: function (res) {
+              console.log(res)
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
     //this.getLogin();
   },
   //手机号码验证
