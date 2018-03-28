@@ -2,9 +2,10 @@ Page({
   data: {
     roles:[]
   },
-  onLoad: function (options) {
+  onLoad: function () {
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
+    console.log(tokenRoles)
     if (tokenRoles) {
       that.setData({
         roles: tokenRoles.roles

@@ -141,13 +141,14 @@ Page({
 
   signIn(){
     var that = this;
+    var tokenRoles = wx.getStorageSync('tokenRoles');
     wx.request({
       url: getApp().data.servsers + 'sign_in/mark',
       data: {
         image: that.data.imgList,
         position: that.data.position,
         address: that.data.address,
-        token: 'abc123'
+        token: tokenRoles.token
       },
       method: 'POST',
       success: function (res) {

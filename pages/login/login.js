@@ -13,7 +13,7 @@ Page({
     btnBackground:'',
     codeText:'获取验证码',
     codeVal:'',
-    time:10,
+    time:60,
     codeShow:false,
     codeDis:true,
     submitDis:true,
@@ -43,11 +43,11 @@ Page({
                   token: res.data.data.token
                 }) 
                 wx.setStorageSync('tokenRoles', res.data.data)// 存储token
-                if (res.data.data.bind_phone === 1) { //res.data.data.bind_phone判定互换
+                if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
                   that.setData({
                     isHiddenLogin: false
                   })
-                } else if (res.data.data.bind_phone === 0){
+                } else if (res.data.data.bind_phone === 1){
                   if (res.data.data.roles.length === 1){
                     wx.setStorageSync('role', res.data.data.roles[0])
                     wx.navigateTo({
@@ -132,14 +132,14 @@ Page({
             isSendCode: true,
             codeShow: true,
             submitDis: false,
+            btnBackground: '#C7C7C7',
+            codeDis: true,
             time: time
           })
           var timer = setInterval(function () {
             time--;
             that.setData({
-              time: time,
-              codeDis: true,
-              btnBackground: '#C7C7C7'
+              time: time
             })
             if (time == 0) {
               clearInterval(timer)
@@ -147,7 +147,7 @@ Page({
                 codeShow: false,
                 codeDis: false,
                 btnBackground: 'linear-gradient(#018fe8,#0072b1)',
-                time: 10
+                time: 60
               })
             }
           }, 1000)
@@ -218,7 +218,7 @@ Page({
             })
           },1000)
         }
-        if (statusCode !== 0) {
+        if (code !== 0) {
           wx.showToast({
             title: res.data.msg,
             icon: 'none',

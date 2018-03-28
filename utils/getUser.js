@@ -28,6 +28,16 @@ var getUser = function(){
                   success: (res) => {
                     //console.log(res);                
                     if (res.authSetting['scope.userInfo']) {
+                      wx.getUserInfo({//获取用户信息
+                        success: function (res) {
+                          console.log('用户信息', res);
+                          var user = {};
+                          user.name = res.userInfo.nickName;
+                          user.img = res.userInfo.avatarUrl;
+                          console.log(user);
+                          wx.setStorageSync('user', user);
+                        }
+                      })
                       //console.log('授权啦')
                     } else {  //用户仍然拒绝的情况
                       //console.log('未授权');
@@ -35,7 +45,6 @@ var getUser = function(){
                     }
                   },
                 })
-
               }
             })
           }
