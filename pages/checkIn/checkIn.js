@@ -6,6 +6,7 @@ Page({
    */
   data: {
       imgList:[],
+      position: '',
       address:'所在位置',
       isShow: true,
       currentTab: 0,
@@ -107,7 +108,10 @@ Page({
         console.log(res)
         that.setData({
           address: res.name,
+          position: res.latitude + ',' + res.longitude
         })
+        // console.log(that.data.address)
+        // console.log(that.data.position)
       },
       fail: function (res) {
         wx.getSetting({
@@ -119,7 +123,7 @@ Page({
                 title: '温馨提示',
                 showCancel: false,
                 confirmText: '授权',
-                content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
+                //content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
                 content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
                 success: (res) => {
                   console.log(res);
@@ -131,6 +135,23 @@ Page({
             }
           }
         })
+      }
+    })
+  },
+
+  signIn(){
+    var that = this;
+    wx.request({
+      url: getApp().data.servsers + 'sign_in/mark',
+      data: {
+        image: that.data.imgList,
+        position: that.data.position,
+        address: that.data.address,
+        token: 'abc123'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
       }
     })
   },

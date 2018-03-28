@@ -6,7 +6,7 @@
             <view class='userText'>
                 <text>{{userInfo.name}}</text>
                 <text class='margin20'>15012630722</text>
-                <text>商务专员</text>
+                <text>{{role.role_name}}</text>
             </view> 
         </view> 
         <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view>

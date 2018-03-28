@@ -27,7 +27,7 @@
         </view>
     </view>
   </view>
-  <view class='checkBtn'>
+  <view class='checkBtn' bindtap='signIn'>
       <button>签到</button>
   </view>
 </view>

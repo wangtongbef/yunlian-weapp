@@ -118,41 +118,79 @@ var getUser = require('../../utils/getUser.js');
 
 Page({
   data:{
-      nickName:'',
-      avatarUrl:'',
-      telephone:'',
-      flag:false,
-      phonePrompt:'',
-      codePrompt:'',
-      promptColor:'',
-      btnBackground:'',
-      codeText:'获取验证码',
-      codeVal:'',
-      time:10,
-      codeShow:false,
-      codeDis:true,
-      submitDis:true,
-      codeT:'',
-      submitBg:'',
-      isSendCode:false
-      //isHiddenLogin:true
+    token:'',
+    nickName:'',
+    avatarUrl:'',
+    telephone:'',
+    flag:false,
+    phonePrompt:'',
+    codePrompt:'',
+    promptColor:'',
+    btnBackground:'',
+    codeText:'获取验证码',
+    codeVal:'',
+    time:10,
+    codeShow:false,
+    codeDis:true,
+    submitDis:true,
+    codeT:'',
+    submitBg:'',
+    isSendCode:false,
+    isHiddenLogin:true
   },
   onLoad:function(){
+    var that = this;
     getUser();
     wx.login({
       success: function (res) {
         console.log(res)
-        console.log(res)
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: getApp().data.servsers + 'login/openId',
+            url: getApp().data.servsers + 'login/login',
             method: 'POST',
             data: {
               wx_code: res.code
             },
             success: function (res) {
-              console.log(res)
+              if (res.data.code === 0) {
+                console.log(res)
+                that.setData({
+                  token: res.data.data.token
+                }) 
+                wx.setStorageSync('tokenRoles', res.data.data)// 存储token
+                if (res.data.data.bind_phone === 1) { //res.data.data.bind_phone判定互换
+                  that.setData({
+                    isHiddenLogin: false
+                  })
+                } else if (res.data.data.bind_phone === 0){
+                  if (res.data.data.roles.length === 1){
+                    wx.setStorageSync('role', res.data.data.roles[0])
+                    wx.navigateTo({
+                      url: '../index/index'
+                    })
+                  } else if (res.data.data.roles.length > 1){
+                    wx.navigateTo({
+                      url: '../rolesCheck/rolesCheck'
+                    })
+                  }
+                }
+              } else if (res.data.code === 1){
+                wx.showToast({
+                  title: '此openid不存在',
+                  icon: 'none',
+                  duration: 2000
+                })
+                that.setData({
+                  isHiddenLogin: true
+                })
+                var t = setTimeout(function () {
+                  wx.redirectTo({
+                  url: '../login/login'
+                  })
+                }, 3000);
+                t
+              }
             }
           })
         } else {
@@ -168,7 +206,8 @@ Page({
       //console.log(e.detail.value);
       var telephone = e.detail.value;
       if (/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(telephone)){
-        console.log('手机验证通过啦')
+        console.log('手机验证通过啦',telephone)
+        console.log(that.data.token)
         that.setData({
           flag: true,
           phonePrompt: '输入正确',
@@ -194,11 +233,11 @@ Page({
     var that = this;
     console.log(that.data.telephone)
     wx.request({
-      url: getApp().data.servsers + 'login/login',
+      url: getApp().data.servsers + 'login/message',
       method: 'POST',
       data:{
         phone_number:that.data.telephone, 
-        token: 'abc123'
+        token: that.data.token
       },
       success:function(e){
         clearInterval(timer)
@@ -228,10 +267,10 @@ Page({
               })
             }
           }, 1000)
-        } else if(e.data.code === -1){
+        } else if(e.data.code !== 0){
           wx.showToast({
-            title: '手机号码不存在',
-            icon: 'loading',
+            title: e.data.msg,
+            icon: 'none',
             duration: 2000
           })
         }
