@@ -2,24 +2,21 @@ Page({
   data: {
     roles:[]
   },
-  onLoad: function (options) {
+  onLoad: function () {
     var that = this
-    wx.request({
-      url: getApp().data.servsers + 'login/role',
-      method: 'POST',
-      data: {
-        token: options.token
-      },
-      success: function (res) {
-        console.log(res.data.data.roles)
-        if (res.data.data.role){
-          console.log("跳转")
-        }else {
-          that.setData({
-            roles: res.data.data.roles
-          })
-        }
-      }
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    console.log(tokenRoles)
+    if (tokenRoles) {
+      that.setData({
+        roles: tokenRoles.roles
+      })
+    }
+  },
+  rolesCheck:function (event){
+    console.log(event.currentTarget.dataset.rolecheck);
+    wx.setStorageSync('role', event.currentTarget.dataset.rolecheck)
+    wx.navigateTo({
+      url: '../index/index'
     })
   }
 })

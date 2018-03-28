@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tokenRoles: {},
+    role: {},
     userInfo:{},
     list:[
       { text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn'},
@@ -26,7 +28,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    getUser();
+    this.setData({
+      tokenRoles: wx.getStorageSync('tokenRoles'),
+      role: wx.getStorageSync('role'),
+      userInfo: wx.getStorageSync('user')
+    })
+    console.log(this.data.tokenRoles)
+    console.log(this.data.userInfo)
+    wx.request({
+      url: getApp().data.servsers + 'login/role',
+      data: {
+        role_id: this.data.role.role_id,
+        token: this.data.tokenRoles.token
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+      }
+    })
+    // getUser();
     // var that = this
     // API.getlist('', function (res) {
     //   //这里既可以获取模拟的res
@@ -52,12 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    var user = wx.getStorageSync('user');
-    console.log(user)
-    that.setData({
-      userInfo: user
-    })
+
   },
 
   /**
