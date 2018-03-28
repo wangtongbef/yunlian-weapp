@@ -23,7 +23,7 @@
   </form>
 </view>-->
 <view class='login' hidden='{{isHiddenLogin}}'>
-  <view class='logo'>
+  <view class='logo' bindtap='test'>
     <image src='../../img/logo.png'></image>
     <view>卡儿酷</view>
   </view>
