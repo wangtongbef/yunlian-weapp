@@ -100,16 +100,43 @@ Page({
     
   },
 
-  getadress:function() {
+  getadress(){
     console.log('aaaa')
     wx.chooseLocation({
       success: function (res) {
         console.log(res)
       },
-      fail: function (getadress) {
-        getadress()
+      fail: function () {
+      //  getadress()
       }
     })
+    // getadress: function() {
+    //   console.log('aaaa')
+    //   wx.chooseLocation({
+    //     success: function (res) {
+    //       console.log(res)
+    //       return
+    //     },
+    //     fail: function () {
+    //       console.log("fail")
+    //       // getadressdetail()
+    //     }
+    //   })
+      // var getadressdetail= function (){
+      //   console.log('bbb')
+      //   wx.chooseLocation({
+      //     success: function (res) {
+      //       console.log(res)
+      //       return
+      //     },
+      //     fail: function () {
+      //       console.log("fail")
+      //       // getadressdetail()
+      //     }
+      //   })
+      // }
+      // getadressdetail()
+    //},
   },
   
   /**
