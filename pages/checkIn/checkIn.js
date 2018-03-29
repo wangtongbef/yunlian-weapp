@@ -172,19 +172,6 @@ Page({
         //do something
       }
     })
-    // wx.request({
-    //   url: getApp().data.servsers + 'sign_in/mark',
-    //   data: {
-    //     image: that.data.imgList,
-    //     position: that.data.position,
-    //     address: that.data.address,
-    //     token: tokenRoles.token
-    //   },
-    //   method: 'POST',
-    //   success: function (res) {
-    //     console.log(res)
-    //   }
-    // })
   },
   
   /**
