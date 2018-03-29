@@ -18,9 +18,7 @@ Page({
       { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
       { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
       { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' },
-      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' },
-      { text: '登录', icon: '', url: '../login/login' },
-      { text: '角色选择', icon: '', url: '../rolesCheck/rolesCheck' }
+      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' }
     ]
   },
 
@@ -33,7 +31,6 @@ Page({
       role: wx.getStorageSync('role'),
       userInfo: wx.getStorageSync('user')
     })
-    console.log(this.data.tokenRoles)
     console.log(this.data.userInfo)
     wx.request({
       url: getApp().data.servsers + 'login/role',
@@ -65,7 +62,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    var that = this
+    var timer = setInterval(function () {
+      console.log('1')
+      var userInfo = wx.getStorageSync('user')
+      if (userInfo) {
+        that.setData({
+          userInfo: userInfo
+        })
+        clearInterval(timer)
+      }
+    }, 1000);
   },
 
   /**

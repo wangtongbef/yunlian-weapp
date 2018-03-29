@@ -50,11 +50,11 @@ Page({
                 } else if (res.data.data.bind_phone === 1){
                   if (res.data.data.roles.length === 1){
                     wx.setStorageSync('role', res.data.data.roles[0])
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../index/index'
                     })
                   } else if (res.data.data.roles.length > 1){
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../rolesCheck/rolesCheck'
                     })
                   }
@@ -73,7 +73,6 @@ Page({
                   url: '../login/login'
                   })
                 }, 3000);
-                t
               }
             }
           })

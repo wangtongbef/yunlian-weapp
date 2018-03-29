@@ -15,7 +15,7 @@ Page({
   rolesCheck:function (event){
     console.log(event.currentTarget.dataset.rolecheck);
     wx.setStorageSync('role', event.currentTarget.dataset.rolecheck)
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../index/index'
     })
   }
