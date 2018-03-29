@@ -34,7 +34,7 @@
 
 <!--签到记录-->
 <view class="swiper-item" hidden="{{isShow}}" class='checkedList'>
-    <block wx:for='{{checkList}}' wx:key='{{index}}'>
+    <block wx:for='{{checkList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
       <view class='backgroundColor signed width'> 
             <text>时间:{{item.time}}</text>
             <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='signedImg' data-img='{{item.image}}'></image>

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    token: '',
     balance: '',
     nearby: [
       { time: '2018-03-09 10:12:20', type: '销售收入', money: '200' },
@@ -17,11 +18,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      token: tokenRoles.token
+    })
     wx.request({
       url: getApp().data.servsers + 'finance/index',
       method: 'POST',
       data: {
-        token: 'abc123'
+        token: that.data.token
       },
       success: function (res) {
         console.log(res)
@@ -34,8 +39,8 @@ Page({
       url: getApp().data.servsers + 'finance/trade',
       method: 'POST',
       data: {
-        page: 1,
-        token: 'abc123'
+        page: 0,
+        token: that.data.token
       },
       success: function (res) {
         console.log(res)

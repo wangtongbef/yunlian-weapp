@@ -68,7 +68,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('这是onshow') //onshow在左上角返回按钮出会执行
   },
 
   /**

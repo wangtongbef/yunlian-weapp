@@ -11,6 +11,7 @@ Page({
     isShow: true,
     isToSignin:false,
     currentTab: 0,
+    isShowListNum: 5,
     checkList:[
       { time: '2017年6月23日', image:'https://dev2.lystrong.cn/upload/signin/20180329/422b044d7a13d46f814d67e61e73bffc.png',address:'深圳市南山区西丽街道1981文化创意园'},
       { time: '2017年10月5日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1982文化创意园' },
@@ -193,5 +194,27 @@ Page({
   onReady: function () {
     
   },
-
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    var that = this
+    if (that.data.isShowListNum < that.data.checkList.length) {
+      wx.showToast({
+        icon: 'loading',
+        duration: 2000
+      })
+    } else if (that.data.isShowListNum >= that.data.checkList.length){
+      wx.showToast({
+        title: '到底啦',
+        duration: 2000
+      })
+    }
+    var t = setTimeout(function () {
+      var isShowListNum = that.data.isShowListNum + 5
+      that.setData({
+        isShowListNum: isShowListNum
+      })
+    }, 2000)
+  }
 })
