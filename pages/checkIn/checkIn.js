@@ -9,6 +9,7 @@ Page({
       position: '',
       address:'所在位置',
       isShow: true,
+      isToSignin:false,
       currentTab: 0,
       checkList:[
         { time: '2017年6月23日', image:'dev2.lystrong.cn/upload/signin/d82d302c-511e-513c-f534-d4cdc4ea9e78.png',address:'深圳市南山区西丽街道1981文化创意园'},
@@ -72,22 +73,10 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        // wx.uploadFile({
-        //   url: getApp().data.servsers + 'sign_in/mark', //仅为示例，非真实的接口地址
-        //   filePath: tempFilePaths[0],
-        //   name: 'file',
-        //   formData: {
-        //     token: tokenRoles.token
-        //   },
-        //   success: function (res) {
-        //     console.log(res)
-        //     var data = res.data
-        //     //do something
-        //   }
-        // })
         console.log(res)
         that.setData({
-          imgList: tempFilePaths
+          imgList: tempFilePaths,
+          isToSignin:true
         })
         
       }
@@ -157,21 +146,23 @@ Page({
   signIn(){
     var that = this;
     var tokenRoles = wx.getStorageSync('tokenRoles');
-    wx.uploadFile({
-      url: getApp().data.servsers + 'sign_in/mark', //仅为示例，非真实的接口地址
-      filePath: that.data.imgList[0],
-      name: 'image',
-      formData: {
-        token: tokenRoles.token, 
-        position: that.data.position,
-        address: that.data.address
-      },
-      success: function (res) {
-        console.log(res)
-        var data = res.data
-        //do something
-      }
-    })
+    if (that.data.isToSignin && that.data.address!=='所在位置'){
+      wx.uploadFile({
+        url: getApp().data.servsers + 'sign_in/mark', //接口地址
+        filePath: that.data.imgList[0],
+        name: 'image',
+        formData: {
+          token: tokenRoles.token,
+          position: that.data.position,
+          address: that.data.address
+        },
+        success: function (res) {
+          console.log(res)
+          var data = res.data
+          //do something
+        }
+      })
+    }
   },
   
   /**
