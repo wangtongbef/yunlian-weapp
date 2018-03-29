@@ -5,19 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-      imgList:[],
-      position: '',
-      address:'所在位置',
-      isShow: true,
-      isToSignin:false,
-      currentTab: 0,
-      checkList:[
-        { time: '2017年6月23日', image:'dev2.lystrong.cn/upload/signin/d82d302c-511e-513c-f534-d4cdc4ea9e78.png',address:'深圳市南山区西丽街道1981文化创意园'},
-        { time: '2017年10月5日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1982文化创意园' },
-        { time: '2017年11月9日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1983文化创意园' },
-        { time: '2018年1月9日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1984文化创意园' },
-      ],
-      photoList:[]
+    imgList:"../../img/photograph.svg",
+    position: '',
+    address:'所在位置',
+    isShow: true,
+    isToSignin:false,
+    currentTab: 0,
+    checkList:[
+      { time: '2017年6月23日', image:'https://dev2.lystrong.cn/upload/signin/20180329/422b044d7a13d46f814d67e61e73bffc.png',address:'深圳市南山区西丽街道1981文化创意园'},
+      { time: '2017年10月5日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1982文化创意园' },
+      { time: '2017年11月9日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1983文化创意园' },
+      { time: '2018年1月9日', image: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1520153152&di=9f7bac5e5f09ef15454137761f1e788b&src=http://img1.3lian.com/2015/a1/95/d/105.jpg', address: '深圳市南山区民治街道1984文化创意园' },
+    ],
+    photoList:[]
   },
 
   /**
@@ -27,11 +27,12 @@ Page({
     
   },
   swichNav: function (e) {
+    var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles');
-    if (e.target.dataset.current == this.data.currentTab) {
+    if (e.target.dataset.current == that.data.currentTab) {
       return false;
     }else if (e.target.dataset.current == 0){
-      this.setData({
+      that.setData({
         currentTab: 0,
         isShow: true
       })
@@ -44,19 +45,28 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          var list = res.data.data.list
+          var reverselist = []
+          for (var i = list.length-1; i >=0;i--){
+            list[i].image = 'https://' + list[i].image
+            reverselist.push(list[i])
+          }
+          console.log(reverselist)
+          that.setData({
+            checkList: reverselist
+          })
         }
       })
-      this.setData({
+      that.setData({
         currentTab: 1,
         isShow: false
       })
     }
-    // if (this.data.currentTab === e.target.dataset.current) {
+    // if (that.data.currentTab === e.target.dataset.current) {
     //   return false;
     // } else {
     //   var showMode = e.target.dataset.current == 0;
-    //   this.setData({
+    //   that.setData({
     //     currentTab: e.target.dataset.current,
     //     isShow: showMode
     //   })
@@ -157,8 +167,20 @@ Page({
           address: that.data.address
         },
         success: function (res) {
-          console.log(res)
-          var data = res.data
+          console.log(res.data)
+          var data = JSON.parse(res.data)
+          console.log(data)
+          if (data.code == 0){
+            wx.showToast({
+              title: '签到成功',
+              icon: 'none',
+              duration: 2000
+            })
+            that.setData({
+              imgList: "../../img/photograph.svg",
+              address: '所在位置'
+            })
+          }
           //do something
         }
       })

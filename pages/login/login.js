@@ -27,7 +27,6 @@ Page({
     getUser();
     wx.login({
       success: function (res) {
-        console.log(res)
         if (res.code) {
           //发起网络请求
           wx.request({
@@ -38,9 +37,9 @@ Page({
             },
             success: function (res) {
               if (res.data.code === 0) {
-                console.log(res)
+                var token = res.data.data.token
                 that.setData({
-                  token: res.data.data.token
+                  token: token
                 }) 
                 wx.setStorageSync('tokenRoles', res.data.data)// 存储token
                 if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
@@ -49,7 +48,20 @@ Page({
                   })
                 } else if (res.data.data.bind_phone === 1){
                   if (res.data.data.roles.length === 1){
-                    wx.setStorageSync('role', res.data.data.roles[0])
+                    var role = res.data.data.roles[0]
+                    wx.setStorageSync('role', role)
+                    wx.request({
+                      url: getApp().data.servsers + 'login/role',
+                      data: {
+                        role_id: role.role_id,
+                        token: token
+                      },
+                      method: 'POST',
+                      success: function (res) {
+                        console.log(res)
+                        wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
+                      }
+                    })
                     wx.redirectTo({
                       url: '../index/index'
                     })
@@ -90,7 +102,7 @@ Page({
       var telephone = e.detail.value;
       if (/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(telephone)){
         console.log('手机验证通过啦',telephone)
-        console.log(that.data.token)
+        console.log('token',that.data.token)
         that.setData({
           flag: true,
           phonePrompt: '输入正确',
@@ -114,7 +126,7 @@ Page({
   //发送验证码
   sendCode:function(){
     var that = this;
-    console.log(that.data.telephone)
+    console.log('telephone',that.data.telephone)
     wx.request({
       url: getApp().data.servsers + 'login/message',
       method: 'POST',
@@ -226,9 +238,5 @@ Page({
         }
       }
     })
-    console.log()
-    /*wx.navigateTo({
-      url: '../index/index',
-    })*/
   }
 })

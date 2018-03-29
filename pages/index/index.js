@@ -32,17 +32,6 @@ Page({
       userInfo: wx.getStorageSync('user')
     })
     console.log(this.data.userInfo)
-    wx.request({
-      url: getApp().data.servsers + 'login/role',
-      data: {
-        role_id: this.data.role.role_id,
-        token: this.data.tokenRoles.token
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-      }
-    })
     // getUser();
     // var that = this
     // API.getlist('', function (res) {

@@ -4,7 +4,7 @@
         <view class='borderBt '>
             <view class='width90 flex'>
                 <text>姓名</text>
-                <text class='grey'>刘小池</text>
+                <text class='grey'>{{user.name}}</text>
             </view> 
         </view>
         <navigator url='../unbindphone/unbindphone'>
@@ -12,7 +12,7 @@
                 <view class='width90 flex'>
                     <text>手机号</text>
                     <view>
-                        <text class='grey'>12345678900</text>
+                        <text class='grey'>{{phonenumber}}</text>
                         <image src='../../img/icon-arrowRG.png'></image>
                     </view>
                 </view>
@@ -23,7 +23,7 @@
         <view class='borderBt'>
             <view class='width90 flex'>
                 <text>角色</text>
-                <text class='grey'>配送员</text>
+                <text class='grey'>{{roleName}}</text>
             </view>
         </view>
     </view>

@@ -5,14 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    user:{},
+    phonenumber:'12345678900',
+    roleName:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var role = wx.getStorageSync('role')
+    var that = this
+    that.setData({
+      user: wx.getStorageSync('user'),
+      roleName: role.role_name
+    })
   },
 
   /**
