@@ -1,21 +1,23 @@
-<view class='background'>
-    <view class='state'>
-        <image src='../../img/success.svg'></image>
-        <text class='blue'>扫码成功</text>
-        <text>该订单已记入你的业绩</text>
-        <!--<text>该订单已记入你的业绩,无须再扫码</text>-->
-    </view>
-    <view class='stateInfo'>
-        <view>
-            <text>产品编号</text>
-            <text>545151</text>
-        </view>
-        <view>
-            <text>产品名称</text>
-            <text>卡儿酷汽车启动电源</text>
-        </view>
-    </view>
-</view>
-<view class='complete'>
-   <button>完成</button>
+<view hidden='isSign'>
+  <view class='background'>
+      <view class='state'>
+          <image src='../../img/success.svg'></image>
+          <text class='blue'>扫码成功</text>
+          <text>该订单已记入你的业绩</text>
+          <!--<text>该订单已记入你的业绩,无须再扫码</text>-->
+      </view>
+      <view class='stateInfo'>
+          <view>
+              <text>产品编号</text>
+              <text>545151</text>
+          </view>
+          <view>
+              <text>产品名称</text>
+              <text>卡儿酷汽车启动电源</text>
+          </view>
+      </view>
+  </view>
+  <view class='complete'>
+    <button>完成</button>
+  </view>
 </view>

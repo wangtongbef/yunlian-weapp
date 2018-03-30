@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    isSign:true
   },
 
   /**
@@ -12,7 +12,7 @@ Page({
    */
   onLoad: function (options) {
     wx.scanCode({
-      onlyFromCamera: true,
+      onlyFromCamera: false,
       success: (res) => {
         console.log(res)
       },
@@ -24,7 +24,7 @@ Page({
   //扫一扫
   scan(){
     wx.scanCode({
-      onlyFromCamera: true,
+      onlyFromCamera: false,
       success: (res) => {
         console.log(res)
       },
