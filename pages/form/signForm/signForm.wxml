@@ -6,19 +6,19 @@
   </view>
   <view class="flex-row flex-cell">
     <text class="flex-cell flex-row">今天</text>
-    <text class="flex-cell flex-row">9</text>
+    <text class="flex-cell flex-row">{{signList.today}}</text>
   </view>
   <view class="flex-row flex-cell">
     <text class="flex-cell flex-row">本周</text>
-    <text class="flex-cell flex-row">23</text>
+    <text class="flex-cell flex-row">{{signList.week}}</text>
   </view>
   <view class="flex-row flex-cell">
     <text class="flex-cell flex-row">本月</text>
-    <text class="flex-cell flex-row">76</text>
+    <text class="flex-cell flex-row">{{signList.month}}</text>
   </view>
   <view class="flex-row flex-cell">
     <text class="flex-cell flex-row">本年</text>
-    <text class="flex-cell flex-row">284</text>
+    <text class="flex-cell flex-row">{{signList.year}}</text>
   </view>
 </view>
 

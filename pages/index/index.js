@@ -12,21 +12,15 @@ Page({
     tokenRoles: {},
     role: {},
     userInfo:{},
-    list:[
-      { text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn'},
-      { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/sign'},
-      { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
-      { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
-      { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' },
-      { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' }
-    ]
+    list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
+    var that = this
+    that.setData({
       tokenRoles: wx.getStorageSync('tokenRoles'),
       role: wx.getStorageSync('role'),
       userInfo: wx.getStorageSync('user')
@@ -41,6 +35,27 @@ Page({
     //     List: res.data
     //   })
     // });
+    if (that.data.role.role_name == '门店销售员') {
+      that.setData({
+        list: [{ text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
+        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+      })
+    } else if (that.data.role.role_name == '门店负责人') {
+      that.setData({
+        list: [{ text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
+        { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
+        { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/saleForm/saleForm' },
+        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+      })
+    } else if (that.data.role.role_name == '商务专员') {
+      that.setData({
+        list: [{ text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn' },
+        { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/sign' },
+        { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
+        { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' },
+        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+      })
+    }
   },
   userInfo(){
     wx.navigateTo({
@@ -53,7 +68,6 @@ Page({
   onReady: function () {
     var that = this
     var timer = setInterval(function () {
-      console.log('1')
       var userInfo = wx.getStorageSync('user')
       if (userInfo) {
         that.setData({

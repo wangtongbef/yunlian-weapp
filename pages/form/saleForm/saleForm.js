@@ -5,9 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    storeArray: ['全部门店','天虹虎妈照相机店', 'dsajdkajkdajfodfkld', '深圳市美康百货', '减肥'],
-    saleArray:['全部销售员','张三','李四','赵武','李柳'],
+    token: '',
+    isCommissioner: false,
+    storeArray: ['全部门店'],
+    saleArray:[],
     timeArray:['今天','本周','本月','本年'],
+    productAlltimedata:{},
     productInfo: [{ name: '卡儿酷软件汽车启动电源', num: 2 }, { name: '卡儿酷手机充电宝', num: 6 }],
     isShow: true,
     storeIndex:0,
@@ -15,7 +18,7 @@ Page({
     timeIndex: 0,
   },
   bindStoreChange: function (e) {
-    console.log('乔丹选的是', this.data.storeArray[e.detail.value])
+    console.log('门店选的是', this.data.storeArray[e.detail.value])
     if (e.detail.value !== 0) {
       this.setData({
         isShow:false
@@ -25,11 +28,6 @@ Page({
         isShow: true
       })
     }
-    /*if (e.detail.value == 4) {
-      this.setData({ reply: true })
-    } else {
-      this.setData({ reply: false })
-    }*/
     this.setData({
       storeIndex: e.detail.value
     })
@@ -40,19 +38,66 @@ Page({
     this.setData({
       saleIndex: e.detail.value
     })
-
   },
   bindTimeChange: function (e) {
-    console.log('销售员选的是', this.data.timeArray[e.detail.value])
     this.setData({
       timeIndex: e.detail.value
     })
+    console.log('time选的是', this.data.timeIndex)
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function () {
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    var role = wx.getStorageSync('role')
+    that.setData({
+      token: tokenRoles.token
+    })
+    if (role.role_name === '商务专员'){
+      that.setData({
+        isCommissioner: true
+      })
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesForCommissioner',
+        data: {
+          shop_id: 0,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            productAlltimedata: res.data.data,
+            productInfo: res.data.data.today
+          })
+          console.log(that.data.productAlltimedata)
+        }
+      })
+    } else if (role.role_name === '门店负责人'){
+      
+    }
+  },
+  search(){
+    var that = this
+    if (that.data.timeIndex == 0){
+      that.setData({
+        productInfo: that.data.productAlltimedata.today
+      })
+    } else if (that.data.timeIndex == 1) {
+      that.setData({
+        productInfo: that.data.productAlltimedata.week
+      })
+    } else if (that.data.timeIndex == 2) {
+      that.setData({
+        productInfo: that.data.productAlltimedata.month
+      })
+    } else if (that.data.timeIndex == 3) {
+      that.setData({
+        productInfo: that.data.productAlltimedata.year
+      })
+    }
   },
 
   /**

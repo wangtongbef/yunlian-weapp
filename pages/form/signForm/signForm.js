@@ -5,13 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
+    token: '',
+    signList: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      token: tokenRoles.token
+    })
+    wx.request({
+      url: getApp().data.servsers + 'statistics/signForCommissioner',
+      data: {
+        token: that.data.token
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          signList: res.data.data
+        })
+      }
+    })
   },
 
   /**

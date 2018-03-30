@@ -7,10 +7,7 @@ Page({
   data: {
     token: '',
     balance: '',
-    nearby: [
-      { time: '2018-03-09 10:12:20', type: '销售收入', money: '200' },
-      { time: '2018-02-18 19:54:09', type: '提现', money: '15' },
-    ]
+    nearby: []
   },
 
   /**

@@ -1,5 +1,5 @@
 <view class='form'>
-  <block wx:for='{{formList}}'>
+  <block wx:for='{{formList}}' wx:key='{{index}}'>
     <view id='{{index}}' class='background' bindtap='link'>
         <image src='{{item.icon}}'></image>
         <text>{{item.text}}</text>

@@ -2,7 +2,7 @@
 <form class='width'>
   <view class='flex saleForm'>
     <view>
-        <picker bindchange="bindStoreChange" value="{{storeIndex}}" range="{{storeArray}}">
+        <picker disabled='{{isCommissioner}}' bindchange="bindStoreChange" value="{{storeIndex}}" range="{{storeArray}}">
           <view class='choose storeChoose'>
               <text>{{storeArray[storeIndex]}}</text>
               <image src='../../../img/icon-arrowDG.svg'></image>
@@ -20,7 +20,7 @@
     </view>
 
     <view>
-      <picker bindchange="bindTimeChange" value="{{timeIndex1}}" range="{{timeArray}}">
+      <picker bindchange="bindTimeChange" range="{{timeArray}}">
           <view class='choose timeChoose'>
               <text>{{timeArray[timeIndex]}}</text>
               <image src='../../../img/icon-arrowDG.svg'></image>
@@ -28,7 +28,7 @@
       </picker>
     </view>
   </view>
-  <view class='submit'>
+  <view class='submit' bindtap='search'>
     <button>查询</button>
   </view>
 </form>
@@ -37,10 +37,10 @@
         <text>产品名称</text>
         <text>数量</text>
     </view>
-    <block wx:for='{{productInfo}}'>
+    <block wx:for='{{productInfo}}' wx:key='{{index}}'>
       <view class='flex productInfo'>
         <text>{{item.name}}</text>
-        <text>{{item.num}}个</text>
+        <text>{{item.cnt}}个</text>
       </view>
     </block>
     
