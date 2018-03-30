@@ -11,7 +11,7 @@ Page({
     saleArray:[],
     timeArray:['今天','本周','本月','本年'],
     productAlltimedata:{},
-    productInfo: [{ name: '卡儿酷软件汽车启动电源', num: 2 }, { name: '卡儿酷手机充电宝', num: 6 }],
+    productInfo: [],
     isShow: true,
     storeIndex:0,
     saleIndex: 0,
@@ -76,7 +76,7 @@ Page({
         }
       })
     } else if (role.role_name === '门店负责人'){
-      
+
     }
   },
   search(){
