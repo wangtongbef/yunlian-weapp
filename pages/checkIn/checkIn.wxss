@@ -20,9 +20,6 @@ page{
   height: 380rpx;
   padding: 50rpx 0
 }
-.addressInfo{
-  
-}
 .padding{
   padding: 26rpx 5%;
 }
@@ -86,17 +83,11 @@ page{
 .swiper-tab .active {
   color: #0072b1;
 }
-.swiper-tab view{
-  
-}
 .swiper-tab view image{
   width: 40rpx;
   height: 40rpx;
   position: relative;
   top: 4rpx
-}
-.signed{
-  
 }
 .signed > text{
   display: block;

@@ -37,7 +37,7 @@
     <block wx:for='{{checkList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
       <view class='backgroundColor signed width'> 
             <text>时间:{{item.time}}</text>
-            <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='signedImg' data-img='{{item.image}}'></image>
+            <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='previewImage' data-img='{{item.image}}'></image>
             <view class='addressInfo'>
                   <image src='../../img/icon-address.svg' class='iconAddress'></image> 
                   <text>{{item.address}}</text>

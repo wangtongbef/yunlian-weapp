@@ -4,33 +4,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isSign:true
+    isSign:true,
+    scanStatus:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.scanCode({
-      onlyFromCamera: false,
-      success: (res) => {
-        console.log(res)
-      },
-      fail: function (e) {
-        console.log(e)
-      }
-    })
+  onLoad: function () {
+    var that = this
+    //扫一扫
+    var scan = function () {
+      wx.scanCode({
+        onlyFromCamera: false,
+        success: (res) => {
+          // wx.showToast({
+          //   title: res,
+          //   icon: 'none',
+          //   duration: 2000
+          // })
+          console.log(res)
+          that.setData({
+            isSign: false
+          })
+          console.log(that.data.isSign)
+        },
+        fail: function (e) {
+        }
+      })
+    }
+    scan()
   },
-  //扫一扫
-  scan(){
-    wx.scanCode({
-      onlyFromCamera: false,
-      success: (res) => {
-        console.log(res)
-      },
-      fail:function(e){
-        console.log(e)
-      }
+  finish (){
+    wx.reLaunch({
+      url: '../index/index'
     })
   },
   /**

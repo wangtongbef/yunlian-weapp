@@ -21,6 +21,9 @@ page{
 .blue{
   color: #0072b1
 }
+.red{
+  color: #FF0000
+}
 .stateInfo > view{
   font-size: 30rpx;
   display: flex;

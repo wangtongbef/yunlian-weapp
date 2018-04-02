@@ -1,10 +1,12 @@
-<view hidden='isSign'>
+<view hidden='{{isSign}}'>
   <view class='background'>
       <view class='state'>
-          <image src='../../img/success.svg'></image>
-          <text class='blue'>扫码成功</text>
-          <text>该订单已记入你的业绩</text>
-          <!--<text>该订单已记入你的业绩,无须再扫码</text>-->
+          <image wx:if='{{scanStatus==0}}' src='../../img/success.svg'></image>
+          <text class='blue'>扫码成功,该订单已记入你的业绩</text>
+          <image wx:if='{{scanStatus!==0}}' src='../../img/fail.svg'></image>
+          <text wx:if='{{scanStatus==1}}' class='red'>该订单已记入你的业绩,无须再扫码</text>
+          <text wx:if='{{scanStatus==2}}' class='red'>产品还未卖出，此次扫码无效</text>
+          <text wx:if='{{scanStatus==3}}' class='red'>产品已计入他人业绩，此次扫码无效</text>
       </view>
       <view class='stateInfo'>
           <view>
@@ -17,7 +19,7 @@
           </view>
       </view>
   </view>
-  <view class='complete'>
+  <view class='complete' bindtap='finish'>
     <button>完成</button>
   </view>
 </view>

@@ -69,6 +69,13 @@ Page({
     // }
   },
   //拍照或者从相册选照片
+  previewImage(e){
+    var current = e.target.dataset.id;
+    var that = this;
+      wx.previewImage({
+        urls: [that.data.checkList[current].image] // 当前显示图片的http链接
+      })
+  },
   photo(){
     var tokenRoles = wx.getStorageSync('tokenRoles');
     var that = this;
@@ -133,8 +140,8 @@ Page({
                 title: '温馨提示',
                 showCancel: false,
                 confirmText: '授权',
-                //content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
-                content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
+                content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
+                //content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
                 success: (res) => {
                   console.log(res);
                   //开启授权
@@ -195,13 +202,16 @@ Page({
   onReachBottom: function () {
     var that = this
     if (that.data.isShowListNum < that.data.checkList.length) {
-      wx.showToast({
-        icon: 'loading',
-        duration: 2000
+      wx.showLoading({
+        title: '加载中',
       })
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 2000)
     } else if (that.data.isShowListNum >= that.data.checkList.length){
       wx.showToast({
         title: '到底啦',
+        icon: 'success',
         duration: 2000
       })
     }
