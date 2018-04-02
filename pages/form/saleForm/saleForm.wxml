@@ -2,15 +2,15 @@
 <form class='width'>
   <view class='flex saleForm'>
     <view>
-        <picker disabled='{{isCommissioner}}' bindchange="bindStoreChange" value="{{storeIndex}}" range="{{storeArray}}">
+        <picker bindchange="bindStoreChange" data-shop_id="{{storeArray[storeIndex].shop_id}}" value="{{storeIndex}}" range="{{storeArray}}" range-key='shop_name'>
           <view class='choose storeChoose'>
-              <text>{{storeArray[storeIndex]}}</text>
+              <text>{{storeArray[storeIndex].shop_name}}</text>
               <image src='../../../img/icon-arrowDG.svg'></image>
           </view>
         </picker>
     </view>
       
-    <view hidden="{{isShow}}">
+    <view hidden="{{isShow||isCommissioner}}">
         <picker bindchange="bindSaleChange" value="{{saleIndex1}}" range="{{saleArray}}">
           <view class='choose'>
               <text>{{saleArray[saleIndex]}}</text>

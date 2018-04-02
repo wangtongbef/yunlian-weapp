@@ -1,3 +1,5 @@
+// var tokenRoles = wx.getStorageSync('tokenRoles')
+// var role = wx.getStorageSync('role')
 // pages/saleForm/saleForm.js
 Page({
 
@@ -7,21 +9,23 @@ Page({
   data: {
     token: '',
     isCommissioner: false,
-    storeArray: ['全部门店'],
+    storeArray: [{ shop_id: 0, shop_name: "全部门店" }],
     saleArray:[],
     timeArray:['今天','本周','本月','本年'],
     productAlltimedata:{},
     productInfo: [],
     isShow: true,
     storeIndex:0,
+    shop_id:0,
     saleIndex: 0,
     timeIndex: 0,
   },
   bindStoreChange: function (e) {
-    console.log('门店选的是', this.data.storeArray[e.detail.value])
+    console.log(e)
+    console.log('门店选的是', e.target.dataset.shop_id)
     if (e.detail.value !== 0) {
       this.setData({
-        isShow:false
+        isShow:false //选择销售人员picker
       })
     }else{
       this.setData({
@@ -29,7 +33,8 @@ Page({
       })
     }
     this.setData({
-      storeIndex: e.detail.value
+      storeIndex: e.detail.value,
+      shop_id:e.target.dataset.shop_id
     })
 
   },
@@ -60,44 +65,98 @@ Page({
         isCommissioner: true
       })
       wx.request({
-        url: getApp().data.servsers + 'statistics/salesForCommissioner',
+        url: getApp().data.servsers + 'statistics/signShopsForCommissioner', //获取签约门店
         data: {
-          shop_id: 0,
           token: that.data.token
         },
         method: 'POST',
         success: function (res) {
           console.log(res)
+          var storeArray = res.data.data
+          storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
           that.setData({
-            productAlltimedata: res.data.data,
-            productInfo: res.data.data.today
+            storeArray: storeArray
           })
-          console.log(that.data.productAlltimedata)
+          console.log(that.data.storeArray)
         }
       })
+      // wx.request({
+      //   url: getApp().data.servsers + 'statistics/salesForCommissioner',
+      //   data: {
+      //     shop_id: 0,
+      //     token: that.data.token
+      //   },
+      //   method: 'POST',
+      //   success: function (res) {
+      //     console.log(res)
+      //     that.setData({
+      //       productAlltimedata: res.data.data,
+      //       productInfo: res.data.data.today
+      //     })
+      //     console.log(that.data.productAlltimedata)
+      //   }
+      // })
     } else if (role.role_name === '门店负责人'){
 
     }
   },
   search(){
     var that = this
-    if (that.data.timeIndex == 0){
-      that.setData({
-        productInfo: that.data.productAlltimedata.today
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    var role = wx.getStorageSync('role')
+    if (role.role_name === '商务专员') {
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesForCommissioner',
+        data: {
+          shop_id: that.data.shop_id,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            productAlltimedata: res.data.data
+          })
+          console.log(that.data.productAlltimedata)
+          if (that.data.timeIndex == 0) {
+            that.setData({
+              productInfo: that.data.productAlltimedata.today
+            })
+          } else if (that.data.timeIndex == 1) {
+            that.setData({
+              productInfo: that.data.productAlltimedata.week
+            })
+          } else if (that.data.timeIndex == 2) {
+            that.setData({
+              productInfo: that.data.productAlltimedata.month
+            })
+          } else if (that.data.timeIndex == 3) {
+            that.setData({
+              productInfo: that.data.productAlltimedata.year
+            })
+          }
+        }
       })
-    } else if (that.data.timeIndex == 1) {
-      that.setData({
-        productInfo: that.data.productAlltimedata.week
-      })
-    } else if (that.data.timeIndex == 2) {
-      that.setData({
-        productInfo: that.data.productAlltimedata.month
-      })
-    } else if (that.data.timeIndex == 3) {
-      that.setData({
-        productInfo: that.data.productAlltimedata.year
-      })
+    } else if (role.role_name === '门店负责人') {
+
     }
+    // if (that.data.timeIndex == 0){
+    //   that.setData({
+    //     productInfo: that.data.productAlltimedata.today
+    //   })
+    // } else if (that.data.timeIndex == 1) {
+    //   that.setData({
+    //     productInfo: that.data.productAlltimedata.week
+    //   })
+    // } else if (that.data.timeIndex == 2) {
+    //   that.setData({
+    //     productInfo: that.data.productAlltimedata.month
+    //   })
+    // } else if (that.data.timeIndex == 3) {
+    //   that.setData({
+    //     productInfo: that.data.productAlltimedata.year
+    //   })
+    // }
   },
 
   /**
