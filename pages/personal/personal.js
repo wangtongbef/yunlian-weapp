@@ -6,7 +6,7 @@ Page({
    */
   data: {
     user:{},
-    phonenumber:'12345678900',
+    phonenumber:'',
     roleName:''
   },
 
