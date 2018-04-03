@@ -24,7 +24,7 @@ Page({
   },
   onLoad:function(){
     var that = this;
-    getUser();
+    //getUser();
     wx.login({
       success: function (res) {
         if (res.code) {
@@ -40,14 +40,14 @@ Page({
                 var token = res.data.data.token
                 that.setData({
                   token: token
-                }) 
+                })
                 wx.setStorageSync('tokenRoles', res.data.data)// 存储token
                 if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
                   that.setData({
                     isHiddenLogin: false
                   })
-                } else if (res.data.data.bind_phone === 1){
-                  if (res.data.data.roles.length === 1){
+                } else if (res.data.data.bind_phone === 1) {
+                  if (res.data.data.roles.length === 1) {
                     var role = res.data.data.roles[0]
                     wx.setStorageSync('role', role)
                     wx.request({
@@ -65,13 +65,13 @@ Page({
                     wx.redirectTo({
                       url: '../index/index'
                     })
-                  } else if (res.data.data.roles.length > 1){
+                  } else if (res.data.data.roles.length > 1) {
                     wx.redirectTo({
                       url: '../rolesCheck/rolesCheck'
                     })
                   }
                 }
-              } else if (res.data.code === 1){
+              } else if (res.data.code === 1) {
                 wx.showToast({
                   title: '此openid不存在',
                   icon: 'none',
@@ -82,7 +82,7 @@ Page({
                 })
                 var t = setTimeout(function () {
                   wx.redirectTo({
-                  url: '../login/login'
+                    url: '../login/login'
                   })
                 }, 3000);
               }
@@ -238,5 +238,8 @@ Page({
         }
       }
     })
+  },
+  onShow: function () {
+    getUser();
   }
 })

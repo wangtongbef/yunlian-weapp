@@ -1,3 +1,4 @@
+var getUser = require('../../utils/getUser.js');
 Page({
   data: {
     roles:[],
@@ -13,6 +14,9 @@ Page({
         token: tokenRoles.token
       })
     }
+  },
+  onShow: function () {
+    //getUser();
   },
   rolesCheck:function (event){
     var that = this
