@@ -11,6 +11,7 @@ Page({
   data: {
     tokenRoles: {},
     role: {},
+    phone_number:'',
     userInfo:{},
     list:[]
   },
@@ -82,7 +83,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     console.log('这是onshow') //onshow在左上角返回按钮出会执行
+    wx.request({
+      url: getApp().data.servsers + 'user/profile',
+      data: {
+        token: that.data.tokenRoles.token
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          phone_number: res.data.data.phone_number
+        })
+      }
+    })
   },
 
   /**

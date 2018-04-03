@@ -5,7 +5,7 @@
             <view class='userImg'><image src='{{userInfo.img}}'></image></view>
             <view class='userText'>
                 <text>{{userInfo.name}}</text>
-                <text class='margin20'>15012630722</text>
+                <text class='margin20'>{{phone_number}}</text>
                 <text>{{role.role_name}}</text>
             </view> 
         </view> 

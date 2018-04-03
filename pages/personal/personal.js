@@ -20,6 +20,19 @@ Page({
       user: wx.getStorageSync('user'),
       roleName: role.role_name
     })
+    wx.request({
+      url: getApp().data.servsers + 'user/profile',
+      data: {
+        token: wx.getStorageSync('tokenRoles').token
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          phonenumber: res.data.data.phone_number
+        })
+      }
+    })
   },
 
   /**
