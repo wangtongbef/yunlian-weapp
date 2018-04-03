@@ -2,7 +2,7 @@
 <form class='width'>
   <view class='flex saleForm'>
     <view>
-        <picker bindchange="bindStoreChange" data-shop_id="{{storeArray[storeIndex].shop_id}}" value="{{storeIndex}}" range="{{storeArray}}" range-key='shop_name'>
+        <picker bindchange="bindStoreChange" value="{{Index}}" range="{{storeArray}}" range-key='shop_name'>
           <view class='choose storeChoose'>
               <text>{{storeArray[storeIndex].shop_name}}</text>
               <image src='../../../img/icon-arrowDG.svg'></image>
@@ -11,9 +11,9 @@
     </view>
       
     <view hidden="{{isShow||isCommissioner}}">
-        <picker bindchange="bindSaleChange" value="{{saleIndex1}}" range="{{saleArray}}">
+        <picker bindchange="bindSaleChange" value="{{Index}}" range="{{salesArray}}"  range-key='user_name'>
           <view class='choose'>
-              <text>{{saleArray[saleIndex]}}</text>
+              <text>{{salesArray[saleIndex].user_name}}</text>
               <image src='../../../img/icon-arrowDG.svg'></image>
           </view>
       </picker>
@@ -39,7 +39,8 @@
     </view>
     <block wx:for='{{productInfo}}' wx:key='{{index}}'>
       <view class='flex productInfo'>
-        <text>{{item.name}}</text>
+        <text hidden="{{!isCommissioner}}">{{item.name}}</text>
+        <text hidden="{{isCommissioner}}">{{item.goods_name}}</text>
         <text>{{item.cnt}}个</text>
       </view>
     </block>

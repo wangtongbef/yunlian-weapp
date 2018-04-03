@@ -8,9 +8,10 @@ Page({
    */
   data: {
     token: '',
+    role: {},
     isCommissioner: false,
     storeArray: [{ shop_id: 0, shop_name: "全部门店" }],
-    saleArray:[],
+    salesArray: [{ user_id: 0, user_name: "全部销售员" }],
     timeArray:['今天','本周','本月','本年'],
     productAlltimedata:{},
     productInfo: [],
@@ -18,30 +19,54 @@ Page({
     storeIndex:0,
     shop_id:0,
     saleIndex: 0,
+    user_id: 0,
     timeIndex: 0,
   },
   bindStoreChange: function (e) {
+    var that = this
     console.log(e)
-    console.log('门店选的是', e.target.dataset.shop_id)
-    if (e.detail.value !== 0) {
-      this.setData({
+    console.log('门店选的是', that.data.storeArray[e.detail.value])
+    if (e.detail.value != 0) {
+      that.setData({
         isShow:false //选择销售人员picker
       })
-    }else{
-      this.setData({
+    } else if (e.detail.value == 0){
+      that.setData({
         isShow: true
       })
+      console.log(that.data.isShow)
     }
-    this.setData({
+    that.setData({
       storeIndex: e.detail.value,
-      shop_id:e.target.dataset.shop_id
+      shop_id: that.data.storeArray[e.detail.value].shop_id
     })
-
+    console.log(that.data.shop_id)
+    if (that.data.role.role_name === '门店负责人') {
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesPersonForShop',
+        data: {
+          shop_id: that.data.shop_id,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          var salesArray = res.data.data
+          salesArray.unshift({ user_id: 0, user_name: "全部销售员" })
+          that.setData({
+            salesArray:salesArray
+          })
+        }
+      })
+    }
   },
   bindSaleChange: function (e) {
-    console.log('销售员选的是', this.data.saleArray[e.detail.value])
-    this.setData({
-      saleIndex: e.detail.value
+    var that = this
+    console.log('销售员选的是', that.data.salesArray[e.detail.value])
+    console.log('销售员选的是', e.detail.value)
+    that.setData({
+      saleIndex: e.detail.value,
+      user_id: that.data.salesArray[e.detail.value].user_id
     })
   },
   bindTimeChange: function (e) {
@@ -56,11 +81,11 @@ Page({
   onLoad: function () {
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
-    var role = wx.getStorageSync('role')
     that.setData({
+      role: wx.getStorageSync('role'),
       token: tokenRoles.token
     })
-    if (role.role_name === '商务专员'){
+    if (that.data.role.role_name === '商务专员'){
       that.setData({
         isCommissioner: true
       })
@@ -80,31 +105,81 @@ Page({
           console.log(that.data.storeArray)
         }
       })
-      // wx.request({
-      //   url: getApp().data.servsers + 'statistics/salesForCommissioner',
-      //   data: {
-      //     shop_id: 0,
-      //     token: that.data.token
-      //   },
-      //   method: 'POST',
-      //   success: function (res) {
-      //     console.log(res)
-      //     that.setData({
-      //       productAlltimedata: res.data.data,
-      //       productInfo: res.data.data.today
-      //     })
-      //     console.log(that.data.productAlltimedata)
-      //   }
-      // })
-    } else if (role.role_name === '门店负责人'){
-
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesForCommissioner',
+        data: {
+          shop_id: 0,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            productAlltimedata: res.data.data,
+            productInfo: res.data.data.today
+          })
+          console.log(that.data.productAlltimedata)
+        }
+      })
+    } else if (that.data.role.role_name === '门店负责人'){
+      wx.request({
+        url: getApp().data.servsers + 'statistics/shopsForChargePerson', //获取签约门店
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          var storeArray = res.data.data
+          storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
+          that.setData({
+            storeArray: storeArray
+          })
+          console.log(that.data.storeArray)
+        }
+      })
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesForChargePerson',
+        data: {
+          shop_id: 0,
+          sales_person_id: 0,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            productAlltimedata: res.data.data,
+            productInfo: res.data.data.today
+          })
+          console.log(that.data.productAlltimedata)
+        }
+      })
     }
   },
   search(){
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
-    var role = wx.getStorageSync('role')
-    if (role.role_name === '商务专员') {
+    var setProductInfo = function (timeIndex) {
+      if (timeIndex == 0) {
+        that.setData({
+          productInfo: that.data.productAlltimedata.today
+        })
+      } else if (timeIndex == 1) {
+        that.setData({
+          productInfo: that.data.productAlltimedata.week
+        })
+      } else if (timeIndex == 2) {
+        that.setData({
+          productInfo: that.data.productAlltimedata.month
+        })
+      } else if (timeIndex == 3) {
+        that.setData({
+          productInfo: that.data.productAlltimedata.year
+        })
+      }
+    }
+    if (that.data.role.role_name === '商务专员') {
       wx.request({
         url: getApp().data.servsers + 'statistics/salesForCommissioner',
         data: {
@@ -118,45 +193,29 @@ Page({
             productAlltimedata: res.data.data
           })
           console.log(that.data.productAlltimedata)
-          if (that.data.timeIndex == 0) {
-            that.setData({
-              productInfo: that.data.productAlltimedata.today
-            })
-          } else if (that.data.timeIndex == 1) {
-            that.setData({
-              productInfo: that.data.productAlltimedata.week
-            })
-          } else if (that.data.timeIndex == 2) {
-            that.setData({
-              productInfo: that.data.productAlltimedata.month
-            })
-          } else if (that.data.timeIndex == 3) {
-            that.setData({
-              productInfo: that.data.productAlltimedata.year
-            })
-          }
+          setProductInfo(that.data.timeIndex)
         }
       })
-    } else if (role.role_name === '门店负责人') {
-
+    } else if (that.data.role.role_name === '门店负责人') {
+      wx.request({
+        url: getApp().data.servsers + 'statistics/salesForChargePerson',
+        data: {
+          shop_id: that.data.shop_id,
+          sales_person_id: that.data.user_id,
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            productAlltimedata: res.data.data,
+            productInfo: res.data.data.today
+          })
+          console.log(that.data.productAlltimedata)
+          setProductInfo(that.data.timeIndex)
+        }
+      })
     }
-    // if (that.data.timeIndex == 0){
-    //   that.setData({
-    //     productInfo: that.data.productAlltimedata.today
-    //   })
-    // } else if (that.data.timeIndex == 1) {
-    //   that.setData({
-    //     productInfo: that.data.productAlltimedata.week
-    //   })
-    // } else if (that.data.timeIndex == 2) {
-    //   that.setData({
-    //     productInfo: that.data.productAlltimedata.month
-    //   })
-    // } else if (that.data.timeIndex == 3) {
-    //   that.setData({
-    //     productInfo: that.data.productAlltimedata.year
-    //   })
-    // }
   },
 
   /**
