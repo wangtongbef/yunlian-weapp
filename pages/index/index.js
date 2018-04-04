@@ -27,7 +27,7 @@ Page({
       userInfo: wx.getStorageSync('user')
     })
     console.log(this.data.userInfo)
-    // getUser();
+    getUser();
     // var that = this
     // API.getlist('', function (res) {
     //   //这里既可以获取模拟的res
@@ -98,7 +98,7 @@ Page({
         })
       }
     })
-    getUser();
+    //getUser();
   },
 
   /**

@@ -37,6 +37,6 @@ App({
     })
   },
   globalData: {
-    quit: false
+    quit: false,
   }
 })

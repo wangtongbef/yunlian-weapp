@@ -238,8 +238,5 @@ Page({
         }
       }
     })
-  },
-  onShow: function () {
-    getUser();
   }
 })
