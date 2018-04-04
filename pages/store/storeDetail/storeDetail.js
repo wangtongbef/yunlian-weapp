@@ -7,22 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-      store:{},
-      saleList:[
-        { name:'刘小池',phoneNum:'15678938978'},
-        { name: '张军好', phoneNum: '18025376979' },
-        { name: '陈芳名', phoneNum: '18073769080' },
-        { name: '陈国良', phoneNum: '15675687675' },
-      ],
-      businessList:[
-        { name: '赵文卓', phoneNum: '15678938978' },
-        { name: '张三丰', phoneNum: '18376734037' },
-        { name: '周笔畅', phoneNum: '15578931078' },
-      ],
-      chargePersonList:[
-        { name: '陈1真', id:0, phoneNum: '15678938978' },
-      ],
-      storeDetail:{}
+    isCommissioner: true,
+    storeId:0,
+    store:{},
+    saleList:[
+      // { name:'刘小池',phoneNum:'15678938978'},
+    ],
+    businessList:[
+      { name: '赵文卓', phoneNum: '15678938978' },
+    ],
+    chargePersonList:[
+      { name: '陈1真', id:0, phoneNum: '15678938978' },
+    ],
+    storeDetail:{}
   },
 
   /**
@@ -31,6 +28,44 @@ Page({
   onLoad: function (options) {
     getLocation();
     var that = this;
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      role: wx.getStorageSync('role'),
+      token: tokenRoles.token,
+      storeId: wx.getStorageSync('storeId'),
+    })
+    if (that.data.role.role_name == '商务专员') {
+      console.log(that.data.role)
+      that.setData({
+        isCommissioner: true
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+        data: {
+          token: that.data.token,
+          id: that.data.storeId
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+        }
+      })
+    } else if (that.data.role.role_name == '门店负责人') {
+      that.setData({
+        isCommissioner: false
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/shopInfoForChargePerson', //获取门店详情
+        data: {
+          token: that.data.token,
+          id: that.data.storeId
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+        }
+      })
+    }
     // wx.getStorage({
     //   key: 'store',
     //   success: function(res) {
@@ -48,13 +83,13 @@ Page({
         console.log(res)
       }
     })*/
-    API.getStoredetail('', function (res) {
-      //这里既可以获取模拟的res
-      console.log(res)
-      that.setData({
-        storeDetail: res.data
-      })
-    });
+    // API.getStoredetail('', function (res) {
+    //   //这里既可以获取模拟的res
+    //   console.log(res)
+    //   that.setData({
+    //     storeDetail: res.data
+    //   })
+    // });
   },
   linkMap(){
     wx.navigateTo({

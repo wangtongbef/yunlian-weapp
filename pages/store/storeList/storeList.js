@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    role:{},
+    isCommissioner:true,
+    token:'',
     isShow: true,
     currentTab: 0,
     chargePstore:[],
@@ -15,8 +18,65 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options);
+  onLoad: function () {
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      role: wx.getStorageSync('role'),
+      token: tokenRoles.token
+    })
+    if (that.data.role.role_name == '商务专员'){
+      console.log(that.data.role)
+      that.setData({
+        isCommissioner: true
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/unsignedShopsForCommissioner', //获取待签约门店
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            waiting: res.data.data
+          })
+          console.log(that.data.waiting)
+        }
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/signingShopsForCommissioner', //获取已签约门店
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            waited: res.data.data
+          })
+          console.log(that.data.waited)
+        }
+      })
+    } else if (that.data.role.role_name == '门店负责人'){
+      that.setData({
+        isCommissioner: false
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/signingShopsForChargePerson', //获取门店列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            chargePstore: res.data.data
+          })
+          console.log(that.data.chargePstore)
+        }
+      })
+    }
     /*var that = this;
     wx.request({
       url: 'http://dev2.lystrong.cn/api/weapp/v1/shops/getSigningShops/',
@@ -33,21 +93,21 @@ Page({
         })
       }
     })*/
-    var that = this
-    API.getTosign('', function (res) {
-      //这里既可以获取模拟的res
-      console.log(res)
-      that.setData({
-        waiting: res.data
-      })
-    });
-    API.getSigned('', function (res) {
-      //这里既可以获取模拟的res
-      console.log(res)
-      that.setData({
-        waited: res.data
-      })
-    });
+    // var that = this
+    // API.getTosign('', function (res) {
+    //   //这里既可以获取模拟的res
+    //   console.log(res)
+    //   that.setData({
+    //     waiting: res.data
+    //   })
+    // });
+    // API.getSigned('', function (res) {
+    //   //这里既可以获取模拟的res
+    //   console.log(res)
+    //   that.setData({
+    //     waited: res.data
+    //   })
+    // });
   },
   swichNav: function (e) {
     if (this.data.currentTab === e.target.dataset.current) {
@@ -60,20 +120,20 @@ Page({
       })
     }
   },
-  waitingDetail(e){
-    //console.log(e);
+  storeDetail(e){
+    console.log(e);
     var that = this;
-    var index = e.currentTarget.dataset.id;
-    console.log(index);
+    var storeId = e.currentTarget.dataset.storeid;
+    console.log(storeId);
     wx.setStorage({
-      key: 'store',
-      data: that.data.waiting[index],
+      key: 'storeId',
+      data: storeId,
       success:function(){
         console.log('缓存成功')
       }
     })
     wx.navigateTo({
-      url: '../storeDetail/storeDetail?id='+index,
+      url: '../storeDetail/storeDetail',
     })
   },
   /**
