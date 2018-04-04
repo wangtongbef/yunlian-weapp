@@ -92,9 +92,20 @@ Page({
     // });
   },
   linkMap(){
-    wx.navigateTo({
+    console.log("map")
+    // wx.navigateTo({
       //跳转到地图页面
       //url: ''
+    // })
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res)
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy
+      }
     })
   },
   salePhoneBtn(e){
