@@ -1,0 +1,59 @@
+page{
+  background: #eee
+}
+.backgroundColor{
+  background: #fff;
+}
+.inputInfo{
+  display: flex;
+  justify-content: center;
+  padding: 80rpx 10%;
+  border-bottom: 1rpx #C7C7C7 solid
+}
+.inputInfo input{
+  height: 100rpx;
+  width: 100%;
+  border: 1rpx #C7C7C7 solid;
+  background: #eee;
+  padding-left: 5%;
+  border-radius:10rpx 
+}
+.padding{
+  padding: 26rpx 5%;
+}
+.flexBetween{
+  display: flex;
+  justify-content: space-between
+}
+.addressInfo .iconAddress{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 8rpx;
+  position: relative;
+  top: 8rpx
+}
+.addressInfo text{
+  font-size: 30rpx
+}
+.addressInfo > view{
+  display: inline-block
+}
+.addressInfo .iconArrow{
+  width: 40rpx;
+  height: 36rpx;
+  position: relative;
+  top: 4rpx
+}
+.checkBtn{
+  display: flex;
+  justify-content: center;
+  margin-top: 200rpx
+}
+.checkBtn button{
+  height: 100rpx;
+  width: 80%;
+  line-height: 100rpx;
+  border-radius: 10rpx;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff
+}

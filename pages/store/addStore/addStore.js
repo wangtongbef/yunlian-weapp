@@ -6,16 +6,76 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    inputVal:'',
+    inputValWarning:'',
+    adress:'门店位置',
+    position:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    getLocation()
+  onLoad: function () {
   },
-
+  
+  getadress() {
+    var that = this;
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          address: res.name,
+          position: res.latitude + ',' + res.longitude
+        })
+        // console.log(that.data.address)
+        // console.log(that.data.position)
+      },
+      fail: function (res) {
+        wx.getSetting({
+          success: (res) => {
+            if (res.authSetting['scope.userLocation']) {
+              return
+            } else {
+              wx.showModal({
+                title: '温馨提示',
+                showCancel: false,
+                confirmText: '授权',
+                content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
+                //content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
+                success: (res) => {
+                  console.log(res);
+                  //开启授权
+                  wx.openSetting({
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  lengthCheck(e){
+    var that = this
+    console.log(e)
+    that.setData({
+      inputVal: e.detail.value
+    })
+    if (that.data.inputVal.length == 0){
+      that.setData({
+        inputValWarning: '门店名称不能为空'
+      })
+    } else if (that.data.inputVal.length == 1){
+      that.setData({
+        inputValWarning: '门店名称不能少于2位'
+      })
+    }
+    wx.showToast({
+      title: that.data.inputValWarning,
+      icon: 'none',
+      duration: 2000
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

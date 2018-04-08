@@ -53,10 +53,12 @@
   bottom: 130rpx;
   width: 80%;
   padding: 0 10%;
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 100rpx;
+  line-height: 100rpx;
 }
-
+.height{
+  line-height: 100rpx
+}
 .addStore navigator button{
   width: 100%;
   background: linear-gradient(#018fe8,#0072b1);

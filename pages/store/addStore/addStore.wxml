@@ -1,1 +1,19 @@
-<text>新增店铺</text>
+<view class="swiper-item">
+  <view class='backgroundColor'>
+    <view class='inputInfo'>
+       <input class='' bindblur='lengthCheck' type="text"></input>
+    </view>
+    <view class='addressInfo flexBetween padding' bindtap='getadress'>
+        <view>
+            <image src='../../../img/icon-address.svg' class='iconAddress'></image>
+            <text>{{adress}}</text>
+        </view>
+        <view>
+            <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+        </view>
+    </view>
+  </view>
+  <view class='checkBtn' bindtap=''>
+      <button>确定</button>
+  </view>
+</view>

@@ -3,6 +3,7 @@ var getLocation = function(){
     type: 'gcj02',
     success: function(res) {
       console.log(res);
+      getApp().globalData.location = res
     },
     fail:function(res){
       wx.showModal({
@@ -19,6 +20,7 @@ var getLocation = function(){
               //console.log(res);                
               if (res.authSetting['scope.userLocation']) {
                 console.log('授权啦')
+                getLocation();
               } else {  //用户仍然拒绝的情况
                 console.log('未授权');
                 getLocation();

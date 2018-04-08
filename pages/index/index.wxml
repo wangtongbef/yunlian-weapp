@@ -1,6 +1,6 @@
 <!--pages/index/index.wxml-->
 <view>
-    <view class='userInfo' bindtap='userInfo'>
+     <view class='userInfo' bindtap='userInfo'> 
         <view>
             <view class='userImg'><image src='{{userInfo.img}}'></image></view>
             <view class='userText'>
@@ -9,7 +9,7 @@
                 <text>{{role.role_name}}</text>
             </view> 
         </view> 
-        <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view>
+        <!-- <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view> -->
     </view>
     <view class='operateList'>
         <view class='operateList-1' >

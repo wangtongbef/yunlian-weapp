@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/login/login",
+    "pages/store/addStore/addStore",
     "pages/index/index",
     "pages/rolesCheck/rolesCheck",
     "pages/store/storeList/storeList",
@@ -8,7 +9,8 @@
     "pages/wallet/walletList/walletList",
     "pages/form/formList/formList",
     "pages/store/storeDetail/storeDetail",
-    "pages/sign/sign",
+    "pages/sign/signList/signList",
+    "pages/sign/signStore/signStore",
     "pages/checkIn/checkIn",
     "pages/personal/personal",
     "pages/scan/scan",
@@ -17,7 +19,6 @@
     "pages/form/signForm/signForm",
     "pages/form/saleForm/saleForm",
     "pages/store/addPerson/addPerson",
-    "pages/store/addStore/addStore",
     "pages/unbindphone/unbindphone"
   ],
   "window":{

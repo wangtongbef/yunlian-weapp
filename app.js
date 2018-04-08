@@ -38,5 +38,6 @@ App({
   },
   globalData: {
     quit: false,
+    location:{}
   }
 })

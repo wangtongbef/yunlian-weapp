@@ -1,0 +1,135 @@
+/* pages/sign/sign.wxss */
+page{
+  background: #eee;
+  font-size: 32rpx
+}
+.background{
+  background: #fff;
+}
+.width{
+  display:block;
+  width:90%;
+  padding:20rpx 5%
+}
+.list{
+  width: 90%;
+  padding:24rpx 5%;
+  border-bottom: 1rpx #eee solid;
+  display: flex;
+  justify-content: space-between
+}
+.list image{
+  width: 34rpx;
+  height: 34rpx
+}
+.swiper-tab{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 100rpx;
+  border-bottom: 1rpx #ccc solid;
+  background: #fff;
+  z-index: 99
+}
+.swiper-tab > view {
+  font-size: 34rpx;
+  display: inline-block;
+  border-bottom: 0rpx;
+  width: 50%;
+  box-sizing: border-box
+}
+.swiper-tab > view:first-child{
+  border-right:1rpx #C7C7C7 solid;
+  
+}
+.swiper-tab .active {
+  color: #0072b1;
+}
+.swiper-tab view image{
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 4rpx
+}
+.photoInfo{
+  display: flex;
+  justify-content: center;
+}
+.photoInfo > view{
+  padding: 100rpx 0
+}
+.photoInfo .photoBtn{
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+}
+.photoInfo text{
+  font-size: 20rpx;
+  display: inline-block
+}
+.photoInfo em{
+  font-style: normal;
+  display: inline-block;
+  color: red;
+  position: relative;
+  top: 9rpx
+}
+.photoInfo .photo{
+  width: 90%;
+  height: 380rpx;
+  padding: 50rpx 0
+}
+.storeInfo{
+  width: 90%;
+  padding: 24rpx 5%;
+  border-bottom: 1rpx #C7C7C7 solid
+}
+.signBtn{
+  display: flex;
+  justify-content: center;
+  margin-top: 180rpx
+}
+.signBtn button{
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  border-radius: 50%;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff
+}
+.signedTime{
+  border-bottom:1rpx #eee solid 
+}
+.signedInfo{
+  font-size: 26rpx;
+  color: #A7A7A7;
+  margin-bottom: 30rpx
+}
+.signedInfo:last-child{
+  margin-bottom: 160rpx
+}
+.signedInfo text{
+  display: block
+}
+.signedInfo image{
+  width: 90%;
+  height: 400rpx;
+  padding: 40rpx 5%
+}
+.signedInfo text:last-child{
+  border-top: 1rpx #eee solid
+}
+.nodata{
+  text-align: center;
+  margin-top: 100rpx
+}
+.nodata image{
+  width: 180rpx;
+  height: 180rpx
+}
+.nodata text{
+  display: block;
+  color: #777;
+  font-size: 32rpx
+}
