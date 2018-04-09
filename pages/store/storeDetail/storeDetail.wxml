@@ -4,22 +4,36 @@
     <view class='backgroundColor'>
       <view>
           <text>编号</text>
-          <text>{{storeDetail.id}}</text>
+          <text>{{storeDetailres.shop.id}}</text>
       </view>
-      <view>
+      <view wx:if="{{isCommissioner}}" bindtap='storeNameChange'>
           <text>名称</text>
-          <text>{{storeDetail.name}}</text>
+          <view>
+              <text>{{storeDetailres.shop.name}}</text>
+              <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+          </view> 
       </view>
-      <view class='addressDetail' bindtap='linkMap'>
+      <view wx:if="{{!isCommissioner}}">
+          <text>名称</text>
+          <text>{{storeDetailstorge.name}}</text>
+      </view>
+      <view wx:if="{{isCommissioner}}" class='addressDetail' bindtap='linkMap'>
           <text>位置</text>
           <view>
-              <text>{{storeDetail.address}}</text>
+              <text>{{storeDetailres.shop.address}}</text>
+              <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+          </view>  
+      </view>
+      <view wx:if="{{!isCommissioner}}" class='addressDetail' bindtap='linkMap'>
+          <text>位置</text>
+          <view>
+              <text>{{storeDetailres.shop.address}}</text>
               <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
           </view>  
       </view>
        <view wx:if="{{isCommissioner}}">
           <text>合作状态</text>
-          <text>{{storeDetail.status}}</text>
+          <text>{{storeDetailstorge.status}}</text>
       </view> 
     </view>
     <!--门店负责人-->
@@ -29,7 +43,7 @@
             <block wx:for='{{saleList}}' wx:key='{{index}}'>
                 <view bindtap='salePhoneBtn' id='{{index}}'>
                     <text>{{item.name}}</text>
-                    <text>{{item.phoneNum}}</text>
+                    <text>{{item.phone_number}}</text>
                 </view>
             </block>
             <view wx:if='{{saleList.length == 0}}' class='noData'>暂无数据</view>
@@ -39,7 +53,7 @@
             <block wx:for='{{businessList}}' wx:key='{{index}}'>
                 <view bindtap='businessPhoneBtn' id='{{index}}'>
                     <text>{{item.name}}</text>
-                    <text>{{item.phoneNum}}</text>
+                    <text>{{item.phone_number}}</text>
                 </view>
             </block>
             <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
@@ -54,7 +68,7 @@
                   <view bindtap='chargePersonBtn' id='{{index}}' >
                       <text>{{item.name}}</text>
                       <view>
-                          <text>{{item.phoneNum}}</text>
+                          <text>{{item.phone_number}}</text>
                           <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{item.id}}'></image>
                       </view>   
                   </view>
@@ -69,7 +83,7 @@
                   <view bindtap='chargePersonBtn' id='{{index}}'>
                       <text>{{item.name}}</text>
                       <view>
-                          <text>{{item.phoneNum}}</text>
+                          <text>{{item.phone_number}}</text>
                           <image src='../../../img/icon-rubbish.svg' class='iconRubbish' bindtap='delete'></image>
                       </view>
                   </view>
@@ -78,8 +92,7 @@
           </view>
       </view>
       <view class='giveUp'>
-          <button>放弃此店</button>
-          <!--<button>解约此店</button>-->
+          <button>{{storeDetailstorge.status=='待签约'?'放弃此店':'解约此店'}}</button>
       </view>
     </view>
 </view>

@@ -8,7 +8,6 @@ Page({
    */
   data: {
     isCommissioner: true,
-    storeId:0,
     store:{},
     saleList:[
       // { name:'刘小池',phoneNum:'15678938978'},
@@ -19,7 +18,8 @@ Page({
     chargePersonList:[
       { name: '陈1真', id:0, phoneNum: '15678938978' },
     ],
-    storeDetail:{}
+    storeDetailstorge:{},
+    storeDetailres:{}
   },
 
   /**
@@ -32,7 +32,7 @@ Page({
     that.setData({
       role: wx.getStorageSync('role'),
       token: tokenRoles.token,
-      storeId: wx.getStorageSync('storeId'),
+      storeDetailstorge: wx.getStorageSync('storeDetail'),
     })
     if (that.data.role.role_name == '商务专员') {
       console.log(that.data.role)
@@ -43,11 +43,17 @@ Page({
         url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
         data: {
           token: that.data.token,
-          id: that.data.storeId
+          id: that.data.storeDetailstorge.id
         },
         method: 'POST',
         success: function (res) {
           console.log(res)
+          that.setData({
+            storeDetailres: res.data.data,
+            chargePersonList: res.data.data.charge_person,
+            businessList: res.data.data.sales
+          })
+          console.log(that.data.storeDetailres)
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {
@@ -58,11 +64,17 @@ Page({
         url: getApp().data.servsers + 'shop/shopInfoForChargePerson', //获取门店详情
         data: {
           token: that.data.token,
-          id: that.data.storeId
+          id: that.data.storeDetailstorge.id
         },
         method: 'POST',
         success: function (res) {
           console.log(res)
+          that.setData({
+            storeDetailres: res.data.data,
+            chargePersonList: res.data.data.charge_person,
+            businessList: res.data.data.sales
+          })
+          console.log(that.data.storeDetailres)
         }
       })
     }
@@ -90,6 +102,11 @@ Page({
     //     storeDetail: res.data
     //   })
     // });
+  },
+  storeNameChange(){
+    wx.navigateTo({
+      url: '../changeStoreName/changeStoreName'
+    })
   },
   linkMap(){
     console.log("map")
@@ -159,7 +176,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this
+    wx.request({
+      url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+      data: {
+        token: that.data.token,
+        id: that.data.storeDetailstorge.id
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          storeDetailres: res.data.data,
+          chargePersonList: res.data.data.charge_person,
+          businessList: res.data.data.sales
+        })
+        console.log(that.data.storeDetailres)
+      }
+    })
   },
 
   /**

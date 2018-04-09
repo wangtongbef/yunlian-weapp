@@ -1,10 +1,11 @@
 {
   "pages":[
     "pages/login/login",
+    "pages/store/storeList/storeList",
+    "pages/store/changeStoreName/changeStoreName",
     "pages/store/addStore/addStore",
     "pages/index/index",
     "pages/rolesCheck/rolesCheck",
-    "pages/store/storeList/storeList",
     "pages/wallet/walletCenter/walletCenter",
     "pages/wallet/walletList/walletList",
     "pages/form/formList/formList",

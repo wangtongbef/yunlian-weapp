@@ -28,7 +28,7 @@ page{
   display: flex;
   justify-content: space-between
 }
-.addressDetail image{
+.iconArrow{
   height: 36rpx;
   width: 36rpx;
   margin-left: 6rpx;

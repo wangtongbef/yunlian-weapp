@@ -41,6 +41,10 @@ Page({
           that.setData({
             waiting: res.data.data
           })
+          var storeArr = that.data.waiting
+          for (var i = 0; i<storeArr.length;i++){
+            storeArr[i].status = '待签约'
+          }
           console.log(that.data.waiting)
         }
       })
@@ -55,6 +59,10 @@ Page({
           that.setData({
             waited: res.data.data
           })
+          var storeArr = that.data.waited
+          for (var i = 0; i < storeArr.length; i++) {
+            storeArr[i].status = '已签约'
+          }
           console.log(that.data.waited)
         }
       })
@@ -77,37 +85,6 @@ Page({
         }
       })
     }
-    /*var that = this;
-    wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/shops/getSigningShops/',
-      method:'POST',
-      data:{
-        token:'abc',
-        commissioner_id:2
-      },
-      success:function(res){
-        console.log(res)
-        var name = res.data.data
-        that.setData({
-          waiting:name
-        })
-      }
-    })*/
-    // var that = this
-    // API.getTosign('', function (res) {
-    //   //这里既可以获取模拟的res
-    //   console.log(res)
-    //   that.setData({
-    //     waiting: res.data
-    //   })
-    // });
-    // API.getSigned('', function (res) {
-    //   //这里既可以获取模拟的res
-    //   console.log(res)
-    //   that.setData({
-    //     waited: res.data
-    //   })
-    // });
   },
   swichNav: function (e) {
     if (this.data.currentTab === e.target.dataset.current) {
@@ -125,9 +102,17 @@ Page({
     var that = this;
     var storeId = e.currentTarget.dataset.storeid;
     console.log(storeId);
+    function searchId(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].id == storeId){
+          return arr[i]
+        }
+      }
+    }
+    var storeDetail = searchId(that.data.chargePstore) || searchId(that.data.waiting) || searchId(that.data.waited)
     wx.setStorage({
-      key: 'storeId',
-      data: storeId,
+      key: 'storeDetail',
+      data: storeDetail,
       success:function(){
         console.log('缓存成功')
       }
@@ -147,7 +132,54 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      role: wx.getStorageSync('role'),
+      token: tokenRoles.token
+    })
+    if (that.data.role.role_name == '商务专员') {
+      console.log(that.data.role)
+      that.setData({
+        isCommissioner: true
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/unsignedShopsForCommissioner', //获取待签约门店
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            waiting: res.data.data
+          })
+          var storeArr = that.data.waiting
+          for (var i = 0; i < storeArr.length; i++) {
+            storeArr[i].status = '待签约'
+          }
+          console.log(that.data.waiting)
+        }
+      })
+      wx.request({
+        url: getApp().data.servsers + 'shop/signingShopsForCommissioner', //获取已签约门店
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            waited: res.data.data
+          })
+          var storeArr = that.data.waited
+          for (var i = 0; i < storeArr.length; i++) {
+            storeArr[i].status = '已签约'
+          }
+          console.log(that.data.waited)
+        }
+      })
+    }
   },
 
   /**

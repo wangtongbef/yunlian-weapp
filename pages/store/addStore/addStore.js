@@ -6,9 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tokenRoles: wx.getStorageSync('tokenRoles'),
     inputVal:'',
     inputValWarning:'',
-    adress:'门店位置',
+    address:'门店位置',
     position:{}
   },
 
@@ -25,10 +26,11 @@ Page({
         console.log(res)
         that.setData({
           address: res.name,
-          position: res.latitude + ',' + res.longitude
+          'position.latitude': res.latitude,
+          'position.longitude': res.longitude
         })
-        // console.log(that.data.address)
-        // console.log(that.data.position)
+        console.log(that.data.address)
+        console.log(that.data.position)
       },
       fail: function (res) {
         wx.getSetting({
@@ -65,15 +67,38 @@ Page({
       that.setData({
         inputValWarning: '门店名称不能为空'
       })
+      wx.showToast({
+        title: that.data.inputValWarning,
+        icon: 'none',
+        duration: 2000
+      })
     } else if (that.data.inputVal.length == 1){
       that.setData({
         inputValWarning: '门店名称不能少于2位'
       })
+      wx.showToast({
+        title: that.data.inputValWarning,
+        icon: 'none',
+        duration: 2000
+      })
     }
-    wx.showToast({
-      title: that.data.inputValWarning,
-      icon: 'none',
-      duration: 2000
+    console.log(that.data.inputVal)
+  },
+  addstore(){
+    var that = this
+    wx.request({
+      url: getApp().data.servsers + 'shop/addShop',
+      method: 'POST',
+      data: {
+        token: that.data.tokenRoles.token,
+        name: that.data.inputVal,
+        address: that.data.address,
+        longitude: that.data.position.longitude,
+        latitude: that.data.position.latitude
+      },
+      success: function (res) {
+        console.log(res)
+      }
     })
   },
   /**

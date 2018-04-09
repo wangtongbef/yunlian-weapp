@@ -1,0 +1,25 @@
+/* pages/addPerson/addPerson.wxss */
+page{
+  background-color: #eee;
+  width: 90%;
+  margin: 240rpx auto 0 auto
+}
+.width{
+  width: 90%;
+  margin: 0 auto;
+}
+.changeName > input{
+  background-color: #fff;
+  height: 100rpx;
+  width: 96%;
+  padding: 0 2%;
+  border-radius:10rpx;
+  font-size: 30rpx
+}
+.changeName > button{
+  border:none;
+  margin-top: 100rpx;
+  background: linear-gradient(#018fe8,#0072b1);
+  color: #fff;
+  border-radius: 10rpx;
+}
