@@ -51,7 +51,7 @@ Page({
     } else if (that.data.role.role_name == '商务专员') {
       that.setData({
         list: [{ text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn' },
-          { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/signList/signList' },
+          { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/sign' },
         { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
         { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' },
         { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]

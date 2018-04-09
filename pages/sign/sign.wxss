@@ -15,12 +15,21 @@ page{
   width: 90%;
   padding:24rpx 5%;
   border-bottom: 1rpx #eee solid;
-  display: flex;
-  justify-content: space-between
+  overflow: hidden
+  /* display: flex;
+  justify-content: space-between */
 }
 .list image{
   width: 34rpx;
-  height: 34rpx
+  height: 34rpx;
+  float:right;
+}
+.needUpdate{
+  color:red;
+  text-align: center;
+  float:right;
+  font-size: 26rpx;
+  margin-right:10rpx
 }
 .swiper-tab{
   position: fixed;

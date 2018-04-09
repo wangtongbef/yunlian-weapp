@@ -38,16 +38,6 @@
     </view>
     <!--门店负责人-->
     <view hidden="{{isCommissioner}}">
-        <view class='detailTitle'>门店销售员</view>
-        <view class='backgroundColor'>
-            <block wx:for='{{saleList}}' wx:key='{{index}}'>
-                <view bindtap='salePhoneBtn' id='{{index}}'>
-                    <text>{{item.name}}</text>
-                    <text>{{item.phone_number}}</text>
-                </view>
-            </block>
-            <view wx:if='{{saleList.length == 0}}' class='noData'>暂无数据</view>
-        </view>
         <view class='detailTitle'>商务专员</view>
         <view class='backgroundColor'>
             <block wx:for='{{businessList}}' wx:key='{{index}}'>
@@ -58,28 +48,38 @@
             </block>
             <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
         </view>
+        <view class='detailTitle'>门店销售员</view>
+        <view class='backgroundColor'>
+            <block wx:for='{{saleList}}' wx:key='{{index}}'>
+                <view bindtap='salePhoneBtn' id='{{index}}'>
+                    <text>{{item.name}}</text>
+                    <text>{{item.phone_number}}</text>
+                </view>
+            </block>
+            <view wx:if='{{saleList.length == 0}}' class='noData'>暂无数据</view>
+        </view>
     </view>
     <!--商务专员-->
     <view hidden="{{!isCommissioner}}">
       <view>
           <view class='detailTitle'>门店负责人</view>
           <view class='backgroundColor'>
-              <block wx:for='{{chargePersonList}}' wx:key='{{index}}'>
+              <block wx:if='{{chargePerson.name}}'>
                   <view bindtap='chargePersonBtn' id='{{index}}' >
-                      <text>{{item.name}}</text>
+                      <text>{{chargePerson.name}}</text>
                       <view>
-                          <text>{{item.phone_number}}</text>
-                          <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{item.id}}'></image>
+                          <text>{{chargePerson.phone_number}}</text>
+                          <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{chargePerson.id}}'></image>
                       </view>   
                   </view>
               </block>
-              <view class='addBtn' bindtap='addPerson' wx:if='{{chargePersonList.length == 0}}'> + 添加</view>
+              <view class='addBtn' bindtap='addChargeperson' wx:if='{{!chargePerson.name}}'> + 添加</view>
           </view>
       </view>
       <view>
           <view class='detailTitle'>门店销售员</view>
           <view class='backgroundColor'>
-              <block wx:for='{{chargePersonList}}' wx:key='{{index}}'>
+              <block wx:for='{{saleList}}' wx:key='{{index}}'>
                   <view bindtap='chargePersonBtn' id='{{index}}'>
                       <text>{{item.name}}</text>
                       <view>
@@ -88,7 +88,7 @@
                       </view>
                   </view>
               </block>
-              <view class='addBtn marginBtm' bindtap='addPerson'>+ 添加</view>
+              <view class='addBtn marginBtm' bindtap='addSales'>+ 添加</view>
           </view>
       </view>
       <view class='giveUp'>

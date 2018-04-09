@@ -8,16 +8,13 @@ Page({
    */
   data: {
     isCommissioner: true,
-    store:{},
     saleList:[
       // { name:'刘小池',phoneNum:'15678938978'},
     ],
     businessList:[
       { name: '赵文卓', phoneNum: '15678938978' },
     ],
-    chargePersonList:[
-      { name: '陈1真', id:0, phoneNum: '15678938978' },
-    ],
+    chargePerson:{},
     storeDetailstorge:{},
     storeDetailres:{}
   },
@@ -50,7 +47,7 @@ Page({
           console.log(res)
           that.setData({
             storeDetailres: res.data.data,
-            chargePersonList: res.data.data.charge_person,
+            chargePerson: res.data.data.charge_person,
             businessList: res.data.data.sales
           })
           console.log(that.data.storeDetailres)
@@ -71,7 +68,7 @@ Page({
           console.log(res)
           that.setData({
             storeDetailres: res.data.data,
-            chargePersonList: res.data.data.charge_person,
+            chargePerson: res.data.data.charge_person,
             businessList: res.data.data.sales
           })
           console.log(that.data.storeDetailres)
@@ -139,18 +136,39 @@ Page({
     })
   },
   //跳转到添加用户手机页面
-  addPerson(){
+  addChargeperson(){
     wx.navigateTo({
-      url: '../addPerson/addPerson',
+      url: '../addPerson/addPerson?title=添加门店负责人',
       success:function(){
+        console.log('成功了')
+      }
+    })
+  },
+  addSales() {
+    wx.navigateTo({
+      url: '../addPerson/addPerson?title=添加门店销售员',
+      success: function () {
         console.log('成功了')
       }
     })
   },
   //更改用户，跳转到添加用户手机页面
   changePerson(){
+    var that=this
+    wx.request({
+      url: getApp().data.servsers + 'shop/deleteShopChargePerson',
+      data: {
+        token: that.data.token,
+        id: that.data.storeDetailres.shop.id,
+        charge_person_id:that.data.chargePerson.id
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+      }
+    })
     wx.navigateTo({
-      url: '../addPerson/addPerson',
+      url: '../addPerson/addPerson?title=更换门店负责人',
     })
   },
   //动态生成标题
@@ -188,7 +206,7 @@ Page({
         console.log(res)
         that.setData({
           storeDetailres: res.data.data,
-          chargePersonList: res.data.data.charge_person,
+          chargePerson: res.data.data.charge_person,
           businessList: res.data.data.sales
         })
         console.log(that.data.storeDetailres)

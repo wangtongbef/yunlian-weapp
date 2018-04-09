@@ -8,7 +8,8 @@ page{
   width: 90%;
   margin: 0 auto;
 }
-.addPhone > input{
+.addPhone > input,
+.addName > input{
   background-color: #fff;
   height: 100rpx;
   width: 96%;
@@ -16,13 +17,17 @@ page{
   border-radius:10rpx;
   font-size: 30rpx
 }
-.addPhone > button{
+.addPhone > button,
+.addName > button{
   border:none;
   background-color: #C7C7C7;
   margin-top: 100rpx;
   /*background: linear-gradient(#018fe8,#0072b1);*/
   color: #fff;
   border-radius: 10rpx;
+}
+.nameButton{
+  background: linear-gradient(#018fe8,#0072b1);
 }
 .addPhone > button[disabled]{
   background-color: #C7C7C7;
@@ -31,11 +36,11 @@ page{
   font-size: 30rpx;
 }
 
-.addPhone > text{
+.addPhone > text,
+.addName > text{
   display: block;
   text-align: right;
   font-size: 24rpx
-  
 }
 .preview view text{
   display: block;
@@ -49,9 +54,6 @@ page{
 }
 .preview{
   font-size: 30rpx
-}
-.previewInfo{
-  
 }
 .previewBtn{
   display: flex;

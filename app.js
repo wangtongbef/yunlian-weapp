@@ -38,6 +38,7 @@ App({
   },
   globalData: {
     quit: false,
-    location:{}
+    location:{},
+    addperson:'添加门店负责人'
   }
 })
