@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    token: '',
     walletDetail:{}
   },
 
@@ -13,12 +14,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      token: tokenRoles.token
+    })
     wx.request({
       url: getApp().data.servsers + 'finance/detail',
       method: 'POST',
       data: {
         trade_id: options.trade_id,
-        token: 'abc123'
+        token: that.data.token
       },
       success: function (res) {
         console.log(res)

@@ -131,18 +131,48 @@ Page({
   },
   confirm(){
     var that = this
-    if (that.data.title == '添加门店负责人'){
+    var chargePersonData = wx.getStorageSync('chargePersonData')
+    if (that.data.title == '添加门店负责人' || that.data.title == '更换门店负责人'){
       wx.request({
-        url: getApp().data.servsers + 'shop/addShopChargePerson',
-        data: {
-          token: that.data.token,
-          id: that.data.storeId,
-          name: that.data.name,
-          phone_number: that.data.phoneNumber
-        },
+        url: getApp().data.servsers + 'shop/deleteShopChargePerson',
+        data: chargePersonData,
         method: 'POST',
         success: function (res) {
           console.log(res)
+          wx.request({
+            url: getApp().data.servsers + 'shop/addShopChargePerson',
+            data: {
+              token: that.data.token,
+              id: that.data.storeId,
+              name: that.data.name,
+              phone_number: that.data.phoneNumber
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              if (res.data.code == 0) {
+                wx.showToast({
+                  title: '添加成功',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 1000)
+              } else if (res.data.code == 1) {
+                wx.showModal({
+                  title: '提示',
+                  content: '添加门店负责人失败',
+                  showCancel: false,
+                  confirmText: '知道了',
+                  success: function () {
+                  }
+                })
+              }
+            }
+          })
         }
       })
     } else if (that.data.title == '添加门店销售员') {
@@ -157,17 +187,41 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
+          if (res.data.code == 0) {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          } else if (res.data.code == 1) {
+            wx.showModal({
+              title: '提示',
+              content: '添加门店销售员失败',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function () {
+              }
+            })
+          } else if (res.data.code == 2) {
+            wx.showModal({
+              title: '提示',
+              content: '该用户已是门店销售员',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          }
         }
       })
     }
-    wx.showModal({
-      title:'提示',
-      content:'当前用户为其他角色,请联系管理员',
-      showCancel:false,
-      confirmText:'知道了',
-      success:function(){
-        console.log('hahah')
-      }
-    })
   }
 })

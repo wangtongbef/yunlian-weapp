@@ -10,18 +10,10 @@ Page({
     flag:true,
     isShow: true,
     currentTab: 0,
+    isShowListNum: 5,
     signCheckStore:{},
-    storeList:[
-      {name:'西丽天虹店'},
-      { name: '民治天虹店' },
-      { name: '保安天虹店' },
-      { name: '福田天虹店' },
-      { name: '南山天虹店' }
-    ],
-    signedList:[
-      { time: '2018年01月18日', name: '民治新区门店', img:'https://car2.autoimg.cn/cardfs/product/g24/M0A/9F/F7/t_autohomecar__wKgHH1qdNBOAMWbFAA3mrvNZy6w507.jpg'},
-      { time: '2018年10月09日', name: '丽人门店', img: 'https://car2.autoimg.cn/cardfs/product/g24/M0A/9F/F7/t_autohomecar__wKgHH1qdNBOAMWbFAA3mrvNZy6w507.jpg' }
-    ]
+    storeList:[],
+    signedList:[]
   },
   onLoad: function (options) {
     var that = this
@@ -49,9 +41,16 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res)
+        var list = res.data.data
+        var reverselist = []
+        for (var i = list.length - 1; i >= 0; i--) {
+          list[i].contract_image = 'https://' + list[i].contract_image
+          reverselist.push(list[i])
+        }
         that.setData({
-          signedList: res.data.data
+          signedList: reverselist
         })
+        console.log(that.data.signedList)
       }
     })
   },
@@ -104,7 +103,7 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -136,6 +135,71 @@ Page({
       urls: imgArr,
     })
 
+  },
+  signContract(){
+    var that = this;
+    var storeDetail = wx.getStorageSync('storeDetail')
+    if (that.data.imgList.length!=0) {
+      wx.uploadFile({
+        url: getApp().data.servsers + 'signing/uploadContract', //接口地址
+        filePath: that.data.imgList[0],
+        name: 'image',
+        formData: {
+          token: that.data.tokenRoles.token,
+          shop_id: storeDetail.id
+        },
+        success: function (res) {
+          console.log(res.data)
+          var data = JSON.parse(res.data)
+          console.log(data)
+          if (data.code == 0) {
+            wx.showToast({
+              title: '签约成功',
+              icon: 'none',
+              duration: 1000
+            })
+            wx.request({
+              url: getApp().data.servsers + 'signing/unsignedList',
+              data: {
+                token: that.data.tokenRoles.token
+              },
+              method: 'POST',
+              success: function (res) {
+                console.log(res)
+                that.setData({
+                  storeList: res.data.data
+                })
+              }
+            })
+            wx.request({
+              url: getApp().data.servsers + 'signing/signingList',
+              data: {
+                token: that.data.tokenRoles.token
+              },
+              method: 'POST',
+              success: function (res) {
+                console.log(res)
+                var list = res.data.data
+                var reverselist = []
+                for (var i = list.length - 1; i >= 0; i--) {
+                  list[i].contract_image = 'https://' + list[i].contract_image
+                  reverselist.push(list[i])
+                }
+                that.setData({
+                  signedList: reverselist
+                })
+                console.log(that.data.signedList)
+              }
+            })
+            that.setData({
+              currentTab: 1,
+              isShow: false,
+              flag:true
+            })
+          }
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -174,9 +238,16 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res)
+        var list = res.data.data
+        var reverselist = []
+        for (var i = list.length - 1; i >= 0; i--) {
+          list[i].contract_image = 'https://' + list[i].contract_image
+          reverselist.push(list[i])
+        }
         that.setData({
-          signedList: res.data.data
+          signedList: reverselist
         })
+        console.log(that.data.signedList)
       }
     })
   },
@@ -206,7 +277,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    var that = this
+    if (that.data.isShowListNum < that.data.signedList.length) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 2000)
+    } else if (that.data.isShowListNum >= that.data.signedList.length) {
+      wx.showToast({
+        title: '到底啦',
+        icon: 'success',
+        duration: 2000
+      })
+    }
+    var t = setTimeout(function () {
+      var isShowListNum = that.data.isShowListNum + 5
+      that.setData({
+        isShowListNum: isShowListNum
+      })
+    }, 2000)
   },
 
   /**

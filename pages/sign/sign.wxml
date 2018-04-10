@@ -19,7 +19,7 @@
         <block wx:for='{{storeList}}' wx:key='{{index}}'>
             <view class='list' bindtap='changeStore' data-index='{{index}}'>
                 <text>{{item.shop_name}}</text>
-                <image src='../../img/icon-arrowRG.png' bindtap='changeStore'></image>
+                <image src='../../img/icon-arrowRG.png'></image>
                 <text class='needUpdate' wx:if='{{item.need_update==1}}'>补充资料</text>
             </view>
         </block>
@@ -41,7 +41,7 @@
             <image wx:if='{{imgList.length !== 0}}' src='{{imgList}}' data-src="{{imgList}}" class='photo' bindtap='photograph'></image>         
         </view>
     </view> 
-    <view class='signBtn'>
+    <view class='signBtn' bindtap='signContract'>
       <button>签约</button>
     </view> 
   </view>
@@ -49,11 +49,11 @@
 
 <!--签约记录-->
 <view class="swiper-item signed" hidden="{{isShow}}">
-    <block wx:for='{{signedList}}' wx:key='{{index}}'>
+    <block wx:for='{{signedList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
       <view class='signedInfo background'>
-          <text class='signedTime width'>时间:{{item.time}}</text>
-          <image src='{{item.img}}' data-id='{{index}}' bindtap='signedImg' data-img='{{item.img}}'></image>
-          <text class='width'>签约门店:{{item.name}}</text>
+          <text class='signedTime width'>时间:{{item.create_time}}</text>
+          <image src='{{item.contract_image}}' data-id='{{index}}' bindtap='signedImg' data-img='{{item.img}}'></image>
+          <text class='width'>签约门店:{{item.shop_name}}</text>
       </view>       
     </block> 
     <view wx:if='{{signedList.length == 0}}' class='nodata'>

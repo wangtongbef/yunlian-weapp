@@ -30,10 +30,18 @@ Page({
       success: function (res) {
         console.log(res)
         wx.setStorageSync('auth', res.data.data.auth)
+        if (res.data.code == 0){
+          wx.redirectTo({
+            url: '../index/index'
+          })
+        } else if (res.data.code == 1){
+          wx.showToast({
+            title: '设定角色失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
-    })
-    wx.redirectTo({
-      url: '../index/index'
     })
   }
 })

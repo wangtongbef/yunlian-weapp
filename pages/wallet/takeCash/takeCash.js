@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    token: '',
+    balance: 0,
     postCashBalance:{}
   },
 
@@ -13,12 +15,29 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    that.setData({
+      token: tokenRoles.token
+    })
+    wx.request({
+      url: getApp().data.servsers + 'finance/index',
+      method: 'POST',
+      data: {
+        token: that.data.token
+      },
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          balance: res.data.data.amount
+        })
+      }
+    })
     wx.request({
       url: getApp().data.servsers+'finance/withdraw',
       method: 'POST',
       data: {
         amount: 0.01,
-        token: 'abc123'
+        token: that.data.token
       },
       success: function (res) {
         console.log(res)

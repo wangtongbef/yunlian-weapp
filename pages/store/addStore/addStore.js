@@ -98,6 +98,18 @@ Page({
       },
       success: function (res) {
         console.log(res)
+        if(res.data.code ==0){
+          wx.showToast({
+            title: '添加成功',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        }
       }
     })
   },

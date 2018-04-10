@@ -16,7 +16,7 @@
           </view>
         </view>
         <view class='showNum'>
-            <text class='gray'>余额  51.00</text>
+            <text class='gray'>余额 {{balance}}</text>
             <text class='blue'>全部提现</text>
         </view>
         <view class='takeCashBtn'>

@@ -7,14 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    firstIn:true,
+    changeAddress:false,
+    newAddress:'',
     isCommissioner: true,
-    saleList:[
-      // { name:'刘小池',phoneNum:'15678938978'},
-    ],
-    businessList:[
-      { name: '赵文卓', phoneNum: '15678938978' },
-    ],
+    role:{},
+    token:'',
+    businessList:[],
     chargePerson:{},
+    commissioner:{},
     storeDetailstorge:{},
     storeDetailres:{}
   },
@@ -23,7 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    getLocation();
     var that = this;
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -51,6 +51,7 @@ Page({
             businessList: res.data.data.sales
           })
           console.log(that.data.storeDetailres)
+          console.log(that.data.businessList)
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {
@@ -68,37 +69,13 @@ Page({
           console.log(res)
           that.setData({
             storeDetailres: res.data.data,
-            chargePerson: res.data.data.charge_person,
+            commissioner: res.data.data.commissioner,
             businessList: res.data.data.sales
           })
           console.log(that.data.storeDetailres)
         }
       })
     }
-    // wx.getStorage({
-    //   key: 'store',
-    //   success: function(res) {
-    //     console.log(res.data)
-    //     that.setData({
-    //       store:res.data
-    //     })
-    //   },
-    // })
-    /*console.log(options);
-    wx.request({
-      url: 'http://dev2.lystrong.cn/api/weapp/v1/shops/getShop/',
-      method:'POST',
-      success:function(res){
-        console.log(res)
-      }
-    })*/
-    // API.getStoredetail('', function (res) {
-    //   //这里既可以获取模拟的res
-    //   console.log(res)
-    //   that.setData({
-    //     storeDetail: res.data
-    //   })
-    // });
   },
   storeNameChange(){
     wx.navigateTo({
@@ -106,35 +83,59 @@ Page({
     })
   },
   linkMap(){
-    console.log("map")
-    // wx.navigateTo({
-      //跳转到地图页面
-      //url: ''
-    // })
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res)
-        var latitude = res.latitude
-        var longitude = res.longitude
-        var speed = res.speed
-        var accuracy = res.accuracy
-      }
-    })
+    var that = this
+    getLocation();
+    if (that.data.role.role_name == '商务专员') {
+      wx.chooseLocation({
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            newAddress: res.name
+          })
+          wx.request({
+            url: getApp().data.servsers + 'shop/updateShopLocation', //更新门店地址
+            data: {
+              id: that.data.storeDetailstorge.id,
+              token: that.data.token,
+              address: res.name,
+              longitude: res.longitude,
+              latitude: res.latitude
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              if(res.data.code == 0){
+                that.setData({
+                  changeAddress: true
+                })
+              }
+            }
+          })
+        }
+      })
+    } else if (that.data.role.role_name == '门店负责人') {
+      console.log(that.data.storeDetailres)
+      wx.openLocation({
+        latitude: parseFloat(that.data.storeDetailres.shop.latitude),
+        longitude: parseFloat(that.data.storeDetailres.shop.longitude),
+        name: that.data.storeDetailres.shop.address,
+        scale: 28
+      })
+    }
   },
-  salePhoneBtn(e){
-    //console.log(e.currentTarget.id);
-    var id = e.currentTarget.id;
-    wx.makePhoneCall({
-      phoneNumber: this.data.saleList[id].phoneNum
-    })
-  },
-  businessPhoneBtn(e){
-    var id = e.currentTarget.id;
-    wx.makePhoneCall({
-      phoneNumber: this.data.businessList[id].phoneNum
-    })
-  },
+  // salePhoneBtn(e){
+  //   //console.log(e.currentTarget.id);
+  //   var id = e.currentTarget.id;
+  //   wx.makePhoneCall({
+  //     phoneNumber: this.data.saleList[id].phoneNum
+  //   })
+  // },
+  // businessPhoneBtn(e){
+  //   var id = e.currentTarget.id;
+  //   wx.makePhoneCall({
+  //     phoneNumber: this.data.businessList[id].phoneNum
+  //   })
+  // },
   //跳转到添加用户手机页面
   addChargeperson(){
     wx.navigateTo({
@@ -155,33 +156,106 @@ Page({
   //更改用户，跳转到添加用户手机页面
   changePerson(){
     var that=this
-    wx.request({
-      url: getApp().data.servsers + 'shop/deleteShopChargePerson',
-      data: {
-        token: that.data.token,
-        id: that.data.storeDetailres.shop.id,
-        charge_person_id:that.data.chargePerson.id
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-      }
-    })
+    var chargePersonData = {
+      token: that.data.token,
+      id: that.data.storeDetailres.shop.id,
+      charge_person_id: that.data.chargePerson.id
+    }
+    wx.setStorageSync('chargePersonData', chargePersonData)
     wx.navigateTo({
       url: '../addPerson/addPerson?title=更换门店负责人',
     })
   },
-  //动态生成标题
-  /*titleName(){
-    wx.setNavigationBarTitle({
-      title: '添加门店负责人',
+  deleteBusiness(e){
+    var that = this
+    var index = e.currentTarget.dataset.index
+    console.log(e)
+    wx.request({
+      url: getApp().data.servsers + 'shop/deleteShopSalesPerson',
+      data: {
+        token: that.data.token,
+        id: that.data.storeDetailres.shop.id,
+        sales_person_id: that.data.businessList[index].id
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        if (res.data.code == 0) {
+          wx.request({
+            url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+            data: {
+              token: that.data.token,
+              id: that.data.storeDetailres.shop.id
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                businessList: res.data.data.sales
+              })
+            }
+          })
+          wx.showToast({
+            title: '删除成功',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
     })
-  }*/
-  delete(e){
-    //var id = e.currentTarget.id;
-    var id = e.dataset.id
-    console.log(id)
-    var that = this;
+  },
+  giveUpstore(){
+    var that = this
+    var storeDetail = that.data.storeDetailstorge
+    if (storeDetail.status == '待签约') {
+      wx.request({
+        url: getApp().data.servsers + 'shop/forgoShop',
+        data: {
+          token: that.data.token,
+          id: storeDetail.id,
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          if (res.data.code == 0) {
+            wx.showToast({
+              title: '放弃签约成功',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          }
+        }
+      })
+    } else if (storeDetail.status == '已签约') {
+      wx.request({
+        url: getApp().data.servsers + 'shop/escapeShop',
+        data: {
+          token: that.data.token,
+          id: storeDetail.id,
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          if (res.data.code == 0) {
+            wx.showToast({
+              title: '解约成功',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          }
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -195,30 +269,39 @@ Page({
    */
   onShow: function () {
     var that = this
-    wx.request({
-      url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
-      data: {
-        token: that.data.token,
-        id: that.data.storeDetailstorge.id
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          storeDetailres: res.data.data,
-          chargePerson: res.data.data.charge_person,
-          businessList: res.data.data.sales
-        })
-        console.log(that.data.storeDetailres)
-      }
-    })
+    var token = that.data.token
+    if (!that.data.firstIn && that.data.role.role_name == '商务专员'){
+      setTimeout(
+        function () {
+          wx.request({
+            url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+            data: {
+              token: token,
+              id: that.data.storeDetailstorge.id
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                storeDetailres: res.data.data,
+                chargePerson: res.data.data.charge_person,
+                businessList: res.data.data.sales
+              })
+              console.log(that.data.storeDetailres)
+            }
+          })
+        }, 100)
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    var that =this
+    that.setData({
+      firstIn: false
+    })
   },
 
   /**

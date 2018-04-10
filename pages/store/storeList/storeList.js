@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    firstIn: true,
     role:{},
     isCommissioner:true,
     token:'',
@@ -138,47 +139,49 @@ Page({
       role: wx.getStorageSync('role'),
       token: tokenRoles.token
     })
-    if (that.data.role.role_name == '商务专员') {
-      console.log(that.data.role)
-      that.setData({
-        isCommissioner: true
-      })
-      wx.request({
-        url: getApp().data.servsers + 'shop/unsignedShopsForCommissioner', //获取待签约门店
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            waiting: res.data.data
-          })
-          var storeArr = that.data.waiting
-          for (var i = 0; i < storeArr.length; i++) {
-            storeArr[i].status = '待签约'
+    if (!that.data.firstIn){
+      if (that.data.role.role_name == '商务专员') {
+        console.log(that.data.role)
+        that.setData({
+          isCommissioner: true
+        })
+        wx.request({
+          url: getApp().data.servsers + 'shop/unsignedShopsForCommissioner', //获取待签约门店
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log(res)
+            that.setData({
+              waiting: res.data.data
+            })
+            var storeArr = that.data.waiting
+            for (var i = 0; i < storeArr.length; i++) {
+              storeArr[i].status = '待签约'
+            }
+            console.log(that.data.waiting)
           }
-          console.log(that.data.waiting)
-        }
-      })
-      wx.request({
-        url: getApp().data.servsers + 'shop/signingShopsForCommissioner', //获取已签约门店
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            waited: res.data.data
-          })
-          var storeArr = that.data.waited
-          for (var i = 0; i < storeArr.length; i++) {
-            storeArr[i].status = '已签约'
+        })
+        wx.request({
+          url: getApp().data.servsers + 'shop/signingShopsForCommissioner', //获取已签约门店
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log(res)
+            that.setData({
+              waited: res.data.data
+            })
+            var storeArr = that.data.waited
+            for (var i = 0; i < storeArr.length; i++) {
+              storeArr[i].status = '已签约'
+            }
+            console.log(that.data.waited)
           }
-          console.log(that.data.waited)
-        }
-      })
+        })
+      }
     }
   },
 
@@ -186,7 +189,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    var that = this
+    that.setData({
+      firstIn: false
+    })
   },
 
   /**
