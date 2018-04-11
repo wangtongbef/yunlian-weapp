@@ -26,8 +26,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
-        console.log(res.data.data)
         that.setData({
           walletDetail: res.data.data
         })

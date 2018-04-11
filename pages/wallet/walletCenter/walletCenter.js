@@ -26,7 +26,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           balance: res.data.data.amount
         })
@@ -40,11 +39,9 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           nearby: res.data.data.list
         })
-        console.log(that.data.nearby)
       }
     })
   },
@@ -59,7 +56,6 @@ Page({
     })
   },
   linkDetail(e){
-    console.log(e)
     var trade_id = e.currentTarget.dataset.trade_id
     wx.navigateTo({
       url: '../walletDetail/walletDetail?trade_id=' + trade_id,

@@ -2,11 +2,10 @@
   <view class='background'>
       <view class='state'>
           <image wx:if='{{scanStatus==0}}' src='../../img/success.svg'></image>
-          <text class='blue'>扫码成功,该订单已记入你的业绩</text>
+          <text wx:if='{{scanStatus==0}}' class='blue'>扫码成功,该订单已记入你的业绩</text>
           <image wx:if='{{scanStatus!==0}}' src='../../img/fail.svg'></image>
-          <text wx:if='{{scanStatus==1}}' class='red'>该订单已记入你的业绩,无须再扫码</text>
-          <text wx:if='{{scanStatus==2}}' class='red'>产品还未卖出，此次扫码无效</text>
-          <text wx:if='{{scanStatus==3}}' class='red'>产品已计入他人业绩，此次扫码无效</text>
+          <text wx:if='{{scanStatus==1}}' class='red'>付款未完成，此次扫码无效</text>
+          <text wx:if='{{scanStatus==2}}' class='red'>产品已计入他人业绩，此次扫码无效</text>
       </view>
       <view class='stateInfo'>
           <view>
@@ -19,7 +18,15 @@
           </view>
       </view>
   </view>
-  <view class='complete' bindtap='finish'>
+  <view wx:if='{{scanStatus==0}}' class='complete' bindtap='finish'>
     <button>完成</button>
+  </view>
+</view>
+<view hidden='{{scanfail}}'>
+  <view class='background'>
+      <view class='state'>
+          <image src='../../img/fail.svg'></image>
+          <text class='red'>无效二维码</text>
+      </view>
   </view>
 </view>

@@ -23,14 +23,11 @@ Page({
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
         that.setData({
           address: res.name,
           'position.latitude': res.latitude,
           'position.longitude': res.longitude
         })
-        console.log(that.data.address)
-        console.log(that.data.position)
       },
       fail: function (res) {
         wx.getSetting({
@@ -45,7 +42,6 @@ Page({
                 content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
                 //content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
                 success: (res) => {
-                  console.log(res);
                   //开启授权
                   wx.openSetting({
                   })
@@ -82,7 +78,6 @@ Page({
         duration: 2000
       })
     }
-    console.log(that.data.inputVal)
   },
   addstore(){
     var that = this
@@ -97,7 +92,6 @@ Page({
         latitude: that.data.position.latitude
       },
       success: function (res) {
-        console.log(res)
         if(res.data.code ==0){
           wx.showToast({
             title: '添加成功',

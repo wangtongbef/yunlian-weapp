@@ -17,7 +17,6 @@ Page({
     
   },
   link(e){
-    console.log(e.currentTarget.id);
     if (e.currentTarget.id == 0){
       wx.navigateTo({
         url: '../saleForm/saleForm',

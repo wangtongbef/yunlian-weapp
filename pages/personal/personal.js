@@ -27,7 +27,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         that.setData({
           phonenumber: res.data.data.phone_number
         })

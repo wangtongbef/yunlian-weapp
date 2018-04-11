@@ -1,8 +1,9 @@
 <view>
     <form>
         <view class='changeName'>
-            <input type='text' placeholder='填写你觉得更合适的名称' bindinput='nameVal'/>
-            <button bindtap='changeNameSubmit'>保存</button>
+          <text>填写你觉得更合适的名称</text>
+          <input type='text' value='{{storeName}}' bindinput='nameVal'/>
+          <button bindtap='changeNameSubmit'>保存</button>
         </view> 
     </form>
 </view>

@@ -26,7 +26,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
         var list = res.data.data.list
         for (var i= 0; i< list.length; i++) {
           if (list[i].type=== 1){
@@ -35,16 +34,13 @@ Page({
             list[i].status = false
           }
         }
-        console.log(list)
         that.setData({
           wallList: list
         })
-        console.log(that.data.wallList)
       }
     })
   },
   linkDetail(e){
-    console.log(e)
     var trade_id = e.currentTarget.dataset.trade_id
     wx.navigateTo({
       url: '../walletDetail/walletDetail?trade_id=' + trade_id,

@@ -26,7 +26,6 @@ Page({
       role: wx.getStorageSync('role'),
       userInfo: wx.getStorageSync('user')
     })
-    console.log(this.data.userInfo)
     getUser();
     // var that = this
     // API.getlist('', function (res) {
@@ -84,7 +83,6 @@ Page({
    */
   onShow: function () {
     var that = this
-    console.log('这是onshow') //onshow在左上角返回按钮出会执行
     wx.request({
       url: getApp().data.servsers + 'user/profile',
       data: {
@@ -92,7 +90,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         that.setData({
           phone_number: res.data.data.phone_number
         })

@@ -24,7 +24,6 @@ Page({
   },
   bindStoreChange: function (e) {
     var that = this
-    console.log(e)
     console.log('门店选的是', that.data.storeArray[e.detail.value])
     if (e.detail.value != 0) {
       that.setData({
@@ -34,13 +33,11 @@ Page({
       that.setData({
         isShow: true
       })
-      console.log(that.data.isShow)
     }
     that.setData({
       storeIndex: e.detail.value,
       shop_id: that.data.storeArray[e.detail.value].shop_id
     })
-    console.log(that.data.shop_id)
     if (that.data.role.role_name === '门店负责人') {
       wx.request({
         url: getApp().data.servsers + 'statistics/salesPersonForShop',
@@ -50,7 +47,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           var salesArray = res.data.data
           salesArray.unshift({ user_id: 0, user_name: "全部销售员" })
           that.setData({
@@ -96,13 +92,11 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           var storeArray = res.data.data
           storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
           that.setData({
             storeArray: storeArray
           })
-          console.log(that.data.storeArray)
         }
       })
       wx.request({
@@ -113,7 +107,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             productAlltimedata: res.data.data,
             productInfo: res.data.data.today
@@ -129,13 +122,11 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           var storeArray = res.data.data
           storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
           that.setData({
             storeArray: storeArray
           })
-          console.log(that.data.storeArray)
         }
       })
       wx.request({
@@ -147,12 +138,10 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             productAlltimedata: res.data.data,
             productInfo: res.data.data.today
           })
-          console.log(that.data.productAlltimedata)
         }
       })
     }
@@ -188,11 +177,9 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             productAlltimedata: res.data.data
           })
-          console.log(that.data.productAlltimedata)
           setProductInfo(that.data.timeIndex)
         }
       })
@@ -206,12 +193,10 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             productAlltimedata: res.data.data,
             productInfo: res.data.data.today
           })
-          console.log(that.data.productAlltimedata)
           setProductInfo(that.data.timeIndex)
         }
       })

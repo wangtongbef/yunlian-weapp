@@ -47,7 +47,6 @@ Page({
             list[i].image = 'https://' + list[i].image
             reverselist.push(list[i])
           }
-          console.log(reverselist)
           that.setData({
             checkList: reverselist
           })
@@ -86,7 +85,6 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log(res)
         that.setData({
           imgList: tempFilePaths,
           isToSignin:true
@@ -122,7 +120,6 @@ Page({
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
         that.setData({
           address: res.name,
           position: res.latitude + ',' + res.longitude
@@ -143,7 +140,6 @@ Page({
                 content: '需要授权您的位置信息后才能使用,我们不会将您的信息提供给第三方,请点击下方授权按钮重新开启权限',
                 //content: '您拒绝了授权,将无法正常使用,如需重新获取请点击下方授权按钮',
                 success: (res) => {
-                  console.log(res);
                   //开启授权
                   wx.openSetting({
                   })
@@ -170,18 +166,38 @@ Page({
           address: that.data.address
         },
         success: function (res) {
-          console.log(res.data)
           var data = JSON.parse(res.data)
-          console.log(data)
           if (data.code == 0){
             wx.showToast({
               title: '签到成功',
               icon: 'none',
               duration: 2000
             })
+            wx.request({
+              url: getApp().data.servsers + 'sign_in/list',
+              data: {
+                page: 0,
+                token: tokenRoles.token
+              },
+              method: 'POST',
+              success: function (res) {
+                var list = res.data.data.list
+                var reverselist = []
+                for (var i = list.length - 1; i >= 0; i--) {
+                  list[i].image = 'https://' + list[i].image
+                  reverselist.push(list[i])
+                }
+                that.setData({
+                  checkList: reverselist
+                })
+              }
+            })
             that.setData({
               imgList: "../../img/photograph.svg",
-              address: '所在位置'
+              isToSignin: false,
+              address: '所在位置',
+              currentTab: 1,
+              isShow: false
             })
           }
           //do something

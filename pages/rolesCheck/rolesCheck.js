@@ -8,7 +8,6 @@ Page({
     getUser();
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
-    console.log(tokenRoles)
     if (tokenRoles) {
       that.setData({
         roles: tokenRoles.roles,
@@ -18,7 +17,6 @@ Page({
   },
   rolesCheck:function (event){
     var that = this
-    console.log(event.currentTarget.dataset.rolecheck);
     wx.setStorageSync('role', event.currentTarget.dataset.rolecheck)
     wx.request({
       url: getApp().data.servsers + 'login/role',
@@ -28,7 +26,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         wx.setStorageSync('auth', res.data.data.auth)
         if (res.data.code == 0){
           wx.redirectTo({

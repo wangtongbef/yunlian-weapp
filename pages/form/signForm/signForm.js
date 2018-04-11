@@ -25,7 +25,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res.data)
         that.setData({
           signList: res.data.data
         })

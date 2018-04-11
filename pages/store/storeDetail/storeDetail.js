@@ -17,7 +17,8 @@ Page({
     chargePerson:{},
     commissioner:{},
     storeDetailstorge:{},
-    storeDetailres:{}
+    storeDetailres:{},
+    storeName:''
   },
 
   /**
@@ -30,9 +31,9 @@ Page({
       role: wx.getStorageSync('role'),
       token: tokenRoles.token,
       storeDetailstorge: wx.getStorageSync('storeDetail'),
+      storeName: wx.getStorageSync('storeName')
     })
     if (that.data.role.role_name == '商务专员') {
-      console.log(that.data.role)
       that.setData({
         isCommissioner: true
       })
@@ -44,14 +45,11 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             storeDetailres: res.data.data,
             chargePerson: res.data.data.charge_person,
             businessList: res.data.data.sales
           })
-          console.log(that.data.storeDetailres)
-          console.log(that.data.businessList)
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {
@@ -66,13 +64,11 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             storeDetailres: res.data.data,
             commissioner: res.data.data.commissioner,
             businessList: res.data.data.sales
           })
-          console.log(that.data.storeDetailres)
         }
       })
     }
@@ -88,7 +84,6 @@ Page({
     if (that.data.role.role_name == '商务专员') {
       wx.chooseLocation({
         success: function (res) {
-          console.log(res)
           that.setData({
             newAddress: res.name
           })
@@ -103,7 +98,6 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
               if(res.data.code == 0){
                 that.setData({
                   changeAddress: true
@@ -114,7 +108,6 @@ Page({
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {
-      console.log(that.data.storeDetailres)
       wx.openLocation({
         latitude: parseFloat(that.data.storeDetailres.shop.latitude),
         longitude: parseFloat(that.data.storeDetailres.shop.longitude),
@@ -141,7 +134,6 @@ Page({
     wx.navigateTo({
       url: '../addPerson/addPerson?title=添加门店负责人',
       success:function(){
-        console.log('成功了')
       }
     })
   },
@@ -149,7 +141,6 @@ Page({
     wx.navigateTo({
       url: '../addPerson/addPerson?title=添加门店销售员',
       success: function () {
-        console.log('成功了')
       }
     })
   },
@@ -169,7 +160,6 @@ Page({
   deleteBusiness(e){
     var that = this
     var index = e.currentTarget.dataset.index
-    console.log(e)
     wx.request({
       url: getApp().data.servsers + 'shop/deleteShopSalesPerson',
       data: {
@@ -179,7 +169,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         if (res.data.code == 0) {
           wx.request({
             url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
@@ -189,7 +178,6 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
               that.setData({
                 businessList: res.data.data.sales
               })
@@ -216,7 +204,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           if (res.data.code == 0) {
             wx.showToast({
               title: '放弃签约成功',
@@ -240,7 +227,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           if (res.data.code == 0) {
             wx.showToast({
               title: '解约成功',
@@ -281,13 +267,12 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
               that.setData({
                 storeDetailres: res.data.data,
                 chargePerson: res.data.data.charge_person,
-                businessList: res.data.data.sales
+                businessList: res.data.data.sales,
+                storeName: wx.getStorageSync('storeName')
               })
-              console.log(that.data.storeDetailres)
             }
           })
         }, 100)

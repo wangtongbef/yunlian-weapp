@@ -9,13 +9,13 @@
       <view wx:if="{{isCommissioner}}" bindtap='storeNameChange'>
           <text>名称</text>
           <view>
-              <text>{{storeDetailres.shop.name}}</text>
+              <text>{{storeName}}</text>
               <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
           </view> 
       </view>
       <view wx:if="{{!isCommissioner}}">
           <text>名称</text>
-          <text>{{storeDetailstorge.name}}</text>
+          <text>{{storeName}}</text>
       </view>
       <view wx:if="{{isCommissioner}}" class='addressDetail' bindtap='linkMap'>
           <text>位置</text>

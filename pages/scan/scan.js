@@ -5,6 +5,8 @@ Page({
    */
   data: {
     isSign:true,
+    scanfail:true,
+    tokenRoles: {},
     scanStatus:0
   },
 
@@ -14,22 +16,52 @@ Page({
   onLoad: function () {
     var that = this
     //扫一扫
+    that.setData({
+      tokenRoles: wx.getStorageSync('tokenRoles')
+    })
+    wx.request({
+      url: getApp().data.servsers + 'finance/share',
+      data: {
+        token: that.data.tokenRoles.token,
+        goods_id: 'abc'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          isSign: false
+        })
+      }
+    })
     var scan = function () {
       wx.scanCode({
         onlyFromCamera: false,
         success: (res) => {
-          // wx.showToast({
-          //   title: res,
-          //   icon: 'none',
-          //   duration: 2000
-          // })
           console.log(res)
-          that.setData({
-            isSign: false
+          wx.request({
+            url: getApp().data.servsers + 'finance/share',
+            data: {
+              token: that.data.tokenRoles.token,
+              goods_id: 'abc'
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                isSign: false
+              })
+            },
+            fail: function (e) {
+              that.setData({
+                scanfail: false
+              })
+            }
           })
-          console.log(that.data.isSign)
         },
-        fail: function (e) {
+        fail: function () {
+          that.setData({
+            scanfail: false
+          })
         }
       })
     }
@@ -58,7 +90,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**

@@ -27,7 +27,6 @@ Page({
       token: tokenRoles.token
     })
     if (that.data.role.role_name == '商务专员'){
-      console.log(that.data.role)
       that.setData({
         isCommissioner: true
       })
@@ -38,7 +37,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             waiting: res.data.data
           })
@@ -46,7 +44,6 @@ Page({
           for (var i = 0; i<storeArr.length;i++){
             storeArr[i].status = '待签约'
           }
-          console.log(that.data.waiting)
         }
       })
       wx.request({
@@ -56,7 +53,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             waited: res.data.data
           })
@@ -64,7 +60,6 @@ Page({
           for (var i = 0; i < storeArr.length; i++) {
             storeArr[i].status = '已签约'
           }
-          console.log(that.data.waited)
         }
       })
     } else if (that.data.role.role_name == '门店负责人'){
@@ -78,11 +73,9 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           that.setData({
             chargePstore: res.data.data
           })
-          console.log(that.data.chargePstore)
         }
       })
     }
@@ -99,10 +92,8 @@ Page({
     }
   },
   storeDetail(e){
-    console.log(e);
     var that = this;
     var storeId = e.currentTarget.dataset.storeid;
-    console.log(storeId);
     function searchId(arr) {
       for (var i = 0; i < arr.length; i++) {
         if (arr[i].id == storeId){
@@ -115,7 +106,12 @@ Page({
       key: 'storeDetail',
       data: storeDetail,
       success:function(){
-        console.log('缓存成功')
+      }
+    })
+    wx.setStorage({
+      key: 'storeName',
+      data: storeDetail.name,
+      success: function () {
       }
     })
     wx.navigateTo({
@@ -141,7 +137,6 @@ Page({
     })
     if (!that.data.firstIn){
       if (that.data.role.role_name == '商务专员') {
-        console.log(that.data.role)
         that.setData({
           isCommissioner: true
         })
@@ -152,7 +147,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             that.setData({
               waiting: res.data.data
             })
@@ -160,7 +154,6 @@ Page({
             for (var i = 0; i < storeArr.length; i++) {
               storeArr[i].status = '待签约'
             }
-            console.log(that.data.waiting)
           }
         })
         wx.request({
@@ -170,7 +163,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             that.setData({
               waited: res.data.data
             })
@@ -178,7 +170,6 @@ Page({
             for (var i = 0; i < storeArr.length; i++) {
               storeArr[i].status = '已签约'
             }
-            console.log(that.data.waited)
           }
         })
       }

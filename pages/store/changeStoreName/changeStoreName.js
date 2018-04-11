@@ -16,19 +16,20 @@ Page({
   onLoad: function (options) {
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
-    var storeId = wx.getStorageSync('storeDetail')
+    var storeDetail = wx.getStorageSync('storeDetail')
     that.setData({
       token: tokenRoles.token,
-      id: storeId.id
+      id: storeDetail.id,
+      storeName: wx.getStorageSync('storeName')
     })
   },
   nameVal(e){
-    console.log(e.detail.value)
     this.setData({
       storeName: e.detail.value,
     })
   },
   changeNameSubmit(){
+    var storeName = this.data.storeName
     if (this.data.storeName.length == 0){
       wx.showToast({
         title: '门店名称不能为空',
@@ -51,8 +52,18 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res.data)
           if (res.data.code == 0){
+            console.log(storeName)
+            wx.setStorage({
+              key:'storeName',
+              data: storeName,
+              success: function (res) {
+                console.log(res)
+              },
+              fail:function(res){
+                console.log(res)
+              }
+            })
             wx.navigateBack({
               delta: 1
             })

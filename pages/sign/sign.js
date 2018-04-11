@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    firstIn: true,
     tokenRoles: {},
     imgList:[],
     flag:true,
@@ -27,7 +28,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         that.setData({
           storeList: res.data.data
         })
@@ -40,7 +40,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         var list = res.data.data
         var reverselist = []
         for (var i = list.length - 1; i >= 0; i--) {
@@ -50,7 +49,6 @@ Page({
         that.setData({
           signedList: reverselist
         })
-        console.log(that.data.signedList)
       }
     })
   },
@@ -75,7 +73,6 @@ Page({
     that.setData({
       signCheckStore: storeList[index]
     })
-    console.log(e.target.dataset.index)
     var storeDetail={
       id: storeList[index].shop_id,
       name: storeList[index].shop_name,
@@ -85,7 +82,6 @@ Page({
       key: 'storeDetail',
       data: storeDetail,
       success: function () {
-        console.log('缓存成功')
       }
     })
     if (storeList[index].need_update==0){
@@ -108,7 +104,6 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
         that.setData({
           imgList: tempFilePaths
         })
@@ -149,9 +144,7 @@ Page({
           shop_id: storeDetail.id
         },
         success: function (res) {
-          console.log(res.data)
           var data = JSON.parse(res.data)
-          console.log(data)
           if (data.code == 0) {
             wx.showToast({
               title: '签约成功',
@@ -165,7 +158,6 @@ Page({
               },
               method: 'POST',
               success: function (res) {
-                console.log(res)
                 that.setData({
                   storeList: res.data.data
                 })
@@ -178,7 +170,6 @@ Page({
               },
               method: 'POST',
               success: function (res) {
-                console.log(res)
                 var list = res.data.data
                 var reverselist = []
                 for (var i = list.length - 1; i >= 0; i--) {
@@ -188,7 +179,6 @@ Page({
                 that.setData({
                   signedList: reverselist
                 })
-                console.log(that.data.signedList)
               }
             })
             that.setData({
@@ -217,46 +207,48 @@ Page({
    */
   onShow: function () {
     var that = this
-    wx.request({
-      url: getApp().data.servsers + 'signing/unsignedList',
-      data: {
-        token: that.data.tokenRoles.token
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          storeList: res.data.data
-        })
-      }
-    })
-    wx.request({
-      url: getApp().data.servsers + 'signing/signingList',
-      data: {
-        token: that.data.tokenRoles.token
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        var list = res.data.data
-        var reverselist = []
-        for (var i = list.length - 1; i >= 0; i--) {
-          list[i].contract_image = 'https://' + list[i].contract_image
-          reverselist.push(list[i])
+    if (!that.data.firstIn) {
+      wx.request({
+        url: getApp().data.servsers + 'signing/unsignedList',
+        data: {
+          token: that.data.tokenRoles.token
+        },
+        method: 'POST',
+        success: function (res) {
+          that.setData({
+            storeList: res.data.data
+          })
         }
-        that.setData({
-          signedList: reverselist
-        })
-        console.log(that.data.signedList)
-      }
-    })
+      })
+      wx.request({
+        url: getApp().data.servsers + 'signing/signingList',
+        data: {
+          token: that.data.tokenRoles.token
+        },
+        method: 'POST',
+        success: function (res) {
+          var list = res.data.data
+          var reverselist = []
+          for (var i = list.length - 1; i >= 0; i--) {
+            list[i].contract_image = 'https://' + list[i].contract_image
+            reverselist.push(list[i])
+          }
+          that.setData({
+            signedList: reverselist
+          })
+        }
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    var that = this
+    that.setData({
+      firstIn: false
+    })
   },
 
   /**

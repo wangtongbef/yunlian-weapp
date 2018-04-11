@@ -26,7 +26,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           balance: res.data.data.amount
         })
@@ -40,8 +39,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
-        console.log(res.data.data)
         that.setData({
           postCashBalance: res.data.data
         })

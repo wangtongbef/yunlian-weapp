@@ -58,7 +58,6 @@ Page({
                       },
                       method: 'POST',
                       success: function (res) {
-                        console.log(res)
                         wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
                       }
                     })
@@ -101,8 +100,6 @@ Page({
       //console.log(e.detail.value);
       var telephone = e.detail.value;
       if (/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(telephone)){
-        console.log('手机验证通过啦',telephone)
-        console.log('token',that.data.token)
         that.setData({
           flag: true,
           phonePrompt: '输入正确',
@@ -126,7 +123,6 @@ Page({
   //发送验证码
   sendCode:function(){
     var that = this;
-    console.log('telephone',that.data.telephone)
     wx.request({
       url: getApp().data.servsers + 'login/message',
       method: 'POST',
@@ -136,7 +132,6 @@ Page({
       },
       success:function(e){
         clearInterval(timer)
-        console.log('验证码发送',e)
         if(e.data.code===0){
           var time = that.data.time;
           that.setData({

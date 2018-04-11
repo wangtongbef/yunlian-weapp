@@ -8,7 +8,14 @@ page{
   width: 90%;
   margin: 0 auto;
 }
+.changeName > text{
+  margin-bottom: 10rpx;
+  margin-left:10rpx;
+  font-size: 32rpx;
+  color: #666
+}
 .changeName > input{
+  margin-top:20rpx;
   background-color: #fff;
   height: 100rpx;
   width: 96%;
