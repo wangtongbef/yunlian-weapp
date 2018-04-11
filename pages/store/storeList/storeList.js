@@ -26,6 +26,9 @@ Page({
       role: wx.getStorageSync('role'),
       token: tokenRoles.token
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role.role_name == '商务专员'){
       that.setData({
         isCommissioner: true
@@ -37,6 +40,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             waiting: res.data.data
           })
@@ -73,6 +77,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             chargePstore: res.data.data
           })
@@ -136,6 +141,9 @@ Page({
       token: tokenRoles.token
     })
     if (!that.data.firstIn){
+      wx.showLoading({
+        title: '加载中',
+      })
       if (that.data.role.role_name == '商务专员') {
         that.setData({
           isCommissioner: true
@@ -147,6 +155,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             that.setData({
               waiting: res.data.data
             })

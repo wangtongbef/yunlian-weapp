@@ -7,13 +7,19 @@ Page({
   data: {
     token: '',
     balance: 0,
-    postCashBalance:{}
+    amount:0,
+    postCashBalance:{},
+    cashWarning: '请输入5 - 20000之间的金额',
+    trueCash:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -26,26 +32,66 @@ Page({
         token: that.data.token
       },
       success: function (res) {
+        wx.hideLoading()
         that.setData({
           balance: res.data.data.amount
         })
       }
     })
+  },
+  inputCash(e){
+    var that = this
+    console.log(e.detail.value)
+    var amount = e.detail.value
+    if (amount >= 5 && amount <= 20000 && amount <= that.data.balance){
+      that.setData({
+        trueCash: true,
+        amount: amount
+      })
+    } else{
+      that.setData({
+        trueCash: false
+      })
+    }
+  },
+  takeAllcash(){
+    var that = this
+    that.setData({
+      amount: that.data.balance
+    })
+    if (that.data.amount >= 5 && that.data.amount <= 20000) {
+      that.setData({
+        trueCash: true
+      })
+    } else {
+      that.setData({
+        trueCash: false
+      })
+    }
+  },
+  takecash(){
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that=this
     wx.request({
-      url: getApp().data.servsers+'finance/withdraw',
+      url: getApp().data.servsers + 'finance/withdraw',
       method: 'POST',
       data: {
-        amount: 0.01,
+        amount: that.data.amount,
         token: that.data.token
       },
       success: function (res) {
-        that.setData({
-          postCashBalance: res.data.data
-        })
+        wx.hideLoading()
+        console.log(res.data.code)
+        if (res.data.code == 0){
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       }
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

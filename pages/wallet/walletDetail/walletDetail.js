@@ -18,6 +18,9 @@ Page({
     that.setData({
       token: tokenRoles.token
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'finance/detail',
       method: 'POST',
@@ -26,6 +29,7 @@ Page({
         token: that.data.token
       },
       success: function (res) {
+        wx.hideLoading()
         that.setData({
           walletDetail: res.data.data
         })

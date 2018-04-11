@@ -17,6 +17,9 @@ Page({
     signedList:[]
   },
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     that.setData({
       tokenRoles: wx.getStorageSync('tokenRoles')
@@ -28,33 +31,39 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         that.setData({
           storeList: res.data.data
-        })
-      }
-    })
-    wx.request({
-      url: getApp().data.servsers + 'signing/signingList',
-      data: {
-        token: that.data.tokenRoles.token
-      },
-      method: 'POST',
-      success: function (res) {
-        var list = res.data.data
-        var reverselist = []
-        for (var i = list.length - 1; i >= 0; i--) {
-          list[i].contract_image = 'https://' + list[i].contract_image
-          reverselist.push(list[i])
-        }
-        that.setData({
-          signedList: reverselist
         })
       }
     })
   },
   swichNav: function (e) {
     if (e.target.dataset.current == 1) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      var that = this
       //获取后台接口，展示签到记录
+      wx.request({
+        url: getApp().data.servsers + 'signing/signingList',
+        data: {
+          token: that.data.tokenRoles.token
+        },
+        method: 'POST',
+        success: function (res) {
+          wx.hideLoading()
+          var list = res.data.data
+          var reverselist = []
+          for (var i = list.length - 1; i >= 0; i--) {
+            list[i].contract_image = 'https://' + list[i].contract_image
+            reverselist.push(list[i])
+          }
+          that.setData({
+            signedList: reverselist
+          })
+        }
+      })
     }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -96,12 +105,16 @@ Page({
   },
   //拍照或者从相册选照片
   photo() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        wx.hideLoading()
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
         that.setData({
@@ -135,6 +148,9 @@ Page({
     var that = this;
     var storeDetail = wx.getStorageSync('storeDetail')
     if (that.data.imgList.length!=0) {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.uploadFile({
         url: getApp().data.servsers + 'signing/uploadContract', //接口地址
         filePath: that.data.imgList[0],
@@ -144,12 +160,11 @@ Page({
           shop_id: storeDetail.id
         },
         success: function (res) {
+          wx.hideLoading()
           var data = JSON.parse(res.data)
           if (data.code == 0) {
-            wx.showToast({
-              title: '签约成功',
-              icon: 'none',
-              duration: 1000
+            wx.showLoading({
+              title: '加载中',
             })
             wx.request({
               url: getApp().data.servsers + 'signing/unsignedList',
@@ -170,6 +185,7 @@ Page({
               },
               method: 'POST',
               success: function (res) {
+                wx.hideLoading()
                 var list = res.data.data
                 var reverselist = []
                 for (var i = list.length - 1; i >= 0; i--) {
@@ -186,8 +202,26 @@ Page({
               isShow: false,
               flag:true
             })
+          } else if (data.code == 1){
+            wx.showToast({
+              title: '图片不合规',
+              icon: 'none',
+              duration: 1000
+            })
+          } else if (data.code == 2) {
+            wx.showToast({
+              title: '签约失败',
+              icon: 'none',
+              duration: 1000
+            })
           }
         }
+      })
+    } else if (that.data.imgList.length== 0){
+      wx.showToast({
+        title: '请正确填写资料',
+        icon: 'none',
+        duration: 1000
       })
     }
   },
@@ -206,6 +240,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     if (!that.data.firstIn) {
       wx.request({
@@ -215,6 +252,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             storeList: res.data.data
           })

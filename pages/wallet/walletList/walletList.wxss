@@ -24,3 +24,16 @@ page{
   color: #c7c7c7;
   font-size: 24rpx
 }
+.nodata{
+  text-align: center;
+  margin-top: 100rpx
+}
+.nodata image{
+  width: 180rpx;
+  height: 180rpx
+}
+.nodata text{
+  display: block;
+  color: #777;
+  font-size: 32rpx
+}

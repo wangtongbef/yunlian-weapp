@@ -16,6 +16,9 @@ Page({
     }
   },
   rolesCheck:function (event){
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     wx.setStorageSync('role', event.currentTarget.dataset.rolecheck)
     wx.request({
@@ -26,6 +29,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         wx.setStorageSync('auth', res.data.data.auth)
         if (res.data.code == 0){
           wx.redirectTo({

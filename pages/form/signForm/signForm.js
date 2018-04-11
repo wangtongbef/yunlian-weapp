@@ -13,6 +13,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -25,6 +28,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         that.setData({
           signList: res.data.data
         })

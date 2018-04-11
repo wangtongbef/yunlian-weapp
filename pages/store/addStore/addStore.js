@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tokenRoles: wx.getStorageSync('tokenRoles'),
+    tokenRoles:{},
     inputVal:'',
     inputValWarning:'',
     address:'门店位置',
@@ -17,6 +17,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    var that =this
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    console.log(tokenRoles)
+    that.setData({
+      tokenRoles: tokenRoles
+    })
   },
   
   getadress() {
@@ -75,11 +81,14 @@ Page({
       wx.showToast({
         title: that.data.inputValWarning,
         icon: 'none',
-        duration: 2000
+        duration: 1000
       })
     }
   },
   addstore(){
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     wx.request({
       url: getApp().data.servsers + 'shop/addShop',
@@ -92,6 +101,7 @@ Page({
         latitude: that.data.position.latitude
       },
       success: function (res) {
+        wx.hideLoading()
         if(res.data.code ==0){
           wx.showToast({
             title: '添加成功',

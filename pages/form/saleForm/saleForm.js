@@ -39,6 +39,9 @@ Page({
       shop_id: that.data.storeArray[e.detail.value].shop_id
     })
     if (that.data.role.role_name === '门店负责人') {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.request({
         url: getApp().data.servsers + 'statistics/salesPersonForShop',
         data: {
@@ -47,6 +50,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           var salesArray = res.data.data
           salesArray.unshift({ user_id: 0, user_name: "全部销售员" })
           that.setData({
@@ -75,6 +79,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -92,6 +99,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           var storeArray = res.data.data
           storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
           that.setData({
@@ -107,11 +115,19 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          that.setData({
-            productAlltimedata: res.data.data,
-            productInfo: res.data.data.today
-          })
-          console.log(that.data.productAlltimedata)
+          console.log(res)
+          if (res.data.code==0){
+            that.setData({
+              productAlltimedata: res.data.data,
+              productInfo: res.data.data.today
+            })
+          } else if (res.data.code == 1){
+            wx.showToast({
+              title: '商铺ID错误',
+              icon: 'none',
+              duration: 1000
+            })
+          }
         }
       })
     } else if (that.data.role.role_name === '门店负责人'){
@@ -122,6 +138,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           var storeArray = res.data.data
           storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
           that.setData({
@@ -168,6 +185,9 @@ Page({
         })
       }
     }
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role.role_name === '商务专员') {
       wx.request({
         url: getApp().data.servsers + 'statistics/salesForCommissioner',
@@ -177,6 +197,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             productAlltimedata: res.data.data
           })
@@ -193,6 +214,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             productAlltimedata: res.data.data,
             productInfo: res.data.data.today

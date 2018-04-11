@@ -33,6 +33,9 @@ Page({
         isShow: true
       })
     } else if (e.target.dataset.current == 1) {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.request({
         url: getApp().data.servsers + 'sign_in/list',
         data: {
@@ -41,6 +44,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           var list = res.data.data.list
           var reverselist = []
           for (var i = list.length-1; i >=0;i--){
@@ -117,9 +121,13 @@ Page({
   // },
 
   getadress() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     wx.chooseLocation({
       success: function (res) {
+        wx.hideLoading()
         that.setData({
           address: res.name,
           position: res.latitude + ',' + res.longitude
@@ -128,6 +136,7 @@ Page({
         // console.log(that.data.position)
       },
       fail: function (res) {
+        wx.hideLoading()
         wx.getSetting({
           success: (res) => {
             if (res.authSetting['scope.userLocation']) {
@@ -156,6 +165,9 @@ Page({
     var that = this;
     var tokenRoles = wx.getStorageSync('tokenRoles');
     if (that.data.isToSignin && that.data.address!=='所在位置'){
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.uploadFile({
         url: getApp().data.servsers + 'sign_in/mark', //接口地址
         filePath: that.data.imgList[0],
@@ -166,12 +178,11 @@ Page({
           address: that.data.address
         },
         success: function (res) {
+          wx.hideLoading()
           var data = JSON.parse(res.data)
           if (data.code == 0){
-            wx.showToast({
-              title: '签到成功',
-              icon: 'none',
-              duration: 2000
+            wx.showLoading({
+              title: '加载中',
             })
             wx.request({
               url: getApp().data.servsers + 'sign_in/list',
@@ -181,6 +192,7 @@ Page({
               },
               method: 'POST',
               success: function (res) {
+                wx.hideLoading()
                 var list = res.data.data.list
                 var reverselist = []
                 for (var i = list.length - 1; i >= 0; i--) {
@@ -199,9 +211,21 @@ Page({
               currentTab: 1,
               isShow: false
             })
+          } else if (data.code == 1){
+            wx.showToast({
+              title: '签到失败',
+              icon: 'none',
+              duration: 1000
+            })
           }
           //do something
         }
+      })
+    } else{
+      wx.showToast({
+        title: '请正确填写资料',
+        icon: 'none',
+        duration: 1000
       })
     }
   },

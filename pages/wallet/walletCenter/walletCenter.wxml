@@ -8,7 +8,7 @@
 </view>
 
 <view class='nearby'>
-    <view class='title'>最近两笔交易明细</view>
+    <view hidden='{{!listshow}}' class='title'>最近交易明细</view>
     <block wx:for='{{nearby}}' wx:key='{{index}}' wx:if="{{index<2}}">
       <view class='detail flex' bindtap='linkDetail'  data-trade_id="{{item.trade_id}}">
         <view class='left'>

@@ -9,6 +9,11 @@ page{
 .blue{
   color: #0072b1
 }
+.red{
+  color: red;
+  font-size: 24rpx;
+  position: absolute
+}
 .gray{
   color: #a7a7a7;
 }
@@ -41,16 +46,17 @@ page{
   display: flex
 }
 .num text{
+  padding-top:5rpx;
   font-size: 46rpx;
 }
 .num input{
   display: inline-block;
   height: 80rpx;
   line-height: 80rpx;
-  font-size: 48rpx;
+  font-size: 60rpx;
 }
 .showNum{
-  padding: 40rpx 0
+  padding: 50rpx 0 40rpx
 }
 .takeCashBtn{
   text-align: center
@@ -58,10 +64,15 @@ page{
 .takeCashBtn button{
   display: inline-block;
   width: 100%;
-  background: #a7a7a7;
   color: #fff;
   height: 80rpx;
   line-height: 80rpx
+}
+.trueCashcolor{
+  background:linear-gradient(#018fe8,#0072b1);
+}
+.wrongCashcolor{
+  background: #a7a7a7;
 }
 .showNum .blue{
   margin-left: 20rpx

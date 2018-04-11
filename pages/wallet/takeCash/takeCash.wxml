@@ -12,15 +12,16 @@
           <text>提现金额</text>
           <view class='num'>
               <text>￥</text>
-              <input type='number'></input>
+              <input bindinput='inputCash' value='{{amount}}' type='number'/>
           </view>
         </view>
+        <text class='red' hidden='{{trueCash}}'>{{cashWarning}}</text>
         <view class='showNum'>
             <text class='gray'>余额 {{balance}}</text>
-            <text class='blue'>全部提现</text>
+            <text bindtap='takeAllcash' class='blue'>全部提现</text>
         </view>
         <view class='takeCashBtn'>
-            <button>提现</button>
+            <button  disabled='{{!trueCash}}' bindtap="takecash" class='{{trueCash==true?"trueCashcolor":"wrongCashcolor"}}'>提现</button>
         </view>
     </view>
     

@@ -19,20 +19,6 @@ Page({
     that.setData({
       tokenRoles: wx.getStorageSync('tokenRoles')
     })
-    wx.request({
-      url: getApp().data.servsers + 'finance/share',
-      data: {
-        token: that.data.tokenRoles.token,
-        goods_id: 'abc'
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          isSign: false
-        })
-      }
-    })
     var scan = function () {
       wx.scanCode({
         onlyFromCamera: false,
@@ -59,8 +45,8 @@ Page({
           })
         },
         fail: function () {
-          that.setData({
-            scanfail: false
+          wx.navigateBack({
+            delta: 1
           })
         }
       })

@@ -34,15 +34,18 @@ Page({
       wx.showToast({
         title: '门店名称不能为空',
         icon: 'none',
-        duration: 2000
+        duration: 1000
       })
     } else if (this.data.storeName.length == 1) {
       wx.showToast({
         title: '门店名称不能少于2位',
         icon: 'none',
-        duration: 2000
+        duration: 1000
       })
     } else if (this.data.storeName.length > 1){
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.request({
         url: getApp().data.servsers + 'shop/updateShopName', 
         data: {
@@ -52,6 +55,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == 0){
             console.log(storeName)
             wx.setStorage({

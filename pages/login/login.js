@@ -23,6 +23,9 @@ Page({
     isHiddenLogin:true
   },
   onLoad:function(){
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     //getUser();
     wx.login({
@@ -37,6 +40,7 @@ Page({
             },
             success: function (res) {
               if (res.data.code === 0) {
+                wx.hideLoading()
                 var token = res.data.data.token
                 that.setData({
                   token: token
@@ -48,6 +52,9 @@ Page({
                   })
                 } else if (res.data.data.bind_phone === 1) {
                   if (res.data.data.roles.length === 1) {
+                    wx.showLoading({
+                      title: '加载中',
+                    })
                     var role = res.data.data.roles[0]
                     wx.setStorageSync('role', role)
                     wx.request({
@@ -58,6 +65,7 @@ Page({
                       },
                       method: 'POST',
                       success: function (res) {
+                        wx.hideLoading()
                         wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
                       }
                     })
@@ -74,7 +82,7 @@ Page({
                 wx.showToast({
                   title: '此openid不存在',
                   icon: 'none',
-                  duration: 2000
+                  duration: 1000
                 })
                 that.setData({
                   isHiddenLogin: true
@@ -83,13 +91,19 @@ Page({
                   wx.redirectTo({
                     url: '../login/login'
                   })
-                }, 3000);
+                }, 1000);
               }
             }
           })
         } else {
           console.log('登录失败！' + res.errMsg)
         }
+      // },
+      // fail(){
+      //   //退出登录？
+      //   wx.navigateBack({
+      //     delta: 10
+      //   })
       }
     });
     //this.getLogin();
@@ -161,7 +175,7 @@ Page({
           wx.showToast({
             title: e.data.msg,
             icon: 'none',
-            duration: 2000
+            duration: 1000
           })
         }
       }

@@ -128,6 +128,9 @@ Page({
   },
   confirm(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     var chargePersonData = wx.getStorageSync('chargePersonData')
     if (that.data.title == '更换门店负责人'){
       wx.request({
@@ -146,9 +149,10 @@ Page({
               },
               method: 'POST',
               success: function (res) {
+                wx.hideLoading()
                 if (res.data.code == 0) {
                   wx.showToast({
-                    title: '添加成功',
+                    title: '更换成功',
                     icon: 'none',
                     duration: 1000
                   })
@@ -160,7 +164,7 @@ Page({
                 } else if (res.data.code == 1) {
                   wx.showModal({
                     title: '提示',
-                    content: '添加门店负责人失败',
+                    content: '更换门店负责人失败',
                     showCancel: false,
                     confirmText: '知道了',
                     success: function () {
@@ -183,6 +187,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == 0) {
             wx.showToast({
               title: '添加成功',
@@ -217,6 +222,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == 0) {
             wx.showToast({
               title: '添加成功',

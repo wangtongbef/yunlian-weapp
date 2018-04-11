@@ -13,6 +13,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -26,16 +29,14 @@ Page({
         token: that.data.token
       },
       success: function (res) {
+        wx.hideLoading()
         var list = res.data.data.list
-        for (var i= 0; i< list.length; i++) {
-          if (list[i].type=== 1){
-            list[i].status = true
-          } else if (list[i].type === 2){
-            list[i].status = false
-          }
+        var wallList=[]
+        for (var i = list.length-1; i>=0; i--) {
+          wallList.push(list[i])
         }
         that.setData({
-          wallList: list
+          wallList: wallList
         })
       }
     })

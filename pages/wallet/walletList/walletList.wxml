@@ -10,3 +10,7 @@
        </view> 
     </block>
 </view>
+<view wx:if='{{wallList.length == 0}}' class='nodata'>
+  <image src='../../../img/nodata.svg'></image>
+  <text>暂无记录</text>
+</view>

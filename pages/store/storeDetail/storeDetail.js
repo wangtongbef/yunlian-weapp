@@ -25,6 +25,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     var tokenRoles = wx.getStorageSync('tokenRoles')
     that.setData({
@@ -45,6 +48,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             storeDetailres: res.data.data,
             chargePerson: res.data.data.charge_person,
@@ -64,6 +68,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           that.setData({
             storeDetailres: res.data.data,
             commissioner: res.data.data.commissioner,
@@ -82,6 +87,9 @@ Page({
     var that = this
     getLocation();
     if (that.data.role.role_name == '商务专员') {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.chooseLocation({
         success: function (res) {
           that.setData({
@@ -98,6 +106,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if(res.data.code == 0){
                 that.setData({
                   changeAddress: true
@@ -158,6 +167,9 @@ Page({
     })
   },
   deleteBusiness(e){
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var index = e.currentTarget.dataset.index
     wx.request({
@@ -178,6 +190,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               that.setData({
                 businessList: res.data.data.sales
               })
@@ -186,13 +199,16 @@ Page({
           wx.showToast({
             title: '删除成功',
             icon: 'none',
-            duration: 2000
+            duration: 1000
           })
         }
       }
     })
   },
   giveUpstore(){
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     var storeDetail = that.data.storeDetailstorge
     if (storeDetail.status == '待签约') {
@@ -204,6 +220,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == 0) {
             wx.showToast({
               title: '放弃签约成功',
@@ -227,6 +244,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == 0) {
             wx.showToast({
               title: '解约成功',
@@ -259,6 +277,9 @@ Page({
     if (!that.data.firstIn && that.data.role.role_name == '商务专员'){
       setTimeout(
         function () {
+          wx.showLoading({
+            title: '加载中',
+          })
           wx.request({
             url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
             data: {
@@ -267,6 +288,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               that.setData({
                 storeDetailres: res.data.data,
                 chargePerson: res.data.data.charge_person,
