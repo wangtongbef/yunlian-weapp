@@ -9,11 +9,11 @@
       <view wx:if='{{prodectData.length!=0}}' class='stateInfo'>
           <view>
               <text>产品编号</text>
-              <text>545151</text>
+              <text>{{prodectData.goods_id}}</text>
           </view>
           <view>
               <text>产品名称</text>
-              <text>卡儿酷汽车启动电源</text>
+              <text>{{prodectData.goods_name}}</text>
           </view>
       </view>
   </view>

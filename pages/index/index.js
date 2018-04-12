@@ -27,14 +27,7 @@ Page({
       userInfo: wx.getStorageSync('user')
     })
     getUser();
-    // var that = this
-    // API.getlist('', function (res) {
-    //   //这里既可以获取模拟的res
-    //   console.log(res)
-    //   that.setData({
-    //     List: res.data
-    //   })
-    // });
+    
     if (that.data.role.role_name == '门店销售员') {
       that.setData({
         list: [{ text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
@@ -57,14 +50,7 @@ Page({
       })
     }
   },
-  // userInfo(){
-  //   wx.navigateTo({
-  //     url: '../personal/personal',
-  //   })
-  // },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  
   onReady: function () {
     var that = this
     var timer = setInterval(function () {
@@ -100,40 +86,5 @@ Page({
       }
     })
     //getUser();
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

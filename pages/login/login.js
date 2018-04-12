@@ -99,12 +99,6 @@ Page({
         } else {
           console.log('登录失败！' + res.errMsg)
         }
-      // },
-      // fail(){
-      //   //退出登录？
-      //   wx.navigateBack({
-      //     delta: 10
-      //   })
       }
     });
     //this.getLogin();
@@ -201,19 +195,7 @@ Page({
       })
     }
   },
-  //登录页面显示状态
-  /*getLogin(){
-    var loginInfo = wx.getStorageSync('loginInfo');
-    console.log(loginInfo);
-    if (loginInfo){
-      wx.redirectTo({
-        url: '../index/index',
-      })
-    }else{
-      this.setData({isHiddenLogin:false})
-    }
-  },*/
-
+  
   //登录并绑定手机号接口
   login(){
     var that = this;

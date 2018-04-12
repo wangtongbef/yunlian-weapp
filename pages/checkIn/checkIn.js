@@ -1,9 +1,6 @@
 var chooseLocation = require('../../utils/getLocation.js');
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     imgList:"../../img/photograph.svg",
     position: '',
@@ -15,12 +12,7 @@ Page({
     checkList:[],
     photoList:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    
   },
   swichNav: function (e) {
     var that = this
@@ -61,15 +53,6 @@ Page({
         isShow: false
       })
     }
-    // if (that.data.currentTab === e.target.dataset.current) {
-    //   return false;
-    // } else {
-    //   var showMode = e.target.dataset.current == 0;
-    //   that.setData({
-    //     currentTab: e.target.dataset.current,
-    //     isShow: showMode
-    //   })
-    // }
   },
   //拍照或者从相册选照片
   previewImage(e){
@@ -84,10 +67,9 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
+      sizeType: ['compressed'], 
+      sourceType: ['camera'], 
       success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
         that.setData({
           imgList: tempFilePaths,
@@ -97,28 +79,6 @@ Page({
       }
     })
   },
-  //预览图片
-  // photograph(e){
-  //   //console.log(e.target.dataset.src);
-  //   var current = e.target.dataset.src;
-  //   var that = this;
-  //     wx.previewImage({
-  //       current: current, // 当前显示图片的http链接
-  //       urls: that.data.imgList // 需要预览的图片http链接列表
-  //     })
-  // },
-  
-  // signedImg(e){
-  //   var that = this;
-  //   var current = e.target.dataset.img;
-  //   var index = e.target.dataset.id;
-  //   var imgArr = [that.data.checkList[index].photo]
-  //   wx.previewImage({
-  //     current: current, // 当前显示图片的http链接
-  //     urls: imgArr,
-  //   })
-    
-  // },
 
   getadress() {
     wx.showLoading({
@@ -132,8 +92,6 @@ Page({
           address: res.name,
           position: res.latitude + ',' + res.longitude
         })
-        // console.log(that.data.address)
-        // console.log(that.data.position)
       },
       fail: function (res) {
         wx.hideLoading()

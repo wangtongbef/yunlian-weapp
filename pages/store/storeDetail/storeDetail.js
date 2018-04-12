@@ -163,20 +163,7 @@ Page({
       })
     }
   },
-  // salePhoneBtn(e){
-  //   //console.log(e.currentTarget.id);
-  //   var id = e.currentTarget.id;
-  //   wx.makePhoneCall({
-  //     phoneNumber: this.data.saleList[id].phoneNum
-  //   })
-  // },
-  // businessPhoneBtn(e){
-  //   var id = e.currentTarget.id;
-  //   wx.makePhoneCall({
-  //     phoneNumber: this.data.businessList[id].phoneNum
-  //   })
-  // },
-  //跳转到添加用户手机页面
+  
   addChargeperson(){
     wx.navigateTo({
       url: '../addPerson/addPerson?title=添加门店负责人',
@@ -342,13 +329,7 @@ Page({
       })
     }
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -390,33 +371,5 @@ Page({
     that.setData({
       firstIn: false
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })
