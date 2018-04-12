@@ -250,68 +250,93 @@ Page({
     })
   },
   giveUpstore(){
-    wx.showLoading({
-      title: '加载中',
-    })
     var that = this
     var storeDetail = that.data.storeDetailstorge
     if (storeDetail.status == '待签约') {
-      wx.request({
-        url: getApp().data.servsers + 'shop/forgoShop',
-        data: {
-          token: that.data.token,
-          id: storeDetail.id,
-        },
-        method: 'POST',
+      wx.showModal({
+        title: '提示',
+        content: '确定不跟踪此店了吗',
+        cancelText:'取消',
+        confirmText:'确定',
         success: function (res) {
-          wx.hideLoading()
-          if (res.data.code == 0) {
-            wx.showToast({
-              title: '放弃签约成功',
-              icon: 'none',
-              duration: 1000
+          if (res.confirm) {
+            wx.showLoading({
+              title: '加载中',
             })
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-              duration: 1000
+            wx.request({
+              url: getApp().data.servsers + 'shop/forgoShop',
+              data: {
+                token: that.data.token,
+                id: storeDetail.id,
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.hideLoading()
+                if (res.data.code == 0) {
+                  wx.showToast({
+                    title: '放弃签约成功',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }, 1000)
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 1000
+                  })
+                }
+              }
             })
+          } else if (res.cancel) {
           }
         }
       })
     } else if (storeDetail.status == '已签约') {
-      wx.request({
-        url: getApp().data.servsers + 'shop/escapeShop',
-        data: {
-          token: that.data.token,
-          id: storeDetail.id,
-        },
-        method: 'POST',
+      wx.showModal({
+        title: '提示',
+        content: '确定要解约此店吗',
+        cancelText: '取消',
+        confirmText: '确定',
         success: function (res) {
-          wx.hideLoading()
-          if (res.data.code == 0) {
-            wx.showToast({
-              title: '解约成功',
-              icon: 'none',
-              duration: 1000
+          if (res.confirm) {
+            wx.showLoading({
+              title: '加载中',
             })
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 1000)
-          } else {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-              duration: 1000
+            wx.request({
+              url: getApp().data.servsers + 'shop/escapeShop',
+              data: {
+                token: that.data.token,
+                id: storeDetail.id,
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.hideLoading()
+                if (res.data.code == 0) {
+                  wx.showToast({
+                    title: '解约成功',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }, 1000)
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 1000
+                  })
+                }
+              }
             })
+          } else if (res.cancel) {
           }
         }
       })

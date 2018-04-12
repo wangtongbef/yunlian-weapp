@@ -152,11 +152,9 @@ Page({
   },
   signedImg(e) {
     var that = this;
-    var current = e.target.dataset.img;
-    var index = e.target.dataset.id;
-    var imgArr = [that.data.signedList[index].img]
+    var index = e.currentTarget.dataset.id;
+    var imgArr = [that.data.signedList[index].contract_image]
     wx.previewImage({
-      current: current, // 当前显示图片的http链接
       urls: imgArr,
     })
 

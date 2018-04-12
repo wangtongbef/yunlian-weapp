@@ -39,7 +39,7 @@ page{
   text-align: center;
   width: 100%;
   position: fixed;
-  bottom: 140rpx
+  bottom: 360rpx
 }
 .complete button{
   display: inline-block;

@@ -173,7 +173,25 @@ Page({
                     success: function () {
                     }
                   })
+                } else if (res.data.code == 2) {
+                  wx.showModal({
+                    title: '提示',
+                    content: '该用户非门店负责人',
+                    showCancel: false,
+                    confirmText: '知道了',
+                    success: function () {
+                    }
+                  })
                 }
+              }
+            })
+          } else if (res.data.code == 1) {
+            wx.showModal({
+              title: '提示',
+              content: '门店负责人删除失败',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function () {
               }
             })
           }
@@ -206,6 +224,15 @@ Page({
             wx.showModal({
               title: '提示',
               content: '添加门店负责人失败',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function () {
+              }
+            })
+          } else if (res.data.code == 2) {
+            wx.showModal({
+              title: '提示',
+              content: '该用户非门店负责人',
               showCancel: false,
               confirmText: '知道了',
               success: function () {
@@ -250,6 +277,18 @@ Page({
             wx.showModal({
               title: '提示',
               content: '该用户已是门店销售员',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          } else if (res.data.code == 3) {
+            wx.showModal({
+              title: '提示',
+              content: '该用户非门店销售员',
               showCancel: false,
               confirmText: '知道了',
               success: function () {
