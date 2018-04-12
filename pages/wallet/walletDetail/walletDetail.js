@@ -29,10 +29,24 @@ Page({
         token: that.data.token
       },
       success: function (res) {
+        console.log(res)
         wx.hideLoading()
-        that.setData({
-          walletDetail: res.data.data
-        })
+        if(res.data.code==0){
+          that.setData({
+            walletDetail: res.data.data
+          })
+        }else{
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function (){
+            wx.navigateBack({
+              delta: 1
+            })
+          },1000)
+        }
       }
     })
   },

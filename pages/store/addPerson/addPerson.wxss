@@ -55,6 +55,9 @@ page{
 .preview{
   font-size: 30rpx
 }
+.previewTitle{
+  margin-left: 10rpx
+}
 .previewBtn{
   display: flex;
   justify-content: space-between;

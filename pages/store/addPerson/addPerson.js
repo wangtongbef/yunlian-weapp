@@ -8,6 +8,7 @@ Page({
     title:'',
     token:'',
     storeId:0,
+    existed:0,
     phoneNumber:'',
     name:'',
     phonePrompt:'',
@@ -93,13 +94,15 @@ Page({
         wx.hideLoading()
         if (res.data.data.existed==0){
           that.setData({
-            changeNamehidden:false
+            changeNamehidden:false,
+            existed:0
           })
         } else if (res.data.data.existed == 1){
           that.setData({
             name: res.data.data.name,
             previewHidden: true,
-            changeNamehidden: true
+            changeNamehidden: true,
+            existed: 1
           })
         }
       }

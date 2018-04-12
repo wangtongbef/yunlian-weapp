@@ -31,10 +31,15 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        wx.hideLoading()
         that.setData({
           storeList: res.data.data
         })
+        console.log(that.data.storeList)
+        setTimeout(function () {
+          if (that.data.storeList[0].shop_name == res.data.data[0].shop_name) {
+            wx.hideLoading()
+          }
+        }, 500)
       }
     })
   },
@@ -76,32 +81,44 @@ Page({
     }
   },
   changeStore(e){
+    console.log(e)
     var that = this
     var storeList = that.data.storeList
-    var index = e.target.dataset.index
-    that.setData({
-      signCheckStore: storeList[index]
-    })
-    var storeDetail={
-      id: storeList[index].shop_id,
-      name: storeList[index].shop_name,
-      status:"待签约"
-    }
-    wx.setStorage({
-      key: 'storeDetail',
-      data: storeDetail,
-      success: function () {
-      }
-    })
-    if (storeList[index].need_update==0){
+    var index = parseInt(e.currentTarget.dataset.index)
+    var storeDetail
+    setTimeout(function () {
       that.setData({
-        flag: false
+        signCheckStore: storeList[index]
       })
-    } else if (storeList[index].need_update == 1){
-      wx.navigateTo({
-        url: '../store/storeDetail/storeDetail',
+      storeDetail = {
+        id: storeList[index].shop_id,
+        name: storeList[index].shop_name,
+        status: "待签约"
+      }
+    }, 50)
+    setTimeout(function () {
+      wx.setStorage({
+        key: 'storeDetail',
+        data: storeDetail,
+        success: function () {
+        }
       })
-    }
+      wx.setStorage({
+        key: 'storeName',
+        data: storeDetail.name,
+        success: function () {
+        }
+      })
+      if (storeList[index].need_update == 0) {
+        that.setData({
+          flag: false
+        })
+      } else if (storeList[index].need_update == 1) {
+        wx.navigateTo({
+          url: '../store/storeDetail/storeDetail',
+        })
+      }
+    }, 100)
   },
   //拍照或者从相册选照片
   photo() {
@@ -111,7 +128,7 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         wx.hideLoading()
@@ -252,28 +269,10 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          wx.hideLoading()
           that.setData({
             storeList: res.data.data
           })
-        }
-      })
-      wx.request({
-        url: getApp().data.servsers + 'signing/signingList',
-        data: {
-          token: that.data.tokenRoles.token
-        },
-        method: 'POST',
-        success: function (res) {
-          var list = res.data.data
-          var reverselist = []
-          for (var i = list.length - 1; i >= 0; i--) {
-            list[i].contract_image = 'https://' + list[i].contract_image
-            reverselist.push(list[i])
-          }
-          that.setData({
-            signedList: reverselist
-          })
+          wx.hideLoading()
         }
       })
     }

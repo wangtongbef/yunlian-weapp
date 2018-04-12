@@ -141,10 +141,10 @@ Page({
       token: tokenRoles.token
     })
     if (!that.data.firstIn){
-      wx.showLoading({
-        title: '加载中',
-      })
       if (that.data.role.role_name == '商务专员') {
+        wx.showLoading({
+          title: '加载中',
+        })
         that.setData({
           isCommissioner: true
         })

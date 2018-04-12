@@ -20,7 +20,8 @@
 </view>
 
 <view class='{{(previewHidden==true)&&(changeNamehidden==true) ? "show" : "hide"}}   preview'>
-     <view>确认所填信息</view>
+     <view class='{{existed == 0 ? "show" : "hide"}} previewTitle'>确认所填信息</view>
+     <view class='{{existed == 1 ? "show" : "hide"}} previewTitle'>为你找到了此人</view>
      <view class='background'>
           <view class='previewInfo width'>
               <text decode="{{true}}">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;&nbsp;&nbsp;{{name}}</text>

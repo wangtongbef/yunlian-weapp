@@ -49,11 +49,24 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          that.setData({
-            storeDetailres: res.data.data,
-            chargePerson: res.data.data.charge_person,
-            businessList: res.data.data.sales
-          })
+          if (res.data.code == 0) {
+            that.setData({
+              storeDetailres: res.data.data,
+              chargePerson: res.data.data.charge_person,
+              businessList: res.data.data.sales
+            })
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          }
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {
@@ -68,12 +81,26 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          console.log(res)
           wx.hideLoading()
-          that.setData({
-            storeDetailres: res.data.data,
-            commissioner: res.data.data.commissioner,
-            businessList: res.data.data.sales
-          })
+          if (res.data.code==0){
+            that.setData({
+              storeDetailres: res.data.data,
+              commissioner: res.data.data.commissioner,
+              businessList: res.data.data.sales
+            })
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          }
         }
       })
     }
@@ -110,6 +137,17 @@ Page({
               if(res.data.code == 0){
                 that.setData({
                   changeAddress: true
+                })
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                  duration: 1000
+                })
+              }else{
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                  duration: 1000
                 })
               }
             }
@@ -201,6 +239,12 @@ Page({
             icon: 'none',
             duration: 1000
           })
+        } else if(res.data.code == 1) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1000
+          })
         }
       }
     })
@@ -232,6 +276,12 @@ Page({
                 delta: 1
               })
             }, 1000)
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
           }
         }
       })
@@ -256,6 +306,12 @@ Page({
                 delta: 1
               })
             }, 1000)
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
           }
         }
       })

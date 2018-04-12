@@ -15,19 +15,19 @@ page{
   width: 90%;
   padding:24rpx 5%;
   border-bottom: 1rpx #eee solid;
-  overflow: hidden
-  /* display: flex;
-  justify-content: space-between */
+  display: flex;
+  justify-content: space-between
+}
+.list text:first-child{
+  flex:auto
 }
 .list image{
   width: 34rpx;
   height: 34rpx;
-  float:right;
 }
 .needUpdate{
   color:red;
   text-align: center;
-  float:right;
   font-size: 26rpx;
   margin-right:10rpx
 }

@@ -19,8 +19,8 @@
         <block wx:for='{{storeList}}' wx:key='{{index}}'>
             <view class='list' bindtap='changeStore' data-index='{{index}}'>
                 <text>{{item.shop_name}}</text>
-                <image src='../../img/icon-arrowRG.png'></image>
                 <text class='needUpdate' wx:if='{{item.need_update==1}}'>补充资料</text>
+                <image src='../../img/icon-arrowRG.png'></image>
             </view>
         </block>
     </view>

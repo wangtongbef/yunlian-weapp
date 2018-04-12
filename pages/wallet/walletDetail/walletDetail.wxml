@@ -20,8 +20,8 @@
         </view>
    </view> 
    <!--当收支类型为提现支出时，不显示以下部分-->
-   <view class='width'>门店信息</view>
-   <view class='detailInfo'>
+   <view wx:if='{{walletDetail.type==1}}' class='width'>门店信息</view>
+   <view wx:if='{{walletDetail.type==1}}' class='detailInfo'>
         <view>
             <text>售出门店</text>
             <text>{{walletDetail.shop_name}}</text>
