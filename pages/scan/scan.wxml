@@ -1,10 +1,10 @@
 <view hidden='{{isSign}}'>
   <view class='background'>
       <view class='state'>
-          <image wx:if='{{scanStatus!=0}}' src='../../img/success.svg'></image>
-          <text wx:if='{{scanStatus!=0}}' class='blue'>扫码成功,该订单已记入你的业绩</text>
-          <image wx:if='{{scanStatus==0}}' src='../../img/fail.svg'></image>
-          <text wx:if='{{scanStatus==0}}' class='red'>{{scanmsg}}</text>
+          <image wx:if='{{scanStatus==0}}' src='../../img/success.svg'></image>
+          <text wx:if='{{scanStatus==0}}' class='blue'>扫码成功,该订单已记入你的业绩</text>
+          <image wx:if='{{scanStatus!=0}}' src='../../img/fail.svg'></image>
+          <text wx:if='{{scanStatus!=0}}' class='red'>{{scanmsg}}</text>
       </view>
       <view wx:if='{{prodectData.length!=0}}' class='stateInfo'>
           <view>
@@ -17,10 +17,10 @@
           </view>
       </view>
   </view>
-  <view wx:if='{{scanStatus!=0}}' class='complete' bindtap='finish'>
+  <view wx:if='{{scanStatus==0}}' class='complete' bindtap='finish'>
     <button>完成</button>
   </view>
-  <view wx:if='{{scanStatus==0}}' class='complete' bindtap='finish'>
+  <view wx:if='{{scanStatus!=0}}' class='complete' bindtap='finish'>
     <button>知道了</button>
   </view>
 </view>

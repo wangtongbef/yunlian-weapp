@@ -32,17 +32,30 @@ Page({
               url: getApp().data.servsers + 'finance/share',
               data: {
                 token: that.data.tokenRoles.token,
-                goods_id: productUrl+'/'
+                url: productUrl +'/FDFee1'
               },
               method: 'POST',
               success: function (res) {
                 console.log(res)
-                that.setData({
-                  isSign: false,
-                  scanStatus: res.data.code,
-                  scanmsg: res.data.msg,
-                  prodectData: res.data.data
-                })
+                if (res.statusCode==200){
+                  that.setData({
+                    isSign: false,
+                    scanStatus: res.data.code,
+                    scanmsg: res.data.msg,
+                    prodectData: res.data.data
+                  })
+                } else {
+                  wx.showToast({
+                    title: '扫码失败',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function() {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  },1000)
+                }
               }
             })
           } else{

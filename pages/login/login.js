@@ -39,6 +39,7 @@ Page({
               wx_code: res.code
             },
             success: function (res) {
+              console.log(res)
               if (res.data.code === 0) {
                 wx.hideLoading()
                 var token = res.data.data.token

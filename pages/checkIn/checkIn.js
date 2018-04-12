@@ -247,12 +247,12 @@ Page({
       })
       setTimeout(function () {
         wx.hideLoading()
-      }, 2000)
+      }, 1000)
     } else if (that.data.isShowListNum >= that.data.checkList.length){
       wx.showToast({
         title: '到底啦',
         icon: 'success',
-        duration: 2000
+        duration: 1000
       })
     }
     var t = setTimeout(function () {
@@ -260,6 +260,6 @@ Page({
       that.setData({
         isShowListNum: isShowListNum
       })
-    }, 2000)
+    }, 1000)
   }
 })

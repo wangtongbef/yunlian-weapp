@@ -9,7 +9,7 @@ Page({
     balance: 0,
     amount:0,
     postCashBalance:{},
-    cashWarning: '请输入5 - 20000之间的金额',
+    cashWarning: '',
     trueCash:false
   },
 
@@ -50,9 +50,15 @@ Page({
         trueCash: true,
         amount: amount
       })
-    } else{
+    } else if (amount > that.data.balance){
       that.setData({
-        trueCash: false
+        trueCash: false,
+        cashWarning:'提现金额超限'
+      })
+    }else{
+      that.setData({
+        trueCash: false,
+        cashWarning: '请输入5 - 20000之间的金额'
       })
     }
   },
