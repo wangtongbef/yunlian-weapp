@@ -3,11 +3,10 @@
       <view class='state'>
           <image wx:if='{{scanStatus==0}}' src='../../img/success.svg'></image>
           <text wx:if='{{scanStatus==0}}' class='blue'>扫码成功,该订单已记入你的业绩</text>
-          <image wx:if='{{scanStatus!==0}}' src='../../img/fail.svg'></image>
-          <text wx:if='{{scanStatus==1}}' class='red'>付款未完成，此次扫码无效</text>
-          <text wx:if='{{scanStatus==2}}' class='red'>产品已计入他人业绩，此次扫码无效</text>
+          <image wx:if='{{scanStatus!=0}}' src='../../img/fail.svg'></image>
+          <text wx:if='{{scanStatus!=0}}' class='red'>{{scanmsg}}</text>
       </view>
-      <view class='stateInfo'>
+      <view wx:if='{{prodectData.length!=0}}' class='stateInfo'>
           <view>
               <text>产品编号</text>
               <text>545151</text>

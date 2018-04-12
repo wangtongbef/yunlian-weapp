@@ -7,7 +7,9 @@ Page({
     isSign:true,
     scanfail:true,
     tokenRoles: {},
-    scanStatus:0
+    scanStatus:0,
+    scanmsg:'',
+    prodectData:[]
   },
 
   /**
@@ -23,26 +25,31 @@ Page({
       wx.scanCode({
         onlyFromCamera: false,
         success: (res) => {
-          console.log(res)
-          wx.request({
-            url: getApp().data.servsers + 'finance/share',
-            data: {
-              token: that.data.tokenRoles.token,
-              goods_id: 'abc'
-            },
-            method: 'POST',
-            success: function (res) {
-              console.log(res)
-              that.setData({
-                isSign: false
-              })
-            },
-            fail: function (e) {
-              that.setData({
-                scanfail: false
-              })
-            }
-          })
+          console.log(res.result)
+          var productUrl = res.result
+          if (productUrl.indexOf("http")>=0){
+            wx.request({
+              url: getApp().data.servsers + 'finance/share',
+              data: {
+                token: that.data.tokenRoles.token,
+                goods_id: productUrl
+              },
+              method: 'POST',
+              success: function (res) {
+                console.log(res)
+                that.setData({
+                  isSign: false,
+                  scanStatus: res.data.code,
+                  scanmsg: res.data.msg,
+                  prodectData: res.data.data
+                })
+              }
+            })
+          } else{
+            that.setData({
+              scanfail: false
+            })
+          }
         },
         fail: function () {
           wx.navigateBack({
