@@ -30,6 +30,7 @@ Page({
       title: '加载中',
     })
     if (that.data.role.role_name == '商务专员'){
+      wx.setNavigationBarTitle({ title: '门店' })
       that.setData({
         isCommissioner: true
       })
@@ -67,6 +68,7 @@ Page({
         }
       })
     } else if (that.data.role.role_name == '门店负责人'){
+      wx.setNavigationBarTitle({ title: '门店列表' })
       that.setData({
         isCommissioner: false
       })

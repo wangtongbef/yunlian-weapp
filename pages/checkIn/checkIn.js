@@ -10,9 +10,17 @@ Page({
     currentTab: 0,
     isShowListNum: 5,
     checkList:[],
+    checklistPage:0,
+    checklistMore:0,
     photoList:[]
   },
   onLoad: function (options) {
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles');
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.getchecklist(that.data.checklistPage)
   },
   swichNav: function (e) {
     var that = this
@@ -25,34 +33,38 @@ Page({
         isShow: true
       })
     } else if (e.target.dataset.current == 1) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      wx.request({
-        url: getApp().data.servsers + 'sign_in/list',
-        data: {
-          page: 0,
-          token: tokenRoles.token
-        },
-        method: 'POST',
-        success: function (res) {
-          wx.hideLoading()
-          var list = res.data.data.list
-          var reverselist = []
-          for (var i = list.length-1; i >=0;i--){
-            list[i].image = 'https://' + list[i].image
-            reverselist.push(list[i])
-          }
-          that.setData({
-            checkList: reverselist
-          })
-        }
-      })
       that.setData({
         currentTab: 1,
         isShow: false
       })
     }
+  },
+
+  getchecklist(checklistPage){
+    var that = this
+    var tokenRoles = wx.getStorageSync('tokenRoles');
+    wx.request({
+      url: getApp().data.servsers + 'sign_in/list',
+      data: {
+        page: checklistPage,
+        token: tokenRoles.token
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        wx.hideLoading()
+        var list = res.data.data.list
+        var addimglist = []
+        for (var i = 0; i < list.length; i++) {
+          list[i].image = 'https://' + list[i].image
+          addimglist.push(list[i])
+        }
+        that.setData({
+          checkList: addimglist,
+          checklistMore: res.data.data.more
+        })
+      }
+    })
   },
   //拍照或者从相册选照片
   previewImage(e){
@@ -63,7 +75,6 @@ Page({
       })
   },
   photo(){
-    var tokenRoles = wx.getStorageSync('tokenRoles');
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
@@ -74,8 +85,7 @@ Page({
         that.setData({
           imgList: tempFilePaths,
           isToSignin:true
-        })
-        
+        }) 
       }
     })
   },
@@ -139,36 +149,26 @@ Page({
           wx.hideLoading()
           var data = JSON.parse(res.data)
           if (data.code == 0){
-            wx.showLoading({
-              title: '加载中',
+            wx.showToast({
+              title: '签到成功',
+              icon: 'none',
+              duration: 1000
             })
-            wx.request({
-              url: getApp().data.servsers + 'sign_in/list',
-              data: {
-                page: 0,
-                token: tokenRoles.token
-              },
-              method: 'POST',
-              success: function (res) {
-                wx.hideLoading()
-                var list = res.data.data.list
-                var reverselist = []
-                for (var i = list.length - 1; i >= 0; i--) {
-                  list[i].image = 'https://' + list[i].image
-                  reverselist.push(list[i])
-                }
-                that.setData({
-                  checkList: reverselist
-                })
-              }
-            })
-            that.setData({
-              imgList: "../../img/photograph.svg",
-              isToSignin: false,
-              address: '所在位置',
-              currentTab: 1,
-              isShow: false
-            })
+            setTimeout(function(){
+              wx.showLoading({
+                title: '加载中',
+              })
+              that.getchecklist(that.data.checklistPage)
+              that.setData({
+                imgList: "../../img/photograph.svg",
+                isToSignin: false,
+                address: '所在位置',
+                currentTab: 1,
+                isShowListNum: 5,
+                checklistPage: 0,
+                isShow: false
+              })
+            },1000)
           } else if (data.code == 1){
             wx.showToast({
               title: '签到失败',
@@ -199,25 +199,70 @@ Page({
    */
   onReachBottom: function () {
     var that = this
-    if (that.data.isShowListNum < that.data.checkList.length) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      setTimeout(function () {
+    var isShowListNum
+    wx.showLoading({
+      title: '加载中',
+    })
+    if (that.data.checklistMore==1){
+      if (that.data.isShowListNum < that.data.checkList.length) {
+        var t = setTimeout(function () {
+          wx.hideLoading()
+          isShowListNum = that.data.isShowListNum + 5
+          that.setData({
+            isShowListNum: isShowListNum
+          })
+        }, 1000)
+      } else if (that.data.isShowListNum = that.data.checkList.length) {//请求数据并拼接
+        var checklistPage = that.data.checklistPage + 20
+        isShowListNum = that.data.isShowListNum + 5
+        var tokenRoles = wx.getStorageSync('tokenRoles');
+        wx.request({
+          url: getApp().data.servsers + 'sign_in/list',
+          data: {
+            page: checklistPage,
+            token: tokenRoles.token
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log(res)
+            var list = res.data.data.list
+            var addimglist = []
+            for (var i = 0; i < list.length; i++) {
+              list[i].image = 'https://' + list[i].image
+              addimglist.push(list[i])
+            }
+            console.log(addimglist)
+            addimglist = that.data.checkList.concat(addimglist)
+            console.log(addimglist)
+            that.setData({
+              checkList: addimglist,
+              checklistMore: res.data.data.more,
+              checklistPage: checklistPage,
+              isShowListNum: isShowListNum
+            })
+            wx.hideLoading()
+          }
+        })
+      }
+    }else if (that.data.checklistMore == 0){
+      if (that.data.isShowListNum < that.data.checkList.length) {
+        var t = setTimeout(function () {
+          wx.hideLoading()
+          isShowListNum = that.data.isShowListNum + 5
+          that.setData({
+            isShowListNum: isShowListNum
+          })
+        }, 1000)
+      }else if (that.data.isShowListNum >= that.data.checkList.length) {
         wx.hideLoading()
-      }, 1000)
-    } else if (that.data.isShowListNum >= that.data.checkList.length){
-      wx.showToast({
-        title: '到底啦',
-        icon: 'success',
-        duration: 1000
-      })
+        //到底了
+        wx.showToast({
+          title: '到底啦',
+          icon: 'success',
+          duration: 1000
+        })
+      }
     }
-    var t = setTimeout(function () {
-      var isShowListNum = that.data.isShowListNum + 5
-      that.setData({
-        isShowListNum: isShowListNum
-      })
-    }, 1000)
+    
   }
 })

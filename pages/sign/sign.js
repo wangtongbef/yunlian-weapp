@@ -36,9 +36,7 @@ Page({
         })
         console.log(that.data.storeList)
         setTimeout(function () {
-          if (that.data.storeList[0].shop_name == res.data.data[0].shop_name) {
-            wx.hideLoading()
-          }
+          wx.hideLoading()
         }, 500)
       }
     })

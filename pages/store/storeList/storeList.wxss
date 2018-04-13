@@ -18,7 +18,10 @@
   color: #0072b1;
   border-bottom: 2rpx solid #0072b1;
 }
-
+.swiper-item{
+  height:820rpx;
+  overflow: scroll
+}
 .borderBtm{ 
   border-bottom: 1rpx #ddd solid;
   display: flex;

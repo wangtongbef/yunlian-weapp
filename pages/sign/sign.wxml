@@ -15,7 +15,7 @@
 <view class="swiper-item" hidden="{{!isShow}}">
   <view hidden='{{!flag}}'>
     <text wx:if='{{storeList.length != 0}}' class='width'>选择签约的门店</text>
-    <view class='background'>
+    <view class='background tosignlist'>
         <block wx:for='{{storeList}}' wx:key='{{index}}'>
             <view class='list' bindtap='changeStore' data-index='{{index}}'>
                 <text>{{item.shop_name}}</text>
