@@ -1,6 +1,6 @@
 <!--pages/index/index.wxml-->
 <view>
-     <view class='userInfo' bindtap='userInfo'> 
+     <view class='userInfo'> 
         <view>
             <view class='userImg'><image src='{{userInfo.img}}'></image></view>
             <view class='userText'>

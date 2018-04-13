@@ -51,7 +51,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         var list = res.data.data.list
         var addimglist = []
@@ -224,7 +223,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             var list = res.data.data.list
             var addimglist = []
             for (var i = 0; i < list.length; i++) {

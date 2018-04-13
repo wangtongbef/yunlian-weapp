@@ -32,7 +32,7 @@ Page({
               url: getApp().data.servsers + 'finance/share',
               data: {
                 token: that.data.tokenRoles.token,
-                url: productUrl +'/XD000002'
+                url: productUrl
               },
               method: 'POST',
               success: function (res) {
