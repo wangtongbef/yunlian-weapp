@@ -3,7 +3,9 @@ page{
   background: #eee
 }
 .background{
-  background: #fff
+  background: #fff;
+  max-height:1090rpx;
+  overflow: scroll
 }
 .width{
   width: 90%;

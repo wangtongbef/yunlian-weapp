@@ -231,9 +231,7 @@ Page({
               list[i].image = 'https://' + list[i].image
               addimglist.push(list[i])
             }
-            console.log(addimglist)
             addimglist = that.data.checkList.concat(addimglist)
-            console.log(addimglist)
             that.setData({
               checkList: addimglist,
               checklistMore: res.data.data.more,
