@@ -37,7 +37,7 @@ page{
 .addressDetail>view text{
   display:block;
   width:93%;
-  margin:0 1% 0 6%;
+  margin:0 0 0 7%;
   line-height: 38rpx;
   text-align: right
 }
