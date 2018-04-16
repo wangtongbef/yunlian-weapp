@@ -1,19 +1,19 @@
 <view class="swiper-item">
   <view class='backgroundColor'>
     <view class='inputInfo'>
-       <input class='' placeholder='请输入门店名称' bindblur='lengthCheck' type="text"></input>
+      <input class='' placeholder='请输入门店名称' bindblur='lengthCheck' type="text"></input>
     </view>
     <view class='addressInfo flexBetween padding' bindtap='getadress'>
-        <view>
-            <image src='../../../img/icon-address.svg' class='iconAddress'></image>
-            <text>{{address}}</text>
-        </view>
-        <view>
-            <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
-        </view>
+      <view>
+        <image src='../../../img/icon-address.svg' class='iconAddress'></image>
+        <text>{{address}}</text>
+      </view>
+      <view>
+        <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+      </view>
     </view>
   </view>
   <view class='checkBtn' bindtap='addstore'>
-      <button>确定</button>
+    <button>确定</button>
   </view>
 </view>

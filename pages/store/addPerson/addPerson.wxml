@@ -1,40 +1,36 @@
 <!--pages/addPerson/addPerson.wxml-->
 <view class='{{(previewHidden==false)&&(changeNamehidden==true) ? "show" : "hide"}}'>
-    <form>
-        <view class='addPhone'>
-            <input type='number' maxlength='11' placeholder='填写要添加的手机号码' bindinput='phoneVal'/>
-            <text style='color:{{promptColor}}'>{{phonePrompt}}</text>
-            <button formType="reset" bindtap='numberSubmit' disabled='{{disabled}}' style='background:{{btnBackground}}'>下一步</button>
-        </view> 
-    </form>
+  <form>
+    <view class='addPhone'>
+      <input type='number' maxlength='11' placeholder='填写要添加的手机号码' bindinput='phoneVal' />
+      <text style='color:{{promptColor}}'>{{phonePrompt}}</text>
+      <button formType="reset" bindtap='numberSubmit' disabled='{{disabled}}' style='background:{{btnBackground}}'>下一步</button>
+    </view>
+  </form>
 </view>
 
 <view class='{{changeNamehidden == false ? "show" : "hide"}}'>
-    <form>
-        <view class='addName'>
-            <input type='text' placeholder='填写要添加的姓名' bindinput='nameVal'/>
-            <text style='color:{{namePromptColor}}'>{{namePrompt}}</text>
-            <button formType="reset" bindtap='nameSubmit' disabled='{{nameDisabled}}' class="{{nameDisabled==true?'':'nameButton'}}">下一步</button>
-        </view> 
-    </form>
+  <form>
+    <view class='addName'>
+      <input type='text' placeholder='填写要添加的姓名' bindinput='nameVal' />
+      <text style='color:{{namePromptColor}}'>{{namePrompt}}</text>
+      <button formType="reset" bindtap='nameSubmit' disabled='{{nameDisabled}}' class="{{nameDisabled==true?'':'nameButton'}}">下一步</button>
+    </view>
+  </form>
 </view>
 
 <view class='{{(previewHidden==true)&&(changeNamehidden==true) ? "show" : "hide"}}   preview'>
-     <view class='{{existed == 0 ? "show" : "hide"}} previewTitle'>确认所填信息</view>
-     <view class='{{existed == 1 ? "show" : "hide"}} previewTitle'>为你找到了此人</view>
-     <view class='background'>
-          <view class='previewInfo width'>
-              <text decode="{{true}}">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;&nbsp;&nbsp;{{name}}</text>
-              <text decode="{{true}}">手机号码:&nbsp;&nbsp;&nbsp;{{phoneNumber}}</text>
-          </view> 
-          <view class='previewBtn width'>
-              <button bindtap='refill'>重新填写</button>
-              <button class='confirm' bindtap='confirm'>确认添加</button>
-          </view>
-     </view>
-     
-</view> 
+  <view class='{{existed == 0 ? "show" : "hide"}} previewTitle'>确认所填信息</view>
+  <view class='{{existed == 1 ? "show" : "hide"}} previewTitle'>为你找到了此人</view>
+  <view class='background'>
+    <view class='previewInfo width'>
+      <text decode="{{true}}">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;&nbsp;&nbsp;{{name}}</text>
+      <text decode="{{true}}">手机号码:&nbsp;&nbsp;&nbsp;{{phoneNumber}}</text>
+    </view>
+    <view class='previewBtn width'>
+      <button bindtap='refill'>重新填写</button>
+      <button class='confirm' bindtap='confirm'>确认添加</button>
+    </view>
+  </view>
 
-
-
-
+</view>

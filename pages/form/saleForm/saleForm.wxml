@@ -2,29 +2,29 @@
 <form class='width'>
   <view class='flex saleForm'>
     <view>
-        <picker bindchange="bindStoreChange" value="{{Index}}" range="{{storeArray}}" range-key='shop_name'>
-          <view class='choose storeChoose'>
-              <text>{{storeArray[storeIndex].shop_name}}</text>
-              <image src='../../../img/icon-arrowDG.svg'></image>
-          </view>
-        </picker>
+      <picker bindchange="bindStoreChange" value="{{Index}}" range="{{storeArray}}" range-key='shop_name'>
+        <view class='choose storeChoose'>
+          <text>{{storeArray[storeIndex].shop_name}}</text>
+          <image src='../../../img/icon-arrowDG.svg'></image>
+        </view>
+      </picker>
     </view>
-      
+
     <view hidden="{{isShow||isCommissioner}}">
-        <picker bindchange="bindSaleChange" value="{{Index}}" range="{{salesArray}}"  range-key='user_name'>
-          <view class='choose'>
-              <text>{{salesArray[saleIndex].user_name}}</text>
-              <image src='../../../img/icon-arrowDG.svg'></image>
-          </view>
+      <picker bindchange="bindSaleChange" value="{{Index}}" range="{{salesArray}}" range-key='user_name'>
+        <view class='choose'>
+          <text>{{salesArray[saleIndex].user_name}}</text>
+          <image src='../../../img/icon-arrowDG.svg'></image>
+        </view>
       </picker>
     </view>
 
     <view>
       <picker bindchange="bindTimeChange" range="{{timeArray}}">
-          <view class='choose timeChoose'>
-              <text>{{timeArray[timeIndex]}}</text>
-              <image src='../../../img/icon-arrowDG.svg'></image>
-          </view>
+        <view class='choose timeChoose'>
+          <text>{{timeArray[timeIndex]}}</text>
+          <image src='../../../img/icon-arrowDG.svg'></image>
+        </view>
       </picker>
     </view>
   </view>
@@ -33,22 +33,22 @@
   </view>
 </form>
 <view class='background'>
-    <view class='flex title'>
-        <text>产品名称</text>
-        <text>数量</text>
+  <view class='flex title'>
+    <text>产品名称</text>
+    <text>数量</text>
+  </view>
+  <block wx:for='{{productInfo}}' wx:key='{{index}}'>
+    <view class='flex productInfo'>
+      <text hidden="{{!isCommissioner}}">{{item.name}}</text>
+      <text hidden="{{isCommissioner}}">{{item.goods_name}}</text>
+      <text>{{item.cnt}}个</text>
     </view>
-    <block wx:for='{{productInfo}}' wx:key='{{index}}'>
-      <view class='flex productInfo'>
-        <text hidden="{{!isCommissioner}}">{{item.name}}</text>
-        <text hidden="{{isCommissioner}}">{{item.goods_name}}</text>
-        <text>{{item.cnt}}个</text>
-      </view>
-    </block>
-    
+  </block>
+
 </view>
 
-  
-    
+
+
 <!--<view class="section {{reply?'on':'off'}}">
     <input name="other" placeholder="请输入所预约项目" type="text"/>
 </view>-->

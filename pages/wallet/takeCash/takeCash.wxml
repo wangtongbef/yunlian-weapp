@@ -1,28 +1,28 @@
 <!--pages/wallet/takecash/takecash.wxml-->
 <view class='takeCash'>
-    <view class='cashPath'>
-        <view class='float'>入账方式</view>
-        <view class='pathInfo'>
-            <text class='blue'>零钱</text>
-            <text class='gray'>立即到账</text>
-        </view>
+  <view class='cashPath'>
+    <view class='float'>入账方式</view>
+    <view class='pathInfo'>
+      <text class='blue'>零钱</text>
+      <text class='gray'>立即到账</text>
     </view>
-    <view class='takecashInfo'>
-        <view class='takeCashNum'>
-          <text>提现金额</text>
-          <view class='num'>
-              <text>￥</text>
-              <input bindinput='inputCash' value='{{amount}}' type='number'/>
-          </view>
-        </view>
-        <text class='red' hidden='{{trueCash}}'>{{cashWarning}}</text>
-        <view class='showNum'>
-            <text class='gray'>余额 {{balance}}</text>
-            <text bindtap='takeAllcash' class='blue'>全部提现</text>
-        </view>
-        <view class='takeCashBtn'>
-            <button  disabled='{{!trueCash}}' bindtap="takecash" class='{{trueCash==true?"trueCashcolor":"wrongCashcolor"}}'>提现</button>
-        </view>
+  </view>
+  <view class='takecashInfo'>
+    <view class='takeCashNum'>
+      <text>提现金额</text>
+      <view class='num'>
+        <text>￥</text>
+        <input bindinput='inputCash' value='{{amount}}' type='number' />
+      </view>
     </view>
-    
+    <text class='red' hidden='{{trueCash}}'>{{cashWarning}}</text>
+    <view class='showNum'>
+      <text class='gray'>余额 {{balance}}</text>
+      <text bindtap='takeAllcash' class='blue'>全部提现</text>
+    </view>
+    <view class='takeCashBtn'>
+      <button disabled='{{!trueCash}}' bindtap="takecash" class='{{trueCash==true?"trueCashcolor":"wrongCashcolor"}}'>提现</button>
+    </view>
+  </view>
+
 </view>

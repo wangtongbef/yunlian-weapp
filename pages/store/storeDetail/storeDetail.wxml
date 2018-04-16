@@ -1,98 +1,98 @@
 <!--门店负责人-->
 <view>
-    <view class='detailTitle'>基本信息</view>
+  <view class='detailTitle'>基本信息</view>
+  <view class='backgroundColor'>
+    <view>
+      <text>编号</text>
+      <text>{{storeDetailstorge.id}}</text>
+    </view>
+    <view wx:if="{{isCommissioner}}" bindtap='storeNameChange'>
+      <text>名称</text>
+      <view>
+        <text>{{storeName}}</text>
+        <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+      </view>
+    </view>
+    <view wx:if="{{!isCommissioner}}">
+      <text>名称</text>
+      <text>{{storeName}}</text>
+    </view>
+    <view wx:if="{{isCommissioner}}" class='addressDetail' bindtap='linkMap'>
+      <text>位置</text>
+      <view>
+        <text>{{storeDetailres.shop.address}}</text>
+      </view>
+      <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+    </view>
+    <view wx:if="{{!isCommissioner}}" class='addressDetail' bindtap='linkMap'>
+      <text>位置</text>
+      <view>
+        <text wx:if='{{changeAddress}}'>{{newAddress}}</text>
+        <text wx:if='{{!changeAddress}}'>{{storeDetailres.shop.address}}</text>
+      </view>
+      <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
+    </view>
+    <view wx:if="{{isCommissioner}}">
+      <text>合作状态</text>
+      <text>{{storeDetailstorge.status}}</text>
+    </view>
+  </view>
+  <!--门店负责人-->
+  <view hidden="{{isCommissioner}}">
+    <view class='detailTitle'>商务专员</view>
     <view class='backgroundColor'>
-      <view>
-          <text>编号</text>
-          <text>{{storeDetailstorge.id}}</text>
-      </view>
-      <view wx:if="{{isCommissioner}}" bindtap='storeNameChange'>
-          <text>名称</text>
-          <view>
-              <text>{{storeName}}</text>
-              <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
-          </view> 
-      </view>
-      <view wx:if="{{!isCommissioner}}">
-          <text>名称</text>
-          <text>{{storeName}}</text>
-      </view>
-      <view wx:if="{{isCommissioner}}" class='addressDetail' bindtap='linkMap'>
-          <text>位置</text>
-          <view>
-              <text>{{storeDetailres.shop.address}}</text>
-          </view>  
-          <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
-      </view>
-      <view wx:if="{{!isCommissioner}}" class='addressDetail' bindtap='linkMap'>
-          <text>位置</text>
-          <view>
-              <text wx:if='{{changeAddress}}'>{{newAddress}}</text>
-              <text wx:if='{{!changeAddress}}'>{{storeDetailres.shop.address}}</text>
-          </view> 
-          <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image> 
-      </view>
-       <view wx:if="{{isCommissioner}}">
-          <text>合作状态</text>
-          <text>{{storeDetailstorge.status}}</text>
-      </view> 
-    </view>
-    <!--门店负责人-->
-    <view hidden="{{isCommissioner}}">
-        <view class='detailTitle'>商务专员</view>
-        <view class='backgroundColor'>
-            <block>
-                <view>
-                    <text>{{commissioner.name}}</text>
-                    <text>{{commissioner.phone_number}}</text>
-                </view>
-            </block>
+      <block>
+        <view>
+          <text>{{commissioner.name}}</text>
+          <text>{{commissioner.phone_number}}</text>
         </view>
-        <view class='detailTitle'>门店销售员</view>
-        <view class='backgroundColor'>
-            <block wx:for='{{businessList}}' wx:key='{{index}}'>
-                <view id='{{index}}'>
-                    <text>{{item.name}}</text>
-                    <text>{{item.phone_number}}</text>
-                </view>
-            </block>
-            <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
+      </block>
+    </view>
+    <view class='detailTitle'>门店销售员</view>
+    <view class='backgroundColor'>
+      <block wx:for='{{businessList}}' wx:key='{{index}}'>
+        <view id='{{index}}'>
+          <text>{{item.name}}</text>
+          <text>{{item.phone_number}}</text>
         </view>
+      </block>
+      <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
     </view>
-    <!--商务专员-->
-    <view hidden="{{!isCommissioner}}">
-      <view>
-          <view class='detailTitle'>门店负责人</view>
-          <view class='backgroundColor'>
-              <block wx:if='{{chargePerson.name}}'>
-                  <view id='{{index}}' >
-                      <text>{{chargePerson.name}}</text>
-                      <view>
-                          <text>{{chargePerson.phone_number}}</text>
-                          <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{chargePerson.id}}'></image>
-                      </view>   
-                  </view>
-              </block>
-              <view class='addBtn' bindtap='addChargeperson' wx:if='{{!chargePerson.name}}'> + 添加</view>
+  </view>
+  <!--商务专员-->
+  <view hidden="{{!isCommissioner}}">
+    <view>
+      <view class='detailTitle'>门店负责人</view>
+      <view class='backgroundColor'>
+        <block wx:if='{{chargePerson.name}}'>
+          <view id='{{index}}'>
+            <text>{{chargePerson.name}}</text>
+            <view>
+              <text>{{chargePerson.phone_number}}</text>
+              <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{chargePerson.id}}'></image>
+            </view>
           </view>
-      </view>
-      <view>
-          <view class='detailTitle'>门店销售员</view>
-          <view class='backgroundColor'>
-              <block wx:for='{{businessList}}' wx:key='{{index}}'>
-                  <view>
-                      <text>{{item.name}}</text>
-                      <view>
-                          <text>{{item.phone_number}}</text>
-                          <image src='../../../img/icon-rubbish.svg'  data-index='{{index}}' class='iconRubbish' bindtap='deleteBusiness'></image>
-                      </view>
-                  </view>
-              </block>
-              <view class='addBtn marginBtm' bindtap='addSales'>+ 添加</view>
-          </view>
-      </view>
-      <view class='giveUp' bindtap='giveUpstore'>
-          <button>{{storeDetailstorge.status=='待签约'?'放弃此店':'解约此店'}}</button>
+        </block>
+        <view class='addBtn' bindtap='addChargeperson' wx:if='{{!chargePerson.name}}'> + 添加</view>
       </view>
     </view>
+    <view>
+      <view class='detailTitle'>门店销售员</view>
+      <view class='backgroundColor'>
+        <block wx:for='{{businessList}}' wx:key='{{index}}'>
+          <view>
+            <text>{{item.name}}</text>
+            <view>
+              <text>{{item.phone_number}}</text>
+              <image src='../../../img/icon-rubbish.svg' data-index='{{index}}' class='iconRubbish' bindtap='deleteBusiness'></image>
+            </view>
+          </view>
+        </block>
+        <view class='addBtn marginBtm' bindtap='addSales'>+ 添加</view>
+      </view>
+    </view>
+    <view class='giveUp' bindtap='giveUpstore'>
+      <button>{{storeDetailstorge.status=='待签约'?'放弃此店':'解约此店'}}</button>
+    </view>
+  </view>
 </view>

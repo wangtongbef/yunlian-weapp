@@ -1,23 +1,23 @@
 <!--pages/wallet/takeCash/takeCash.wxml-->
 <view class='background width takeCash'>
-    <view class='takeCashInfo flex'>
-        <text>钱包(元)</text>
-        <image src='../../../img/icon-wallet.svg' bindtap='linkList'></image>
-    </view>
-    <view class='money'>￥{{balance}}</view>
+  <view class='takeCashInfo flex'>
+    <text>钱包(元)</text>
+    <image src='../../../img/icon-wallet.svg' bindtap='linkList'></image>
+  </view>
+  <view class='money'>￥{{balance}}</view>
 </view>
 
 <view class='nearby'>
-    <view hidden='{{!listshow}}' class='title'>最近交易明细</view>
-    <block wx:for='{{nearby}}' wx:key='{{index}}' wx:if="{{index<2}}">
-      <view class='detail flex' bindtap='linkDetail'  data-trade_id="{{item.trade_id}}">
-        <view class='left'>
-            <text class='gray'>{{item.create_time}}</text>
-            <text>{{item.type_name}}</text>
-        </view>
-        <view class='red moneyType'>{{item.amount}}</view>
+  <view hidden='{{!listshow}}' class='title'>最近交易明细</view>
+  <block wx:for='{{nearby}}' wx:key='{{index}}' wx:if="{{index<2}}">
+    <view class='detail flex' bindtap='linkDetail' data-trade_id="{{item.trade_id}}">
+      <view class='left'>
+        <text class='gray'>{{item.create_time}}</text>
+        <text>{{item.type_name}}</text>
       </view>
-    </block>
+      <view class='red moneyType'>{{item.amount}}</view>
+    </view>
+  </block>
 </view>
 
 <view class='takeCashBtn'>

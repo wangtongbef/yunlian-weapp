@@ -1,27 +1,31 @@
 <!--pages/index/index.wxml-->
 <view>
-     <view class='userInfo'> 
-        <view>
-            <view class='userImg'><image src='{{userInfo.img}}'></image></view>
-            <view class='userText'>
-                <text>{{userInfo.name}}</text>
-                <text class='margin20'>{{phone_number}}</text>
-                <text>{{role.role_name}}</text>
-            </view> 
-        </view> 
-        <!-- <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view> -->
+  <view class='userInfo'>
+    <view>
+      <view class='userImg'>
+        <image src='{{userInfo.img}}'></image>
+      </view>
+      <view class='userText'>
+        <text>{{userInfo.name}}</text>
+        <text class='margin20'>{{phone_number}}</text>
+        <text>{{role.role_name}}</text>
+      </view>
     </view>
-    <view class='operateList'>
-        <view class='operateList-1' >
-            <block wx:for='{{list}}' wx:key="text">
-              <navigator class='operateInfo' url='{{item.url}}'>
-                  <view class='operateText'>
-                      <image src='{{item.icon}}'></image>
-                      <text>{{item.text}}</text>
-                  </view>
-                  <view class='arrow'><image src='../../img/icon-arrowRB.svg'></image></view>
-              </navigator>
-            </block> 
-        </view>
+    <!-- <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view> -->
+  </view>
+  <view class='operateList'>
+    <view class='operateList-1'>
+      <block wx:for='{{list}}' wx:key="text">
+        <navigator class='operateInfo' url='{{item.url}}'>
+          <view class='operateText'>
+            <image src='{{item.icon}}'></image>
+            <text>{{item.text}}</text>
+          </view>
+          <view class='arrow'>
+            <image src='../../img/icon-arrowRB.svg'></image>
+          </view>
+        </navigator>
+      </block>
     </view>
+  </view>
 </view>

@@ -1,58 +1,54 @@
-
 <view class="swiper-tab">
-    <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">
-        <image src="{{currentTab==0 ? '../../img/icon-checkActive.svg' : '../../img/icon-checkIn.svg'}}"></image>
-        签到
-    </view>
-    <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">
-        <image src="{{currentTab==1 ? '../../img/icon-checkedActive.svg' : '../../img/icon-checked.svg'}}"></image>  
-        签到记录
-    </view>
+  <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">
+    <image src="{{currentTab==0 ? '../../img/icon-checkActive.svg' : '../../img/icon-checkIn.svg'}}"></image>
+    签到
+  </view>
+  <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">
+    <image src="{{currentTab==1 ? '../../img/icon-checkedActive.svg' : '../../img/icon-checked.svg'}}"></image>
+    签到记录
+  </view>
 </view>
 
 <!--签到-->
 <view class="swiper-item" hidden="{{!isShow}}">
   <view class='backgroundColor'>
     <view class='photoInfo'>
-        <image wx:if='{{imgList == "../../img/photograph.svg"}}' src='{{imgList}}' bindtap='photo' class='photoBtn'></image>
-        <view wx:if='{{imgList !== "../../img/photograph.svg"}}' data-src="{{imgList}}" class="photoBox" bindtap='photoImg'>
-          <image src='{{imgList}}' class='photo'></image>
-        </view> 
+      <image wx:if='{{imgList == "../../img/photograph.svg"}}' src='{{imgList}}' bindtap='photo' class='photoBtn'></image>
+      <view wx:if='{{imgList !== "../../img/photograph.svg"}}' data-src="{{imgList}}" class="photoBox" bindtap='photoImg'>
+        <image src='{{imgList}}' class='photo'></image>
+      </view>
     </view>
     <view class='addressInfo flexBetween padding' bindtap='getadress'>
-        <view>
-            <image src='../../img/icon-address.svg' class='iconAddress'></image>
-            <text>{{address}}</text>
-        </view>
-        <view>
-            <image src='../../img/icon-arrowRG.png' class='iconArrow'></image>
-        </view>
+      <view>
+        <image src='../../img/icon-address.svg' class='iconAddress'></image>
+        <text>{{address}}</text>
+      </view>
+      <view>
+        <image src='../../img/icon-arrowRG.png' class='iconArrow'></image>
+      </view>
     </view>
   </view>
   <view class='checkBtn' bindtap='signIn'>
-      <button>签到</button>
+    <button>签到</button>
   </view>
 </view>
 
 <!--签到记录-->
 <view class="swiper-item" hidden="{{isShow}}" class='checkedList'>
-    <block wx:for='{{checkList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
-      <view class='backgroundColor signed width'> 
-            <text>时间:{{item.time}}</text>
-            <view class='imgBox'> 
-              <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='previewImage' data-img='{{item.image}}'></image>
-            </view>
-            <view class='addressInfo'>
-                  <image src='../../img/icon-address.svg' class='iconAddress'></image> 
-                  <text>{{item.address}}</text>
-            </view>
+  <block wx:for='{{checkList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
+    <view class='backgroundColor signed width'>
+      <text>时间:{{item.time}}</text>
+      <view class='imgBox'>
+        <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='previewImage' data-img='{{item.image}}'></image>
       </view>
-    </block>
-    <view wx:if='{{checkList.length == 0}}' class='nodata'>
-        <image src='../../img/nodata.svg'></image>
-        <text>暂无签到记录</text>
+      <view class='addressInfo'>
+        <image src='../../img/icon-address.svg' class='iconAddress'></image>
+        <text>{{item.address}}</text>
+      </view>
     </view>
+  </block>
+  <view wx:if='{{checkList.length == 0}}' class='nodata'>
+    <image src='../../img/nodata.svg'></image>
+    <text>暂无签到记录</text>
+  </view>
 </view>
-
-
-

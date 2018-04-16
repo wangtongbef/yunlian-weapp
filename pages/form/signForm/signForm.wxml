@@ -21,4 +21,3 @@
     <text class="flex-cell flex-row">{{signList.year}}</text>
   </view>
 </view>
-

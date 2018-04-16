@@ -1,11 +1,11 @@
 <view>
   <text class='width'>选择角色</text>
   <view class='background'>
-      <block wx:for='{{roles}}' wx:key="{{index}}"> 
-        <view class='list' data-rolecheck="{{roles[index]}}" bindtap='rolesCheck'>
-            <text>{{roles[index].role_name}}</text>
-            <image src='../../img/icon-arrowRG.png'></image>
-        </view>
-      </block> 
+    <block wx:for='{{roles}}' wx:key="{{index}}">
+      <view class='list' data-rolecheck="{{roles[index]}}" bindtap='rolesCheck'>
+        <text>{{roles[index].role_name}}</text>
+        <image src='../../img/icon-arrowRG.png'></image>
+      </view>
+    </block>
   </view>
 </view>
