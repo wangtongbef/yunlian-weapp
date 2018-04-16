@@ -6,6 +6,8 @@ Page({
    */
   data: {
     token: '',
+    wallListPage: 1,
+    wallListMore: 0,
     wallList:[]
   },
 
@@ -25,18 +27,15 @@ Page({
       url: getApp().data.servsers + 'finance/trade',
       method: 'POST',
       data: {
-        page: 0,
+        page: that.data.wallListPage,
         token: that.data.token
       },
       success: function (res) {
         wx.hideLoading()
-        var list = res.data.data.list
-        var wallList=[]
-        for (var i = list.length-1; i>=0; i--) {
-          wallList.push(list[i])
-        }
+        var wallList = res.data.data.list
         that.setData({
-          wallList: wallList
+          wallList: wallList,
+          wallListMore: res.data.data.more
         })
       }
     })
@@ -46,5 +45,39 @@ Page({
     wx.navigateTo({
       url: '../walletDetail/walletDetail?trade_id=' + trade_id,
     })
+  },
+  onReachBottom: function () {
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
+    if (that.data.wallListMore == 1){
+      var wallListPage = that.data.wallListPage + 1
+      wx.request({
+        url: getApp().data.servsers + 'finance/trade',
+        method: 'POST',
+        data: {
+          page: wallListPage,
+          token: that.data.token
+        },
+        success: function (res) {
+          wx.hideLoading()
+          var addWallList = res.data.data.list
+          var wallList = that.data.wallList.concat(addWallList) 
+          that.setData({
+            wallList: wallList,
+            wallListMore: res.data.data.more
+          })
+        }
+      })
+
+    } else if (that.data.wallListMore == 0){
+      wx.hideLoading()
+      wx.showToast({
+        title: '到底啦',
+        icon: 'success',
+        duration: 1000
+      })
+    }
   }
 })

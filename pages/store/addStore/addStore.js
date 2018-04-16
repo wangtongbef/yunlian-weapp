@@ -30,7 +30,7 @@ Page({
     wx.chooseLocation({
       success: function (res) {
         that.setData({
-          address: res.name,
+          address: res.address,
           'position.latitude': res.latitude,
           'position.longitude': res.longitude
         })

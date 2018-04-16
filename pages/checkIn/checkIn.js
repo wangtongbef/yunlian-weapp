@@ -196,7 +196,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function () { //
     var that = this
     var isShowListNum
     wx.showLoading({
@@ -212,7 +212,7 @@ Page({
           })
         }, 1000)
       } else if (that.data.isShowListNum = that.data.checkList.length) {//请求数据并拼接
-        var checklistPage = that.data.checklistPage + 20
+        var checklistPage = that.data.checklistPage + 1
         isShowListNum = that.data.isShowListNum + 5
         var tokenRoles = wx.getStorageSync('tokenRoles');
         wx.request({
