@@ -34,6 +34,7 @@ Page({
           'position.latitude': res.latitude,
           'position.longitude': res.longitude
         })
+        //console.log(that.data.address)
       },
       fail: function (res) {
         wx.getSetting({

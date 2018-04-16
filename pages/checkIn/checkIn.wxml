@@ -14,8 +14,10 @@
 <view class="swiper-item" hidden="{{!isShow}}">
   <view class='backgroundColor'>
     <view class='photoInfo'>
-       <image wx:if='{{imgList == "../../img/photograph.svg"}}' src='{{imgList}}' bindtap='photo' class='photoBtn'></image>
-       <image wx:if='{{imgList !== "../../img/photograph.svg"}}' src='{{imgList}}' data-src="{{imgList}}" class='photo' bindtap='photo'></image>
+        <image wx:if='{{imgList == "../../img/photograph.svg"}}' src='{{imgList}}' bindtap='photo' class='photoBtn'></image>
+        <view wx:if='{{imgList !== "../../img/photograph.svg"}}' data-src="{{imgList}}" class="photoBox" bindtap='photoImg'>
+          <image src='{{imgList}}' class='photo'></image>
+        </view> 
     </view>
     <view class='addressInfo flexBetween padding' bindtap='getadress'>
         <view>
@@ -37,7 +39,9 @@
     <block wx:for='{{checkList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
       <view class='backgroundColor signed width'> 
             <text>时间:{{item.time}}</text>
-            <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='previewImage' data-img='{{item.image}}'></image>
+            <view class='imgBox'> 
+              <image src='{{item.image}}' class='signedImg' data-id='{{index}}' bindtap='previewImage' data-img='{{item.image}}'></image>
+            </view>
             <view class='addressInfo'>
                   <image src='../../img/icon-address.svg' class='iconAddress'></image> 
                   <text>{{item.address}}</text>

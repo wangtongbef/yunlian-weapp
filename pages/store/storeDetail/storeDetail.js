@@ -120,14 +120,14 @@ Page({
       wx.chooseLocation({
         success: function (res) {
           that.setData({
-            newAddress: res.name
+            newAddress: res.address
           })
           wx.request({
             url: getApp().data.servsers + 'shop/updateShopLocation', //更新门店地址
             data: {
               id: that.data.storeDetailstorge.id,
               token: that.data.token,
-              address: res.name,
+              address: res.address,
               longitude: res.longitude,
               latitude: res.latitude
             },

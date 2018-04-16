@@ -28,6 +28,23 @@ page{
   display: flex;
   justify-content: space-between
 }
+.addressDetail>text{
+  flex:none;
+}
+.addressDetail>view{
+  flex:auto;
+}
+.addressDetail>view text{
+  display:block;
+  width:93%;
+  margin:0 1% 0 6%;
+  line-height: 38rpx;
+  text-align: right
+}
+.addressDetail>.iconArrow{
+  top: 0;
+  flex:none;
+}
 .iconArrow{
   height: 36rpx;
   width: 36rpx;

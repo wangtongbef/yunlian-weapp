@@ -46,12 +46,8 @@ Page({
       success: function (res) {
         wx.hideLoading()
         var nearby = res.data.data.list
-        var wallList = []
-        for (var i = nearby.length-1; i >= 0; i--) {
-          wallList.push(nearby[i])
-        }
         that.setData({
-          nearby: wallList
+          nearby: nearby
         })
         if (nearby.length!==0){
           that.setData({
@@ -122,12 +118,8 @@ Page({
         success: function (res) {
           wx.hideLoading()
           var nearby = res.data.data.list
-          var wallList = []
-          for (var i = nearby.length - 1; i >= 0; i--) {
-            wallList.push(nearby[i])
-          }
           that.setData({
-            nearby: wallList
+            nearby: nearby
           })
           if (nearby.length !== 0) {
             that.setData({

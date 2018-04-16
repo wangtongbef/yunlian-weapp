@@ -65,7 +65,7 @@ Page({
       }
     })
   },
-  //拍照或者从相册选照片
+  
   previewImage(e){
     var current = e.target.dataset.id;
     var that = this;
@@ -73,6 +73,7 @@ Page({
         urls: [that.data.checkList[current].image] // 当前显示图片的http链接
       })
   },
+  //拍照或者从相册选照片
   photo(){
     var that = this;
     wx.chooseImage({
@@ -88,6 +89,16 @@ Page({
       }
     })
   },
+  // 预览选中图片
+  photoImg(e){
+    console.log(e)
+    var current = e.currentTarget.dataset.src[0];
+    var that = this;
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: that.data.imgList // 需要预览的图片http链接列表
+    })
+  },
 
   getadress() {
     wx.showLoading({
@@ -98,9 +109,10 @@ Page({
       success: function (res) {
         wx.hideLoading()
         that.setData({
-          address: res.name,
+          address: res.address,
           position: res.latitude + ',' + res.longitude
         })
+        //console.log(that.data.address)
       },
       fail: function (res) {
         wx.hideLoading()

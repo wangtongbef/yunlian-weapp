@@ -65,6 +65,7 @@ Page({
           var addWallList = res.data.data.list
           var wallList = that.data.wallList.concat(addWallList) 
           that.setData({
+            wallListPage: wallListPage,
             wallList: wallList,
             wallListMore: res.data.data.more
           })

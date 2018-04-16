@@ -15,10 +15,15 @@ page{
   height: 180rpx;
   padding: 100rpx 0
 }
-.photoInfo .photo{
-  width: 90%;
-  height: 380rpx;
-  padding: 50rpx 0
+.photoBox{
+  height: 350rpx;
+  width:90%;
+  margin: 50rpx 0;
+  overflow: hidden
+}
+.photo{
+  min-height: 350rpx;
+  min-width:100%;
 }
 .padding{
   padding: 26rpx 5%;
@@ -99,9 +104,14 @@ page{
   width: 90%;
   padding: 20rpx 5%
 }
-.signed image{
+.signed .imgBox{
   width: 100%;
-  height: 400rpx
+  height: 400rpx;
+  overflow: hidden
+}
+.signedImg{
+  min-height: 400rpx;
+  min-width:100%
 }
 .signed{
   margin-bottom: 30rpx;

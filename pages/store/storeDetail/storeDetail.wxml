@@ -21,16 +21,16 @@
           <text>位置</text>
           <view>
               <text>{{storeDetailres.shop.address}}</text>
-              <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
           </view>  
+          <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
       </view>
       <view wx:if="{{!isCommissioner}}" class='addressDetail' bindtap='linkMap'>
           <text>位置</text>
           <view>
               <text wx:if='{{changeAddress}}'>{{newAddress}}</text>
               <text wx:if='{{!changeAddress}}'>{{storeDetailres.shop.address}}</text>
-              <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image>
-          </view>  
+          </view> 
+          <image src='../../../img/icon-arrowRG.png' class='iconArrow'></image> 
       </view>
        <view wx:if="{{isCommissioner}}">
           <text>合作状态</text>

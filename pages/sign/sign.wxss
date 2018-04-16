@@ -69,7 +69,7 @@ page{
   display: flex;
   justify-content: center;
 }
-.photoInfo > view{
+.checkimg{
   padding: 100rpx 0
 }
 .photoInfo .photoBtn{
@@ -88,10 +88,15 @@ page{
   position: relative;
   top: 9rpx
 }
-.photoInfo .photo{
+.photoBox{
   width: 90%;
-  height: 380rpx;
-  padding: 50rpx 0
+  height: 350rpx;
+  margin: 50rpx 0;
+  overflow: hidden
+}
+.photo{
+  min-width: 100%;
+  min-height: 350rpx;
 }
 .storeInfo{
   width: 90%;
@@ -125,10 +130,15 @@ page{
 .signedInfo text{
   display: block
 }
-.signedInfo image{
+.signedImgbox{
   width: 90%;
   height: 400rpx;
-  padding: 40rpx 5%
+  padding: 40rpx 5%;
+  overflow: hidden
+}
+.signedImgbox img{
+  min-width: 100%;
+  min-height: 400rpx;
 }
 .signedInfo text:last-child{
   border-top: 1rpx #eee solid

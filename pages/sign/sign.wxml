@@ -33,12 +33,14 @@
     <view class='background'>
         <view class='storeInfo'>签约门店:{{signCheckStore.shop_name}}</view>
         <view class='photoInfo'>
-            <view wx:if='{{imgList.length == 0}}'>
+            <view wx:if='{{imgList.length == 0}}' class='checkimg'>
               <image src='../../img/photograph.svg' class='photoBtn' bindtap='photo'></image>
               <em>*</em>
               <text>点击上传合同照片</text>
             </view> 
-            <image wx:if='{{imgList.length !== 0}}' src='{{imgList}}' data-src="{{imgList}}" class='photo' bindtap='photograph'></image>         
+            <view wx:if='{{imgList.length !== 0}}' class='photoBox' data-src="{{imgList}}" bindtap='photograph'>
+              <image src='{{imgList}}' class='photo'></image>
+            </view>      
         </view>
     </view> 
     <view class='signBtn' bindtap='signContract'>
@@ -51,9 +53,11 @@
 <view class="swiper-item signed" hidden="{{isShow}}">
     <block wx:for='{{signedList}}' wx:key='{{index}}' wx:if="{{index<isShowListNum}}">
       <view class='signedInfo background'>
-          <text class='signedTime width'>时间:{{item.create_time}}</text>
-          <image src='{{item.contract_image}}' data-id='{{index}}' bindtap='signedImg' data-img='{{item.img}}'></image>
-          <text class='width'>签约门店:{{item.shop_name}}</text>
+        <text class='signedTime width'>时间:{{item.create_time}}</text>
+        <view data-id='{{index}}' class='signedImgbox' bindtap='signedImg' data-img='{{item.img}}'>
+          <image src='{{item.contract_image}}'></image>
+        </view>
+        <text class='width'>签约门店:{{item.shop_name}}</text>
       </view>       
     </block> 
     <view wx:if='{{signedList.length == 0}}' class='nodata'>
