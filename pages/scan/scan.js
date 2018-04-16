@@ -25,7 +25,6 @@ Page({
       wx.scanCode({
         onlyFromCamera: false,
         success: (res) => {
-          console.log(res.result)
           var productUrl = res.result
           if (productUrl.indexOf("http")>=0){
             wx.request({
@@ -36,7 +35,6 @@ Page({
               },
               method: 'POST',
               success: function (res) {
-                console.log(res)
                 if (res.statusCode==200){
                   that.setData({
                     isSign: false,

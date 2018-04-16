@@ -34,7 +34,6 @@ Page({
         that.setData({
           storeList: res.data.data
         })
-        console.log(that.data.storeList)
         setTimeout(function () {
           wx.hideLoading()
         }, 500)
