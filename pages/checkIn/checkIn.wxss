@@ -83,7 +83,6 @@ page{
 }
 .swiper-tab > view:first-child{
   border-right:1rpx #C7C7C7 solid;
-  
 }
 .swiper-tab .active {
   color: #0072b1;
@@ -110,8 +109,8 @@ page{
   overflow: hidden
 }
 .signedImg{
-  min-height: 400rpx;
-  min-width:100%
+  height: 400rpx;
+  width:100%
 }
 .signed{
   margin-bottom: 30rpx;

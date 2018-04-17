@@ -12,7 +12,7 @@
       <text>提现金额</text>
       <view class='num'>
         <text>￥</text>
-        <input bindinput='inputCash' value='{{amount}}' type='number' />
+        <input bindinput='inputCash' value='{{amount}}' type='digit' />
       </view>
     </view>
     <text class='red' hidden='{{trueCash}}'>{{cashWarning}}</text>

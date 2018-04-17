@@ -39,7 +39,7 @@
           <text>点击上传合同照片</text>
         </view> 
         <view wx:if='{{imgList.length !== 0}}' class='photoBox' data-src="{{imgList}}" bindtap='photograph'>
-          <image src='{{imgList}}' class='photo'></image>
+          <image src='{{imgList}}' mode='aspectFill' class='photo'></image>
         </view>      
       </view>
     </view> 
@@ -55,7 +55,7 @@
     <view class='signedInfo background'>
       <text class='signedTime width'>时间:{{item.create_time}}</text>
       <view data-id='{{index}}' class='signedImgbox' bindtap='signedImg' data-img='{{item.img}}'>
-        <image class='signedImg' src='{{item.contract_image}}'></image>
+        <image class='signedImg'  mode='aspectFill' src='{{item.contract_image}}'></image>
       </view>
       <text class='width'>签约门店:{{item.shop_name}}</text>
     </view>       

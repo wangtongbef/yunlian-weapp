@@ -284,7 +284,7 @@ Page({
       })
       setTimeout(function () {
         wx.hideLoading()
-      }, 1000)
+      }, 500)
     } else if (that.data.isShowListNum >= that.data.signedList.length) {
       wx.showToast({
         title: '到底啦',
@@ -297,6 +297,6 @@ Page({
       that.setData({
         isShowListNum: isShowListNum
       })
-    }, 1000)
+    }, 500)
   }
 })

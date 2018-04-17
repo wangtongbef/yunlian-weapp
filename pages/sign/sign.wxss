@@ -23,7 +23,7 @@ page{
   justify-content: space-between
 }
 .list text:first-child{
-  flex:auto
+  flex:auto;
 }
 .list image{
   width: 34rpx;
@@ -138,8 +138,8 @@ page{
   overflow: hidden
 }
 .signedImgbox .signedImg{
-  min-width: 100%;
-  min-height: 360rpx;
+  width: 100%;
+  height: 360rpx;
 }
 .signedInfo text:last-child{
   border-top: 1rpx #eee solid

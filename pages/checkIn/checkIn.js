@@ -216,7 +216,7 @@ Page({
           that.setData({
             isShowListNum: isShowListNum
           })
-        }, 1000)
+        }, 500)
       } else if (that.data.isShowListNum = that.data.checkList.length) {//请求数据并拼接
         var checklistPage = that.data.checklistPage + 1
         isShowListNum = that.data.isShowListNum + 5
@@ -254,7 +254,7 @@ Page({
           that.setData({
             isShowListNum: isShowListNum
           })
-        }, 1000)
+        }, 500)
       }else if (that.data.isShowListNum >= that.data.checkList.length) {
         wx.hideLoading()
         //到底了
