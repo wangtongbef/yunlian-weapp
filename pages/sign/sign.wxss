@@ -132,13 +132,14 @@ page{
 }
 .signedImgbox{
   width: 90%;
-  height: 400rpx;
-  padding: 40rpx 5%;
+  height: 360rpx;
+  padding: 40rpx 5% 0;
+  margin-bottom: 40rpx;
   overflow: hidden
 }
-.signedImgbox img{
+.signedImgbox .signedImg{
   min-width: 100%;
-  min-height: 400rpx;
+  min-height: 360rpx;
 }
 .signedInfo text:last-child{
   border-top: 1rpx #eee solid
