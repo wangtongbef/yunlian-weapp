@@ -112,8 +112,8 @@ Page({
   },
   linkMap(){
     var that = this
-    getLocation();
     if (that.data.role.role_name == '商务专员') {
+      getLocation();
       wx.showLoading({
         title: '加载中',
       })
