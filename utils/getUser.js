@@ -5,7 +5,6 @@ var getUser = function(){
       var code = res.code
       wx.getUserInfo({//获取用户信息
         success: function (res) {
-          console.log('用户信息', res);
           var user = {};
           user.name = res.userInfo.nickName;
           user.img = res.userInfo.avatarUrl;
@@ -26,7 +25,6 @@ var getUser = function(){
                     if (res.authSetting['scope.userInfo']) {
                       wx.getUserInfo({//获取用户信息
                         success: function (res) {
-                          console.log('用户信息', res);
                           var user = {};
                           user.name = res.userInfo.nickName;
                           user.img = res.userInfo.avatarUrl;

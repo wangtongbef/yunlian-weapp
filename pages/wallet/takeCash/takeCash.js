@@ -42,7 +42,6 @@ Page({
   },
   inputCash(e){
     var that = this
-    console.log(e.detail.value)
     var amount = e.detail.value
     if (amount >= 5 && amount <= 20000 && amount <= that.data.balance){
       that.setData({
@@ -90,7 +89,6 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        console.log(res.data.code)
         if (res.data.code == 0){
           wx.showToast({
             title: '提现成功',

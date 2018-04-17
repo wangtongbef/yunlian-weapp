@@ -14,8 +14,7 @@ var getLocation = function(){
         success: (res) => {
           //开启授权
           wx.openSetting({
-            success: (res) => {
-              //console.log(res);                
+            success: (res) => {               
               if (res.authSetting['scope.userLocation']) {
                 getLocation();
               } else {  //用户仍然拒绝的情况

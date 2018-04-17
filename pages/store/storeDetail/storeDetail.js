@@ -81,7 +81,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           wx.hideLoading()
           if (res.data.code==0){
             that.setData({

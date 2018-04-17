@@ -62,7 +62,6 @@ Page({
   },
   lengthCheck(e){
     var that = this
-    console.log(e)
     that.setData({
       inputVal: e.detail.value
     })

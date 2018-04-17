@@ -57,15 +57,12 @@ Page({
         success: function (res) {
           wx.hideLoading()
           if (res.data.code == 0){
-            console.log(storeName)
             wx.setStorage({
               key:'storeName',
               data: storeName,
               success: function (res) {
-                console.log(res)
               },
               fail:function(res){
-                console.log(res)
               }
             })
             wx.navigateBack({

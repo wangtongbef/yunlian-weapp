@@ -78,7 +78,6 @@ Page({
     }
   },
   changeStore(e){
-    console.log(e)
     var that = this
     var storeList = that.data.storeList
     var index = parseInt(e.currentTarget.dataset.index)
@@ -139,7 +138,6 @@ Page({
   },
   //预览图片
   photograph(e) {
-    //console.log(e.target.dataset.src);
     var current = e.target.dataset.src;
     var that = this;
     wx.previewImage({
