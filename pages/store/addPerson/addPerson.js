@@ -173,7 +173,7 @@ Page({
                     success: function () {
                     }
                   })
-                } else if (res.data.code == 2) {
+                } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
                   wx.showModal({
                     title: '提示',
                     content: '该用户非门店负责人',
@@ -229,7 +229,7 @@ Page({
               success: function () {
               }
             })
-          } else if (res.data.code == 2) {
+          } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
             wx.showModal({
               title: '提示',
               content: '该用户非门店负责人',
@@ -285,7 +285,7 @@ Page({
                 })
               }
             })
-          } else if (res.data.code == 3) {
+          } else if (res.data.code == 3) {   //逻辑去掉了此角色判定
             wx.showModal({
               title: '提示',
               content: '该用户非门店销售员',

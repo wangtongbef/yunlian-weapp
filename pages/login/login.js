@@ -97,6 +97,11 @@ Page({
           })
         } else {
           console.log('登录失败！' + res.errMsg)
+          wx.showToast({
+            title: '登录失败！',
+            icon: 'none',
+            duration: 1000
+          })
         }
       }
     });

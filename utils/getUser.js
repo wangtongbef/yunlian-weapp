@@ -33,7 +33,6 @@ var getUser = function(){
                           wx.setStorageSync('user', user);
                         }
                       })
-                      //console.log('授权啦')
                     } else {  //没有授权
                       getUser()
                     }

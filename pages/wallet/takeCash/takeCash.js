@@ -32,7 +32,6 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        console.log(res)
         var balance = res.data.data.amount
         wx.hideLoading()
         that.setData({
