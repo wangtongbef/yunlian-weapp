@@ -78,7 +78,7 @@
     </view>
     <view>
       <view class='detailTitle'>门店销售员</view>
-      <view class='backgroundColor'>
+      <view class='backgroundColor businessListBox'>
         <block wx:for='{{businessList}}' wx:key='{{index}}'>
           <view>
             <text>{{item.name}}</text>

@@ -61,6 +61,10 @@ page{
   justify-content: center;
   color: #0072b1;
 }
+.businessListBox{
+  height:276rpx;
+  overflow: scroll;
+}
 .giveUp{
   width: 80%;
   padding: 0 10%;
@@ -81,7 +85,4 @@ page{
   width: 54rpx;
   position: relative;
   top: 10rpx
-}
-view.marginBtm{
-  margin-bottom: 260rpx
 }

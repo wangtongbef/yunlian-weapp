@@ -226,6 +226,7 @@ Page({
             duration: 1000
           })
         } else if(res.data.code == 1) {
+          wx.hideLoading()
           wx.showToast({
             title: res.data.msg,
             icon: 'none',
