@@ -4,7 +4,7 @@
   <view class='detailInfo'>
     <view>
       <text>流水号</text>
-      <text>{{walletDetail.related_order_id}}</text>
+      <text>{{walletDetail.id}}</text>
     </view>
     <view>
       <text>收支类型</text>

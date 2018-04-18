@@ -35,6 +35,7 @@ Page({
               },
               method: 'POST',
               success: function (res) {
+                console.log(res)
                 if (res.statusCode==200){
                   that.setData({
                     isSign: false,

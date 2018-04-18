@@ -62,7 +62,7 @@ page{
   color: #0072b1;
 }
 .businessListBox{
-  height:276rpx;
+  max-height:276rpx;
   overflow: scroll;
 }
 .giveUp{

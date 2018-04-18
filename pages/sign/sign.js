@@ -41,32 +41,6 @@ Page({
     })
   },
   swichNav: function (e) {
-    if (e.target.dataset.current == 1) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      var that = this
-      //获取后台接口，展示签到记录
-      wx.request({
-        url: getApp().data.servsers + 'signing/signingList',
-        data: {
-          token: that.data.tokenRoles.token
-        },
-        method: 'POST',
-        success: function (res) {
-          wx.hideLoading()
-          var list = res.data.data
-          var reverselist = []
-          for (var i = list.length - 1; i >= 0; i--) {
-            list[i].contract_image = 'https://' + list[i].contract_image
-            reverselist.push(list[i])
-          }
-          that.setData({
-            signedList: reverselist
-          })
-        }
-      })
-    }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -75,6 +49,32 @@ Page({
         currentTab: e.target.dataset.current,
         isShow: showMode
       })
+      if (e.target.dataset.current == 1) {
+        wx.showLoading({
+          title: '加载中',
+        })
+        var that = this
+        //获取后台接口，展示签约记录
+        wx.request({
+          url: getApp().data.servsers + 'signing/signingList',
+          data: {
+            token: that.data.tokenRoles.token
+          },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
+            var list = res.data.data
+            var reverselist = []
+            for (var i = list.length - 1; i >= 0; i--) {
+              list[i].contract_image = 'https://' + list[i].contract_image
+              reverselist.push(list[i])
+            }
+            that.setData({
+              signedList: reverselist
+            })
+          }
+        })
+      }
     }
   },
   changeStore(e){
