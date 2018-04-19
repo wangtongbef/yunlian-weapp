@@ -44,7 +44,7 @@
       <block>
         <view>
           <text>{{commissioner.name}}</text>
-          <text>{{commissioner.phone_number}}</text>
+          <text data-phonenumber='{{commissioner.phone_number}}' bindtap='call'>{{commissioner.phone_number}}</text>
         </view>
       </block>
     </view>
@@ -53,7 +53,7 @@
       <block wx:for='{{businessList}}' wx:key='{{index}}'>
         <view id='{{index}}'>
           <text>{{item.name}}</text>
-          <text>{{item.phone_number}}</text>
+          <text data-phonenumber='{{item.phone_number}}' bindtap='call'>{{item.phone_number}}</text>
         </view>
       </block>
       <view wx:if='{{businessList.length == 0}}' class='noData'>暂无数据</view>
@@ -68,7 +68,7 @@
           <view id='{{index}}'>
             <text>{{chargePerson.name}}</text>
             <view>
-              <text>{{chargePerson.phone_number}}</text>
+              <text data-phonenumber='{{chargePerson.phone_number}}' bindtap='call'>{{chargePerson.phone_number}}</text>
               <image src='../../../img/icon-change.svg' class='iconRubbish' bindtap='changePerson' data-id='{{chargePerson.id}}'></image>
             </view>
           </view>
@@ -83,7 +83,7 @@
           <view>
             <text>{{item.name}}</text>
             <view>
-              <text>{{item.phone_number}}</text>
+              <text data-phonenumber='{{item.phone_number}}' bindtap='call'>{{item.phone_number}}</text>
               <image src='../../../img/icon-rubbish.svg' data-index='{{index}}' class='iconRubbish' bindtap='deleteBusiness'></image>
             </view>
           </view>

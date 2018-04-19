@@ -163,6 +163,20 @@ Page({
     }
   },
   
+  call(e){
+    var phonenumber = e.currentTarget.dataset.phonenumber
+    wx.makePhoneCall({
+      phoneNumber: phonenumber,
+      fail:function(){
+        wx.showToast({
+          title: '电话拨打失败',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    })
+  },
+
   addChargeperson(){
     wx.navigateTo({
       url: '../addPerson/addPerson?title=添加门店负责人',
