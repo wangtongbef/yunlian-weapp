@@ -78,7 +78,7 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['compressed'], 
+      sizeType: ['original', 'compressed'], 
       sourceType: ['camera'], 
       success: function (res) {
         var tempFilePaths = res.tempFilePaths
