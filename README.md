@@ -14,3 +14,6 @@ app.json为页面目录
 app.js为入口
 
 pages为页面
+
+此版本为体验版本
+appid与服务器均为测试搬，正式版需要修正appid与服务器配置
