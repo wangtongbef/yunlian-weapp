@@ -49,4 +49,4 @@ var getUser = function(){
   })
 }
 
-module.exports = getUser;
+// module.exports = getUser;

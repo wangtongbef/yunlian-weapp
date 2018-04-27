@@ -7,6 +7,9 @@
   border-bottom: 1rpx #ccc solid;
   box-sizing: border-box;
 }
+open-data{
+  color: grey;
+}
 .grey{
   color: grey;
 }

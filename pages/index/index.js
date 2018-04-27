@@ -1,6 +1,6 @@
 // pages/index/index.js
 
-var getUser = require('../../utils/getUser.js');
+// var getUser = require('../../utils/getUser.js');
 
 var API = require('../../utils/api.js')
 Page({

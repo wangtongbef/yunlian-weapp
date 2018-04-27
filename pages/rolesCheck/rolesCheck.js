@@ -1,4 +1,4 @@
-var getUser = require('../../utils/getUser.js');
+// var getUser = require('../../utils/getUser.js');
 Page({
   data: {
     roles:[],
