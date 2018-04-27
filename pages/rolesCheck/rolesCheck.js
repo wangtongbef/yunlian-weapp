@@ -5,7 +5,7 @@ Page({
     token:''
   },
   onLoad: function () {
-    getUser();
+    // getUser();
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     if (tokenRoles) {

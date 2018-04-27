@@ -14,7 +14,11 @@
 }
 .userImg{
   display: inline-block;
-  margin-right: 24rpx
+  margin-right: 24rpx;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden
 }
 .userImg image{
   width: 140rpx;
@@ -24,6 +28,10 @@
 .userText{
   display: inline-block;
   align-items: center
+}
+.userText open-data{
+  display: block;
+  font-size: 34rpx
 }
 .userText text{
   display: block;

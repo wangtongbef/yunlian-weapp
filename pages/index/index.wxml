@@ -3,10 +3,12 @@
   <view class='userInfo'>
     <view>
       <view class='userImg'>
-        <image src='{{userInfo.img}}'></image>
+        <!-- <image src='{{userInfo.img}}'></image> -->
+        <open-data type="userAvatarUrl"></open-data>
       </view>
       <view class='userText'>
-        <text>{{userInfo.name}}</text>
+        <open-data type="userNickName"></open-data>
+        <!-- <text>{{userInfo.name}}</text> -->
         <text class='margin20'>{{phone_number}}</text>
         <text>{{role.role_name}}</text>
       </view>

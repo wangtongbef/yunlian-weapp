@@ -26,7 +26,7 @@ Page({
       role: wx.getStorageSync('role'),
       userInfo: wx.getStorageSync('user')
     })
-    getUser();
+    // getUser();
     
     if (that.data.role.role_name == '门店销售员') {
       that.setData({
