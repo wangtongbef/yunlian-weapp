@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "2.0.2",
 	"appid": "wx19030112e96cd7f4",
 	"projectname": "yunlian-weapp",
 	"isGameTourist": false,

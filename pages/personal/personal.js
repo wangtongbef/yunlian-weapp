@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:{},
+    //user:{},
     phonenumber:'',
     roleName:''
   },
@@ -17,7 +17,7 @@ Page({
     var role = wx.getStorageSync('role')
     var that = this
     that.setData({
-      user: wx.getStorageSync('user'),
+      // user: wx.getStorageSync('user'),
       roleName: role.role_name
     })
     wx.request({

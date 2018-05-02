@@ -1,11 +1,11 @@
-var getUser = require('../../utils/getUser.js');
+// var getUser = require('../../utils/getUser.js');
 Page({
   data: {
     roles:[],
     token:''
   },
   onLoad: function () {
-    getUser();
+    // getUser();
     var that = this
     var tokenRoles = wx.getStorageSync('tokenRoles')
     if (tokenRoles) {

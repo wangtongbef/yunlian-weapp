@@ -4,7 +4,8 @@
     <view class='borderBt '>
       <view class='width90 flex'>
         <text>姓名</text>
-        <text class='grey'>{{user.name}}</text>
+        <open-data type="userNickName"></open-data>
+        <!-- <text class='grey'>{{user.name}}</text> -->
       </view>
     </view>
     <navigator url='../unbindphone/unbindphone'>
