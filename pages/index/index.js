@@ -82,7 +82,7 @@ Page({
         wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
-            title: res.msg,
+            title: 'token过期',
             icon: 'none',
             duration: 1000
           })
