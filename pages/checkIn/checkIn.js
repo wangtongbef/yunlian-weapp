@@ -52,16 +52,29 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        var list = res.data.data.list
-        var addimglist = []
-        for (var i = 0; i < list.length; i++) {
-          list[i].image = 'https://' + list[i].image
-          addimglist.push(list[i])
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        }else{
+          var list = res.data.data.list
+          var addimglist = []
+          for (var i = 0; i < list.length; i++) {
+            list[i].image = 'https://' + list[i].image
+            addimglist.push(list[i])
+          }
+          that.setData({
+            checkList: addimglist,
+            checklistMore: res.data.data.more
+          })
         }
-        that.setData({
-          checkList: addimglist,
-          checklistMore: res.data.data.more
-        })
       }
     })
   },
@@ -158,34 +171,47 @@ Page({
         },
         success: function (res) {
           wx.hideLoading()
-          var data = JSON.parse(res.data)
-          if (data.code == 0){
+          if (res.code == -3) {
             wx.showToast({
-              title: '签到成功',
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
-            setTimeout(function(){
-              wx.showLoading({
-                title: '加载中',
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
               })
-              that.getchecklist(that.data.checklistPage)
-              that.setData({
-                imgList: "../../img/photograph.svg",
-                isToSignin: false,
-                address: '所在位置',
-                currentTab: 1,
-                isShowListNum: 5,
-                checklistPage: 0,
-                isShow: false
+            }, 1000)
+          }else{
+            var data = JSON.parse(res.data)
+            if (data.code == 0){
+              wx.showToast({
+                title: '签到成功',
+                icon: 'none',
+                duration: 1000
               })
-            },1000)
-          } else if (data.code == 1){
-            wx.showToast({
-              title: '签到失败',
-              icon: 'none',
-              duration: 1000
-            })
+              setTimeout(function(){
+                wx.showLoading({
+                  title: '加载中',
+                })
+                that.getchecklist(that.data.checklistPage)
+                that.setData({
+                  imgList: "../../img/photograph.svg",
+                  isToSignin: false,
+                  address: '所在位置',
+                  currentTab: 1,
+                  isShowListNum: 5,
+                  checklistPage: 0,
+                  isShow: false
+                })
+              },1000)
+            } else if (data.code == 1){
+              wx.showToast({
+                title: '签到失败',
+                icon: 'none',
+                duration: 1000
+              })
+            }
           }
           //do something
         }
@@ -229,20 +255,34 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            var list = res.data.data.list
-            var addimglist = []
-            for (var i = 0; i < list.length; i++) {
-              list[i].image = 'https://' + list[i].image
-              addimglist.push(list[i])
+            if (res.code == -3) {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }, 1000)
+              wx.hideLoading()
+            }else{
+              var list = res.data.data.list
+              var addimglist = []
+              for (var i = 0; i < list.length; i++) {
+                list[i].image = 'https://' + list[i].image
+                addimglist.push(list[i])
+              }
+              addimglist = that.data.checkList.concat(addimglist)
+              that.setData({
+                checkList: addimglist,
+                checklistMore: res.data.data.more,
+                checklistPage: checklistPage,
+                isShowListNum: isShowListNum
+              })
+              wx.hideLoading()
             }
-            addimglist = that.data.checkList.concat(addimglist)
-            that.setData({
-              checkList: addimglist,
-              checklistMore: res.data.data.more,
-              checklistPage: checklistPage,
-              isShowListNum: isShowListNum
-            })
-            wx.hideLoading()
           }
         })
       }

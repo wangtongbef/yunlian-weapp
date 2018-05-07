@@ -31,12 +31,25 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        that.setData({
-          storeList: res.data.data
-        })
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 500)
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            storeList: res.data.data
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 500)
+        }
       }
     })
   },
@@ -63,15 +76,28 @@ Page({
           method: 'POST',
           success: function (res) {
             wx.hideLoading()
-            var list = res.data.data
-            var reverselist = []
-            for (var i = list.length - 1; i >= 0; i--) {
-              list[i].contract_image = 'https://' + list[i].contract_image
-              reverselist.push(list[i])
+            if (res.code == -3) {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }, 1000)
+            } else {
+              var list = res.data.data
+              var reverselist = []
+              for (var i = list.length - 1; i >= 0; i--) {
+                list[i].contract_image = 'https://' + list[i].contract_image
+                reverselist.push(list[i])
+              }
+              that.setData({
+                signedList: reverselist
+              })
             }
-            that.setData({
-              signedList: reverselist
-            })
           }
         })
       }

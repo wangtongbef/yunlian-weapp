@@ -80,9 +80,22 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        that.setData({
-          phone_number: res.data.data.phone_number
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        }else{
+          that.setData({
+            phone_number: res.data.data.phone_number
+          })
+        }
       }
     })
     //getUser();
