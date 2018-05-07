@@ -102,23 +102,36 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        if(res.data.code ==0){
+        if (res.code == -3) {
           wx.showToast({
-            title: '添加成功',
+            title: res.msg,
             icon: 'none',
             duration: 1000
           })
-          setTimeout(function(){
-            wx.navigateBack({
-              delta: 1
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
             })
           }, 1000)
-        }else{
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1000
-          })
+        } else {
+          if(res.data.code ==0){
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function(){
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+          }
         }
       }
     })

@@ -30,21 +30,34 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        if(res.data.code==0){
-          that.setData({
-            walletDetail: res.data.data
-          })
-        }else{
+        if (res.code == -3) {
           wx.showToast({
-            title: res.data.msg,
+            title: res.msg,
             icon: 'none',
             duration: 1000
           })
-          setTimeout(function (){
-            wx.navigateBack({
-              delta: 1
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
             })
-          },1000)
+          }, 1000)
+        } else {
+          if(res.data.code==0){
+            that.setData({
+              walletDetail: res.data.data
+            })
+          }else{
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function (){
+              wx.navigateBack({
+                delta: 1
+              })
+            },1000)
+          }
         }
       }
     })

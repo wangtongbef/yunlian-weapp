@@ -31,9 +31,22 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        that.setData({
-          balance: res.data.data.amount
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            balance: res.data.data.amount
+          })
+        }
       }
     })
     wx.request({
@@ -45,14 +58,27 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        var nearby = res.data.data.list
-        that.setData({
-          nearby: nearby
-        })
-        if (nearby.length!==0){
-          that.setData({
-            listshow: true
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
           })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          var nearby = res.data.data.list
+          that.setData({
+            nearby: nearby
+          })
+          if (nearby.length!==0){
+            that.setData({
+              listshow: true
+            })
+          }
         }
       }
     })
@@ -103,9 +129,22 @@ Page({
           token: that.data.token
         },
         success: function (res) {
-          that.setData({
-            balance: res.data.data.amount
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              balance: res.data.data.amount
+            })
+          }
         }
       })
       wx.request({
@@ -117,14 +156,27 @@ Page({
         },
         success: function (res) {
           wx.hideLoading()
-          var nearby = res.data.data.list
-          that.setData({
-            nearby: nearby
-          })
-          if (nearby.length !== 0) {
-            that.setData({
-              listshow: true
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
             })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            var nearby = res.data.data.list
+            that.setData({
+              nearby: nearby
+            })
+            if (nearby.length !== 0) {
+              that.setData({
+                listshow: true
+              })
+            }
           }
         }
       })

@@ -32,11 +32,24 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        var wallList = res.data.data.list
-        that.setData({
-          wallList: wallList,
-          wallListMore: res.data.data.more
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          var wallList = res.data.data.list
+          that.setData({
+            wallList: wallList,
+            wallListMore: res.data.data.more
+          })
+        }
       }
     })
   },
@@ -62,13 +75,26 @@ Page({
         },
         success: function (res) {
           wx.hideLoading()
-          var addWallList = res.data.data.list
-          var wallList = that.data.wallList.concat(addWallList) 
-          that.setData({
-            wallListPage: wallListPage,
-            wallList: wallList,
-            wallListMore: res.data.data.more
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            var addWallList = res.data.data.list
+            var wallList = that.data.wallList.concat(addWallList) 
+            that.setData({
+              wallListPage: wallListPage,
+              wallList: wallList,
+              wallListMore: res.data.data.more
+            })
+          }
         }
       })
 

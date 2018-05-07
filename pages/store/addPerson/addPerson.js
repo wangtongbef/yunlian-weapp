@@ -92,18 +92,31 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        if (res.data.data.existed==0){
-          that.setData({
-            changeNamehidden:false,
-            existed:0
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
           })
-        } else if (res.data.data.existed == 1){
-          that.setData({
-            name: res.data.data.name,
-            previewHidden: true,
-            changeNamehidden: true,
-            existed: 1
-          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          if (res.data.data.existed==0){
+            that.setData({
+              changeNamehidden:false,
+              existed:0
+            })
+          } else if (res.data.data.existed == 1){
+            that.setData({
+              name: res.data.data.name,
+              previewHidden: true,
+              changeNamehidden: true,
+              existed: 1
+            })
+          }
         }
       }
     })
@@ -141,59 +154,85 @@ Page({
         data: chargePersonData,
         method: 'POST',
         success: function (res) {
-          if (res.data.code == 0){
-            wx.request({
-              url: getApp().data.servsers + 'shop/addShopChargePerson',
-              data: {
-                token: that.data.token,
-                id: that.data.storeId,
-                name: that.data.name,
-                phone_number: that.data.phoneNumber
-              },
-              method: 'POST',
-              success: function (res) {
-                wx.hideLoading()
-                if (res.data.code == 0) {
-                  wx.showToast({
-                    title: '更换成功',
-                    icon: 'none',
-                    duration: 1000
-                  })
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: 1
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            if (res.data.code == 0){
+              wx.request({
+                url: getApp().data.servsers + 'shop/addShopChargePerson',
+                data: {
+                  token: that.data.token,
+                  id: that.data.storeId,
+                  name: that.data.name,
+                  phone_number: that.data.phoneNumber
+                },
+                method: 'POST',
+                success: function (res) {
+                  wx.hideLoading()
+                  if (res.code == -3) {
+                    wx.showToast({
+                      title: res.msg,
+                      icon: 'none',
+                      duration: 1000
                     })
-                  }, 1000)
-                } else if (res.data.code == 1) {
-                  wx.showModal({
-                    title: '提示',
-                    content: '更换门店负责人失败',
-                    showCancel: false,
-                    confirmText: '知道了',
-                    success: function () {
+                    setTimeout(function () {
+                      wx.redirectTo({
+                        url: '../login/login'
+                      })
+                    }, 1000)
+                  } else {
+                    if (res.data.code == 0) {
+                      wx.showToast({
+                        title: '更换成功',
+                        icon: 'none',
+                        duration: 1000
+                      })
+                      setTimeout(function () {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      }, 1000)
+                    } else if (res.data.code == 1) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '更换门店负责人失败',
+                        showCancel: false,
+                        confirmText: '知道了',
+                        success: function () {
+                        }
+                      })
+                    } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
+                      wx.showModal({
+                        title: '提示',
+                        content: '该用户非门店负责人',
+                        showCancel: false,
+                        confirmText: '知道了',
+                        success: function () {
+                        }
+                      })
                     }
-                  })
-                } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
-                  wx.showModal({
-                    title: '提示',
-                    content: '该用户非门店负责人',
-                    showCancel: false,
-                    confirmText: '知道了',
-                    success: function () {
-                    }
-                  })
+                  }
                 }
-              }
-            })
-          } else if (res.data.code == 1) {
-            wx.showModal({
-              title: '提示',
-              content: '门店负责人删除失败',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
-              }
-            })
+              })
+            } else if (res.data.code == 1) {
+              wx.showModal({
+                title: '提示',
+                content: '门店负责人删除失败',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                }
+              })
+            }
           }
         }
       })
@@ -209,35 +248,48 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.data.code == 0) {
+          if (res.code == -3) {
             wx.showToast({
-              title: '添加成功',
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
+              wx.redirectTo({
+                url: '../login/login'
               })
             }, 1000)
-          } else if (res.data.code == 1) {
-            wx.showModal({
-              title: '提示',
-              content: '添加门店负责人失败',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
-              }
-            })
-          } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
-            wx.showModal({
-              title: '提示',
-              content: '该用户非门店负责人',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
-              }
-            })
+          } else {
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '添加成功',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            } else if (res.data.code == 1) {
+              wx.showModal({
+                title: '提示',
+                content: '添加门店负责人失败',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                }
+              })
+            } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
+              wx.showModal({
+                title: '提示',
+                content: '该用户非门店负责人',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                }
+              })
+            }
           }
         }
       })
@@ -253,50 +305,63 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.data.code == 0) {
+          if (res.code == -3) {
             wx.showToast({
-              title: '添加成功',
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
+              wx.redirectTo({
+                url: '../login/login'
               })
             }, 1000)
-          } else if (res.data.code == 1) {
-            wx.showModal({
-              title: '提示',
-              content: '添加门店销售员失败',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
-              }
-            })
-          } else if (res.data.code == 2) {
-            wx.showModal({
-              title: '提示',
-              content: '该用户已是门店销售员',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
+          } else {
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '添加成功',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
                 wx.navigateBack({
                   delta: 1
                 })
-              }
-            })
-          } else if (res.data.code == 3) {   //逻辑去掉了此角色判定
-            wx.showModal({
-              title: '提示',
-              content: '该用户非门店销售员',
-              showCancel: false,
-              confirmText: '知道了',
-              success: function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            })
+              }, 1000)
+            } else if (res.data.code == 1) {
+              wx.showModal({
+                title: '提示',
+                content: '添加门店销售员失败',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                }
+              })
+            } else if (res.data.code == 2) {
+              wx.showModal({
+                title: '提示',
+                content: '该用户已是门店销售员',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              })
+            } else if (res.data.code == 3) {   //逻辑去掉了此角色判定
+              wx.showModal({
+                title: '提示',
+                content: '该用户非门店销售员',
+                showCancel: false,
+                confirmText: '知道了',
+                success: function () {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              })
+            }
           }
         }
       })
