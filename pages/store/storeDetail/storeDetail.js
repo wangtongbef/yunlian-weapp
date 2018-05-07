@@ -51,13 +51,13 @@ Page({
           wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
-              title: res.msg,
+              title: 'token过期',
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
               wx.redirectTo({
-                url: '../login/login'
+                url: '../../login/login'
               })
             }, 1000)
           } else {
@@ -97,13 +97,13 @@ Page({
           wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
-              title: res.msg,
+              title: 'token过期',
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
               wx.redirectTo({
-                url: '../login/login'
+                url: '../../login/login'
               })
             }, 1000)
           } else {
@@ -161,13 +161,13 @@ Page({
               wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
-                  title: res.msg,
+                  title: 'token过期',
                   icon: 'none',
                   duration: 1000
                 })
                 setTimeout(function () {
                   wx.redirectTo({
-                    url: '../login/login'
+                    url: '../../login/login'
                   })
                 }, 1000)
               } else {
@@ -260,13 +260,13 @@ Page({
       success: function (res) {
         if (res.data.code == -3) {
           wx.showToast({
-            title: res.msg,
+            title: 'token过期',
             icon: 'none',
             duration: 1000
           })
           setTimeout(function () {
             wx.redirectTo({
-              url: '../login/login'
+              url: '../../login/login'
             })
           }, 1000)
         } else {
@@ -282,13 +282,13 @@ Page({
                 wx.hideLoading()
                 if (res.data.code == -3) {
                   wx.showToast({
-                    title: res.msg,
+                    title: 'token过期',
                     icon: 'none',
                     duration: 1000
                   })
                   setTimeout(function () {
                     wx.redirectTo({
-                      url: '../login/login'
+                      url: '../../login/login'
                     })
                   }, 1000)
                 } else {
@@ -340,13 +340,13 @@ Page({
                 wx.hideLoading()
                 if (res.data.code == -3) {
                   wx.showToast({
-                    title: res.msg,
+                    title: 'token过期',
                     icon: 'none',
                     duration: 1000
                   })
                   setTimeout(function () {
                     wx.redirectTo({
-                      url: '../login/login'
+                      url: '../../login/login'
                     })
                   }, 1000)
                 } else {
@@ -397,13 +397,13 @@ Page({
                 wx.hideLoading()
                 if (res.data.code == -3) {
                   wx.showToast({
-                    title: res.msg,
+                    title: 'token过期',
                     icon: 'none',
                     duration: 1000
                   })
                   setTimeout(function () {
                     wx.redirectTo({
-                      url: '../login/login'
+                      url: '../../login/login'
                     })
                   }, 1000)
                 } else {
@@ -458,13 +458,13 @@ Page({
               wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
-                  title: res.msg,
+                  title: 'token过期',
                   icon: 'none',
                   duration: 1000
                 })
                 setTimeout(function () {
                   wx.redirectTo({
-                    url: '../login/login'
+                    url: '../../login/login'
                   })
                 }, 1000)
               } else {
