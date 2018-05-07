@@ -42,7 +42,7 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.code == -3) {
+          if (res.data.code == -3) {
             wx.showToast({
               title: res.msg,
               icon: 'none',
@@ -71,7 +71,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          if (res.code == -3) {
+          if (res.data.code == -3) {
             wx.showToast({
               title: res.msg,
               icon: 'none',
@@ -106,7 +106,7 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.code == -3) {
+          if (res.data.code == -3) {
             wx.showToast({
               title: res.msg,
               icon: 'none',
@@ -191,7 +191,7 @@ Page({
           method: 'POST',
           success: function (res) {
             wx.hideLoading()
-            if (res.code == -3) {
+            if (res.data.code == -3) {
               wx.showToast({
                 title: res.msg,
                 icon: 'none',
@@ -220,7 +220,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            if (res.code == -3) {
+            if (res.data.code == -3) {
               wx.showToast({
                 title: res.msg,
                 icon: 'none',
