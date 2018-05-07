@@ -32,11 +32,24 @@ Page({
         token: that.data.token
       },
       success: function (res) {
-        var balance = res.data.data.amount
         wx.hideLoading()
-        that.setData({
-          balance: parseFloat(balance)
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          var balance = res.data.data.amount
+          that.setData({
+            balance: parseFloat(balance)
+          })
+        }
       }
     })
   },
@@ -89,22 +102,35 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        if (res.data.code == 0){
+        if (res.code == -3) {
           wx.showToast({
-            title: '提现成功',
+            title: res.msg,
             icon: 'none',
             duration: 1000
           })
           setTimeout(function () {
-            wx.navigateBack({
-              delta: 1
-            })},1000)
-        } else if (res.data.code != 0){
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1000
-          })
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          if (res.data.code == 0){
+            wx.showToast({
+              title: '提现成功',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })},1000)
+          } else if (res.data.code != 0){
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+          }
         }
       }
     })

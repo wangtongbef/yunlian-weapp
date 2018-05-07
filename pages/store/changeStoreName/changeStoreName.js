@@ -56,24 +56,37 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.data.code == 0){
-            wx.setStorage({
-              key:'storeName',
-              data: storeName,
-              success: function (res) {
-              },
-              fail:function(res){
-              }
-            })
-            wx.navigateBack({
-              delta: 1
-            })
-          } else if (res.data.code == 1){
+          if (res.code == -3) {
             wx.showToast({
-              title: '门店名称修改失败',
+              title: res.msg,
               icon: 'none',
-              duration: 2000
+              duration: 1000
             })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            if (res.data.code == 0){
+              wx.setStorage({
+                key:'storeName',
+                data: storeName,
+                success: function (res) {
+                },
+                fail:function(res){
+                }
+              })
+              wx.navigateBack({
+                delta: 1
+              })
+            } else if (res.data.code == 1){
+              wx.showToast({
+                title: '门店名称修改失败',
+                icon: 'none',
+                duration: 2000
+              })
+            }
           }
         }
       })

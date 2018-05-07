@@ -49,23 +49,36 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.data.code == 0) {
-            that.setData({
-              storeDetailres: res.data.data,
-              chargePerson: res.data.data.charge_person,
-              businessList: res.data.data.sales
-            })
-          } else {
+          if (res.code == -3) {
             wx.showToast({
-              title: res.data.msg,
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
+              wx.redirectTo({
+                url: '../login/login'
               })
             }, 1000)
+          } else {
+            if (res.data.code == 0) {
+              that.setData({
+                storeDetailres: res.data.data,
+                chargePerson: res.data.data.charge_person,
+                businessList: res.data.data.sales
+              })
+            } else {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            }
           }
         }
       })
@@ -82,23 +95,36 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          if (res.data.code==0){
-            that.setData({
-              storeDetailres: res.data.data,
-              commissioner: res.data.data.commissioner,
-              businessList: res.data.data.sales
-            })
-          }else{
+          if (res.code == -3) {
             wx.showToast({
-              title: res.data.msg,
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
             setTimeout(function () {
-              wx.navigateBack({
-                delta: 1
+              wx.redirectTo({
+                url: '../login/login'
               })
             }, 1000)
+          } else {
+            if (res.data.code==0){
+              that.setData({
+                storeDetailres: res.data.data,
+                commissioner: res.data.data.commissioner,
+                businessList: res.data.data.sales
+              })
+            }else{
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            }
           }
         }
       })
@@ -133,21 +159,34 @@ Page({
             method: 'POST',
             success: function (res) {
               wx.hideLoading()
-              if(res.data.code == 0){
-                that.setData({
-                  changeAddress: true
-                })
+              if (res.code == -3) {
                 wx.showToast({
-                  title: res.data.msg,
+                  title: res.msg,
                   icon: 'none',
                   duration: 1000
                 })
-              }else{
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'none',
-                  duration: 1000
-                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../login/login'
+                  })
+                }, 1000)
+              } else {
+                if(res.data.code == 0){
+                  that.setData({
+                    changeAddress: true
+                  })
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 1000
+                  })
+                }else{
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none',
+                    duration: 1000
+                  })
+                }
               }
             }
           })
@@ -219,33 +258,59 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.code == 0) {
-          wx.request({
-            url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
-            data: {
-              token: that.data.token,
-              id: that.data.storeDetailres.shop.id
-            },
-            method: 'POST',
-            success: function (res) {
-              wx.hideLoading()
-              that.setData({
-                businessList: res.data.data.sales
-              })
-            }
-          })
+        if (res.code == -3) {
           wx.showToast({
-            title: '删除成功',
+            title: res.msg,
             icon: 'none',
             duration: 1000
           })
-        } else if(res.data.code == 1) {
-          wx.hideLoading()
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1000
-          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          if (res.data.code == 0) {
+            wx.request({
+              url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+              data: {
+                token: that.data.token,
+                id: that.data.storeDetailres.shop.id
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.hideLoading()
+                if (res.code == -3) {
+                  wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function () {
+                    wx.redirectTo({
+                      url: '../login/login'
+                    })
+                  }, 1000)
+                } else {
+                  that.setData({
+                    businessList: res.data.data.sales
+                  })
+                }
+              }
+            })
+            wx.showToast({
+              title: '删除成功',
+              icon: 'none',
+              duration: 1000
+            })
+          } else if(res.data.code == 1) {
+            wx.hideLoading()
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+          }
         }
       }
     })
@@ -273,23 +338,36 @@ Page({
               method: 'POST',
               success: function (res) {
                 wx.hideLoading()
-                if (res.data.code == 0) {
+                if (res.code == -3) {
                   wx.showToast({
-                    title: '放弃签约成功',
+                    title: res.msg,
                     icon: 'none',
                     duration: 1000
                   })
                   setTimeout(function () {
-                    wx.navigateBack({
-                      delta: 1
+                    wx.redirectTo({
+                      url: '../login/login'
                     })
                   }, 1000)
                 } else {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 1000
-                  })
+                  if (res.data.code == 0) {
+                    wx.showToast({
+                      title: '放弃签约成功',
+                      icon: 'none',
+                      duration: 1000
+                    })
+                    setTimeout(function () {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    }, 1000)
+                  } else {
+                    wx.showToast({
+                      title: res.data.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                  }
                 }
               }
             })
@@ -317,23 +395,36 @@ Page({
               method: 'POST',
               success: function (res) {
                 wx.hideLoading()
-                if (res.data.code == 0) {
+                if (res.code == -3) {
                   wx.showToast({
-                    title: '解约成功',
+                    title: res.msg,
                     icon: 'none',
                     duration: 1000
                   })
                   setTimeout(function () {
-                    wx.navigateBack({
-                      delta: 1
+                    wx.redirectTo({
+                      url: '../login/login'
                     })
                   }, 1000)
                 } else {
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 1000
-                  })
+                  if (res.data.code == 0) {
+                    wx.showToast({
+                      title: '解约成功',
+                      icon: 'none',
+                      duration: 1000
+                    })
+                    setTimeout(function () {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    }, 1000)
+                  } else {
+                    wx.showToast({
+                      title: res.data.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                  }
                 }
               }
             })
@@ -365,12 +456,25 @@ Page({
             method: 'POST',
             success: function (res) {
               wx.hideLoading()
-              that.setData({
-                storeDetailres: res.data.data,
-                chargePerson: res.data.data.charge_person,
-                businessList: res.data.data.sales,
-                storeName: wx.getStorageSync('storeName')
-              })
+              if (res.code == -3) {
+                wx.showToast({
+                  title: res.msg,
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../login/login'
+                  })
+                }, 1000)
+              } else {
+                that.setData({
+                  storeDetailres: res.data.data,
+                  chargePerson: res.data.data.charge_person,
+                  businessList: res.data.data.sales,
+                  storeName: wx.getStorageSync('storeName')
+                })
+              }
             }
           })
         }, 100)

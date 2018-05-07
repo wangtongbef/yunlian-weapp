@@ -42,12 +42,25 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          that.setData({
-            waiting: res.data.data
-          })
-          var storeArr = that.data.waiting
-          for (var i = 0; i<storeArr.length;i++){
-            storeArr[i].status = '待签约'
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              waiting: res.data.data
+            })
+            var storeArr = that.data.waiting
+            for (var i = 0; i<storeArr.length;i++){
+              storeArr[i].status = '待签约'
+            }
           }
         }
       })
@@ -58,12 +71,25 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          that.setData({
-            waited: res.data.data
-          })
-          var storeArr = that.data.waited
-          for (var i = 0; i < storeArr.length; i++) {
-            storeArr[i].status = '已签约'
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              waited: res.data.data
+            })
+            var storeArr = that.data.waited
+            for (var i = 0; i < storeArr.length; i++) {
+              storeArr[i].status = '已签约'
+            }
           }
         }
       })
@@ -80,9 +106,22 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          that.setData({
-            chargePstore: res.data.data
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              chargePstore: res.data.data
+            })
+          }
         }
       })
     }
@@ -152,12 +191,25 @@ Page({
           method: 'POST',
           success: function (res) {
             wx.hideLoading()
-            that.setData({
-              waiting: res.data.data
-            })
-            var storeArr = that.data.waiting
-            for (var i = 0; i < storeArr.length; i++) {
-              storeArr[i].status = '待签约'
+            if (res.code == -3) {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }, 1000)
+            } else {
+              that.setData({
+                waiting: res.data.data
+              })
+              var storeArr = that.data.waiting
+              for (var i = 0; i < storeArr.length; i++) {
+                storeArr[i].status = '待签约'
+              }
             }
           }
         })
@@ -168,12 +220,25 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            that.setData({
-              waited: res.data.data
-            })
-            var storeArr = that.data.waited
-            for (var i = 0; i < storeArr.length; i++) {
-              storeArr[i].status = '已签约'
+            if (res.code == -3) {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }, 1000)
+            } else {
+              that.setData({
+                waited: res.data.data
+              })
+              var storeArr = that.data.waited
+              for (var i = 0; i < storeArr.length; i++) {
+                storeArr[i].status = '已签约'
+              }
             }
           }
         })
