@@ -197,59 +197,99 @@ Page({
         },
         success: function (res) {
           wx.hideLoading()
+          var res = JSON.parse(res)
           var data = JSON.parse(res.data)
-          if (data.code == 0) {
-            wx.showLoading({
-              title: '加载中',
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
             })
-            wx.request({
-              url: getApp().data.servsers + 'signing/unsignedList',
-              data: {
-                token: that.data.tokenRoles.token
-              },
-              method: 'POST',
-              success: function (res) {
-                that.setData({
-                  storeList: res.data.data
-                })
-              }
-            })
-            wx.request({
-              url: getApp().data.servsers + 'signing/signingList',
-              data: {
-                token: that.data.tokenRoles.token
-              },
-              method: 'POST',
-              success: function (res) {
-                wx.hideLoading()
-                var list = res.data.data
-                var reverselist = []
-                for (var i = list.length - 1; i >= 0; i--) {
-                  list[i].contract_image = 'https://' + list[i].contract_image
-                  reverselist.push(list[i])
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            if (data.code == 0) {
+              wx.showLoading({
+                title: '加载中',
+              })
+              wx.request({
+                url: getApp().data.servsers + 'signing/unsignedList',
+                data: {
+                  token: that.data.tokenRoles.token
+                },
+                method: 'POST',
+                success: function (res) {
+                  if (res.code == -3) {
+                    wx.showToast({
+                      title: res.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                    setTimeout(function () {
+                      wx.redirectTo({
+                        url: '../login/login'
+                      })
+                    }, 1000)
+                  } else {
+                    that.setData({
+                      storeList: res.data.data
+                    })
+                  }
                 }
-                that.setData({
-                  signedList: reverselist
-                })
-              }
-            })
-            that.setData({
-              currentTab: 1,
-              isShow: false,
-              flag:true
-            })
-          } else if (data.code == 1){
-            wx.showToast({
-              title: '图片不合规',
-              icon: 'none',
-              duration: 1000
-            })
-          } else if (data.code == 2) {
-            wx.showToast({
-              title: '签约失败',
-              icon: 'none',
-              duration: 1000
-            })
+              })
+              wx.request({
+                url: getApp().data.servsers + 'signing/signingList',
+                data: {
+                  token: that.data.tokenRoles.token
+                },
+                method: 'POST',
+                success: function (res) {
+                  wx.hideLoading()
+                  if (res.code == -3) {
+                    wx.showToast({
+                      title: res.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                    setTimeout(function () {
+                      wx.redirectTo({
+                        url: '../login/login'
+                      })
+                    }, 1000)
+                  } else {
+                    var list = res.data.data
+                    var reverselist = []
+                    for (var i = list.length - 1; i >= 0; i--) {
+                      list[i].contract_image = 'https://' + list[i].contract_image
+                      reverselist.push(list[i])
+                    }
+                    that.setData({
+                      signedList: reverselist
+                    })
+                  }
+                }
+              })
+              that.setData({
+                currentTab: 1,
+                isShow: false,
+                flag:true
+              })
+            } else if (data.code == 1){
+              wx.showToast({
+                title: '图片不合规',
+                icon: 'none',
+                duration: 1000
+              })
+            } else if (data.code == 2) {
+              wx.showToast({
+                title: '签约失败',
+                icon: 'none',
+                duration: 1000
+              })
+            }
           }
         }
       })
@@ -278,9 +318,22 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          that.setData({
-            storeList: res.data.data
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              storeList: res.data.data
+            })
+          }
           wx.hideLoading()
         }
       })
