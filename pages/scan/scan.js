@@ -35,24 +35,37 @@ Page({
               },
               method: 'POST',
               success: function (res) {
-                if (res.statusCode==200){
-                  that.setData({
-                    isSign: false,
-                    scanStatus: res.data.code,
-                    scanmsg: res.data.msg,
-                    prodectData: res.data.data
-                  })
-                } else {
+                if (res.code == -3) {
                   wx.showToast({
-                    title: '扫码失败',
+                    title: res.msg,
                     icon: 'none',
                     duration: 1000
                   })
-                  setTimeout(function() {
-                    wx.navigateBack({
-                      delta: 1
+                  setTimeout(function () {
+                    wx.redirectTo({
+                      url: '../login/login'
                     })
-                  },1000)
+                  }, 1000)
+                } else {
+                  if (res.statusCode==200){
+                    that.setData({
+                      isSign: false,
+                      scanStatus: res.data.code,
+                      scanmsg: res.data.msg,
+                      prodectData: res.data.data
+                    })
+                  } else {
+                    wx.showToast({
+                      title: '扫码失败',
+                      icon: 'none',
+                      duration: 1000
+                    })
+                    setTimeout(function() {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    },1000)
+                  }
                 }
               }
             })

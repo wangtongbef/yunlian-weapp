@@ -29,9 +29,22 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        that.setData({
-          signList: res.data.data
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            signList: res.data.data
+          })
+        }
       }
     })
   }

@@ -51,11 +51,24 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          var salesArray = res.data.data
-          salesArray.unshift({ user_id: 0, user_name: "全部销售员" })
-          that.setData({
-            salesArray:salesArray
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          }else{
+            var salesArray = res.data.data
+            salesArray.unshift({ user_id: 0, user_name: "全部销售员" })
+            that.setData({
+              salesArray: salesArray
+            })
+          }
         }
       })
     }
@@ -100,11 +113,24 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          var storeArray = res.data.data
-          storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
-          that.setData({
-            storeArray: storeArray
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            var storeArray = res.data.data
+            storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
+            that.setData({
+              storeArray: storeArray
+            })
+          }
         }
       })
       wx.request({
@@ -116,17 +142,30 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
-          if (res.data.code==0){
-            that.setData({
-              productAlltimedata: res.data.data,
-              productInfo: res.data.data.today
-            })
-          } else if (res.data.code == 1){
+          if (res.code == -3) {
             wx.showToast({
-              title: '商铺ID错误',
+              title: res.msg,
               icon: 'none',
               duration: 1000
             })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            if (res.data.code==0){
+              that.setData({
+                productAlltimedata: res.data.data,
+                productInfo: res.data.data.today
+              })
+            } else if (res.data.code == 1){
+              wx.showToast({
+                title: '商铺ID错误',
+                icon: 'none',
+                duration: 1000
+              })
+            }
           }
         }
       })
@@ -139,11 +178,24 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          var storeArray = res.data.data
-          storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
-          that.setData({
-            storeArray: storeArray
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            var storeArray = res.data.data
+            storeArray.unshift({ shop_id: 0, shop_name: "全部门店" })
+            that.setData({
+              storeArray: storeArray
+            })
+          }
         }
       })
       wx.request({
@@ -155,10 +207,23 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          that.setData({
-            productAlltimedata: res.data.data,
-            productInfo: res.data.data.today
-          })
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              productAlltimedata: res.data.data,
+              productInfo: res.data.data.today
+            })
+          }
         }
       })
     }
@@ -198,10 +263,23 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          that.setData({
-            productAlltimedata: res.data.data
-          })
-          setProductInfo(that.data.timeIndex)
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              productAlltimedata: res.data.data
+            })
+            setProductInfo(that.data.timeIndex)
+          }
         }
       })
     } else if (that.data.role.role_name === '门店负责人') {
@@ -215,11 +293,24 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          that.setData({
-            productAlltimedata: res.data.data,
-            productInfo: res.data.data.today
-          })
-          setProductInfo(that.data.timeIndex)
+          if (res.code == -3) {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              productAlltimedata: res.data.data,
+              productInfo: res.data.data.today
+            })
+            setProductInfo(that.data.timeIndex)
+          }
         }
       })
     }
