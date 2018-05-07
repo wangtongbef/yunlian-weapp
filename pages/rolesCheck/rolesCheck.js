@@ -30,17 +30,30 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        wx.setStorageSync('auth', res.data.data.auth)
-        if (res.data.code == 0){
-          wx.redirectTo({
-            url: '../index/index'
-          })
-        } else if (res.data.code == 1){
+        if (res.code == -3) {
           wx.showToast({
-            title: '设定角色失败',
+            title: res.msg,
             icon: 'none',
-            duration: 2000
+            duration: 1000
           })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        }else{
+          wx.setStorageSync('auth', res.data.data.auth)
+          if (res.data.code == 0) {
+            wx.redirectTo({
+              url: '../index/index'
+            })
+          } else if (res.data.code == 1) {
+            wx.showToast({
+              title: '设定角色失败',
+              icon: 'none',
+              duration: 2000
+            })
+          } 
         }
       }
     })

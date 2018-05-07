@@ -27,9 +27,22 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        that.setData({
-          phonenumber: res.data.data.phone_number
-        })
+        if (res.code == -3) {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            phonenumber: res.data.data.phone_number
+          })
+        }
       }
     })
   }
