@@ -5,7 +5,7 @@ Page({
    */
   data: {
     formList:[
-      { icon:'../../../img/sale.svg',text:'销售报表'},
+      { icon:'../../../img/sale.svg',text:'销量报表'},
       { icon: '../../../img/sign.svg', text: '签约报表' },
     ]
   },
