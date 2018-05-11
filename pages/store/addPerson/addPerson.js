@@ -262,7 +262,7 @@ Page({
           } else {
             if (res.data.code == 0) {
               wx.showToast({
-                title: '添加成功',
+                title: res.data.msg,
                 icon: 'none',
                 duration: 1000
               })
@@ -274,7 +274,7 @@ Page({
             } else if (res.data.code == 1) {
               wx.showModal({
                 title: '提示',
-                content: '添加门店负责人失败',
+                content: res.data.msg,
                 showCancel: false,
                 confirmText: '知道了',
                 success: function () {
@@ -283,7 +283,7 @@ Page({
             } else if (res.data.code == 2) {  //逻辑去掉了此角色判定
               wx.showModal({
                 title: '提示',
-                content: '该用户非门店负责人',
+                content: res.data.msg,
                 showCancel: false,
                 confirmText: '知道了',
                 success: function () {
@@ -319,7 +319,7 @@ Page({
           } else {
             if (res.data.code == 0) {
               wx.showToast({
-                title: '添加成功',
+                title: res.data.msg,
                 icon: 'none',
                 duration: 1000
               })
@@ -331,7 +331,7 @@ Page({
             } else if (res.data.code == 1) {
               wx.showModal({
                 title: '提示',
-                content: '添加门店销售员失败',
+                content: res.data.msg,
                 showCancel: false,
                 confirmText: '知道了',
                 success: function () {
@@ -340,7 +340,7 @@ Page({
             } else if (res.data.code == 2) {
               wx.showModal({
                 title: '提示',
-                content: '该用户已是门店销售员',
+                content: res.data.msg,
                 showCancel: false,
                 confirmText: '知道了',
                 success: function () {
@@ -352,7 +352,7 @@ Page({
             } else if (res.data.code == 3) {   //逻辑去掉了此角色判定
               wx.showModal({
                 title: '提示',
-                content: '该用户非门店销售员',
+                content: res.data.msg,
                 showCancel: false,
                 confirmText: '知道了',
                 success: function () {
