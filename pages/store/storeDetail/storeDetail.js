@@ -144,52 +144,55 @@ Page({
       })
       wx.chooseLocation({
         success: function (res) {
-          that.setData({
-            newAddress: res.address
-          })
-          wx.request({
-            url: getApp().data.servsers + 'shop/updateShopLocation', //更新门店地址
-            data: {
-              id: that.data.storeDetailstorge.id,
-              token: that.data.token,
-              address: res.address,
-              longitude: res.longitude,
-              latitude: res.latitude
-            },
-            method: 'POST',
-            success: function (res) {
-              wx.hideLoading()
-              if (res.data.code == -3) {
-                wx.showToast({
-                  title: 'token过期',
-                  icon: 'none',
-                  duration: 1000
-                })
-                setTimeout(function () {
-                  wx.redirectTo({
-                    url: '../../login/login'
-                  })
-                }, 1000)
-              } else {
-                if(res.data.code == 0){
-                  that.setData({
-                    changeAddress: true
-                  })
+          var address = res.address
+          if (/省|自治区|北京市|天津市|重庆市|上海市|香港|澳门/.test(address) && /市|自治州|地区|区划|县/.test(address) && /区|县|镇|乡|街道/.test(address)) {
+            that.setData({
+              newAddress: res.address
+            })
+            wx.request({
+              url: getApp().data.servsers + 'shop/updateShopLocation', //更新门店地址
+              data: {
+                id: that.data.storeDetailstorge.id,
+                token: that.data.token,
+                address: res.address,
+                longitude: res.longitude,
+                latitude: res.latitude
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.hideLoading()
+                if (res.data.code == -3) {
                   wx.showToast({
-                    title: res.data.msg,
+                    title: 'token过期',
                     icon: 'none',
                     duration: 1000
                   })
-                }else{
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none',
-                    duration: 1000
-                  })
+                  setTimeout(function () {
+                    wx.redirectTo({
+                      url: '../../login/login'
+                    })
+                  }, 1000)
+                } else {
+                  if(res.data.code == 0){
+                    that.setData({
+                      changeAddress: true
+                    })
+                    wx.showToast({
+                      title: res.data.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                  }else{
+                    wx.showToast({
+                      title: res.data.msg,
+                      icon: 'none',
+                      duration: 1000
+                    })
+                  }
                 }
               }
-            }
-          })
+            })
+          }
         }
       })
     } else if (that.data.role.role_name == '门店负责人') {

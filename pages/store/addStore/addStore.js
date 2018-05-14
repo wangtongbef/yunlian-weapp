@@ -29,11 +29,18 @@ Page({
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        that.setData({
-          address: res.address,
-          'position.latitude': res.latitude,
-          'position.longitude': res.longitude
-        })
+        var address = res.address
+        if (/省|自治区|北京市|天津市|重庆市|上海市|香港|澳门/.test(address) && /市|自治州|地区|区划|县/.test(address) && /区|县|镇|乡|街道/.test(address)) {
+          that.setData({
+            address: address,
+            'position.latitude': res.latitude,
+            'position.longitude': res.longitude
+          })
+        } else {
+          that.setData({
+            address: '门店位置'
+          })
+        }
         //console.log(that.data.address)
       },
       fail: function (res) {
