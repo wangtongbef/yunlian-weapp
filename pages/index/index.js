@@ -36,7 +36,7 @@ Page({
     } else if (that.data.role.role_name == '门店负责人') {
       that.setData({
         list: [{ text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
-        { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
+        { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scanStorecheck/scanStorecheck' },
         { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/saleForm/saleForm' },
         { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
       })

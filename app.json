@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/login/login",
     "pages/store/storeList/storeList",
     "pages/store/changeStoreName/changeStoreName",
@@ -19,9 +19,10 @@
     "pages/form/signForm/signForm",
     "pages/form/saleForm/saleForm",
     "pages/store/addPerson/addPerson",
-    "pages/unbindphone/unbindphone"
+    "pages/unbindphone/unbindphone",
+    "pages/scanStorecheck/scanStorecheck"
   ],
-  "window":{
+  "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTextStyle": "white"

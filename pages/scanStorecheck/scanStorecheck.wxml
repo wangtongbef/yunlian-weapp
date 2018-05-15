@@ -1,0 +1,11 @@
+<view class='borderBtmBox'>
+  <block wx:for='{{chargePstore}}' wx:key="index">
+    <view class='{{checkedIndex==index?"storeChecked":"storeChecking"}}' bindtap='checkStore' data-index='{{index}}'>
+      <text>{{item.name}}</text>
+    </view>
+  </block>
+  <view class='nodata' wx:if="{{chargePstore.length == 0}}">
+    <image src='../../../img/nodata.svg'></image>
+    <text>暂无数据</text>
+  </view>
+</view>
