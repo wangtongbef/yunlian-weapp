@@ -9,6 +9,7 @@ Page({
     tokenRoles: {},
     scanStatus:0,
     scanmsg:'',
+    storeDetailstorge:{},
     prodectData:[]
   },
 
@@ -19,7 +20,8 @@ Page({
     var that = this
     //扫一扫
     that.setData({
-      tokenRoles: wx.getStorageSync('tokenRoles')
+      tokenRoles: wx.getStorageSync('tokenRoles'),
+      storeDetailstorge: wx.getStorageSync('storeDetail')
     })
     var scan = function () {
       wx.scanCode({
@@ -30,6 +32,7 @@ Page({
             wx.request({
               url: getApp().data.servsers + 'finance/share',
               data: {
+                shop_id: that.data.storeDetailstorge.id,
                 token: that.data.tokenRoles.token,
                 url: productUrl
               },
@@ -76,9 +79,16 @@ Page({
           }
         },
         fail: function () {
-          wx.navigateBack({
-            delta: 1
+          wx.showToast({
+            title: '扫码失败',
+            icon: 'none',
+            duration: 1000
           })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../index/index'
+            })
+          }, 1000)
         }
       })
     }
