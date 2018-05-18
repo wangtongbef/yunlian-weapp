@@ -24,7 +24,6 @@ Page({
   },
   bindStoreChange: function (e) {
     var that = this
-    console.log('门店选的是', that.data.storeArray[e.detail.value])
     if (e.detail.value != 0) {
       that.setData({
         isShow:false //选择销售人员picker
@@ -36,6 +35,8 @@ Page({
     }
     that.setData({
       storeIndex: e.detail.value,
+      saleIndex: 0,
+      timeIndex: 0,
       shop_id: that.data.storeArray[e.detail.value].shop_id
     })
     if (that.data.role.role_name === '门店负责人') {
@@ -75,10 +76,9 @@ Page({
   },
   bindSaleChange: function (e) {
     var that = this
-    console.log('销售员选的是', that.data.salesArray[e.detail.value])
-    console.log('销售员选的是', e.detail.value)
     that.setData({
       saleIndex: e.detail.value,
+      timeIndex:0,
       user_id: that.data.salesArray[e.detail.value].user_id
     })
   },
@@ -86,7 +86,6 @@ Page({
     this.setData({
       timeIndex: e.detail.value
     })
-    console.log('time选的是', this.data.timeIndex)
   },
   /**
    * 生命周期函数--监听页面加载
