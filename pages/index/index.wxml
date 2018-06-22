@@ -1,31 +1,26 @@
 <!--pages/index/index.wxml-->
 <view>
   <view class='userInfo'>
-    <view>
-      <view class='userImg'>
-        <!-- <image src='{{userInfo.img}}'></image> -->
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <view class='userText'>
-        <open-data type="userNickName"></open-data>
-        <!-- <text>{{userInfo.name}}</text> -->
-        <text class='margin20'>{{phone_number}}</text>
-        <text>{{role.role_name}}</text>
-      </view>
+    <view class='userImg'>
+      <!-- <image src='{{userInfo.img}}'></image> -->
+      <open-data type="userAvatarUrl"></open-data>
     </view>
-    <!-- <view class='arrow'><image src='../../img/icon-arrowRW.svg'></image></view> -->
+    <view class='userText'>
+      <open-data type="userNickName"></open-data>
+      <!-- <text>{{userInfo.name}}</text> -->
+      <text>{{phone_number}}</text>
+    </view>
+    <view class='roleText'>
+      <text>{{role.role_name}}</text>
+    </view>
   </view>
   <view class='operateList'>
     <view class='operateList-1'>
       <block wx:for='{{list}}' wx:key="text">
-        <navigator class='operateInfo' url='{{item.url}}'>
-          <view class='operateText'>
-            <image src='{{item.icon}}'></image>
-            <text>{{item.text}}</text>
-          </view>
-          <view class='arrow'>
-            <image src='../../img/icon-arrowRB.svg'></image>
-          </view>
+        <navigator class='operateInfo' hover-class="none" url='{{item.url}}'>
+          <image class="icon fn" mode="widthFix" src='{{item.icon}}'></image>
+          <text class="title">{{item.text}}</text>
+          <image class="arrow fn" mode="widthFix" src='../../img/arrow-right.png'></image>
         </navigator>
       </block>
     </view>

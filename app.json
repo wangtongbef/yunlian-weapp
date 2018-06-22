@@ -20,6 +20,9 @@
     "pages/form/saleForm/saleForm",
     "pages/store/addPerson/addPerson",
     "pages/unbindphone/unbindphone",
+    "pages/Inventory/inventoryList/inventoryList",
+    "pages/Inventory/inventoryStoreDetail/inventoryStoreDetail",
+    "pages/Inventory/inventoryExpressDetail/inventoryExpressDetail",
     "pages/scanStorecheck/scanStorecheck"
   ],
   "window": {

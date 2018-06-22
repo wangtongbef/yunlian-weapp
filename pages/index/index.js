@@ -30,23 +30,23 @@ Page({
     
     if (that.data.role.role_name == '门店销售员') {
       that.setData({
-        list: [{ text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scan/scan' },
-        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+        list: [{ text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scan/scan' },
+          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
       })
     } else if (that.data.role.role_name == '门店负责人') {
       that.setData({
-        list: [{ text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
-        { text: '售后扫码', icon: '../../img/icon-scanCode.svg', url: '../scanStorecheck/scanStorecheck' },
-        { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/saleForm/saleForm' },
-        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+        list: [{ text: '门店', icon: '../../img/mendian_icon.png', url: '../store/storeList/storeList' },
+          { text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scanStorecheck/scanStorecheck' },
+          { text: '报表', icon: '../../img/baobiao-icon.png', url: '../form/saleForm/saleForm' },
+          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
       })
     } else if (that.data.role.role_name == '商务专员') {
       that.setData({
-        list: [{ text: '签到', icon: '../../img/icon-signIndex.svg', url: '../checkIn/checkIn' },
-          { text: '签约', icon: '../../img/icon-signing.svg', url: '../sign/sign' },
-        { text: '门店', icon: '../../img/icon-store.svg', url: '../store/storeList/storeList' },
-        { text: '报表', icon: '../../img/icon-reportForm.svg', url: '../form/formList/formList' },
-        { text: '资金', icon: '../../img/icon-money.svg', url: '../wallet/walletCenter/walletCenter' }]
+        list: [{ text: '签到', icon: '../../img/qiandao-icon.png', url: '../checkIn/checkIn' },
+          { text: '签约', icon: '../../img/qianyue-icon.png', url: '../sign/sign' },
+          { text: '门店', icon: '../../img/mendian_icon.png', url: '../store/storeList/storeList' },
+        { text: '报表', icon: '../../img/baobiao-icon.png', url: '../form/formList/formList' },
+        { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
       })
     }
   },
