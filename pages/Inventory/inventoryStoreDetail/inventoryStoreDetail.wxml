@@ -1,2 +1,8 @@
-<!--pages/Inventory/inventoryStoreDetail/inventoryStoreDetail.wxml-->
-<text>pages/Inventory/inventoryStoreDetail/inventoryStoreDetail.wxml</text>
+<view class='title'>{{storetitle.name}}</view>
+<view class='gray'></view>
+<view>
+  <view class="detail_tab">
+    <text class="{{currentTab==0 ? 'choose' : 'nochoose'}} normal" data-current="0" bindtap="swichNav">正常品</text>
+    <text class="{{currentTab==1 ? 'choose' : 'nochoose'}} probl" data-current="1" bindtap="swichNav">问题品</text>
+  </view>
+</view>

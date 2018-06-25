@@ -5,14 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    storetitle: {},
+    currentTab:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    that.setData({
+      storetitle: options
+    })
+  },
+
+  swichNav: function (e) {
+    var that = this
+    if (that.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
   },
 
   /**

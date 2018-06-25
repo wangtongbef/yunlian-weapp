@@ -24,5 +24,14 @@
         </navigator>
       </block>
     </view>
+    <view wx:if="{{List_storage.length!==0}}" class='operateList-1'>
+      <block wx:for='{{List_storage}}' wx:key="text">
+        <navigator class='operateInfo' hover-class="none" url='{{item.url}}'>
+          <image class="icon fn" mode="widthFix" src='{{item.icon}}'></image>
+          <text class="title">{{item.text}}</text>
+          <image class="arrow fn" mode="widthFix" src='../../img/arrow-right.png'></image>
+        </navigator>
+      </block>
+    </view>
   </view>
 </view>

@@ -1,2 +1,24 @@
 <!--pages/Inventory/inventoryList/inventoryList.wxml-->
-<text>pages/Inventory/inventoryList/inventoryList.wxml</text>
+<view class='swiper-tab'>
+  <view class="{{currentTab==0 ? 'choose' : 'nochoose'}} tab-store" data-current="0" bindtap="swichNav">门店内</view>
+  <view class="{{currentTab==1 ? 'choose' : 'nochoose'}} tab-transport" data-current="1" bindtap="swichNav">运输中</view>
+</view>
+<view wx:if='{{downloaded}}'>
+  <view wx:if='{{currentTab==0 && storeList.length!=0}}'>
+    <block wx:for='{{storeList}}' wx:key="index">
+      <view class='storeli' data-index="{{index}}" bindtap='navigat'>{{item.name}}</view>
+    </block>
+  </view>
+  <view wx:if='{{currentTab==1 && expressList.length!=0}}'>
+    <block wx:for='{{expressList}}' wx:key="numbers">
+      <view class='expressli' data-numbers="{{item.numbers}}">
+        <text>{{item.name}}</text>
+        <text>{{item.numbers}}</text>
+      </view>
+    </block>
+  </view>
+  <view class='nodata' wx:if='{{(currentTab==0 && storeList.length==0) || (currentTab==1 && expressList.length==0)}}'>
+    <image src='../../../img/no_data.png'></image>
+    <text>暂无数据</text>
+  </view>
+</view>

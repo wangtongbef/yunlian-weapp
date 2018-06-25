@@ -13,7 +13,8 @@ Page({
     role: {},
     phone_number:'',
     userInfo:{},
-    list:[]
+    list:[],
+    List_storage:[]
   },
 
   /**
@@ -38,7 +39,8 @@ Page({
         list: [{ text: '门店', icon: '../../img/mendian_icon.png', url: '../store/storeList/storeList' },
           { text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scanStorecheck/scanStorecheck' },
           { text: '报表', icon: '../../img/baobiao-icon.png', url: '../form/saleForm/saleForm' },
-          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
+          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
+        List_storage: [{ text: '存货', icon: '../../img/cunhuo-icon.png', url: '../Inventory/inventoryList/inventoryList' }]
       })
     } else if (that.data.role.role_name == '商务专员') {
       that.setData({
