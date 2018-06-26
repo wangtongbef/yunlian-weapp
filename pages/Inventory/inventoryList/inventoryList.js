@@ -73,6 +73,16 @@ Page({
       url: '../inventoryStoreDetail/inventoryStoreDetail?id=' + storeId + '&name=' + storeName
     })
   },
+
+  navigatExp: function (e) {
+    console.log(e)
+    var that = this;
+    var expressName = that.data.expressList[e.currentTarget.dataset.index].name
+    var expressNumbers = that.data.expressList[e.currentTarget.dataset.index].numbers
+    wx.navigateTo({
+      url: '../inventoryExpressDetail/inventoryExpressDetail?name=' + expressName + '&numbers=' + expressNumbers
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
