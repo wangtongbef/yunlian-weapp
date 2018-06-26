@@ -1,1 +1,87 @@
 /* pages/Inventory/inventoryExpressDetail/inventoryExpressDetail.wxss */
+page{
+  background-color: rgb(238,238,238)
+}
+.title{
+  height:55rpx;
+  width: 100%;
+  padding:45rpx 0 0 40rpx;
+  font-size: 28rpx;
+  color: rgb(167,167,167)
+}
+.content{
+  width:100%;
+  padding:60rpx 40rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between
+}
+.content view{
+  width:calc(100% - 80rpx);
+  height:32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end
+}
+.content view:first-child{
+  margin-bottom: 40rpx;
+}
+.ct{
+  font-size: 28rpx;
+  color:rgb(88,88,88);
+}
+.cn{
+  font-size: 28rpx;
+  color:rgb(42,41,41);
+}
+.cc{
+  font-size: 32rpx;
+  color:rgb(42,41,41);
+}
+.listBox{
+  width:100%;
+  padding-top:60rpx;
+  background-color: #fff
+}
+.list{
+  width:calc(100% - 80rpx);
+  height:36rpx;
+  margin:0 40rpx 0;
+  padding-bottom: 40rpx;
+  display:flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.listBox .list:last-child{
+  padding-bottom: 50rpx;
+}
+.productName{
+  width: 320rpx;
+  font-size: 28rpx;
+  color: rgb(88, 88, 88);
+  height: 28rpx
+}
+.productAmount,.productMeasure{
+  text-align: right;
+  color: rgb(42, 41, 41);
+}
+.productAmount{
+  width: 320rpx;
+  font-size: 36rpx;
+  height: 36rpx
+}
+.productMeasure{
+  width: 30rpx;
+  font-size: 20rpx;
+  height: 20rpx
+}
+.productFamily{
+  width:calc(100% - 80rpx);
+  margin-left: 40rpx;
+  padding:15rpx 0 55rpx 0;
+  border-top: 2rpx solid rgb(238,238,238);
+  text-align: right;
+  font-size: 24rpx;
+  color: rgb(1,144,210)
+}

@@ -1,2 +1,40 @@
 <!--pages/Inventory/inventoryExpressDetail/inventoryExpressDetail.wxml-->
-<text>pages/Inventory/inventoryExpressDetail/inventoryExpressDetail.wxml</text>
+<view>
+  <view class='title'>运单</view>
+  <view class='content'>
+    <view>
+      <text class='ct'>物流公司</text>
+      <text class='cc'>{{waybill.name}}</text>
+    </view>
+    <view>
+      <text class='ct'>运单号</text>
+      <text class='cn'>{{waybill.numbers}}</text>
+    </view>
+  </view>
+</view>
+<view>
+  <view class='title'>发货方</view>
+  <view class='content'>
+    <view>
+      <text class='ct'>寄出人</text>
+      <text class='cc'>{{sender.sendPerson}}</text>
+    </view>
+    <view>
+      <text class='ct'>寄出门店</text>
+      <text class='cc'>{{sender.sendStore}}</text>
+    </view>
+  </view>
+</view>
+<view>
+  <view class='title'>货物清单</view>
+  <view class='listBox'>
+    <block wx:for='{{productsList}}' wx:key="name">
+      <view class='list'>
+        <text class='productName'>{{item.name}}</text>
+        <text class='productAmount'>{{item.amount}}</text>
+        <text class='productMeasure'>个</text>
+      </view>
+    </block>
+    <view class='productFamily'>问题品</view>
+  </view>
+</view>

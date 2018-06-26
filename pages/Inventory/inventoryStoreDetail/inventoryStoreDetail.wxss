@@ -32,16 +32,15 @@ page{
   margin-left:90rpx;
 }
 .choose{
-  color:rgb(1,144,210)
+  color:rgb(1,144,210);
 }
 .nochoose{
-  color:rgb(122,122,122)
+  color:rgb(122,122,122);
 }
 .productsDetail{
   width:calc(100% - 80rpx);
   height:36rpx;
   margin:40rpx 40rpx 0;
-  text-align: bottom;
   display:flex;
   justify-content: flex-end;
   align-items: flex-end

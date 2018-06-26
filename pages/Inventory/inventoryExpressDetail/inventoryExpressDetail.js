@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    expressDetail:{}
+    waybill:{},
+    sender:{sendPerson:'意义',sendStore:'大浪中心店'},
+    productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }]
   },
 
   /**
@@ -14,9 +16,9 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      expressDetail: options
+      waybill: options
     })
-    console.log(that.data.expressDetail)
+    console.log(that.data.waybill)
   },
 
   /**
