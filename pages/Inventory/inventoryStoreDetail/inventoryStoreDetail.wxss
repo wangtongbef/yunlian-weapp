@@ -18,7 +18,7 @@ page{
 .detail_tab{
   width:calc(100% -80rpx);
   height:112rpx;
-  margin:20rpx 40rpx 0 40rpx;
+  margin:20rpx 40rpx 55rpx 40rpx;
   border-bottom: 2rpx solid rgb(204, 204, 204);
   display:flex;
   justify-content: center;
@@ -36,4 +36,40 @@ page{
 }
 .nochoose{
   color:rgb(122,122,122)
+}
+.productsDetail{
+  width:calc(100% - 80rpx);
+  height:36rpx;
+  margin:40rpx 40rpx 0;
+  text-align: bottom;
+  display:flex;
+  justify-content: flex-end;
+  align-items: flex-end
+}
+.productName{
+  width: 320rpx;
+  font-size: 28rpx;
+  color: rgb(88, 88, 88);
+  height: 28rpx
+}
+.productAmount,.productMeasure{
+  text-align: right;
+  color: rgb(42, 41, 41);
+}
+.productAmount{
+  width: 320rpx;
+  font-size: 36rpx;
+  height: 36rpx
+}
+.productMeasure{
+  width: 30rpx;
+  font-size: 20rpx;
+  height: 20rpx
+}
+.nodata{
+  margin-top: 250rpx;
+  width:100%;
+  text-align: center;
+  font-size: 28rpx;
+  color:rgb(167,167,167);
 }

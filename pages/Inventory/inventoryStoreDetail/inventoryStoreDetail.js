@@ -6,7 +6,12 @@ Page({
    */
   data: {
     storetitle: {},
-    currentTab:0
+    currentTab:0,
+    nomalProducts: [{ name: '卡儿酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, {name: '卡儿酷军工电源', amount: 5000 }],
+    // faultyProducts: [{ name: '卡儿酷启动电', amount: 20 }, { name: '卡儿酷车', amount: 10 }, { name: '卡儿酷军工', amount: 500 }],
+    //nomalProducts: [],
+    faultyProducts: [],
+    products: []
   },
 
   /**
@@ -15,7 +20,8 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      storetitle: options
+      storetitle: options,
+      products: that.data.nomalProducts
     })
   },
 
@@ -27,6 +33,15 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
+      if (e.target.dataset.current == 0){
+        that.setData({
+          products: that.data.nomalProducts
+        })
+      } else if (e.target.dataset.current == 1) {
+        that.setData({
+          products: that.data.faultyProducts
+        })
+      }
     }
   },
 

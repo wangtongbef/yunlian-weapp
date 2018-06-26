@@ -5,4 +5,16 @@
     <text class="{{currentTab==0 ? 'choose' : 'nochoose'}} normal" data-current="0" bindtap="swichNav">正常品</text>
     <text class="{{currentTab==1 ? 'choose' : 'nochoose'}} probl" data-current="1" bindtap="swichNav">问题品</text>
   </view>
+  <view>
+    <block wx:if='{{products.length!=0}}' wx:for='{{products}}' wx:key="name">
+      <view class='productsDetail'>
+        <text class='productName'>{{item.name}}</text>
+        <text class='productAmount'>{{item.amount}}</text>
+        <text  class='productMeasure'>个</text>
+      </view>
+    </block>
+    <view wx:if='{{products.length==0}}'>
+      <view class='nodata'>暂无数据</view>
+    </view>
+  </view>
 </view>
