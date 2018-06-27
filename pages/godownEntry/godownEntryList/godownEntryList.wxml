@@ -16,7 +16,7 @@
 </view>
 <view class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
-    <view class='listCell'>
+    <view class='listCell' data-numbers='{{item.numbers}}' bindtap='toDetail'>
       <view class='listCellL'>
         <text class='listCellNmubers'>{{item.numbers}}</text>
         <text class='listCellTime'>{{item.time}}</text>
