@@ -8,4 +8,17 @@
       </view>
     </block>
   </view>
+    <!-- 虚拟角色 -->
+  <text class='width'>选择角色</text>
+  <view class='background'>
+    <view class='list' data-role="{{'仓管员'}}" bindtap='navigat'>
+      <text>仓管员</text>
+      <image src='../../img/icon-arrowRG.png'></image>
+    </view>
+    <view class='list' data-role="{{'配送员'}}" bindtap='navigat'>
+      <text>配送员</text>
+      <image src='../../img/icon-arrowRG.png'></image>
+    </view>
+  </view>
+    <!-- 虚拟角色 -->
 </view>

@@ -51,6 +51,23 @@ Page({
         { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
       })
     }
+
+    // 虚拟角色
+    if (options.role == '仓管员'){
+      that.setData({
+        phone_number: '110110110',
+        role: { role_id: 5, role_name: '仓管员' },
+        List_storage: [{ text: '入库单', icon: '../../img/rukudan-icon.png', url: '../Inventory/inventoryList/inventoryList' }]
+      })
+    } else if (options.role == '配送员'){
+      that.setData({
+        phone_number: '110110110',
+        role: { role_id: 6, role_name: '仓管员' },
+        List_storage: [{ text: '入库单', icon: '../../img/rukudan-icon.png', url: '../Inventory/inventoryList/inventoryList' }]
+      })
+    }
+    // 虚拟角色
+    
   },
   
   onReady: function () {
