@@ -1,0 +1,5 @@
+<!--pages/godownEntry/godownEntryList/godownEntryList.wxml-->
+<view class='title'>
+  <text class='titleName'>全部状态</text>
+  <image class='titlePic' mode='widthFix' src='../../../img/arrow-down.png'></image>
+</view>

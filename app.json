@@ -23,7 +23,8 @@
     "pages/Inventory/inventoryList/inventoryList",
     "pages/Inventory/inventoryStoreDetail/inventoryStoreDetail",
     "pages/Inventory/inventoryExpressDetail/inventoryExpressDetail",
-    "pages/scanStorecheck/scanStorecheck"
+    "pages/scanStorecheck/scanStorecheck",
+    "pages/godownEntry/godownEntryList/godownEntryList"
   ],
   "window": {
     "backgroundTextStyle": "light",
