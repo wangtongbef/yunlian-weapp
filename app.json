@@ -24,7 +24,8 @@
     "pages/Inventory/inventoryStoreDetail/inventoryStoreDetail",
     "pages/Inventory/inventoryExpressDetail/inventoryExpressDetail",
     "pages/scanStorecheck/scanStorecheck",
-    "pages/godownEntry/godownEntryList/godownEntryList"
+    "pages/godownEntry/godownEntryList/godownEntryList",
+    "pages/godownEntry/godownentryDetail/godownentryDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

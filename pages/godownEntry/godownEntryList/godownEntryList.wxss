@@ -1,6 +1,7 @@
 /* pages/godownEntry/godownEntryList/godownEntryList.wxss */
 page{
   background-color:rgb(248,248,248);
+  height:100%
 }
 .title{
   height:88rpx;
@@ -8,11 +9,124 @@ page{
   padding-left: 40rpx;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(3, 40, 109, 0.2);
+  position:relative;
+  z-index: 100;
+}
+.titleName{
+  height:50rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  color:rgb(88,88,88);
 }
 .titlePic{
   width: 35rpx;
   height: 20rpx;
   margin-left: 20rpx
+}
+.statedown{
+  width:100%;
+  height:calc(100% - 88rpx);
+  z-index: 50;
+}
+.stateshadow{
+  width:100%;
+  height:calc(100% - 448rpx);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+.stateBox{
+  width: calc(100% - 80rpx);
+  height: 112rpx;
+  margin: 0 40rpx;
+  border-bottom: 2rpx solid rgb(238,238,238);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.statedown .stateBox[data-stateId='3']{
+  border-bottom: 0
+}
+.stateName{
+  font-size: 32rpx;
+  height:50rpx;
+  line-height: 50rpx;
+}
+.statePic{
+  width:36rpx;
+  height: 25rpx;
+}
+.checked{
+  color:rgb(1,144,210);
+}
+.unchecked{
+  color:rgb(88,88,88);
+}
+.list{
+  margin-top:40rpx
+}
+.listCell{
+  height:160rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  padding:0 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+.listCellL{
+  height:90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.listCellNmubers{
+  font-size: 32rpx;
+  color:rgb(42,41,41);
+}
+.listCellTime{
+  font-size: 20rpx;
+  color:rgb(88,88,88);
+}
+.listCellState{
+  font-size: 36rpx;
+}
+.button,
+.buttonText{
+  width:182rpx;
+  position: fixed;
+  left: calc(50% - 91rpx);
+}
+.button{
+  width:182rpx;
+  height:196rpx;
+  bottom:26rpx;
+  z-index: 30
+}
+.buttonText{
+  height:182rpx;
+  bottom:40rpx;
+  text-align: center;
+  line-height: 182rpx;
+  z-index: 32;
+  font-size: 40rpx;
+  color: #fff
+}
+.nodataPic{
+  display: block;
+  width:86rpx;
+  height:75rpx;
+  margin-top: 300rpx;
+  margin-left: calc(50% - 43rpx);
+}
+.nodataText{
+  display: inline-block;
+  width: 100%;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  margin-top: 29rpx;
+  font-size: 28rpx;
+  color: rgb(167,167,167)
 }
