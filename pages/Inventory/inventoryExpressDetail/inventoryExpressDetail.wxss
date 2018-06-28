@@ -41,7 +41,7 @@ page{
 }
 .listBox{
   width:100%;
-  padding-top:60rpx;
+  padding-top:50rpx;
   background-color: #fff
 }
 .list{

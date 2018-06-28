@@ -11,13 +11,18 @@ Page({
      { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }],
     stateChecked: 0,
     stateBoxstate: false,
+    role:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    var that = this;
+    that.setData({
+      role: options.role
+    })
+    console.log(that.data.role)
   },
 
   stateBoxhide: function (e) {
@@ -41,7 +46,14 @@ Page({
   toDetail: function(e){
     console.log(e.currentTarget.dataset.numbers)
     wx.navigateTo({
-      url: '../../godownEntry/godownentryDetail/godownentryDetail'
+      url: '../../godownEntry/godownentryDetail/godownentryDetail?role=' + this.data.role + '&state=' + e.currentTarget.dataset.state
+    })
+  },
+
+  inStorage: function(){
+    console.log('扫一扫')
+    wx.navigateTo({
+      url: ''   //扫码页面
     })
   },
   /**

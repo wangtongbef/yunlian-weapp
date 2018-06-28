@@ -1,2 +1,64 @@
 <!--pages/godownEntry/godownentryDetail/godownentryDetail.wxml-->
-<text>pages/godownEntry/godownentryDetail/godownentryDetail.wxml</text>
+<view class='{{maskshow?"oh":""}}'>
+  <view>
+    <view class='title'>基本信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>状态</text>
+        <text wx:if='{{state==1}}' style='color:rgb(1,144,210);font-size:32rpx'>待确认</text>
+        <text wx:if='{{state==2}}' style='color:rgb(88,88,88);font-size:32rpx'>已入库</text>
+        <text wx:if='{{state==3}}' style='color:rgb(88,88,88);font-size:32rpx'>已取消</text>
+      </view>
+      <view>
+        <text class='ct'>编号</text>
+        <text class='cn'>ps1111111</text>
+      </view>
+      <view>
+        <text class='ct'>收货人</text>
+        <text class='cc'>小小明</text>
+      </view>
+      <view>
+        <text class='ct'>生成时间</text>
+        <text class='cn'>2018-06-07  16:16</text>
+      </view>
+
+    </view>
+  </view>
+  <view>
+    <view class='title'>送货方信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>配送员</text>
+        <text class='cc'>小明</text>
+      </view>
+      <view>
+        <text class='ct'>配送员编号</text>
+        <text class='cc'>1110000</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='title'>货物清单</view>
+    <view class='listBox {{state==1?"mb118":""}}'>
+      <block wx:for='{{productsList}}' wx:key="name">
+        <view class='list'>
+          <text class='productName'>{{item.name}}</text>
+          <text class='productAmount'>{{item.amount}}</text>
+          <text class='productMeasure'>个</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='godownentryButton' wx:if='{{state==1}}' bindtap='godownentryButton'>
+    <text wx:if="{{role=='仓管员'}}">取消入库</text>
+    <text wx:if="{{role=='配送员'}}">确认入库</text>
+  </view>
+</view>
+<view wx:if='{{maskshow}}' class='mask'>
+  <view class='maskbox'>
+    <text>确定要取消入库吗？</text>
+    <view class='no' bindtap='no'>否</view>
+    <view class='yes' bindtap='yes'>是</view>
+  </view>
+</view>
+
