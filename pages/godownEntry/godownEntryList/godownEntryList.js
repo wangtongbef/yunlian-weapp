@@ -8,10 +8,17 @@ Page({
     states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待确认' }, { stateId: 2, state: '已入库' }, { stateId: 3, state:'已取消'}],
     list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
      { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
+     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
+     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
+     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
+     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
+     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
+     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
      { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }],
     stateChecked: 0,
     stateBoxstate: false,
-    role:''
+    role:'',
+    token:''
   },
 
   /**
@@ -19,10 +26,26 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.setData({
-      role: options.role
-    })
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    if (tokenRoles) {
+      that.setData({
+        token: tokenRoles.token,
+        role: options.role
+      })
+    }
     console.log(that.data.role)
+
+    wx.request({
+      url: getApp().data.servsers + 'storage/storageList',
+      data: {
+        token: that.data.token,
+        status:0
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+      }
+    })
   },
 
   stateBoxhide: function (e) {
@@ -55,6 +78,10 @@ Page({
     wx.navigateTo({
       url: ''   //扫码页面
     })
+  },
+
+  endtouchmove: function () {
+    return false;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

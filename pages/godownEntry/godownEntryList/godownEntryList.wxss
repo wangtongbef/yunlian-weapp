@@ -1,7 +1,7 @@
 /* pages/godownEntry/godownEntryList/godownEntryList.wxss */
 page{
   background-color:rgb(248,248,248);
-  height:100%
+  height:calc(100% - 128rpx);
 }
 .title{
   height:88rpx;
@@ -11,7 +11,8 @@ page{
   display: flex;
   align-items: center;
   box-shadow: 0 4px 8px rgba(3, 40, 109, 0.2);
-  position:relative;
+  position:fixed;
+  top:0;
   z-index: 100;
 }
 .titleName{
@@ -28,6 +29,8 @@ page{
 .statedown{
   width:100%;
   height:calc(100% - 88rpx);
+  position: fixed;
+  top:88rpx;
   z-index: 50;
 }
 .stateshadow{
@@ -64,7 +67,7 @@ page{
   color:rgb(88,88,88);
 }
 .list{
-  margin-top:40rpx
+  margin-top:128rpx
 }
 .listCell{
   height:160rpx;

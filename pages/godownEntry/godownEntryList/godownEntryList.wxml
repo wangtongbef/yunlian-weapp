@@ -1,9 +1,9 @@
 <!--pages/godownEntry/godownEntryList/godownEntryList.wxml-->
-<view class='title' bindtap='stateBoxhide'>
+<view class='title' bindtap='stateBoxhide' catchtouchmove='endtouchmove'>
   <text class='titleName'>{{states[stateChecked].state}}</text>
   <image class='titlePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
 </view>
-<view class='statedown' style="position:absolute" hidden='{{!stateBoxstate}}'>
+<view class='statedown' hidden='{{!stateBoxstate}}' catchtouchmove='endtouchmove'>
   <view style='background-color:#fff;z-index:50'>
     <block wx:for='{{states}}' wx:key="text">
       <view class='stateBox' data-stateId='{{item.stateId}}' bindtap='stateCheck'>

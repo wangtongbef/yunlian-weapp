@@ -1,2 +1,38 @@
 <!--pages/goodsReturn/goodsreturnList/goodsreturnList.wxml-->
-<text>pages/goodsReturn/goodsreturnList/goodsreturnList.wxml</text>
+<view class='title'>
+  <view class='stateTitle' bindtap='stateBoxhide'>
+    <text class='stateName'>{{states[stateChecked].state}}</text>
+    <image class='statePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
+  </view>
+</view>
+<view class='statedown' hidden='{{!stateBoxstate}}' bindtap='stateBoxhide'>
+  <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
+    <block wx:for='{{states}}' wx:key="text">
+      <view class='stateBox' data-stateId='{{item.stateId}}' catchtap='stateCheck'>
+        <text class='{{stateChecked==item.stateId?"checked":"unchecked"}} stateName'>{{item.state}}</text>
+        <image wx:if='{{stateChecked==item.stateId}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
+      </view>
+    </block>
+  </view>
+</view>
+<view class='list'>
+  <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
+    <view class='listCell' data-numbers='{{item.numbers}}' data-state='{{item.state}}' bindtap='toDetail'>
+      <view class='listCellL'>
+        <text class='listCellNmubers'>{{item.numbers}}</text>
+        <text class='listCellTime'>{{item.time}}</text>
+      </view>
+      <text class='listCellState' wx:if='{{item.state==1}}' style='color:rgb(1,144,210)'>待确认</text>
+      <text class='listCellState' wx:if='{{item.state==2}}' style='color:rgb(88,88,88)'>已入库</text>
+      <text class='listCellState' wx:if='{{item.state==3}}' style='color:rgb(88,88,88)'>已取消</text>
+    </view>
+  </block>
+  <view wx:if='{{list.length == 0}}'>
+    <image class='nodataPic' src='../../../img/no_data.png'></image>
+    <text class='nodataText'>还没有入库单</text>
+  </view>
+  <view wx:if='{{role=="仓管员"}}' bindtap='inStorage'>
+    <image class='button' src='../../../img/circle-icon.png'></image>
+    <text class='buttonText'>入 库</text>
+  </view>
+</view>
