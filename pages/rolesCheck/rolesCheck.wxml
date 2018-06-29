@@ -19,6 +19,10 @@
       <text>配送员</text>
       <image src='../../img/icon-arrowRG.png'></image>
     </view>
+    <view class='list' data-role="{{'生产经理'}}" bindtap='navigat'>
+      <text>生产经理</text>
+      <image src='../../img/icon-arrowRG.png'></image>
+    </view>
   </view>
     <!-- 虚拟角色 -->
 </view>

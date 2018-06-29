@@ -104,11 +104,6 @@ page{
   top:0;
   left: 0;
 }
-.oh{
-  overflow: hidden;
-  height:100%;
-  width:100%;
-}
 .maskbox{
   width: 560rpx;
   height:320rpx;
