@@ -4,7 +4,12 @@
     <text class='stateName'>{{states[stateChecked].state}}</text>
     <image class='statePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
   </view>
+  <view class='stateTitle' wx:if='{{staterightShow}}' bindtap='staterightBoxhide'>
+    <text class='stateName'>{{statesRight[staterightChecked].state}}</text>
+    <image class='statePic' mode='widthFix' src='{{!staterightBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
+  </view>
 </view>
+<!--left  -->
 <view class='statedown' hidden='{{!stateBoxstate}}' bindtap='stateBoxhide'>
   <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
     <block wx:for='{{states}}' wx:key="text">
@@ -15,16 +20,25 @@
     </block>
   </view>
 </view>
+<!--right  -->
+<view class='statedown' hidden='{{!staterightBoxstate}}' bindtap='staterightBoxhide'>
+  <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
+    <block wx:for='{{statesRight}}' wx:key="text">
+      <view class='stateBox' data-staterightId='{{item.stateId}}' catchtap='staterightCheck'>
+        <text class='{{staterightChecked==item.stateId?"checked":"unchecked"}} stateName'>{{item.state}}</text>
+        <image wx:if='{{staterightChecked==item.stateId}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
+      </view>
+    </block>
+  </view>
+</view>
 <view class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
-    <view class='listCell' data-numbers='{{item.numbers}}' data-state='{{item.state}}' bindtap='toDetail'>
+    <view class='listCell' data-statet='{{statetext[item.state-1]}}' data-state='{{item.state}}' bindtap='toDetail'>
       <view class='listCellL'>
         <text class='listCellNmubers'>{{item.numbers}}</text>
         <text class='listCellTime'>{{item.time}}</text>
       </view>
-      <text class='listCellState' wx:if='{{item.state==1}}' style='color:rgb(1,144,210)'>待确认</text>
-      <text class='listCellState' wx:if='{{item.state==2}}' style='color:rgb(88,88,88)'>已入库</text>
-      <text class='listCellState' wx:if='{{item.state==3}}' style='color:rgb(88,88,88)'>已取消</text>
+      <text class='listCellState' style='color:{{statecolor[item.state-1]}}'>{{statetext[item.state-1]}}</text>
     </view>
   </block>
   <view wx:if='{{list.length == 0}}'>
@@ -33,6 +47,7 @@
   </view>
   <view wx:if='{{role=="仓管员"}}' bindtap='inStorage'>
     <image class='button' src='../../../img/circle-icon.png'></image>
-    <text class='buttonText'>入 库</text>
+    <text class='buttonText-1'>申 请</text>
+    <text class='buttonText-2'>退 货</text>
   </view>
 </view>

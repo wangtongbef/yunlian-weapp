@@ -26,7 +26,8 @@
     "pages/scanStorecheck/scanStorecheck",
     "pages/godownEntry/godownEntryList/godownEntryList",
     "pages/godownEntry/godownentryDetail/godownentryDetail",
-    "pages/goodsReturn/goodsreturnList/goodsreturnList"
+    "pages/goodsReturn/goodsreturnList/goodsreturnList",
+    "pages/goodsReturn/goodsreturnDetail/goodsreturnDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -5,10 +5,11 @@ page{
 }
 .title{
   height:88rpx;
-  width:100%;
-  padding-left: 40rpx;
+  width:calc(100% - 80rpx);
+  padding:0 40rpx;
   background-color: #fff;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 8px rgba(3, 40, 109, 0.2);
   position:fixed;
@@ -43,7 +44,7 @@ page{
   justify-content: space-between;
   align-items: center;
 }
-.statedown .stateBox[data-stateId='6']{
+.statedown .stateBox:last-child{
   border-bottom: 0
 }
 .stateName{
@@ -93,7 +94,8 @@ page{
   font-size: 36rpx;
 }
 .button,
-.buttonText{
+.buttonText-1,
+.buttonText-2{
   width:182rpx;
   position: fixed;
   left: calc(50% - 91rpx);
@@ -104,14 +106,20 @@ page{
   bottom:26rpx;
   z-index: 30
 }
-.buttonText{
-  height:182rpx;
-  bottom:40rpx;
+.buttonText-1,
+.buttonText-2{
+  height:122rpx;
   text-align: center;
-  line-height: 182rpx;
+  line-height: 122rpx;
   z-index: 32;
   font-size: 40rpx;
   color: #fff
+}
+.buttonText-1{
+  bottom: 98rpx;
+}
+.buttonText-2{
+  bottom: 48rpx;
 }
 .nodataPic{
   display: block;

@@ -1,0 +1,136 @@
+/* pages/goodsReturn/goodsreturnDetail/goodsreturnDetail.wxss */
+page{
+  background-color: rgb(238,238,238);
+  height:100%
+}
+.title{
+  height:55rpx;
+  width: 100%;
+  padding:45rpx 0 0 40rpx;
+  font-size: 28rpx;
+  color: rgb(167,167,167)
+}
+.content{
+  background-color: #fff;
+  padding:40rpx 0;
+}
+.content view{
+  height:70rpx;
+  width: calc(100% - 80rpx);
+  padding: 0 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+.ct{
+  font-size: 28rpx;
+  color:rgb(88,88,88);
+}
+.cn{
+  font-size: 28rpx;
+  color:rgb(42,41,41);
+}
+.cc{
+  font-size: 32rpx;
+  color:rgb(42,41,41);
+}
+.listBox{
+  width:100%;
+  padding-top:50rpx;
+  background-color: #fff;
+}
+.list{
+  width:calc(100% - 80rpx);
+  height:36rpx;
+  margin:0 40rpx 0;
+  padding-bottom: 40rpx;
+  display:flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.listBox .list:last-child{
+  padding-bottom: 65rpx;
+}
+.productName{
+  width: 320rpx;
+  font-size: 28rpx;
+  color: rgb(88, 88, 88);
+  height: 28rpx
+}
+.productAmount,.productMeasure{
+  text-align: right;
+  color: rgb(42, 41, 41);
+}
+.productAmount{
+  width: 320rpx;
+  font-size: 36rpx;
+  height: 36rpx
+}
+.productMeasure{
+  width: 30rpx;
+  font-size: 20rpx;
+  height: 20rpx
+}
+.productFamily{
+  width:calc(100% - 80rpx);
+  margin-left: 40rpx;
+  padding:15rpx 0 55rpx 0;
+  border-top: 2rpx solid rgb(238,238,238);
+  text-align: right;
+  font-size: 24rpx;
+  color: rgb(1,144,210)
+}
+.mb118{
+  margin-bottom: 118rpx;
+}
+.godownentryButton{
+  width:100%;
+  height:118rpx;
+  background-color: rgb(1,144,210);
+  font-size: 40rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0
+}
+.mask{
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top:0;
+  left: 0;
+}
+.maskbox{
+  width: 560rpx;
+  height:320rpx;
+  margin-top:60%;
+  margin-left:calc(50% - 280rpx);
+  background-color: #fff;
+  border-radius: 6rpx;
+  position: relative
+}
+.maskbox text{
+  position: absolute;
+  left:40rpx;
+  top: 60rpx;
+  font-size: 40rpx;
+  color:rgb(88, 88, 88);
+}
+.yes,
+.no{
+  position: absolute;
+  bottom: 60rpx;
+  font-size: 36rpx;
+}
+.yes{
+  color:rgb(1,144,210);
+  right: 80rpx;
+}
+.no{
+  color: rgb(122,122,122);
+  right:220rpx
+}
