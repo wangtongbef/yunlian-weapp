@@ -71,15 +71,6 @@ page{
   font-size: 20rpx;
   height: 20rpx
 }
-.productFamily{
-  width:calc(100% - 80rpx);
-  margin-left: 40rpx;
-  padding:15rpx 0 55rpx 0;
-  border-top: 2rpx solid rgb(238,238,238);
-  text-align: right;
-  font-size: 24rpx;
-  color: rgb(1,144,210)
-}
 .mb118{
   margin-bottom: 118rpx;
 }

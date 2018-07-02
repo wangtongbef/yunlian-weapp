@@ -6,9 +6,8 @@ Page({
    */
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
-    state: 0,
-    role: '',
-    maskshow: false
+    statet: '',
+    statecolor:''
   },
 
   /**
@@ -16,23 +15,19 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    
-
     var that = this
     that.setData({
-      state: options.state,
-      role: options.role
+      statet: options.statet
     })
-  },
 
-  godownentryButton: function () {
-    var that = this
-    if (that.data.role == '仓管员') {
+    if (options.statet == '待审核' || options.statet == '待取货' || options.statet == '运送中'){
       that.setData({
-        maskshow: true
+        statecolor: 'rgb(1,144,210)'
       })
-    } else if (that.data.role == '配送员') {
-      //确认入库
+    } else if (options.statet == '已完成' || options.statet == '已取消' || options.statet == '审核不过'){
+      that.setData({
+        statecolor: 'rgb(88,88,88)'
+      })
     }
   },
 
