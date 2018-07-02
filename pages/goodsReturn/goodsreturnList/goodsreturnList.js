@@ -24,7 +24,8 @@ Page({
     staterightChecked: 0,
     staterightBoxstate: false,
 
-    role: ''
+    role: '',
+    applicationButton: false
   },
 
   /**
@@ -44,6 +45,16 @@ Page({
       that.setData({
         staterightShow: true,
         statesRight: [{ stateId: 0, state: '全部门店' }, { stateId: 1, state: '门店一' }, { stateId: 2, state: '门店儿' }, { stateId: 3, state: '门店删' }]
+      })
+    }
+
+    if (that.data.role == '配送员' || that.data.role == '生产经理') {
+      that.setData({
+        applicationButton: false
+      })
+    } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || that.data.role == '仓管员') {
+      that.setData({
+        applicationButton: true
       })
     }
   },
@@ -95,6 +106,13 @@ Page({
     wx.navigateTo({
       url: '../../goodsReturn/goodsreturnDetail/goodsreturnDetail?role=' + this.data.role + '&statet=' + e.currentTarget.dataset.statet
       // 退货单详情
+    })
+  },
+
+  toApplication: function () {
+    wx.navigateTo({
+      url: '../../goodsReturn/applicationforReturn/applicationforReturn'
+      // 申请退货
     })
   },
 

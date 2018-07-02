@@ -43,9 +43,9 @@
   </block>
   <view wx:if='{{list.length == 0}}'>
     <image class='nodataPic' src='../../../img/no_data.png'></image>
-    <text class='nodataText'>还没有入库单</text>
+    <text class='nodataText'>还没有退货单</text>
   </view>
-  <view wx:if='{{role=="仓管员"}}' bindtap='inStorage'>
+  <view wx:if='{{applicationButton}}' bindtap='toApplication'>
     <image class='button' src='../../../img/circle-icon.png'></image>
     <text class='buttonText-1'>申 请</text>
     <text class='buttonText-2'>退 货</text>
