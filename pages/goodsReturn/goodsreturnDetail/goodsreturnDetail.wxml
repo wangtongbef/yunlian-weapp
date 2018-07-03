@@ -1,5 +1,5 @@
 <!--pages/goodsReturn/goodsreturnDetail/goodsreturnDetail.wxml-->
-<view>
+<view  class='{{state==0?"":"mb118"}}'>
   <view>
     <view class='title'>基本信息</view>
     <view class='content'>
@@ -54,7 +54,7 @@
   </view>
   <view>
     <view class='title'>货物清单</view>
-    <view class='listBox {{state==1?"mb118":""}}'>
+    <view class='listBox'>
       <block wx:for='{{productsList}}' wx:key="name">
         <view class='list'>
           <text class='productName'>{{item.name}}</text>
@@ -65,11 +65,23 @@
       <view class='productFamily'>问题品</view>
     </view>
   </view>
+  <view>
+    <view class='title'>备注</view>
+    <view class='remarks'>
+      <view class='remarksTest'></view>
+    </view>
+  </view>
+  <view class='returnButton returnButton-1' wx:if='{{state==1}}' bindtap='receive'>确认收货</view>
+  <view class='returnButton returnButton-1' wx:if='{{state==2}}' bindtap='clear'>取 消</view>
+  <view class='returnButton' wx:if='{{state==3}}'>
+    <view class='clear' bindtap='clear'>取 消</view>
+    <view class='send' bindtap='send'>发 货</view>
+  </view>
 </view>
-<view wx:if='{{false}}' class='mask' catchtouchmove='endtouchmove'>
+<!-- <view wx:if='{{false}}' class='mask' catchtouchmove='endtouchmove'>
   <view class='maskbox'>
     <text>确定要取消入库吗？</text>
     <view class='no' bindtap='no'>否</view>
     <view class='yes' bindtap='yes'>是</view>
   </view>
-</view>
+</view> -->

@@ -102,7 +102,6 @@ Page({
   },
 
   toDetail: function (e) {
-    console.log(e.currentTarget.dataset.numbers)
     wx.navigateTo({
       url: '../../goodsReturn/goodsreturnDetail/goodsreturnDetail?role=' + this.data.role + '&statet=' + e.currentTarget.dataset.statet
       // 退货单详情

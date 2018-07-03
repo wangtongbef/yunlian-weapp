@@ -1,2 +1,30 @@
 <!--pages/goodsReturn/applicationforReturn/applicationforReturn.wxml-->
-<text>pages/goodsReturn/applicationforReturn/applicationforReturn.wxml</text>
+<view>
+  <view class='title'>货物清单</view>
+  <view class='listBox'>
+    <block wx:for='{{productsList}}' wx:key="name">
+      <view class='list'>
+        <text class='productName'>{{item.name}}</text>
+        <text class='productAmount'>{{item.amount}}</text>
+        <text class='productMeasure'>个</text>
+      </view>
+    </block>
+  </view>
+</view>
+<view>
+  <view class='title'>品质信息</view>
+  <view class='typeCheck'>
+    <view class='naomal'>
+      <image src='../../../img/color.png'></image>
+      <text>正常</text>
+    </view>
+    <view class='problem'>
+      <image src='../../../img/color.png'></image>
+      <text>有问题</text>
+    </view>
+  </view>
+</view>
+<view>
+  <view class='title'>备注</view>
+  
+</view>

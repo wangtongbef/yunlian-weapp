@@ -7,7 +7,11 @@ Page({
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
     statet: '',
-    statecolor:''
+    statecolor:'',
+    state:0,
+    role:'',
+    sendtype:'物流配送',
+    receiveorsend:'退货'
   },
 
   /**
@@ -17,7 +21,8 @@ Page({
     console.log(options)
     var that = this
     that.setData({
-      statet: options.statet
+      statet: options.statet,
+      role: options.role
     })
 
     if (options.statet == '待审核' || options.statet == '待取货' || options.statet == '运送中'){
@@ -28,6 +33,85 @@ Page({
       that.setData({
         statecolor: 'rgb(88,88,88)'
       })
+    }
+
+    if (that.data.statet == '待取货'){
+      if (that.data.role == '配送员'){
+        that.setData({
+          state: 1
+        })
+      } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')){
+        if (that.data.sendtype == '物流配送'){
+          that.setData({
+            state: 3
+          })
+        } else if (that.data.sendtype == '配送员配送'){
+          that.setData({
+            state: 2
+          })
+        } 
+      }
+    } else if (that.data.statet == '运送中'){
+      if ((that.data.role == '仓管员' && that.data.receiveorsend == '收货') || that.data.role == '生产经理') {
+        that.setData({
+          state: 1
+        })
+      } else if (that.data.role == '配送员'){
+        that.setData({
+          state: 2
+        })
+      } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')){
+        if (that.data.sendtype == '物流配送') {
+          that.setData({
+            state: 2
+          })
+        }
+      }
+    }else{
+      that.setData({
+        state: 0
+      })
+    }
+  },
+
+  receive: function(){
+    var that = this
+    if (that.data.statet == '待取货' && that.data.role == '配送员'){
+      console.log('配送员 待取货 确认收货')
+    } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '收货'){
+      console.log('仓管员 收货 运送中 确认收货')
+    } else if (that.data.statet == '运送中' && that.data.role == '生产经理'){
+      console.log('生产经理 运送中 确认收货')
+    }
+  },
+
+  clear: function(){
+    var that = this
+    if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
+      console.log('门店负责人 待取货 取消')
+    } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
+      console.log('门店销售员 待取货 取消')
+    } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
+      console.log('仓管员 待取货 退货 取消')
+    } else if (that.data.statet == '运送中' && that.data.role == '配送员'){
+      console.log('配送员 运送中 取消')
+    } if (that.data.statet == '运送中' && that.data.role == '门店负责人') {
+      console.log('门店负责人 运送中 取消')
+    } else if (that.data.statet == '运送中' && that.data.role == '门店销售员') {
+      console.log('门店销售员 运送中 取消')
+    } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
+      console.log('仓管员 运送中 退货 取消')
+    }
+  },
+  
+  send: function(){
+    var that = this
+    if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
+      console.log('门店负责人 待取货 发货')
+    } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
+      console.log('门店销售员 待取货 发货')
+    } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
+      console.log('仓管员 待取货 退货 发货')
     }
   },
 
