@@ -71,3 +71,28 @@ page{
   font-size:32rpx;
   color: rgb(42, 41, 41)
 }
+.remarkContent{
+  padding-top: 60rpx;
+  background-color: #fff
+}
+.textarea{
+  width: 630rpx;
+  height: 120rpx;
+  border: 2rpx dashed #a7a7a7;
+  margin-left: 38rpx;
+  padding:20rpx;
+  font-size: 24rpx;
+  color: rgb(88, 88, 88)
+}
+.submit{
+  width:100%;
+  height:118rpx;
+  font-size: 40rpx;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  background-color: rgb(1,144,210);
+  justify-content: center;
+  color: #fff;
+}

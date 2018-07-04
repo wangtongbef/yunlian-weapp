@@ -1,30 +1,43 @@
 <!--pages/goodsReturn/applicationforReturn/applicationforReturn.wxml-->
-<view>
-  <view class='title'>货物清单</view>
-  <view class='listBox'>
-    <block wx:for='{{productsList}}' wx:key="name">
-      <view class='list'>
-        <text class='productName'>{{item.name}}</text>
-        <text class='productAmount'>{{item.amount}}</text>
-        <text class='productMeasure'>个</text>
+<view style='margin-bottom: 118rpx;'>
+  <view>
+    <view class='title'>货物清单</view>
+    <view class='listBox'>
+      <block wx:for='{{productsList}}' wx:key="name">
+        <view class='list'>
+          <text class='productName'>{{item.name}}</text>
+          <text class='productAmount'>{{item.amount}}</text>
+          <text class='productMeasure'>个</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view>
+    <view class='title'>品质信息</view>
+    <view class='typeCheck'>
+      <view class='naomal'>
+        <image src='{{productType?"../../../img/color.png":"../../../img/gray.png"}}' catchtap='chooseProducttype'></image>
+        <text>正常</text>
       </view>
-    </block>
-  </view>
-</view>
-<view>
-  <view class='title'>品质信息</view>
-  <view class='typeCheck'>
-    <view class='naomal'>
-      <image src='../../../img/color.png'></image>
-      <text>正常</text>
-    </view>
-    <view class='problem'>
-      <image src='../../../img/color.png'></image>
-      <text>有问题</text>
+      <view class='problem'>
+        <image src='{{!productType?"../../../img/color.png":"../../../img/gray.png"}}' catchtap='chooseProducttype'></image>
+        <text>有问题</text>
+      </view>
     </view>
   </view>
+  <view>
+    <view class='title'>备注</view>
+    <view class='remarkContent' style='padding-bottom:60rpx'>
+      <textarea class='textarea' placeholder="请填写你退货的申请理由..." placeholder-style="color:rgb(204,204,204);font-size:24rpx" maxlength='64' focus='true'></textarea>
+      <view style='margin:40rpx;color:#585858;font-size:24rpx'>添加图片:</view>
+      <view style='margin-left:40rpx;height:160rpx'>
+        <view  style='height:160rpx;display:inline-block;position:relative' wx:for='{{imgList}}' wx:key='index'>
+          <image src='{{item.path}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+          <image src='../../../img/reduce.png' style='width:88rpx;height:88rpx;position:absolute;top:36rpx;left:36rpx' data-index='{{index}}' catchtap='delImage'></image>
+        </view>
+        <image hidden="{{imgList.length==4}}" src='../../../img/add.png' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0' catchtap='addImage'></image>
+      </view>
+    </view>
+  </view>
 </view>
-<view>
-  <view class='title'>备注</view>
-  
-</view>
+<view class='submit' catchtap='submit'>提 交</view>

@@ -68,7 +68,10 @@
   <view>
     <view class='title'>备注</view>
     <view class='remarks'>
-      <view class='remarksTest'></view>
+      <view class='remarksTest'>餐品有问题。。。</view>
+      <view style='margin-left:40rpx;height:160rpx;padding-bottom:60rpx'>
+        <image src='../../../img/add.png' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+      </view>
     </view>
   </view>
   <view class='returnButton returnButton-1' wx:if='{{state==1}}' bindtap='receive'>确认收货</view>

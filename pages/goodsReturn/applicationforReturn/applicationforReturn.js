@@ -6,6 +6,8 @@ Page({
    */
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
+    imgList: [{ path: '../../../img/add.png' }, { path: '../../../img/add.png' }],
+    productType: false
   },
 
   /**
@@ -15,6 +17,43 @@ Page({
   
   },
 
+  chooseProducttype:function(){
+    this.setData({
+      productType: !this.data.productType
+    }) 
+  },
+
+  addImage:function (){
+    var that = this
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFiles = res.tempFiles
+        var list = that.data.imgList
+        list.push(tempFiles[0])
+        that.setData({
+          imgList: list
+        }) 
+        console.log(res)
+      }
+    })
+  },
+
+  delImage:function(e){
+    var that = this
+    var list = that.data.imgList
+    list.splice(e.currentTarget.dataset.index, 1)
+    that.setData({
+      imgList: list
+    })
+  },
+
+  submit: function(){
+    console.log('submit')
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
