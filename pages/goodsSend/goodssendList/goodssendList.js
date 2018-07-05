@@ -6,9 +6,15 @@ Page({
    */
   data: {
     statetext: ['待备货', '待取货', '运送中', '已完成', '已取消'],
+    statecolor: ['rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(88,88,88)', 'rgb(88,88,88)'],
 
     states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待备货' }, { stateId: 2, state: '待取货' }, { stateId: 3, state: '运送中' },
     { stateId: 4, state: '已完成' }, { stateId: 5, state: '已取消' }],
+    list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1, listtype:'紧急'},
+      { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2, listtype: '紧急'},
+      { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3, listtype: '普通'},
+      { numbers: 'ps44444444', time: "2018-06-07  16:16", state: 4, listtype: '紧急'},
+      { numbers: 'ps55555555', time: "2018-06-07  16:16", state: 5, listtype: '普通'}],
     
     stateChecked: 0, //下拉框目录选择
     stateBoxstate: false, //下拉框状态选择
@@ -72,7 +78,7 @@ Page({
     return false;
   },
 
-  staterightCheck: function (e) { //退货状态接口与门店状态接口
+  staterightCheck: function (e) { //送货状态接口与门店状态接口
     var that = this
     that.setData({
       staterightChecked: e.currentTarget.dataset.staterightid
