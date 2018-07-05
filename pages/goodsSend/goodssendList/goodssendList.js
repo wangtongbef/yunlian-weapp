@@ -1,31 +1,24 @@
-// pages/goodsReturn/goodsreturnList/goodsreturnList.js
+// pages/goodsSend/goodssendList/goodssendList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    statetext: ['待审核', '待取货', '运送中', '已完成', '已取消', '审核不过'],
-    statecolor: ['rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(88,88,88)', 'rgb(88,88,88)', 'rgb(88,88,88)'],
+    statetext: ['待备货', '待取货', '运送中', '已完成', '已取消'],
 
-    states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待审核' }, { stateId: 2, state: '待取货' }, { stateId: 3, state: '运送中' },
-       { stateId: 4, state: '已完成' }, { stateId: 5, state: '已取消' }, { stateId: 6, state: '审核不过' }],
-    list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-    { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-    { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, 
-    { numbers: 'ps44444444', time: "2018-06-07  16:16", state: 4 },
-    { numbers: 'ps55555555', time: "2018-06-07  16:16", state: 5 },
-    { numbers: 'ps66666666', time: "2018-06-07  16:16", state: 6 }],
+    states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待备货' }, { stateId: 2, state: '待取货' }, { stateId: 3, state: '运送中' },
+    { stateId: 4, state: '已完成' }, { stateId: 5, state: '已取消' }],
+    
     stateChecked: 0, //下拉框目录选择
     stateBoxstate: false, //下拉框状态选择
 
     staterightShow: false,
     statesRight: [],
-    staterightChecked: 0,
-    staterightBoxstate: false,
+    staterightChecked: 0,//下拉框目录选择
+    staterightBoxstate: false,//下拉框状态选择
 
-    role: '',
-    applicationButton: false
+    role: ''
   },
 
   /**
@@ -36,25 +29,15 @@ Page({
     that.setData({
       role: options.role,
     })
-    if (that.data.role == '仓管员'){
+    if (that.data.role == '仓管员') {
       that.setData({
         staterightShow: true,
-        statesRight: [{ stateId: 0, state: '退货' }, { stateId: 1, state: '收货' }]
+        statesRight: [{ stateId: 0, state: '发货' }, { stateId: 1, state: '收货' }]
       })
-    } else if (that.data.role == '门店负责人'){
+    } else if (that.data.role == '门店负责人') {
       that.setData({
         staterightShow: true,
         statesRight: [{ stateId: 0, state: '全部门店' }, { stateId: 1, state: '门店一' }, { stateId: 2, state: '门店儿' }, { stateId: 3, state: '门店删' }]
-      })
-    }
-
-    if (that.data.role == '配送员' || that.data.role == '生产经理') {
-      that.setData({
-        applicationButton: false
-      })
-    } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || that.data.role == '仓管员') {
-      that.setData({
-        applicationButton: true
       })
     }
   },
@@ -68,7 +51,7 @@ Page({
     })
   },
 
-  staterightBoxhide: function(){
+  staterightBoxhide: function () {
     var that = this;
     that.setData({
       stateBoxstate: false,
@@ -101,20 +84,6 @@ Page({
     }, 10)
     console.log(e.currentTarget.dataset.staterightid)
     return false;
-  },
-
-  toDetail: function (e) {
-    wx.navigateTo({
-      url: '../../goodsReturn/goodsreturnDetail/goodsreturnDetail?role=' + this.data.role + '&statet=' + e.currentTarget.dataset.statet
-      // 退货单详情
-    })
-  },
-
-  toApplication: function () {
-    wx.navigateTo({
-      url: '../../goodsReturn/applicationforReturn/applicationforReturn'
-      // 申请退货
-    })
   },
 
   /**

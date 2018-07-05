@@ -16,11 +16,11 @@
     <view class='title'>品质信息</view>
     <view class='typeCheck'>
       <view class='naomal'>
-        <image src='{{productType?"../../../img/color.png":"../../../img/gray.png"}}' catchtap='chooseProducttype'></image>
+        <image src='{{productType==1?"../../../img/color.png":"../../../img/gray.png"}}' data-type='1' catchtap='chooseProducttype'></image>
         <text>正常</text>
       </view>
       <view class='problem'>
-        <image src='{{!productType?"../../../img/color.png":"../../../img/gray.png"}}' catchtap='chooseProducttype'></image>
+        <image src='{{productType==2?"../../../img/color.png":"../../../img/gray.png"}}' data-type='2' catchtap='chooseProducttype'></image>
         <text>有问题</text>
       </view>
     </view>

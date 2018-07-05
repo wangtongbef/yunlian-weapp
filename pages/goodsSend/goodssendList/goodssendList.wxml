@@ -1,0 +1,33 @@
+<!--pages/goodsSend/goodssendList/goodssendList.wxml-->
+<view class='title'>
+  <view class='stateTitle' bindtap='stateBoxhide'>
+    <text class='stateName'>{{states[stateChecked].state}}</text>
+    <image class='statePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
+  </view>
+  <view class='stateTitle' wx:if='{{staterightShow}}' bindtap='staterightBoxhide'>
+    <text class='stateName'>{{statesRight[staterightChecked].state}}</text>
+    <image class='statePic' mode='widthFix' src='{{!staterightBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
+  </view>
+</view>
+<!--left  -->
+<view class='statedown' hidden='{{!stateBoxstate}}' bindtap='stateBoxhide'>
+  <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
+    <block wx:for='{{states}}' wx:key="text">
+      <view class='stateBox' data-stateId='{{item.stateId}}' catchtap='stateCheck'>
+        <text class='{{stateChecked==item.stateId?"checked":"unchecked"}} stateName'>{{item.state}}</text>
+        <image wx:if='{{stateChecked==item.stateId}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
+      </view>
+    </block>
+  </view>
+</view>
+<!--right  -->
+<view class='statedown' hidden='{{!staterightBoxstate}}' bindtap='staterightBoxhide'>
+  <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
+    <block wx:for='{{statesRight}}' wx:key="text">
+      <view class='stateBox' data-staterightId='{{item.stateId}}' catchtap='staterightCheck'>
+        <text class='{{staterightChecked==item.stateId?"checked":"unchecked"}} stateName'>{{item.state}}</text>
+        <image wx:if='{{staterightChecked==item.stateId}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
+      </view>
+    </block>
+  </view>
+</view>

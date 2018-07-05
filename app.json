@@ -28,7 +28,8 @@
     "pages/godownEntry/godownentryDetail/godownentryDetail",
     "pages/goodsReturn/goodsreturnList/goodsreturnList",
     "pages/goodsReturn/goodsreturnDetail/goodsreturnDetail",
-    "pages/goodsReturn/applicationforReturn/applicationforReturn"
+    "pages/goodsReturn/applicationforReturn/applicationforReturn",
+    "pages/goodsSend/goodssendList/goodssendList"
   ],
   "window": {
     "backgroundTextStyle": "light",

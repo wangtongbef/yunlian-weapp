@@ -7,7 +7,7 @@ Page({
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
     imgList: [{ path: '../../../img/add.png' }, { path: '../../../img/add.png' }],
-    productType: false
+    productType: 2
   },
 
   /**
@@ -17,10 +17,17 @@ Page({
   
   },
 
-  chooseProducttype:function(){
-    this.setData({
-      productType: !this.data.productType
-    }) 
+  chooseProducttype:function(e){
+    var type = e.currentTarget.dataset.type
+    if (this.data.productType == type){
+      this.setData({
+        productType: 0
+      }) 
+    }else{
+      this.setData({
+        productType: e.currentTarget.dataset.type
+      })
+    }
   },
 
   addImage:function (){
