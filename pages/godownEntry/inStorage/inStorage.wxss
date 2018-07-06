@@ -1,0 +1,33 @@
+/* pages/godownEntry/inStorage/inStorage.wxss */
+poage{
+  background: #eee;
+  margin-top:0;
+}
+.scantop{
+  width:100%;
+  height:440rpx;
+  box-shadow: 0 4px 8px rgba(7, 17, 111, 0.2);
+  background-color:#fff;
+  margin-top:0;
+}
+.scantop view{
+  width:100%;
+  text-align: center
+}
+.button{
+  width:640rpx;
+  height:100rpx;
+  margin:160rpx 55rpx 0 55rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button view{
+  width:280rpx;
+  height:100rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+  font-size:40rpx;
+}

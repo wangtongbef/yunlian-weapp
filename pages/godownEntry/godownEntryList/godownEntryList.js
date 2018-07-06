@@ -6,15 +6,16 @@ Page({
    */
   data: {
     states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待确认' }, { stateId: 2, state: '已入库' }, { stateId: 3, state:'已取消'}],
-    list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, { numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-     { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-     { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }],
+    list: [{
+      "id": 1,
+      "status": 0,
+      "update_time": "2018-06-29 11:13:38"
+    },
+    {
+      "id": 2,
+      "status": 1,
+      "update_time": "2018-06-29 11:14:36"
+    },],
     stateChecked: 0,
     stateBoxstate: false,
     role:'',
@@ -27,12 +28,11 @@ Page({
   onLoad: function (options) {
     var that = this;
     var tokenRoles = wx.getStorageSync('tokenRoles')
-    if (tokenRoles) {
-      that.setData({
-        token: tokenRoles.token,
-        role: options.role
-      })
-    }
+    var role = wx.getStorageSync('role')
+    that.setData({
+      token: tokenRoles.token,
+      role: role.role_name
+    })
     console.log(that.data.role)
 
     wx.request({
@@ -44,6 +44,9 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res)
+        // that.setData({
+        //   list: res.data.data
+        // })
       }
     })
   },
@@ -69,14 +72,14 @@ Page({
   toDetail: function(e){
     console.log(e.currentTarget.dataset.numbers)
     wx.navigateTo({
-      url: '../../godownEntry/godownentryDetail/godownentryDetail?role=' + this.data.role + '&state=' + e.currentTarget.dataset.state
+      url: '../../godownEntry/godownentryDetail/godownentryDetail?id=' + this.data.id
     })
   },
 
   inStorage: function(){
     console.log('扫一扫')
     wx.navigateTo({
-      url: ''   //扫码页面
+      url: '../../godownEntry/inStorage/inStorage'   //扫码页面
     })
   },
 

@@ -16,14 +16,14 @@
 </view>
 <view class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
-    <view class='listCell' data-numbers='{{item.numbers}}' data-state='{{item.state}}' bindtap='toDetail'>
+    <view class='listCell' data-id='{{item.id}}' bindtap='toDetail'>
       <view class='listCellL'>
-        <text class='listCellNmubers'>{{item.numbers}}</text>
-        <text class='listCellTime'>{{item.time}}</text>
+        <text class='listCellNmubers'>{{item.id}}</text>
+        <text class='listCellTime'>{{item.update_time}}</text>
       </view>
-      <text class='listCellState' wx:if='{{item.state==1}}' style='color:rgb(1,144,210)'>待确认</text>
-      <text class='listCellState' wx:if='{{item.state==2}}' style='color:rgb(88,88,88)'>已入库</text>
-      <text class='listCellState' wx:if='{{item.state==3}}' style='color:rgb(88,88,88)'>已取消</text>
+      <text class='listCellState' wx:if='{{item.status==0}}' style='color:rgb(1,144,210)'>待确认</text>
+      <text class='listCellState' wx:if='{{item.status==1}}' style='color:rgb(88,88,88)'>已入库</text>
+      <text class='listCellState' wx:if='{{item.status==2}}' style='color:rgb(88,88,88)'>已取消</text>
     </view>
   </block>
   <view wx:if='{{list.length == 0}}'>

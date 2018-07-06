@@ -1,0 +1,9 @@
+<!--pages/godownEntry/inStorage/inStorage.wxml-->
+<view class='scantop'>
+  <view style='font-size:30rpx;color:rgb(122,122,122);margin-top:155rpx;height:30rpx;line-height:30rpx'>二维码编号</view>
+  <view style='letter-spacing:5px;font-size:52rpx;color:rgb(88,88,88);margin-top:60rpx;height:52rpx;line-height:52rpx'>12345678912345</view>
+</view>
+<view class='button'>
+  <view style='background-color:rgb(1,144,210)' catchtap='continue'>继续扫描</view>
+  <view style='background-color:rgb(2,181,19)' catchtap='confirm'>确定</view>
+</view>
