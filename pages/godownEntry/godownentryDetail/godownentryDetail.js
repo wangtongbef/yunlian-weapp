@@ -6,7 +6,7 @@ Page({
    */
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
-    state:0,
+    state:1,
     maskshow:false
   },
 

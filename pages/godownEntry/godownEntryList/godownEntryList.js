@@ -5,18 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待确认' }, { stateId: 2, state: '已入库' }, { stateId: 3, state:'已取消'}],
-    list: [{
-      "id": 1,
-      "status": 0,
-      "update_time": "2018-06-29 11:13:38"
-    },
-    {
-      "id": 2,
-      "status": 1,
-      "update_time": "2018-06-29 11:14:36"
-    },],
-    stateChecked: 0,
+    states: [{ stateId: -1, state: '全部状态' }, { stateId: 0, state: '待确认' }, { stateId: 1, state: '已入库' }, { stateId: 2, state:'已取消'}],
+    list: [],
+    stateChecked: -1,
     stateBoxstate: false,
     role:'',
     token:''
@@ -34,21 +25,36 @@ Page({
       role: role.role_name
     })
     console.log(that.data.role)
-
-    wx.request({
-      url: getApp().data.servsers + 'storage/storageList',
-      data: {
-        token: that.data.token,
-        status:0
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-        // that.setData({
-        //   list: res.data.data
-        // })
-      }
-    })
+    if (that.data.role=='仓管员'){
+      wx.request({
+        url: getApp().data.servsers + 'storage/storageList',
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            list: res.data.data
+          })
+        }
+      })
+    } else if (that.data.role == '配送员') {
+      wx.request({
+        url: getApp().data.servsers + 'storage/storageListForCourier',
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            list: res.data.data
+          })
+        }
+      })
+    }
+    
   },
 
   stateBoxhide: function (e) {
@@ -65,14 +71,80 @@ Page({
       stateChecked: e.currentTarget.dataset.stateid
     })
     setTimeout(function(){that.setData({
-      stateBoxstate: !that.data.stateBoxstate
-    })},10)
+        stateBoxstate: !that.data.stateBoxstate
+      })
+      if (that.data.stateChecked == -1) {
+        console.log(that.data.stateChecked)
+        if (that.data.role == '仓管员') {
+          wx.request({
+            url: getApp().data.servsers + 'storage/storageList',
+            data: {
+              token: that.data.token
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          })
+        } else if (that.data.role == '配送员') {
+          wx.request({
+            url: getApp().data.servsers + 'storage/storageListForCourier',
+            data: {
+              token: that.data.token
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          })
+        }
+      }else{
+        console.log(that.data.stateChecked)
+        if (that.data.role == '仓管员') {
+          wx.request({
+            url: getApp().data.servsers + 'storage/storageList',
+            data: {
+              token: that.data.token,
+              status: that.data.stateChecked
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          })
+        } else if (that.data.role == '配送员') {
+          wx.request({
+            url: getApp().data.servsers + 'storage/storageListForCourier',
+            data: {
+              token: that.data.token,
+              status: that.data.stateChecked
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          })
+        }
+      }
+    },10)
   },
 
   toDetail: function(e){
-    console.log(e.currentTarget.dataset.numbers)
+    console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '../../godownEntry/godownentryDetail/godownentryDetail?id=' + this.data.id
+      url: '../../godownEntry/godownentryDetail/godownentryDetail?id=' + e.currentTarget.dataset.id
     })
   },
 

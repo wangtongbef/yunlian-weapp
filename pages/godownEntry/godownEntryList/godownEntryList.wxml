@@ -1,6 +1,6 @@
 <!--pages/godownEntry/godownEntryList/godownEntryList.wxml-->
 <view class='title' bindtap='stateBoxhide' catchtouchmove='endtouchmove'>
-  <text class='titleName'>{{states[stateChecked].state}}</text>
+  <text class='titleName'>{{states[stateChecked+1].state}}</text>
   <image class='titlePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
 </view>
 <view class='statedown' hidden='{{!stateBoxstate}}' catchtouchmove='endtouchmove'>

@@ -1,9 +1,59 @@
 <!--pages/godownEntry/inStorage/inStorage.wxml-->
-<view class='scantop'>
-  <view style='font-size:30rpx;color:rgb(122,122,122);margin-top:155rpx;height:30rpx;line-height:30rpx'>二维码编号</view>
-  <view style='letter-spacing:5px;font-size:52rpx;color:rgb(88,88,88);margin-top:60rpx;height:52rpx;line-height:52rpx'>12345678912345</view>
+<view wx:if='{{comfirmState==1}}'>
+  <view class='scantop'>
+    <view hidden='true'>
+      <view class='numTitle'>二维码编号</view>
+      <view class='numContent'>12345678912345</view>
+    </view>
+    <view>
+      <view class='notValid'>二维码无效</view>
+    </view>
+  </view>
+  <view class='button'>
+    <view style='background-color:rgb(1,144,210)' catchtap='Continue'>继续扫描</view>
+    <view style='background-color:rgb(2,181,19)' catchtap='confirm'>确定</view>
+  </view>
 </view>
-<view class='button'>
-  <view style='background-color:rgb(1,144,210)' catchtap='continue'>继续扫描</view>
-  <view style='background-color:rgb(2,181,19)' catchtap='confirm'>确定</view>
+<view wx:if='{{comfirmState==2}}'>
+  <view>
+    <view class='title'>送货方信息</view>
+    <view wx:if='{{sendType==0}}' class='content'>
+      <view>
+        <text class='ct'>送货方</text>
+        <text class='cc'>工厂</text>
+      </view>
+    </view>
+    <view wx:if='{{sendType==1}}' class='content'>
+      <view>
+        <text class='ct'>配送员</text>
+        <text class='cc'>小明</text>
+      </view>
+    </view>
+    <view wx:if='{{sendType==2}}' class='content'>
+      <view>
+        <text class='ct'>物流</text>
+        <text class='cc'>顺丰</text>
+      </view>
+      <view>
+        <text class='ct'>运单号</text>
+        <text class='cn'>1110000</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='title'>货物清单</view>
+    <view class='listBox mb118'>
+      <block wx:for='{{productList}}' wx:key="name">
+        <view class='list'>
+          <text class='productName'>{{item.name}}</text>
+          <text class='productAmount'>{{item.count}}</text>
+          <text class='productMeasure'>个</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='submit' catchtap='submit'>
+  提 交
+  </view>
 </view>
+<view wx:if='{{maskshow}}' class='mask'><text>{{markedWords}}</text></view>
