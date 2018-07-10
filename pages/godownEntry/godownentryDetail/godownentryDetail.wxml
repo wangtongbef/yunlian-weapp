@@ -5,50 +5,62 @@
     <view class='content'>
       <view>
         <text class='ct'>状态</text>
-        <text wx:if='{{state==1}}' style='color:rgb(1,144,210);font-size:32rpx'>待确认</text>
-        <text wx:if='{{state==2}}' style='color:rgb(88,88,88);font-size:32rpx'>已入库</text>
-        <text wx:if='{{state==3}}' style='color:rgb(88,88,88);font-size:32rpx'>已取消</text>
+        <text wx:if='{{base_info.status==0}}' style='color:rgb(1,144,210);font-size:32rpx'>待确认</text>
+        <text wx:if='{{base_info.status==1}}' style='color:rgb(88,88,88);font-size:32rpx'>已入库</text>
+        <text wx:if='{{base_info.status==2}}' style='color:rgb(88,88,88);font-size:32rpx'>已取消</text>
       </view>
       <view>
         <text class='ct'>编号</text>
-        <text class='cn'>ps1111111</text>
+        <text class='cn'>{{base_info.id}}</text>
       </view>
       <view>
         <text class='ct'>收货人</text>
-        <text class='cc'>小小明</text>
+        <text class='cc'>{{base_info.receive_person}}</text>
       </view>
       <view>
         <text class='ct'>生成时间</text>
-        <text class='cn'>2018-06-07  16:16</text>
+        <text class='cn'>{{base_info.create_time}}</text>
       </view>
     </view>
   </view>
-  <view>
+  <view wx:if="{{role == '仓管员'}}">
     <view class='title'>送货方信息</view>
-    <view class='content'>
+    <view wx:if='{{give_info.from_type==0}}' class='content'>
+      <view>
+        <text class='ct'>送货方</text>
+        <text class='cc'>工厂</text>
+      </view>
+    </view>
+    <view wx:if='{{give_info.from_type==1}}' class='content'>
       <view>
         <text class='ct'>配送员</text>
-        <text class='cc'>小明</text>
+        <text class='cc'>{{give_info.courier}}</text>
+      </view>
+    </view>
+    <view wx:if='{{give_info.from_type==2}}' class='content'>
+      <view>
+        <text class='ct'>物流</text>
+        <text class='cc'>{{give_info.logistics_company}}</text>
       </view>
       <view>
-        <text class='ct'>配送员编号</text>
-        <text class='cc'>1110000</text>
+        <text class='ct'>运单号</text>
+        <text class='cn'>{{give_info.waybill_number}}</text>
       </view>
     </view>
   </view>
   <view>
     <view class='title'>货物清单</view>
-    <view class='listBox {{state==1?"mb118":""}}'>
-      <block wx:for='{{productsList}}' wx:key="name">
+    <view class='listBox {{status==0?"mb118":""}}'>
+      <block wx:for='{{product_list}}' wx:key="name">
         <view class='list'>
-          <text class='productName'>{{item.name}}</text>
-          <text class='productAmount'>{{item.amount}}</text>
+          <text class='productName'>{{item.product_name}}</text>
+          <text class='productAmount'>{{item.product_count}}</text>
           <text class='productMeasure'>个</text>
         </view>
       </block>
     </view>
   </view>
-  <view class='godownentryButton' wx:if='{{state==1}}' bindtap='godownentryButton'>
+  <view class='godownentryButton' wx:if='{{base_info.status==0}}' bindtap='godownentryButton'>
     <text wx:if="{{role=='仓管员'}}">取消入库</text>
     <text wx:if="{{role=='配送员'}}">确认入库</text>
   </view>

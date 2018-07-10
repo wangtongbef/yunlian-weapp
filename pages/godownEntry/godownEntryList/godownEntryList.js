@@ -169,7 +169,43 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    var role = wx.getStorageSync('role')
+    that.setData({
+      token: tokenRoles.token,
+      role: role.role_name
+    })
+    console.log(that.data.role)
+    if (that.data.role == '仓管员') {
+      wx.request({
+        url: getApp().data.servsers + 'storage/storageList',
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            list: res.data.data
+          })
+        }
+      })
+    } else if (that.data.role == '配送员') {
+      wx.request({
+        url: getApp().data.servsers + 'storage/storageListForCourier',
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            list: res.data.data
+          })
+        }
+      })
+    }
   },
 
   /**
