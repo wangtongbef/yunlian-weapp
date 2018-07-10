@@ -6,7 +6,7 @@ Page({
    */
   data: {
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
-    imgList: [{ path: '../../../img/add.png' }, { path: '../../../img/add.png' }],
+    imgList: [],
     productType: 2
   },
 
@@ -40,11 +40,11 @@ Page({
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFiles = res.tempFiles
         var list = that.data.imgList
-        list.push(tempFiles[0])
+        list.push(tempFiles[0].path)
         that.setData({
           imgList: list
         }) 
-        console.log(res)
+        console.log(that.data.imgList)
       }
     })
   },

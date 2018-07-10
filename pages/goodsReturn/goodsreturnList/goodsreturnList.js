@@ -5,26 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statetext: ['待审核', '待取货', '运送中', '已完成', '已取消', '审核不过'],
-    statecolor: ['rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(88,88,88)', 'rgb(88,88,88)', 'rgb(88,88,88)'],
+    statetext: ['待审核', '审核不过', '待取货', '运送中', '已完成', '已返厂', '已取消'],
+    statecolor: ['rgb(1,144,210)', 'rgb(88,88,88)', 'rgb(1,144,210)', 'rgb(1,144,210)', 'rgb(88,88,88)', 'rgb(88,88,88)', 'rgb(88,88,88)'],
 
-    states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待审核' }, { stateId: 2, state: '待取货' }, { stateId: 3, state: '运送中' },
-       { stateId: 4, state: '已完成' }, { stateId: 5, state: '已取消' }, { stateId: 6, state: '审核不过' }],
-    list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1 },
-    { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2 },
-    { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3 }, 
-    { numbers: 'ps44444444', time: "2018-06-07  16:16", state: 4 },
-    { numbers: 'ps55555555', time: "2018-06-07  16:16", state: 5 },
-    { numbers: 'ps66666666', time: "2018-06-07  16:16", state: 6 }],
+    states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待审核' }, { stateId: 2, state: '审核不过' }, { stateId: 3, state: '待取货' }, { stateId: 4, state: '运送中' },
+      { stateId: 5, state: '已完成' }, { stateId: 6, state: '已返厂' }, { stateId: 7, state: '已取消' }], //stateId-1==status
+    list: [],
     stateChecked: 0, //下拉框目录选择
     stateBoxstate: false, //下拉框状态选择
 
     staterightShow: false,
     statesRight: [],
-    staterightChecked: 0,
+    staterightChecked: -1,
     staterightBoxstate: false,
 
     role: '',
+    token:'',
     applicationButton: false
   },
 
@@ -33,20 +29,182 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    var role = wx.getStorageSync('role')
     that.setData({
-      role: options.role,
+      role: role.role_name,
+      token: tokenRoles.token
     })
     if (that.data.role == '仓管员'){
       that.setData({
         staterightShow: true,
-        statesRight: [{ stateId: 0, state: '退货' }, { stateId: 1, state: '收货' }]
+        statesRight: [{ id: -1, name: '收货' }, { id: 0, name: '退货' }]
+      })
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnList', //获取收货订单列表
+        data: {
+          token: that.data.token,
+          type:0
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              list: res.data.data
+            })
+          }
+        }
       })
     } else if (that.data.role == '门店负责人'){
-      that.setData({
-        staterightShow: true,
-        statesRight: [{ stateId: 0, state: '全部门店' }, { stateId: 1, state: '门店一' }, { stateId: 2, state: '门店儿' }, { stateId: 3, state: '门店删' }]
+      var storeList
+      wx.request({
+        url: getApp().data.servsers + 'shop/signingShopsForChargePerson', //获取门店列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            storeList = [{ id: -1, name: '全部门店' }].concat(res.data.data)
+            console.log(storeList)
+            that.setData({
+              staterightShow: true,
+              statesRight: storeList
+            })
+          }
+        }
       })
-    }
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              list: res.data.data
+            })
+          }
+        }
+      })
+    } else if (that.data.role == '生产经理') {
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnListForProduceManager', //获取退货列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              list: res.data.data
+            })
+          }
+        }
+      })
+    } else if (that.data.role == '配送员') {
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnListForCourier', //获取退货列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              list: res.data.data
+            })
+          }
+        }
+      })
+    } else if (that.data.role == '门店销售员') {
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnListForSales', //获取退货列表
+        data: {
+          token: that.data.token
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              list: res.data.data
+            })
+          }
+        }
+      })
+    } 
 
     if (that.data.role == '配送员' || that.data.role == '生产经理') {
       that.setData({
@@ -79,8 +237,358 @@ Page({
   stateCheck: function (e) { //状态选择接口请求
     var that = this
     that.setData({
-      stateChecked: e.currentTarget.dataset.stateid
+      stateChecked: e.currentTarget.dataset.stateid //选中的stateid==status+1
     })
+    if (that.data.role == '仓管员') {
+      if (that.data.stateChecked == 0){
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnList', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            type: that.data.staterightChecked + 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }else{
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnList', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            type: that.data.staterightChecked + 1,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '门店负责人') {
+      var storeList
+      if (that.data.stateChecked == 0){
+        if (that.data.staterightChecked == -1){
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        } else if (that.data.staterightChecked != -1){
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              shop_id: that.data.staterightChecked
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        }
+      } else if(that.data.stateChecked != 0){
+        if (that.data.staterightChecked == -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              status: that.data.stateChecked - 1
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        } else if (that.data.staterightChecked != -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              shop_id: that.data.staterightChecked,
+              status: that.data.stateChecked - 1
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        }
+      }
+    } else if (that.data.role == '生产经理') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForProduceManager', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForProduceManager', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '配送员') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForCourier', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForCourier', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '门店销售员') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForSales', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForSales', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } 
     setTimeout(function () {
       that.setData({
         stateBoxstate: !that.data.stateBoxstate
@@ -94,6 +602,356 @@ Page({
     that.setData({
       staterightChecked: e.currentTarget.dataset.staterightid
     })
+    if (that.data.role == '仓管员') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnList', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            type: that.data.staterightChecked + 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnList', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            type: that.data.staterightChecked + 1,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '门店负责人') {
+      var storeList
+      if (that.data.stateChecked == 0) {
+        if (that.data.staterightChecked == -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        } else if (that.data.staterightChecked != -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              shop_id: that.data.staterightChecked
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        }
+      } else if (that.data.stateChecked != 0) {
+        if (that.data.staterightChecked == -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              status: that.data.stateChecked - 1
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        } else if (that.data.staterightChecked != -1) {
+          wx.request({
+            url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
+            data: {
+              token: that.data.token,
+              shop_id: that.data.staterightChecked,
+              status: that.data.stateChecked - 1
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                console.log(res)
+                that.setData({
+                  list: res.data.data
+                })
+              }
+            }
+          })
+        }
+      }
+    } else if (that.data.role == '生产经理') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForProduceManager', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForProduceManager', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '配送员') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForCourier', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForCourier', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } else if (that.data.role == '门店销售员') {
+      if (that.data.stateChecked == 0) {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForSales', //获取收货订单列表
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: getApp().data.servsers + 'return_documents/returnListForSales', //获取收货订单列表
+          data: {
+            token: that.data.token,
+            status: that.data.stateChecked - 1
+          },
+          method: 'POST',
+          success: function (res) {
+            if (res.data.code == -3) {
+              wx.showToast({
+                title: 'token过期',
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../login/login'
+                })
+              }, 1000)
+            } else {
+              console.log(res)
+              that.setData({
+                list: res.data.data
+              })
+            }
+          }
+        })
+      }
+    } 
     setTimeout(function () {
       that.setData({
         staterightBoxstate: !that.data.staterightBoxstate

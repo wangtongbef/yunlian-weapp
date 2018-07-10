@@ -32,7 +32,7 @@
       <view style='margin:40rpx;color:#585858;font-size:24rpx'>添加图片:</view>
       <view style='margin-left:40rpx;height:160rpx'>
         <view  style='height:160rpx;display:inline-block;position:relative' wx:for='{{imgList}}' wx:key='index'>
-          <image src='{{item.path}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+          <image src='{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
           <image src='../../../img/reduce.png' style='width:88rpx;height:88rpx;position:absolute;top:36rpx;left:36rpx' data-index='{{index}}' catchtap='delImage'></image>
         </view>
         <image hidden="{{imgList.length==4}}" src='../../../img/add.png' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0' catchtap='addImage'></image>
