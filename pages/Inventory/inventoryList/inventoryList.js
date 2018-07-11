@@ -84,8 +84,8 @@ Page({
               }, 1000)
             } else {
               that.setData({
-                // expressList: res.data.data,
-                expressList: [{ logistics_company_name: "顺丰", waybill_number: "123456789" }, { logistics_company_name: "韵达", waybill_number: "145263987" }], //测试数据
+                expressList: res.data.data,
+                //expressList: [{ logistics_company_name: "顺丰", waybill_number: "123456789" }, { logistics_company_name: "韵达", waybill_number: "145263987" }], //测试数据
                 downloaded: true
               })
             }

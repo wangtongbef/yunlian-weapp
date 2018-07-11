@@ -35,6 +35,7 @@
         <text class='productMeasure'>个</text>
       </view>
     </block>
-    <view class='productFamily'>问题品</view>
+    <view wx:if="{{billdata.quality==0}}" class='productFamily'>正常品</view>
+    <view wx:if="{{billdata.quality==1}}" class='productFamily'>问题品</view>
   </view>
 </view>
