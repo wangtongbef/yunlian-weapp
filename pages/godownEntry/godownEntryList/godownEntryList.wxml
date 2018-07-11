@@ -26,7 +26,7 @@
       <text class='listCellState' wx:if='{{item.status==2}}' style='color:rgb(88,88,88)'>已取消</text>
     </view>
   </block>
-  <view wx:if='{{list.length == 0}}'>
+  <view class='nodata' wx:if='{{list.length == 0}}'>
     <image class='nodataPic' src='../../../img/no_data.png'></image>
     <text class='nodataText'>还没有入库单</text>
   </view>

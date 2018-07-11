@@ -43,7 +43,7 @@
       <text class='listCellState' style='color:{{statecolor[item.state-1]}}'>{{statetext[item.state-1]}}</text>
     </view>
   </block>
-  <view wx:if='{{list.length == 0}}'>
+  <view class='nodata' wx:if='{{list.length == 0}}'>
     <image class='nodataPic' src='../../../img/no_data.png'></image>
     <text class='nodataText'>还没有送货单</text>
   </view>

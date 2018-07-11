@@ -67,7 +67,8 @@ page{
   color:rgb(88,88,88);
 }
 .list{
-  margin-top:128rpx
+  margin-top:128rpx;
+  position:relative;
 }
 .listCell{
   height:160rpx;
@@ -116,11 +117,15 @@ page{
   font-size: 40rpx;
   color: #fff
 }
+.nodata{
+  position:absolute;
+  top:282rpx;
+  width:100%;
+}
 .nodataPic{
   display: block;
   width:86rpx;
   height:75rpx;
-  margin-top: 300rpx;
   margin-left: calc(50% - 43rpx);
 }
 .nodataText{

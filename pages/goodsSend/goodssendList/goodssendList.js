@@ -10,11 +10,7 @@ Page({
 
     states: [{ stateId: 0, state: '全部状态' }, { stateId: 1, state: '待备货' }, { stateId: 2, state: '待取货' }, { stateId: 3, state: '运送中' },
     { stateId: 4, state: '已完成' }, { stateId: 5, state: '已取消' }],
-    list: [{ numbers: 'ps1111111', time: "2018-06-07  16:16", state: 1, listtype:'紧急'},
-      { numbers: 'ps2222222', time: "2018-06-07  16:16", state: 2, listtype: '紧急'},
-      { numbers: 'ps33333333', time: "2018-06-07  16:16", state: 3, listtype: '普通'},
-      { numbers: 'ps44444444', time: "2018-06-07  16:16", state: 4, listtype: '紧急'},
-      { numbers: 'ps55555555', time: "2018-06-07  16:16", state: 5, listtype: '普通'}],
+    list: [],
     
     stateChecked: 0, //下拉框目录选择
     stateBoxstate: false, //下拉框状态选择
@@ -24,7 +20,8 @@ Page({
     staterightChecked: 0,//下拉框目录选择
     staterightBoxstate: false,//下拉框状态选择
 
-    role: ''
+    role: '',
+    token:''
   },
 
   /**
@@ -33,13 +30,45 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({
-      role: options.role,
+      role: wx.getStorageSync('role').role_name,
+      token: wx.getStorageSync('tokenRoles').token
     })
     if (that.data.role == '仓管员') {
       that.setData({
         staterightShow: true,
         statesRight: [{ stateId: 0, state: '发货' }, { stateId: 1, state: '收货' }]
       })
+      // function Request(url,data){
+      //   var resdata
+      //   wx.request({
+      //     url: getApp().data.servsers + url, //获取送货订单列表
+      //     data: data,
+      //     method: 'POST',
+      //     success: function (res) {
+      //       if (res.data.code == -3) {
+      //         wx.showToast({
+      //           title: 'token过期',
+      //           icon: 'none',
+      //           duration: 1000
+      //         })
+      //         setTimeout(function () {
+      //           wx.redirectTo({
+      //             url: '../../login/login'
+      //           })
+      //         }, 1000)
+      //       } else {
+      //         console.log(res)
+      //         return res
+      //       }
+      //     }
+      //   })
+      //   return resdata
+      // }
+      // var resdata = Request('delivery/deliveryList', {
+      //   token: that.data.token,
+      //   type: 0
+      // })
+      // console.log(resdata)
     } else if (that.data.role == '门店负责人') {
       that.setData({
         staterightShow: true,
