@@ -5,24 +5,57 @@ Page({
    * 页面的初始数据
    */
   data: {
-    storetitle: {},
+    storetitle: '',
     currentTab:0,
-    nomalProducts: [{ name: '卡儿酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, {name: '卡儿酷军工电源', amount: 5000 }],
-    // faultyProducts: [{ name: '卡儿酷启动电', amount: 20 }, { name: '卡儿酷车', amount: 10 }, { name: '卡儿酷军工', amount: 500 }],
-    //nomalProducts: [],
-    faultyProducts: [],
-    products: []
+    products: [],
+    token:'',
+    shop_id:-1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     that.setData({
-      storetitle: options,
-      products: that.data.nomalProducts
+      token: wx.getStorageSync('tokenRoles').token,
+      shop_id: options.id
     })
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: getApp().data.servsers + 'shop_inventory/detailInShop', //获取正常品
+      data: {
+        token: that.data.token,
+        shop_id: that.data.shop_id,
+        quality:0
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        wx.hideLoading()
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            products: res.data.data.product_list,
+            storetitle: res.data.data.shop_name
+          })
+        }
+      }
+    })
+    console.log(that.data.products)
   },
 
   swichNav: function (e) {
@@ -33,15 +66,35 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
-      if (e.target.dataset.current == 0){
-        that.setData({
-          products: that.data.nomalProducts
-        })
-      } else if (e.target.dataset.current == 1) {
-        that.setData({
-          products: that.data.faultyProducts
-        })
-      }
+      wx.request({
+        url: getApp().data.servsers + 'shop_inventory/detailInShop', //获取
+        data: {
+          token: that.data.token,
+          shop_id: that.data.shop_id,
+          quality: e.target.dataset.current
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          wx.hideLoading()
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              products: res.data.data.product_list
+            })
+          }
+        }
+      })
     }
   },
 

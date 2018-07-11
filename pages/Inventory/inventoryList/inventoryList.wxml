@@ -12,8 +12,8 @@
   <view wx:if='{{currentTab==1 && expressList.length!=0}}'>
     <block wx:for='{{expressList}}' wx:key="numbers">
       <view class='expressli' data-index="{{index}}" bindtap='navigatExp'>
-        <text>{{item.name}}</text>
-        <text>{{item.numbers}}</text>
+        <text>{{item.logistics_company_name}}</text>
+        <text>{{item.waybill_number}}</text>
       </view>
     </block>
   </view>

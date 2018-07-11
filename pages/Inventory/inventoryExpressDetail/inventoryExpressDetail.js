@@ -5,8 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    waybill:{},
-    sender:{sendPerson:'意义',sendStore:'大浪中心店'},
+    waybill:'',
+    billdata:{},
+    token:'',
     productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }]
   },
 
@@ -16,9 +17,40 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      waybill: options
+      waybill: options.numbers,
+      token: wx.getStorageSync('tokenRoles').token
     })
     console.log(that.data.waybill)
+    wx.request({
+      url: getApp().data.servsers + 'shop_inventory/detailInTransport', 
+      data: {
+        token: that.data.token,
+        id: that.data.waybill
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        wx.hideLoading()
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          that.setData({
+            billdata: res.data.data,
+            productsList: res.data.data.product_list
+          })
+          console.log(that.data.billdata)
+        }
+      }
+    })
   },
 
   /**

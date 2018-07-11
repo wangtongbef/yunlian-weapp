@@ -1,4 +1,4 @@
-<view class='title'>{{storetitle.name}}</view>
+<view class='title'>{{storetitle}}</view>
 <view class='gray'></view>
 <view>
   <view class="detail_tab">
