@@ -5,7 +5,9 @@
     <image class='statePic' mode='widthFix' src='{{!stateBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
   </view>
   <view class='stateTitle' wx:if='{{staterightShow}}' bindtap='staterightBoxhide'>
-    <text class='stateName'>{{statesRight[staterightChecked].state}}</text>
+    <block wx:for='{{statesRight}}' wx:key="text">
+      <text wx:if='{{staterightChecked==item.id}}' class='stateName'>{{item.name}}</text>
+    </block>
     <image class='statePic' mode='widthFix' src='{{!staterightBoxstate?"../../../img/arrow-down.png":"../../../img/arrow_up.png"}}'></image>
   </view>
 </view>
@@ -24,9 +26,9 @@
 <view class='statedown' hidden='{{!staterightBoxstate}}' bindtap='staterightBoxhide'>
   <view style='background-color:#fff;z-index:50;display:fixed;top:88rpx;'>
     <block wx:for='{{statesRight}}' wx:key="text">
-      <view class='stateBox' data-staterightId='{{item.stateId}}' catchtap='staterightCheck'>
-        <text class='{{staterightChecked==item.stateId?"checked":"unchecked"}} stateName'>{{item.state}}</text>
-        <image wx:if='{{staterightChecked==item.stateId}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
+      <view class='stateBox' data-staterightId='{{item.id}}' catchtap='staterightCheck'>
+        <text class='{{staterightChecked==item.id?"checked":"unchecked"}} stateName'>{{item.name}}</text>
+        <image wx:if='{{staterightChecked==item.id}}' class='statePic' mode='widthFix' src='../../../img/ok.png'></image>
       </view>
     </block>
   </view>
@@ -36,11 +38,11 @@
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
     <view class='listCell' data-statet='{{statetext[item.state-1]}}' data-index='{{index}}' bindtap='toDetail'>
       <view class='listCellL'>
-        <text class='listCellNmubers'>{{item.numbers}}</text>
-        <text class='listCellTime'>{{item.time}}</text>
+        <text class='listCellNmubers'>{{item.id}}</text>
+        <text class='listCellTime'>{{item.create_time}}</text>
       </view>
-      <view class='listtype'>{{item.listtype}}</view>
-      <text class='listCellState' style='color:{{statecolor[item.state-1]}}'>{{statetext[item.state-1]}}</text>
+      <view class='listtype'>{{item.type}}</view>
+      <text class='listCellState' style='color:{{statecolor[item.state-1]}}'>{{statetext[item.status]}}</text>
     </view>
   </block>
   <view class='nodata' wx:if='{{list.length == 0}}'>
