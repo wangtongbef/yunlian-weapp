@@ -1,0 +1,40 @@
+/* pages/scanGoods/scanGoods/scanGoods.wxss */
+page{
+  background-color: rgb(248, 248, 248);
+}
+.title{
+  width:100%;
+  height:156rpx;
+  text-align: center;
+  line-height: 156rpx;
+  font-size: 36rpx;
+  color: rgb(42, 41, 41);
+  background-color: #fff;
+  margin-bottom: 40rpx;
+}
+.list{
+  width:calc(100% - 80rpx);
+  height:100rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  padding:0 40rpx;
+  display: flex;
+  align-items: center;
+}
+.arrowRight{
+  width:20rpx;
+  height:35rpx;
+}
+.listName{
+  width:60%;
+  color: rgb(88, 88, 88)
+}
+.listcount{
+  width:calc(40% - 40rpx);
+  color:rgb(1, 144, 210);
+  text-align: right
+}
+.arrowRight{
+  margin-left: 20rpx;
+}

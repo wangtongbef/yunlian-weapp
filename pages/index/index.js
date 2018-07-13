@@ -34,7 +34,8 @@ Page({
         list: [{ text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scan/scan' },
           { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
         List_storage: [{ text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }]
+          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '门店负责人') {
       that.setData({
@@ -44,7 +45,8 @@ Page({
           { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
         List_storage: [{ text: '存货', icon: '../../img/cunhuo-icon.png', url: '../Inventory/inventoryList/inventoryList' },
           { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }]
+          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '商务专员') {
       that.setData({
@@ -61,7 +63,8 @@ Page({
         List_storage: [{
           text: '入库单', icon: '../../img/rukudan-icon.png', url: '../godownEntry/godownEntryList/godownEntryList' },
           { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }]
+          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '配送员'){
       that.setData({

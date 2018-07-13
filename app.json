@@ -31,7 +31,9 @@
     "pages/goodsReturn/applicationforReturn/applicationforReturn",
     "pages/goodsSend/goodssendList/goodssendList",
     "pages/goodsSend/goodssendDetail/goodssendDetail",
-    "pages/godownEntry/inStorage/inStorage"
+    "pages/godownEntry/inStorage/inStorage",
+    "pages/scanGoods/scanGoods/scanGoods",
+    "pages/scanGoods/scanGoodsdetail/scanGoodsdetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

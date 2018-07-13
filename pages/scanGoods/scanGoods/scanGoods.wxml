@@ -1,0 +1,11 @@
+<!--pages/scanGoods/scanGoods/scanGoods.wxml-->
+<view class='title'>产品清单</view>
+<view>
+  <block wx:for='{{list}}' wx:key="{{index}}">
+      <view class='list'>
+        <text class='listName'>{{item.name}}</text>
+        <text class='listcount'>{{item.count}}个</text>
+        <image class='arrowRight' src='../../../img/arrow_right.png'></image>
+      </view>
+    </block>
+</view>
