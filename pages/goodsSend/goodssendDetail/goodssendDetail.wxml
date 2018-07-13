@@ -1,2 +1,73 @@
 <!--pages/goodsSend/goodssendDetail/goodssendDetail.wxml-->
-<text>pages/goodsSend/goodssendDetail/goodssendDetail.wxml</text>
+<view  class='{{state==0?"":"mb118"}}'>
+  <view>
+    <view class='title'>基本信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>状态</text>
+        <text style='color:{{statecolor}};font-size:32rpx'>{{statet}}</text>
+      </view>
+      <view>
+        <text class='ct'>编号</text>
+        <text class='cn'>ps1111111</text>
+      </view>
+      <view>
+        <text class='ct'>收货人</text>
+        <text class='cc'>小小明</text>
+      </view>
+      <view>
+        <text class='ct'>生成时间</text>
+        <text class='cn'>2018-06-07  16:16</text>
+      </view>
+    </view>
+  </view>
+    <view>
+    <view class='title'>发货方信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>发货仓库</text>
+        <text class='cc'>大浪店</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='title'>送货方信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>配送员</text>
+        <text class='cc'>小明</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='title'>收货方信息</view>
+    <view class='content'>
+      <view>
+        <text class='ct'>收货机构</text>
+        <text class='cc'>八号当铺</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class='title'>货物清单</view>
+    <view class='listBox'>
+      <block wx:for='{{productsList}}' wx:key="name">
+        <view class='list'>
+          <text class='productName'>{{item.name}}</text>
+          <text class='productAmount'>{{item.amount}}</text>
+          <text class='productMeasure'>个</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='returnButton' wx:if='{{state==1}}'>
+    <view class='clear' bindtap='clear'>取 消</view>
+    <view class='stockUp' bindtap='stockUp'>备 货</view>
+  </view>
+  <view class='returnButton returnButton-1' wx:if='{{state==2}}' bindtap='clear'>取 消</view>
+  <view class='returnButton' wx:if='{{state==3}}'>
+    <view class='clear' bindtap='clear'>取 消</view>
+    <view class='send' bindtap='send'>发 货</view>
+  </view>
+  <view class='returnButton returnButton-1' wx:if='{{state==4}}' bindtap='receive'>确认收货</view>
+</view>
