@@ -5,25 +5,79 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [{
-      "type": "CB01",
-      "count": 1,
-      "name": "智能电瓶",
-      "id": 40
-    },
-    {
-      "type": "cb02",
-      "count": 2,
-      "name": "卡尔酷智能电瓶",
-      "id": 38
-    }]
+    list: [],
+    err: false,
+    code_sn: '',
+    code_type:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    wx.scanCode({
+      onlyFromCamera: false,
+      success: (res) => {
+        if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
+          var detail = res.result.split("?")[1].split("&")
+          that.setData({
+            code_sn: detail[0].split("=")[1],
+            code_type: detail[1].split("=")[1]
+          })
+          wx.request({
+            url: getApp().data.servsers + 'code/getProduct',
+            data: {
+              token: wx.getStorageSync('tokenRoles').token,
+              code_sn: that.data.code_sn,
+              code_type: that.data.code_type
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+              if (res.data.code == -3) {
+                wx.showToast({
+                  title: 'token过期',
+                  icon: 'none',
+                  duration: 1000
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '../../login/login'
+                  })
+                }, 1000)
+              } else {
+                if (res.statusCode == 200) {
+                  that.setData({
+                    list:res.data.data
+                  })
+                } else {
+                  wx.showToast({
+                    title: '扫码失败',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }, 1000)
+                }
+              }
+            }
+          })
+        } else {
+          that.setData({
+            err: true
+          })
+        }
+      },
+      fail: function () {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
   },
 
   /**
@@ -33,6 +87,12 @@ Page({
   
   },
 
+  todetail: function (e){
+    var that = this
+    wx.navigateTo({
+      url: '../scanGoodsdetail/scanGoodsdetail?code_sn=' + that.data.code_sn + '&code_type=' + that.data.code_sn + '&id=' + e.currentTarget.dataset.id,
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

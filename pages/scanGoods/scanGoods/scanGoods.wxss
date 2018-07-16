@@ -38,3 +38,29 @@ page{
 .arrowRight{
   margin-left: 20rpx;
 }
+.nodata image{
+  width:140rpx;
+  height:136rpx;
+  margin-top:370rpx;
+  margin-left: calc(50% - 70rpx);
+  display: block
+}
+.nodata text{
+  display: block;
+  color:rgb(167, 167, 167);
+  font-size: 32rpx;
+  margin-top: 40rpx;
+  width: 100%;
+  height: 32rpx;
+  text-align: center;
+  line-height: 32rpx;
+}
+.error{
+  color:rgb(88, 88, 88);
+  font-size: 32rpx;
+  margin-top: 460rpx;
+  width: 100%;
+  height: 32rpx;
+  text-align: center;
+  line-height: 32rpx;
+}

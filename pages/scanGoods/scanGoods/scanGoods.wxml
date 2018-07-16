@@ -1,11 +1,20 @@
 <!--pages/scanGoods/scanGoods/scanGoods.wxml-->
-<view class='title'>产品清单</view>
-<view>
-  <block wx:for='{{list}}' wx:key="{{index}}">
-      <view class='list'>
-        <text class='listName'>{{item.name}}</text>
-        <text class='listcount'>{{item.count}}个</text>
-        <image class='arrowRight' src='../../../img/arrow_right.png'></image>
-      </view>
-    </block>
+<view wx:if='{{list.length!=0}}'>
+  <view class='title'>产品清单</view>
+  <view>
+    <block wx:for='{{list}}' wx:key="{{index}}">
+        <view class='list' data-id='{{item.id}}' catchtap='todetail'>
+          <text class='listName'>{{item.name}}</text>
+          <text class='listcount'>{{item.count}}个</text>
+          <image class='arrowRight' src='../../../img/arrow_right.png'></image>
+        </view>
+      </block>
+  </view>
+</view>
+<view wx:if='{{list.length==0}}' class='nodata'>
+  <image src='../../../img/no.png'></image>
+  <text>没有产品</text>
+</view>
+<view wx:if='{{err}}' class='error'>
+  二维码无效
 </view>

@@ -1,2 +1,15 @@
 <!--pages/scanGoods/scanGoodsdetail/scanGoodsdetail.wxml-->
-<text>pages/scanGoods/scanGoodsdetail/scanGoodsdetail.wxml</text>
+<view class='detailtop'>
+  <view class='productType'>产品型号：{{Type}}</view>
+  <view class='productName'>产品名称：{{name}}</view>
+</view>
+<view class='detailbottom'>
+  <view class='bottomtitle'>产品编号</view>
+  <view class='productids'>
+    <block wx:for='{{product_ids}}' wx:key="{{index}}">
+      <view class='productid'>
+        {{item}}
+      </view>
+    </block>
+  </view>
+</view>
