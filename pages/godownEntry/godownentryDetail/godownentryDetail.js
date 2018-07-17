@@ -189,7 +189,7 @@ Page({
               maskshow: false
             })
             wx.showToast({
-              title: '确认入库单失败,入库单可能已取消',
+              title: '取消入库单失败,入库单可能已入库',
               icon: 'none',
               duration: 1000
             })

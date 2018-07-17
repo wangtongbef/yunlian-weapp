@@ -1,11 +1,11 @@
 <!--pages/godownEntry/inStorage/inStorage.wxml-->
 <view wx:if='{{comfirmState==1}}'>
   <view class='scantop'>
-    <view hidden='true'>
+    <view wx:if='{{codedetail}}'>
       <view class='numTitle'>二维码编号</view>
-      <view class='numContent'>12345678912345</view>
+      <view class='numContent'>{{codenumber}}</view>
     </view>
-    <view>
+    <view wx:if='{{!codedetail}}'>
       <view class='notValid'>二维码无效</view>
     </view>
   </view>

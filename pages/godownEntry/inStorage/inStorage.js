@@ -7,7 +7,10 @@ Page({
   data: {
     token:'',
     productList:[],
-    sendType:1,
+    sendList:[],
+    sendType:-1,
+    codedetail:true,
+    codenumber:'',
     comfirmState:1,
     markedWords:'',
     maskshow:false
@@ -22,45 +25,62 @@ Page({
       token: wx.getStorageSync('tokenRoles').token
     })
     wx.scanCode({
-      onlyFromCamera: true,
+      onlyFromCamera: false,
       success: (res) => {
-        console.log(res)
-        that.setData({
-          comfirmState: 1
+        if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
+          var detail = res.result.split("?")[1].split("&")
+          var obj = {'code_sn': detail[0].split("=")[1], 'code_type': detail[1].split("=")[1]}
+          var arr = []
+          arr.push(obj)
+          that.setData({
+            sendList: arr,
+            codenumber: detail[0].split("=")[1]
+          })
+        } else {
+          that.setData({
+            codedetail: false
+          })
+        }
+      },
+      fail: function () {
+        wx.navigateBack({
+          delta: 1
         })
       }
     })
   },
 
   Continue:function(){
+    var that = this
+    console.log(that.data.sendList)
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
-        console.log(res)
+        if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
+          var detail = res.result.split("?")[1].split("&")
+          var obj = { 'code_sn': detail[0].split("=")[1], 'code_type': detail[1].split("=")[1] }
+          var arr = that.data.sendList
+          arr.push(obj)
+          that.setData({
+            sendList: arr,
+            codenumber: detail[0].split("=")[1]
+          })
+        } else {
+          that.setData({
+            codedetail: false
+          })
+        }
       }
     })
   },
 
   confirm: function(){ //确认产品数量
     var that = this
-    function maskconfirm() {
-      that.setData({
-        maskshow: false
-      })
-      if (that.data.markedWords == '确认成功') {
-        that.setData({
-          comfirmState: 2,
-        })
-      } else {
-        wx.navigateBack({
-          delta: 1
-        })
-      }
-    }
     wx.request({
       url: getApp().data.servsers + 'storage/storageInfo',
       data: {
-        token: that.data.token
+        token: that.data.token,
+        code_list: JSON.stringify(that.data.sendList)
       },
       method: 'POST',
       success: function (res) {
@@ -119,6 +139,11 @@ Page({
               })
           }}, 1000)
         }
+      },
+      fail: function(){
+        wx.navigateBack({
+          delta: 1
+        })
       }
     })
   },
@@ -128,7 +153,8 @@ Page({
     wx.request({
       url: getApp().data.servsers + 'storage/storage',
       data: {
-        token: that.data.token
+        token: that.data.token,
+        code_list: JSON.stringify(that.data.sendList)
       },
       method: 'POST',
       success: function (res) {
@@ -146,10 +172,17 @@ Page({
           }, 1000)
         } else {
           if (res.data.code == 0) {
-            that.setData({
-              markedWords: '操作成功',
-              maskshow: true
-            })
+            if (that.data.sendType==1){
+              that.setData({
+                markedWords: '入库单已提交，等待配送员确认',
+                maskshow: true
+              })
+            } else {
+              that.setData({
+                markedWords: '入库成功',
+                maskshow: true
+              })
+            }
             setTimeout(function () {
               that.setData({
                 maskshow: false
@@ -163,6 +196,14 @@ Page({
               markedWords: '入库失败',
               maskshow: true
             })
+            setTimeout(function () {
+              that.setData({
+                maskshow: false
+              })
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
           }
         }
       }
