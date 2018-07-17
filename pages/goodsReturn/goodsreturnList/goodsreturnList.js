@@ -798,10 +798,18 @@ Page({
   },
 
   toApplication: function () {
-    wx.navigateTo({
-      url: '../../goodsReturn/reeturnConfirm/reeturnConfirm'
-      // 申请退货
-    })
+    var role = wx.getStorageSync('role').role_name
+    if (role=='门店负责人'){
+      wx.navigateTo({
+        url: '../../goodsReturn/returnStorecheck/returnStorecheck'
+        // 申请退货
+      })
+    }else{
+      wx.navigateTo({
+        url: '../../goodsReturn/reeturnConfirm/reeturnConfirm'
+        // 申请退货
+      })
+    }
   },
 
   /**
