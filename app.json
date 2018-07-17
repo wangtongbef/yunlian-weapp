@@ -34,7 +34,8 @@
     "pages/godownEntry/inStorage/inStorage",
     "pages/scanGoods/scanGoods/scanGoods",
     "pages/scanGoods/scanGoodsdetail/scanGoodsdetail",
-    "pages/goodsReturn/reeturnConfirm/reeturnConfirm"
+    "pages/goodsReturn/reeturnConfirm/reeturnConfirm",
+    "pages/goodsReturn/returnStorecheck/returnStorecheck"
   ],
   "window": {
     "backgroundTextStyle": "light",
