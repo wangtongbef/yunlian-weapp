@@ -33,7 +33,8 @@
     "pages/goodsSend/goodssendDetail/goodssendDetail",
     "pages/godownEntry/inStorage/inStorage",
     "pages/scanGoods/scanGoods/scanGoods",
-    "pages/scanGoods/scanGoodsdetail/scanGoodsdetail"
+    "pages/scanGoods/scanGoodsdetail/scanGoodsdetail",
+    "pages/goodsReturn/reeturnConfirm/reeturnConfirm"
   ],
   "window": {
     "backgroundTextStyle": "light",

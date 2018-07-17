@@ -799,7 +799,7 @@ Page({
 
   toApplication: function () {
     wx.navigateTo({
-      url: '../../goodsReturn/applicationforReturn/applicationforReturn'
+      url: '../../goodsReturn/reeturnConfirm/reeturnConfirm'
       // 申请退货
     })
   },

@@ -1,0 +1,17 @@
+<!--pages/goodsReturn/reeturnConfirm/reeturnConfirm.wxml-->
+<view>
+  <view class='scantop'>
+    <view wx:if='{{codedetail}}'>
+      <view class='numTitle'>二维码编号</view>
+      <view class='numContent'>{{codenumber}}</view>
+    </view>
+    <view wx:if='{{!codedetail}}'>
+      <view class='notValid'>二维码无效</view>
+    </view>
+  </view>
+  <view class='button'>
+    <view style='background-color:rgb(1,144,210)' catchtap='Continue'>继续扫描</view>
+    <view style='background-color:rgb(2,181,19)' catchtap='confirm'>确定</view>
+  </view>
+</view>
+<view wx:if='{{maskshow}}' class='mask'><text>{{markedWords}}</text></view>
