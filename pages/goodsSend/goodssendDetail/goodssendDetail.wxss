@@ -106,3 +106,42 @@ page{
   background-color: rgb(1,144,210);
   color: #fff;
 }
+.mask{
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top:0;
+  left: 0;
+}
+.maskbox{
+  width: 560rpx;
+  height:320rpx;
+  margin-top:60%;
+  margin-left:calc(50% - 280rpx);
+  background-color: #fff;
+  border-radius: 6rpx;
+  position: relative
+}
+.maskbox text{
+  position: absolute;
+  left:40rpx;
+  top: 60rpx;
+  font-size: 40rpx;
+  color:rgb(88, 88, 88);
+}
+.yes,
+.no{
+  position: absolute;
+  bottom: 60rpx;
+  font-size: 36rpx;
+}
+.yes{
+  color:rgb(1,144,210);
+  right: 80rpx;
+}
+.no{
+  color: rgb(122,122,122);
+  right:220rpx
+}
