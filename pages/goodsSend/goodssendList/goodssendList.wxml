@@ -36,13 +36,13 @@
 <!-- list -->
 <view class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
-    <view class='listCell' data-statet='{{statetext[item.state-1]}}' data-index='{{index}}' bindtap='toDetail'>
+    <view class='listCell' data-id='{{item.id}}' data-index='{{index}}' bindtap='toDetail'>
       <view class='listCellL'>
         <text class='listCellNmubers'>{{item.id}}</text>
         <text class='listCellTime'>{{item.create_time}}</text>
       </view>
-      <view class='listtype'>{{item.type}}</view>
-      <text class='listCellState' style='color:{{statecolor[item.state-1]}}'>{{statetext[item.status]}}</text>
+      <view class='listtype'>{{item.type==0?'普通':'紧急'}}</view>
+      <text class='listCellState' style='color:{{statecolor[item.status]}}'>{{statetext[item.status]}}</text>
     </view>
   </block>
   <view class='nodata' wx:if='{{list.length == 0}}'>

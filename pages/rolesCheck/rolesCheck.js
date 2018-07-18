@@ -57,16 +57,5 @@ Page({
         }
       }
     })
-  },
-
-  // 虚拟角色
-  navigat: function (e) {
-    var that = this;
-    var role = e.currentTarget.dataset.role
-    console.log(e)
-    wx.navigateTo({
-      url: '../index/index?role=' + role
-    })
   }
-  // 虚拟角色
 })

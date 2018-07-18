@@ -5,16 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
+    productsList: [],
     imgList: [],
-    productType: 2
+    productType: 2,
+    token:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    that.setData({
+      token: wx.getStorageSync('tokenRoles').token,
+      productsList: JSON.parse(options.productlist)
+    }) 
+    console.log(that.data.productsList)
   },
 
   chooseProducttype:function(e){
@@ -59,7 +65,25 @@ Page({
   },
 
   submit: function(){
+    var that = this
     console.log('submit')
+    wx.request({
+      url: getApp().data.servsers + 'return_documents/returnSubmit',
+      data: {
+        quality:1,
+        token: that.data.token,
+        des:'12334566554'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function () {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -69,7 +69,7 @@ Page({
     } else if (that.data.role.role_name == '配送员'){
       that.setData({
         phone_number: '110110110',
-        role: { role_id: 6, role_name: '仓管员' },
+        role: { role_id: 6, role_name: '配送员' },
         List_storage: [{ text: '入库单', icon: '../../img/rukudan-icon.png', url: '../godownEntry/godownEntryList/godownEntryList' },
           { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
           { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }]

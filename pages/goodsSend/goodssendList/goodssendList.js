@@ -21,7 +21,8 @@ Page({
     staterightBoxstate: false,//下拉框状态选择
 
     role: '',
-    token:''
+    token:'',
+    WHkeperType:'发货'
   },
 
   /**
@@ -59,6 +60,9 @@ Page({
             }, 1000)
           } else {
             console.log(res)
+            that.setData({
+              list:res.data.data
+            })
           }
         }
       }) 
@@ -527,7 +531,8 @@ Page({
             } else {
               console.log(res)
               that.setData({
-                list: res.data.data
+                list: res.data.data,
+                WHkeperType: that.data.statesRight[e.currentTarget.dataset.staterightid+1].name
               })
             }
           }
@@ -556,7 +561,8 @@ Page({
             } else {
               console.log(res)
               that.setData({
-                list: res.data.data
+                list: res.data.data,
+                WHkeperType: that.data.statesRight[e.currentTarget.dataset.staterightid + 1].name
               })
             }
           }
@@ -693,10 +699,17 @@ Page({
 
   toDetail: function (e) {
     console.log(this.data.list[e.currentTarget.dataset.index])
-    wx.navigateTo({
-      url: '../../goodsSend/goodssendDetail/goodssendDetail?role=' + this.data.role + '&statet=' + e.currentTarget.dataset.statet
-      // 送货单详情 未处理
-    })
+    if (this.data.role == '仓管员'){
+      wx.navigateTo({
+        url: '../../goodsSend/goodssendDetail/goodssendDetail?role=' + this.data.role + '&id=' + e.currentTarget.dataset.id + '&WHkeperType=' + this.data.WHkeperType
+        // 送货单详情 未处理
+      })
+    }else{
+      wx.navigateTo({
+        url: '../../goodsSend/goodssendDetail/goodssendDetail?role=' + this.data.role + '&id=' + e.currentTarget.dataset.id
+        // 送货单详情 未处理
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
