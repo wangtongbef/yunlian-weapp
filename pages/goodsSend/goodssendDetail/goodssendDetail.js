@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    firstIn:true,
+    id:'',
+    WHkeperType:'',
     token:'',
     state:0,
     role:'',
@@ -29,13 +32,15 @@ Page({
     console.log(options)
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
-      role: wx.getStorageSync('role').role_name
+      role: wx.getStorageSync('role').role_name,
+      id: options.id,
+      WHkeperType: options.WHkeperType
     })
     wx.request({
       url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单列表
       data: {
         token: that.data.token,
-        id: options.id
+        id:that.data.id
       },
       method: 'POST',
       success: function (res) {
@@ -65,7 +70,7 @@ Page({
       }, 
       complete: function(){
         if (that.data.role == '仓管员') {
-          if (options.WHkeperType == '发货') {
+          if (that.data.WHkeperType == '发货') {
             if (that.data.sendStep == '待备货') {
               that.setData({
                 state: 1,
@@ -87,7 +92,7 @@ Page({
                 })
               }
             }
-          } else if (options.WHkeperType == '收货') {
+          } else if (that.data.WHkeperType == '收货') {
             if (that.data.sendStep == '运送中') {
               that.setData({
                 state: 4,
@@ -203,100 +208,103 @@ Page({
    */
   onShow: function () {
     var that = this
-    console.log(options)
-    that.setData({
-      token: wx.getStorageSync('tokenRoles').token,
-      role: wx.getStorageSync('role').role_name
-    })
-    wx.request({
-      url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单列表
-      data: {
-        token: that.data.token,
-        id: options.id
-      },
-      method: 'POST',
-      success: function (res) {
-        if (res.data.code == -3) {
-          wx.showToast({
-            title: 'token过期',
-            icon: 'none',
-            duration: 1000
-          })
-          setTimeout(function () {
-            wx.redirectTo({
-              url: '../../login/login'
+    if (!that.data.firstIn){
+      that.setData({
+        token: wx.getStorageSync('tokenRoles').token,
+        role: wx.getStorageSync('role').role_name
+      })
+      wx.request({
+        url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单列表
+        data: {
+          token: that.data.token,
+          id: that.data.id
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
             })
-          }, 1000)
-        } else {
-          console.log(res)
-          that.setData({
-            sendStep: that.data.steptext[res.data.data.base_info.status],
-            sendType: that.data.sendTypetext[res.data.data.give_info.delivery_type],
-            base_info: res.data.data.base_info,
-            from_info: res.data.data.from_info,
-            give_info: res.data.data.give_info,
-            receive_info: res.data.data.receive_info,
-            product_list: res.data.data.product_list
-          })
-        }
-      },
-      complete: function () {
-        if (that.data.role == '仓管员') {
-          if (options.WHkeperType == '发货') {
-            if (that.data.sendStep == '待备货') {
-              that.setData({
-                state: 1,
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
               })
-            } else if (that.data.sendStep == '待取货') {
-              if (that.data.sendType == '配送员') {
+            }, 1000)
+          } else {
+            console.log(res)
+            that.setData({
+              sendStep: that.data.steptext[res.data.data.base_info.status],
+              sendType: that.data.sendTypetext[res.data.data.give_info.delivery_type],
+              base_info: res.data.data.base_info,
+              from_info: res.data.data.from_info,
+              give_info: res.data.data.give_info,
+              receive_info: res.data.data.receive_info,
+              product_list: res.data.data.product_list
+            })
+          }
+        },
+        complete: function () {
+          if (that.data.role == '仓管员') {
+            if (that.data.WHkeperType == '发货') {
+              if (that.data.sendStep == '待备货') {
                 that.setData({
-                  state: 2,
+                  state: 1,
                 })
-              } else if (that.data.sendType == '物流') {
-                that.setData({
-                  state: 3,
-                })
+              } else if (that.data.sendStep == '待取货') {
+                if (that.data.sendType == '配送员') {
+                  that.setData({
+                    state: 2,
+                  })
+                } else if (that.data.sendType == '物流') {
+                  that.setData({
+                    state: 3,
+                  })
+                }
+              } else if (that.data.sendStep == '运送中') {
+                if (that.data.sendType == '物流') {
+                  that.setData({
+                    state: 2,
+                  })
+                }
               }
-            } else if (that.data.sendStep == '运送中') {
-              if (that.data.sendType == '物流') {
+            } else if (that.data.WHkeperType == '收货') {
+              if (that.data.sendStep == '运送中') {
                 that.setData({
-                  state: 2,
+                  state: 4,
                 })
               }
             }
-          } else if (options.WHkeperType == '收货') {
+          } else if (that.data.role == '配送员') {
+            if (that.data.sendStep == '运送中') {
+              that.setData({
+                state: 2,
+              })
+            } else if (that.data.sendStep == '待取货') {
+              that.setData({
+                state: 4,
+              })
+            }
+          } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员') {
             if (that.data.sendStep == '运送中') {
               that.setData({
                 state: 4,
               })
             }
           }
-        } else if (that.data.role == '配送员') {
-          if (that.data.sendStep == '运送中') {
-            that.setData({
-              state: 2,
-            })
-          } else if (that.data.sendStep == '待取货') {
-            that.setData({
-              state: 4,
-            })
-          }
-        } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员') {
-          if (that.data.sendStep == '运送中') {
-            that.setData({
-              state: 4,
-            })
-          }
         }
-      }
-    })
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    this.setData({
+      firstIn:false
+    })
   },
 
   /**

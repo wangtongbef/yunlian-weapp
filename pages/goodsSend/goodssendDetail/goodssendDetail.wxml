@@ -81,10 +81,3 @@
   </view>
   <view class='returnButton returnButton-1' wx:if='{{state==4}}' bindtap='receive'>确认收货</view>
 </view>
-<view wx:if='{{maskshow}}' class='mask' catchtouchmove='endtouchmove'>
-  <view class='maskbox'>
-    <text>确定要取消送货吗？</text>
-    <view class='no' bindtap='no'>否</view>
-    <view class='yes' bindtap='yes'>是</view>
-  </view>
-</view>
