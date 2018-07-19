@@ -839,11 +839,9 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var tokenRoles = wx.getStorageSync('tokenRoles')
-    var role = wx.getStorageSync('role')
     that.setData({
-      role: role.role_name,
-      token: tokenRoles.token
+      role: wx.getStorageSync('role').role_name,
+      token: wx.getStorageSync('tokenRoles').token
     })
     if (that.data.role == '仓管员') {
       that.setData({
@@ -870,7 +868,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             that.setData({
               list: res.data.data
             })
@@ -899,7 +896,6 @@ Page({
             }, 1000)
           } else {
             storeList = [{ id: -1, name: '全部门店' }].concat(res.data.data)
-            console.log(storeList)
             that.setData({
               staterightShow: true,
               statesRight: storeList
