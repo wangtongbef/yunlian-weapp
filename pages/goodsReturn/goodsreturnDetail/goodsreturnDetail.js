@@ -23,7 +23,9 @@ Page({
     token:'',
     sendtype:'',
     receiveorsend:'',
-    maskshow: false
+    maskshow: false,
+    maskshow_2: false,
+    markedWords:''
   },
 
   /**
@@ -189,6 +191,9 @@ Page({
   yes: function () {
     //确认取消
     var that = this
+    that.setData({
+      maskshow: false,
+    })
     wx.request({
       url: getApp().data.servsers + 'return_documents/cancelReturn', //取消退货单
       data: {
@@ -211,9 +216,25 @@ Page({
         } else {
           console.log(res)
           if(res.data.code == 0){
-
+            that.setData({
+              maskshow_2: true,
+              markedWords: res.data.msg
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
           } else if (res.data.code == 1){
-            
+            that.setData({
+              maskshow_2: true,
+              markedWords: res.data.msg
+            })
+            setTimeout(function () {
+              that.setData({
+                maskshow_2: false
+              })
+            }, 1000)
           }
         }
       }

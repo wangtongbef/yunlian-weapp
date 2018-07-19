@@ -16,6 +16,8 @@ Page({
     steptext: ['待备货', '待取货', '运送中', '已完成', '已取消'],
     sendTypetext: ['配送员','物流'],
     maskshow: false,
+    maskshow_2: false,
+    markedWords: '',
 
     base_info:{},
     from_info:{},
@@ -143,6 +145,9 @@ Page({
 
   yes: function () {
     var that = this
+    that.setData({
+      maskshow: false
+    })
     wx.request({
       url: getApp().data.servsers + 'delivery/cancelDelivery', //取消送货单
       data: {
@@ -166,12 +171,8 @@ Page({
           console.log(res)
           if (res.data.code == 0) {
             that.setData({
-              maskshow: false
-            })
-            wx.showToast({
-              title: '取消送货单成功',
-              icon: 'none',
-              duration: 1000
+              maskshow_2: true,
+              markedWords: res.data.msg
             })
             setTimeout(function () {
               wx.navigateBack({
@@ -180,13 +181,14 @@ Page({
             }, 1000)
           } else if (res.data.code == 1) {
             that.setData({
-              maskshow: false
+              maskshow_2: true,
+              markedWords: res.data.msg
             })
-            wx.showToast({
-              title: '取消送货单失败',
-              icon: 'none',
-              duration: 1000
-            })
+            setTimeout(function () {
+              that.setData({
+                maskshow_2: false
+              })
+            }, 1000)
           }
         }
       }

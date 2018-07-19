@@ -88,3 +88,4 @@
     <view class='yes' bindtap='yes'>是</view>
   </view>
 </view>
+<view wx:if='{{maskshow_2}}' class='mask-2'><text>{{markedWords}}</text></view>
