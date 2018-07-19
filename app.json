@@ -36,7 +36,8 @@
     "pages/scanGoods/scanGoodsdetail/scanGoodsdetail",
     "pages/goodsReturn/reeturnConfirm/reeturnConfirm",
     "pages/goodsReturn/returnStorecheck/returnStorecheck",
-    "pages/goodsSend/stockUp/stockUp"
+    "pages/goodsSend/stockUp/stockUp",
+    "pages/goodsSend/logisticsChoose/logisticsChoose"
   ],
   "window": {
     "backgroundTextStyle": "light",

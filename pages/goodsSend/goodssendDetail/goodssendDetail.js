@@ -69,6 +69,9 @@ Page({
         }
       }, 
       complete: function(){
+        that.setData({
+          firstIn: false
+        })
         if (that.data.role == '仓管员') {
           if (that.data.WHkeperType == '发货') {
             if (that.data.sendStep == '待备货') {
@@ -196,6 +199,13 @@ Page({
       maskshow: false
     })
   },
+
+  send:function(){
+    var that = this
+    wx.navigateTo({
+      url: '../logisticsChoose/logisticsChoose?id=' + that.data.base_info.id
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -214,7 +224,7 @@ Page({
         role: wx.getStorageSync('role').role_name
       })
       wx.request({
-        url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单列表
+        url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单详情
         data: {
           token: that.data.token,
           id: that.data.id
@@ -302,9 +312,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.setData({
-      firstIn:false
-    })
+
   },
 
   /**

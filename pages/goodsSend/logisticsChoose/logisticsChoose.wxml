@@ -1,0 +1,17 @@
+<!--pages/goodsSend/logisticsChoose/logisticsChoose.wxml-->
+<view class='top'>
+  <view class='title'>运单号：</view>
+  <view style='width:calc(100% - 80rpx);position:absolute;top:140rpx;left:40rpx;'>
+    <input class='number' placeholder='请输入运单号' placeholder-class='pl' value="{{inputValue}}" bindinput='bindinput'></input>
+  </view>
+</view>
+<view class='logisticslist'>
+  <block wx:for='{{companylist}}' wx:key="text">
+    <view class='logisticscell' data-id='{{item.id}}' catchtap='companycheck'>
+      <text>{{item.name}}</text>
+      <image src='{{companyChecked==item.id?"../../../img/color.png":"../../../img/gray.png"}}'></image>
+    </view>
+  </block>
+</view>
+<view class='confirm' catchtap='confirm'>确 认</view>
+<view wx:if='{{maskshow}}' class='mask'><text>{{markedWords}}</text></view>

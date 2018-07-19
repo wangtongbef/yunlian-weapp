@@ -28,7 +28,7 @@
   <view>
     <view class='title'>备注</view>
     <view class='remarkContent' style='padding-bottom:60rpx'>
-      <textarea class='textarea' placeholder="请填写你退货的申请理由..." placeholder-style="color:rgb(204,204,204);font-size:24rpx" maxlength='64' focus='true'></textarea>
+      <textarea class='textarea' placeholder="请填写你退货的申请理由..." placeholder-style="color:rgb(204,204,204);font-size:24rpx" maxlength='64' bindblur='getdes' focus='true'></textarea>
       <view style='margin:40rpx;color:#585858;font-size:24rpx'>添加图片:</view>
       <view style='margin-left:40rpx;height:160rpx'>
         <view  style='height:160rpx;display:inline-block;position:relative' wx:for='{{imgList}}' wx:key='index'>
