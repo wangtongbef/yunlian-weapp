@@ -6,9 +6,11 @@ Page({
    */
   data: {
     productsList: [],
+    code_list:[],
     imgList: [],
     productType: 2,
-    token:''
+    token:'',
+    des:''
   },
 
   /**
@@ -18,7 +20,8 @@ Page({
     var that = this
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
-      productsList: JSON.parse(options.productlist)
+      productsList: JSON.parse(options.productlist),
+      code_list: options.returnList
     }) 
     console.log(that.data.productsList)
   },
@@ -34,6 +37,12 @@ Page({
         productType: e.currentTarget.dataset.type
       })
     }
+  },
+
+  getdes:function(e){
+    this.setData({
+      des: e.detail.value
+    })
   },
 
   addImage:function (){
@@ -64,26 +73,98 @@ Page({
     })
   },
 
-  submit: function(){
+  submit: function(){ //传图片还有问题
     var that = this
     console.log('submit')
-    wx.request({
-      url: getApp().data.servsers + 'return_documents/returnSubmit',
-      data: {
-        quality:1,
-        token: that.data.token,
-        des:'12334566554'
-      },
-      method: 'POST',
-      success: function (res) {
-        console.log(res)
-      },
-      fail: function () {
-        wx.navigateBack({
-          delta: 1
-        })
-      }
-    })
+    if (wx.getStorageSync('role').role_name=='仓管员'){
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnSubmit',
+        data: {
+          quality: that.data.productType-1,
+          token: that.data.token,
+          des: that.data.des,
+          code_list: that.data.code_list
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          var return_id = res.data[0].return_id
+          for (var i = 0; i < imgList.length;i++){
+            wx.uploadFile({
+              url: getApp().data.servsers + 'return_documents/uploadImg',
+              filePath: tempFilePaths[i],
+              name: 'file',
+              formData: {
+                return_id: '2'
+              },
+              success: function (res) {
+                cosnole.log(res)
+                var data = res.data
+              }
+            })
+          }
+        }
+      })
+    } else if (wx.getStorageSync('role').role_name == '门店负责人'){
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnSubmit',
+        data: {
+          quality: that.data.productType - 1,
+          token: that.data.token,
+          des: that.data.des,
+          code_list: that.data.code_list
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          var return_id = res.data[0].return_id
+          for (var i = 0; i < imgList.length; i++) {
+            wx.uploadFile({
+              url: getApp().data.servsers + 'return_documents/uploadImg',
+              filePath: tempFilePaths[i],
+              name: 'file',
+              formData: {
+                return_id: '2'
+              },
+              success: function (res) {
+                cosnole.log(res)
+                var data = res.data
+              }
+            })
+          }
+        }
+      })
+
+    } else if (wx.getStorageSync('role').role_name == '门店销售员') {
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/returnSubmit',
+        data: {
+          quality: that.data.productType - 1,
+          token: that.data.token,
+          des: that.data.des,
+          code_list: that.data.code_list
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res)
+          var return_id = res.data[0].return_id
+          for (var i = 0; i < imgList.length; i++) {
+            wx.uploadFile({
+              url: getApp().data.servsers + 'return_documents/uploadImg',
+              filePath: tempFilePaths[i],
+              name: 'file',
+              formData: {
+                return_id: '2'
+              },
+              success: function (res) {
+                cosnole.log(res)
+                var data = res.data
+              }
+            })
+          }
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

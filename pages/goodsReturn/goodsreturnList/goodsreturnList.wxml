@@ -35,7 +35,7 @@
 </view>
 <view class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
-    <view class='listCell' bindtap='toDetail'>
+    <view class='listCell' data-id='{{item.id}}' bindtap='toDetail'>
       <view class='listCellL'>
         <text class='listCellNmubers'>{{item.id}}</text>
         <text class='listCellTime'>{{item.create_time}}</text>

@@ -9,15 +9,15 @@
       </view>
       <view>
         <text class='ct'>编号</text>
-        <text class='cn'>ps1111111</text>
+        <text class='cn'>{{base_info.id}}</text>
       </view>
       <view>
         <text class='ct'>收货人</text>
-        <text class='cc'>小小明</text>
+        <text class='cc'>{{receiving_info}}</text>
       </view>
       <view>
         <text class='ct'>生成时间</text>
-        <text class='cn'>2018-06-07  16:16</text>
+        <text class='cn'>{{base_info.create_time}}</text>
       </view>
     </view>
   </view>
@@ -26,20 +26,30 @@
     <view class='content'>
       <view>
         <text class='ct'>退货机构</text>
-        <text class='cc'>大浪店</text>
+        <text class='cc'>{{return_info.return_warehouse}}</text>
       </view>
       <view>
         <text class='ct'>提交人</text>
-        <text class='cc'>小明</text>
+        <text class='cc'>{{return_info.return_person}}</text>
       </view>
     </view>
   </view>
   <view>
     <view class='title'>送货方信息</view>
-    <view class='content'>
+    <view wx:if="{{give_info.delivery_type==0}}" class='content'>
       <view>
         <text class='ct'>配送员</text>
-        <text class='cc'>小明</text>
+        <text class='cc'>{{give_info.courier}}</text>
+      </view>
+    </view>
+    <view wx:if="{{give_info.delivery_type==1}}" class='content'>
+      <view>
+        <text class='ct'>物流公司</text>
+        <text class='cc'>{{give_info.logistics_company}}</text>
+      </view>
+      <view>
+        <text class='ct'>物流单号</text>
+        <text class='cc'>{{give_info.waybill_number}}</text>
       </view>
     </view>
   </view>
@@ -48,7 +58,7 @@
     <view class='content'>
       <view>
         <text class='ct'>收货机构</text>
-        <text class='cc'>八号当铺</text>
+        <text class='cc'>{{receiving_info}}</text>
       </view>
     </view>
   </view>
@@ -57,20 +67,22 @@
     <view class='listBox'>
       <block wx:for='{{productsList}}' wx:key="name">
         <view class='list'>
-          <text class='productName'>{{item.name}}</text>
-          <text class='productAmount'>{{item.amount}}</text>
+          <text class='productName'>{{item.product_name}}</text>
+          <text class='productAmount'>{{item.product_count}}</text>
           <text class='productMeasure'>个</text>
         </view>
       </block>
-      <view class='productFamily'>问题品</view>
+      <view class='productFamily'>{{quality==0?'正常品':'问题品'}}</view>
     </view>
   </view>
   <view>
     <view class='title'>备注</view>
     <view class='remarks'>
-      <view class='remarksTest'>餐品有问题。。。</view>
-      <view style='margin-left:40rpx;height:160rpx;padding-bottom:60rpx'>
-        <image src='../../../img/add.png' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+      <view class='remarksTest'>{{des}}</view>
+      <view  wx:if='{{imagelist.length!=0}}' style='margin-left:40rpx;height:160rpx;padding-bottom:60rpx'>
+        <block wx:for='{{imagelist}}' wx:key="text">
+          <image src='{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+        </block>
       </view>
     </view>
   </view>
@@ -81,10 +93,10 @@
     <view class='send' bindtap='send'>发 货</view>
   </view>
 </view>
-<!-- <view wx:if='{{false}}' class='mask' catchtouchmove='endtouchmove'>
+ <view wx:if='{{maskshow}}' class='mask' catchtouchmove='endtouchmove'>
   <view class='maskbox'>
-    <text>确定要取消入库吗？</text>
+    <text>确定要取消退货吗？</text>
     <view class='no' bindtap='no'>否</view>
     <view class='yes' bindtap='yes'>是</view>
   </view>
-</view> -->
+</view> 

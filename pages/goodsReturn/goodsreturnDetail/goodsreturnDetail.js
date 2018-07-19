@@ -5,13 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    productsList: [{ name: '酷启动电源', amount: 2000 }, { name: '卡儿酷车充', amount: 1000 }, { name: '卡儿酷军工电源', amount: 5000 }],
-    statet: '',
+    stateArr:['待审核','审核不过','待取货','运送中','已完成','已返厂','已取消'],
+    productsList: [],
+    id: '',
     statecolor:'',
-    state:0,
+
+    base_info:{},
+    des:'',
+    give_info:{},
+    receiving_info:{},
+    return_info:{},
+    quality:-1,
+    imagelist:[],
+
+    statet:'',
     role:'',
-    sendtype:'物流配送',
-    receiveorsend:'退货'
+    token:'',
+    sendtype:'',
+    receiveorsend:'',
+    maskshow: false
   },
 
   /**
@@ -19,59 +31,111 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    var tokenRoles = wx.getStorageSync('tokenRoles')
+    var role = wx.getStorageSync('role')
     var that = this
     that.setData({
-      statet: options.statet,
-      role: options.role
+      id: options.id,
+      role: role.role_name,
+      token: tokenRoles.token
     })
-
-    if (options.statet == '待审核' || options.statet == '待取货' || options.statet == '运送中'){
+    if (options.receiveorsend){
       that.setData({
-        statecolor: 'rgb(1,144,210)'
-      })
-    } else if (options.statet == '已完成' || options.statet == '已取消' || options.statet == '审核不过'){
-      that.setData({
-        statecolor: 'rgb(88,88,88)'
+        receiveorsend: options.receiveorsend
       })
     }
+    wx.request({
+      url: getApp().data.servsers + 'return_documents/returnDetail', //获取退货单详情
+      data: {
+        token: that.data.token,
+        id: that.data.id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+          that.setData({
+            statet: that.data.stateArr[res.data.data.base_info.status],
+            productsList: res.data.data.product_list,
+            base_info: res.data.data.base_info,
+            des: res.data.data.des,
+            give_info: res.data.data.give_info,
+            receiving_info: res.data.data.receiving_info,
+            return_info: res.data.data.return_info,
+            quality: res.data.data.quality
+          })
 
-    if (that.data.statet == '待取货'){
-      if (that.data.role == '配送员'){
-        that.setData({
-          state: 1
-        })
-      } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')){
-        if (that.data.sendtype == '物流配送'){
-          that.setData({
-            state: 3
-          })
-        } else if (that.data.sendtype == '配送员配送'){
-          that.setData({
-            state: 2
-          })
-        } 
-      }
-    } else if (that.data.statet == '运送中'){
-      if ((that.data.role == '仓管员' && that.data.receiveorsend == '收货') || that.data.role == '生产经理') {
-        that.setData({
-          state: 1
-        })
-      } else if (that.data.role == '配送员'){
-        that.setData({
-          state: 2
-        })
-      } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')){
-        if (that.data.sendtype == '物流配送') {
-          that.setData({
-            state: 2
-          })
+          if (that.data.give_info.delivery_type==0){
+            that.setData({
+              sendtype: '配送员'
+            })
+          } else if (that.data.give_info.delivery_type == 1) {
+            that.setData({
+              sendtype: '物流配送'
+            })
+          }
+
+          if (that.data.statet == '待审核' || that.data.statet == '待取货' || that.data.statet == '运送中') {
+            that.setData({
+              statecolor: 'rgb(1,144,210)'
+            })
+          } else if (that.data.statet == '已完成' || that.data.statet == '已取消' || that.data.statet == '审核不过' || that.data.statet == '已返厂') {
+            that.setData({
+              statecolor: 'rgb(88,88,88)'
+            })
+          }
+
+          if (that.data.statet == '待取货') {
+            if (that.data.role == '配送员') {
+              that.setData({
+                state: 1
+              })
+            } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')) {
+              if (that.data.sendtype == '物流配送') {
+                that.setData({
+                  state: 3
+                })
+              } else if (that.data.sendtype == '配送员配送') {
+                that.setData({
+                  state: 2
+                })
+              }
+            }
+          } else if (that.data.statet == '运送中') {
+            if ((that.data.role == '仓管员' && that.data.receiveorsend == '收货') || that.data.role == '生产经理') {
+              that.setData({
+                state: 1
+              })
+            } else if (that.data.role == '配送员') {
+              that.setData({
+                state: 2
+              })
+            } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')) {
+              if (that.data.sendtype == '物流配送') {
+                that.setData({
+                  state: 2
+                })
+              }
+            }
+          } else {
+            that.setData({
+              state: 0
+            })
+          }
         }
       }
-    }else{
-      that.setData({
-        state: 0
-      })
-    }
+    })
   },
 
   receive: function(){
@@ -87,21 +151,24 @@ Page({
 
   clear: function(){
     var that = this
-    if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
-      console.log('门店负责人 待取货 取消')
-    } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
-      console.log('门店销售员 待取货 取消')
-    } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
-      console.log('仓管员 待取货 退货 取消')
-    } else if (that.data.statet == '运送中' && that.data.role == '配送员'){
-      console.log('配送员 运送中 取消')
-    } if (that.data.statet == '运送中' && that.data.role == '门店负责人') {
-      console.log('门店负责人 运送中 取消')
-    } else if (that.data.statet == '运送中' && that.data.role == '门店销售员') {
-      console.log('门店销售员 运送中 取消')
-    } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
-      console.log('仓管员 运送中 退货 取消')
-    }
+    that.setData({
+      maskshow:true
+    })
+    // if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
+    //   console.log('门店负责人 待取货 取消')
+    // } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
+    //   console.log('门店销售员 待取货 取消')
+    // } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
+    //   console.log('仓管员 待取货 退货 取消')
+    // } else if (that.data.statet == '运送中' && that.data.role == '配送员'){
+    //   console.log('配送员 运送中 取消')
+    // } if (that.data.statet == '运送中' && that.data.role == '门店负责人') {
+    //   console.log('门店负责人 运送中 取消')
+    // } else if (that.data.statet == '运送中' && that.data.role == '门店销售员') {
+    //   console.log('门店销售员 运送中 取消')
+    // } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
+    //   console.log('仓管员 运送中 退货 取消')
+    // }
   },
   
   send: function(){
@@ -120,7 +187,37 @@ Page({
   },
 
   yes: function () {
-    //确认取消入库
+    //确认取消
+    var that = this
+    wx.request({
+      url: getApp().data.servsers + 'return_documents/cancelReturn', //取消退货单
+      data: {
+        token: that.data.token,
+        id: that.data.id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+          if(res.data.code == 0){
+
+          } else if (res.data.code == 1){
+            
+          }
+        }
+      }
+    })
   },
 
   no: function () {
