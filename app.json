@@ -37,7 +37,7 @@
     "pages/goodsReturn/reeturnConfirm/reeturnConfirm",
     "pages/goodsReturn/returnStorecheck/returnStorecheck",
     "pages/goodsSend/stockUp/stockUp",
-    "pages/goodsSend/logisticsChoose/logisticsChoose"
+    "pages/goodsReturn/logisticsChoose/logisticsChoose"
   ],
   "window": {
     "backgroundTextStyle": "light",

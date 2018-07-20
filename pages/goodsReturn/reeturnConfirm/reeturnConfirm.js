@@ -172,7 +172,7 @@ Page({
               })
               if (that.data.markedWords == '确认成功') {
                 wx.navigateTo({
-                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList)
+                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
                 })
               } else {
                 wx.navigateBack({
@@ -229,7 +229,7 @@ Page({
               })
               if (that.data.markedWords == '确认成功') {
                 wx.navigateTo({
-                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList)
+                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
                 })
               } else {
                 wx.navigateBack({

@@ -10,13 +10,14 @@ Page({
     imgList: [],
     productType: 2,
     token:'',
-    des:''
+    des:'123456789'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
@@ -88,56 +89,59 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
-          var return_id = res.data[0].return_id
-          for (var i = 0; i < imgList.length;i++){
+          var return_id = res.data.data.return_id
+          // for (var i = 0; i < that.data.imgList.length; i++) {
             wx.uploadFile({
-              url: getApp().data.servsers + 'return_documents/uploadImg',
-              filePath: tempFilePaths[i],
+              url: getApp().data.servsers + 'return_documents/uploadImg', //接口地址
+              filePath: that.data.imgList[0],
               name: 'file',
               formData: {
-                return_id: '2'
+                token: that.data.token,
+                return_id: return_id
               },
               success: function (res) {
-                cosnole.log(res)
+                console.log(res)
                 var data = res.data
               }
             })
-          }
+          // }
         }
       })
     } else if (wx.getStorageSync('role').role_name == '门店负责人'){
       wx.request({
-        url: getApp().data.servsers + 'return_documents/returnSubmit',
+        url: getApp().data.servsers + 'return_documents/returnSubmitShop',
         data: {
           quality: that.data.productType - 1,
           token: that.data.token,
           des: that.data.des,
+          shop_id: wx.getStorageSync('storeDetail').id,
           code_list: that.data.code_list
         },
         method: 'POST',
         success: function (res) {
           console.log(res)
-          var return_id = res.data[0].return_id
-          for (var i = 0; i < imgList.length; i++) {
-            wx.uploadFile({
-              url: getApp().data.servsers + 'return_documents/uploadImg',
-              filePath: tempFilePaths[i],
-              name: 'file',
-              formData: {
-                return_id: '2'
-              },
-              success: function (res) {
-                cosnole.log(res)
-                var data = res.data
-              }
-            })
-          }
+          var return_id = res.data.data.return_id
+          // for (var i = 0; i < that.data.imgList.length; i++) {
+          wx.uploadFile({
+            url: getApp().data.servsers + 'return_documents/uploadImg', //接口地址
+            filePath: that.data.imgList[0],
+            name: 'file',
+            formData: {
+              token: that.data.token,
+              return_id: return_id
+            },
+            success: function (res) {
+              console.log(res)
+              var data = res.data
+            }
+          })
+          // }
         }
       })
 
     } else if (wx.getStorageSync('role').role_name == '门店销售员') {
       wx.request({
-        url: getApp().data.servsers + 'return_documents/returnSubmit',
+        url: getApp().data.servsers + 'return_documents/returnSubmitSales',
         data: {
           quality: that.data.productType - 1,
           token: that.data.token,
@@ -147,17 +151,18 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
-          var return_id = res.data[0].return_id
-          for (var i = 0; i < imgList.length; i++) {
+          var return_id = res.data.data.return_id
+          for (var i = 0; i < that.data.imgList.length; i++) {
             wx.uploadFile({
               url: getApp().data.servsers + 'return_documents/uploadImg',
-              filePath: tempFilePaths[i],
-              name: 'file',
+              filePath: that.data.imgList[i],
+              name: 'image',
               formData: {
-                return_id: '2'
+                token: that.data.token,
+                return_id: return_id
               },
               success: function (res) {
-                cosnole.log(res)
+                console.log(res)
                 var data = res.data
               }
             })

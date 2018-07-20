@@ -111,7 +111,7 @@ Page({
             })
           } else if (that.data.sendStep == '待取货') {
             that.setData({
-              state: 4,
+              state: 5,
             })
           }
         } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员') {
@@ -136,6 +136,184 @@ Page({
     var that = this
     that.setData({
       maskshow: true
+    })
+  },
+
+  getgoods: function(){
+    var that = this
+    that.setData({
+      maskshow: false
+    })
+    wx.request({
+      url: getApp().data.servsers + 'delivery/confirmCourier', //确认取货
+      data: {
+        token: that.data.token,
+        id: that.data.base_info.id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+          if (res.data.code == 0) {
+            that.setData({
+              maskshow_2: true,
+              markedWords: res.data.msg
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          } else if (res.data.code == 1) {
+            that.setData({
+              maskshow_2: true,
+              markedWords: res.data.msg
+            })
+            setTimeout(function () {
+              that.setData({
+                maskshow_2: false
+              })
+            }, 1000)
+          }
+        }
+      }
+    })
+  },
+
+  receive: function(){
+    var that = this
+    if (that.data.role=='仓管员'){
+      wx.request({
+        url: getApp().data.servsers + 'delivery/confirm',
+        data: {
+          token: that.data.token,
+          id: that.data.id
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            if (res.data.code == 0) {
+              that.setData({
+                maskshow_2: true,
+                markedWords: res.data.msg
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            } else if (res.data.code == 1) {
+              that.setData({
+                maskshow_2: true,
+                markedWords: res.data.msg
+              })
+              setTimeout(function () {
+                that.setData({
+                  maskshow_2: false
+                })
+              }, 1000)
+            }
+          }
+        }
+      })
+    } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员'){
+      wx.request({
+        url: getApp().data.servsers + 'delivery/confirmChargePerson',
+        data: {
+          token: that.data.token,
+          id: that.data.id
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+            if (res.data.code == 0) {
+              that.setData({
+                maskshow_2: true,
+                markedWords: res.data.msg
+              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            } else if (res.data.code == 1) {
+              that.setData({
+                maskshow_2: true,
+                markedWords: res.data.msg
+              })
+              setTimeout(function () {
+                that.setData({
+                  maskshow_2: false
+                })
+              }, 1000)
+            }
+          }
+        }
+      })
+    }
+  },
+
+  getlocation: function(){ 
+    var that = this  
+    wx.request({
+      url: getApp().data.servsers + 'delivery/address',
+      data: {
+        token: that.data.token,
+        id: that.data.receive_info.id,
+        type: that.data.receive_info.receive_type
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+        }
+      }
     })
   },
 
@@ -295,7 +473,7 @@ Page({
               })
             } else if (that.data.sendStep == '待取货') {
               that.setData({
-                state: 4,
+                state: 5,
               })
             }
           } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员') {

@@ -19,6 +19,7 @@ Page({
     wx.scanCode({
       onlyFromCamera: false,
       success: (res) => {
+        console.log(res)
         if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
           var detail = res.result.split("?")[1].split("&")
           that.setData({

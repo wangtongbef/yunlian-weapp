@@ -101,10 +101,10 @@ Page({
       }, 1000)
     }else {
       wx.request({
-        url: getApp().data.servsers + 'delivery/sendOut', //获取快递公司列表
+        url: getApp().data.servsers + 'return_documents/sendOut', //获取快递公司列表
         data: {
           token: that.data.token,
-          delivery_id: that.data.id,
+          return_id: that.data.id,
           logistics_company_id: that.data.companyChecked,
           waybill_number: that.data.inputValue
         },

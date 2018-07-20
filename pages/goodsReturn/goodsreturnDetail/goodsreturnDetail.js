@@ -101,7 +101,7 @@ Page({
           if (that.data.statet == '待取货') {
             if (that.data.role == '配送员') {
               that.setData({
-                state: 1
+                state: 4
               })
             } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')) {
               if (that.data.sendtype == '物流配送') {
@@ -142,13 +142,85 @@ Page({
 
   receive: function(){
     var that = this
-    if (that.data.statet == '待取货' && that.data.role == '配送员'){
-      console.log('配送员 待取货 确认收货')
-    } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '收货'){
-      console.log('仓管员 收货 运送中 确认收货')
-    } else if (that.data.statet == '运送中' && that.data.role == '生产经理'){
-      console.log('生产经理 运送中 确认收货')
+    if (that.data.role == '仓管员'){
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/confirm', //退货单确认收货
+        data: {
+          token: that.data.token,
+          id: that.data.id
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+          }
+        }
+      })
+    } else if (that.data.role == '生产经理'){
+      wx.request({
+        url: getApp().data.servsers + 'return_documents/confirmProduceManager', //退货单确认收货
+        data: {
+          token: that.data.token,
+          id: that.data.id
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data.code == -3) {
+            wx.showToast({
+              title: 'token过期',
+              icon: 'none',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../../login/login'
+              })
+            }, 1000)
+          } else {
+            console.log(res)
+          }
+        }
+      })
     }
+  },
+
+  getgoods:function(){
+    var that = this
+    wx.request({
+      url: getApp().data.servsers + 'return_documents/confirmCourier', //退货单确认取货
+      data: {
+        token: that.data.token,
+        id: that.data.id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+        }
+      }
+    })
   },
 
   clear: function(){
@@ -156,32 +228,13 @@ Page({
     that.setData({
       maskshow:true
     })
-    // if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
-    //   console.log('门店负责人 待取货 取消')
-    // } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
-    //   console.log('门店销售员 待取货 取消')
-    // } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
-    //   console.log('仓管员 待取货 退货 取消')
-    // } else if (that.data.statet == '运送中' && that.data.role == '配送员'){
-    //   console.log('配送员 运送中 取消')
-    // } if (that.data.statet == '运送中' && that.data.role == '门店负责人') {
-    //   console.log('门店负责人 运送中 取消')
-    // } else if (that.data.statet == '运送中' && that.data.role == '门店销售员') {
-    //   console.log('门店销售员 运送中 取消')
-    // } else if (that.data.statet == '运送中' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
-    //   console.log('仓管员 运送中 退货 取消')
-    // }
   },
   
-  send: function(){
+  send: function () {
     var that = this
-    if (that.data.statet == '待取货' && that.data.role == '门店负责人') {
-      console.log('门店负责人 待取货 发货')
-    } else if (that.data.statet == '待取货' && that.data.role == '门店销售员') {
-      console.log('门店销售员 待取货 发货')
-    } else if (that.data.statet == '待取货' && that.data.role == '仓管员' && that.data.receiveorsend == '退货') {
-      console.log('仓管员 待取货 退货 发货')
-    }
+    wx.navigateTo({
+      url: '../logisticsChoose/logisticsChoose?id=' + that.data.base_info.id
+    })
   },
 
   endtouchmove: function () {
