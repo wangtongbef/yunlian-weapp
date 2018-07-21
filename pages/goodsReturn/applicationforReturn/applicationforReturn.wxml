@@ -41,3 +41,4 @@
   </view>
 </view>
 <view class='submit' catchtap='submit'>提 交</view>
+<view wx:if='{{maskshow}}' class='mask'><text>{{markedWords}}</text></view>

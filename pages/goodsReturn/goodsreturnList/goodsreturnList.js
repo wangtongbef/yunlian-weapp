@@ -834,9 +834,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    that.setData({
-      firstin:false
-    })
+
   },
 
   /**
@@ -881,34 +879,6 @@ Page({
           }
         })
       } else if (that.data.role == '门店负责人') {
-        var storeList
-        wx.request({
-          url: getApp().data.servsers + 'shop/signingShopsForChargePerson', //获取门店列表
-          data: {
-            token: that.data.token
-          },
-          method: 'POST',
-          success: function (res) {
-            if (res.data.code == -3) {
-              wx.showToast({
-                title: 'token过期',
-                icon: 'none',
-                duration: 1000
-              })
-              setTimeout(function () {
-                wx.redirectTo({
-                  url: '../../login/login'
-                })
-              }, 1000)
-            } else {
-              storeList = [{ id: -1, name: '全部门店' }].concat(res.data.data)
-              that.setData({
-                staterightShow: true,
-                statesRight: storeList
-              })
-            }
-          }
-        })
         wx.request({
           url: getApp().data.servsers + 'return_documents/returnListForChargePerson', //获取退货单列表
           data: {

@@ -101,7 +101,7 @@ Page({
       }, 1000)
     }else {
       wx.request({
-        url: getApp().data.servsers + 'return_documents/sendOut', //获取快递公司列表
+        url: getApp().data.servsers + 'return_documents/sendOut', //退货单发货
         data: {
           token: that.data.token,
           return_id: that.data.id,
