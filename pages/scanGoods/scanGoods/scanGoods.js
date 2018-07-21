@@ -16,6 +16,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.scanCode({
       onlyFromCamera: false,
       success: (res) => {
@@ -35,7 +38,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',

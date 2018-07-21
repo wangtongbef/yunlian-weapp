@@ -16,6 +16,9 @@ Page({
   onLoad: function (options) {
     var that = this
     console.log(options)
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'code/productList',
       data: {
@@ -26,7 +29,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
