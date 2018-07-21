@@ -28,6 +28,9 @@ Page({
       role: role.role_name,
       token: tokenRoles.token
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role == '仓管员') {
       wx.request({
         url: getApp().data.servsers + 'storage/storageDetail',
@@ -37,7 +40,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -67,7 +70,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -92,6 +95,9 @@ Page({
 
   godownentryButton: function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role == '仓管员'){
       that.setData({
         maskshow: true
@@ -105,7 +111,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -146,8 +152,18 @@ Page({
     return false;
   },
 
+  clear: function () {
+    var that = this
+    that.setData({
+      maskshow: true
+    })
+  },
+
   yes:function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     //确认取消入库
     wx.request({
       url: getApp().data.servsers + 'storage/cancelStorage',
@@ -157,7 +173,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',

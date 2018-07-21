@@ -76,6 +76,9 @@ Page({
 
   confirm: function(){ //确认产品数量
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'storage/storageInfo',
       data: {
@@ -84,7 +87,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
+        wx.hideLoading()
         console.log(res.data.data.product_list)
         if (res.data.code == -3) {
           wx.showToast({
@@ -105,24 +108,9 @@ Page({
               markedWords: '确认成功',
               maskshow: true
             })
-          } else if (res.data.code == 1){
+          } else if (res.data.code != 0){
             that.setData({
-              markedWords: '产品来源不一致,请重新扫描',
-              maskshow: true
-            })
-          } else if (res.data.code == 2) {
-            that.setData({
-              markedWords: '部分产品来源不正确,请重新扫描',
-              maskshow: true
-            })
-          } else if (res.data.code == 3) {
-            that.setData({
-              markedWords: '部分产品质量有问题,请重新扫描',
-              maskshow: true
-            })
-          } else if (res.data.code == 4) {
-            that.setData({
-              markedWords: '部分产品被锁定,请重新扫描',
+              markedWords: res.data.msg,
               maskshow: true
             })
           }
@@ -150,6 +138,9 @@ Page({
 
   submit:function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'storage/storage',
       data: {
@@ -158,7 +149,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',

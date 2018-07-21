@@ -10,7 +10,8 @@ Page({
     stateChecked: -1,
     stateBoxstate: false,
     role:'',
-    token:''
+    token:'',
+    firstin:true
   },
 
   /**
@@ -25,36 +26,40 @@ Page({
       role: role.role_name
     })
     console.log(that.data.role)
-    if (that.data.role=='仓管员'){
-      wx.request({
-        url: getApp().data.servsers + 'storage/storageList',
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            list: res.data.data
-          })
-        }
+    if(that.data.firstin){
+      wx.showLoading({
+        title: '加载中',
       })
-    } else if (that.data.role == '配送员') {
-      wx.request({
-        url: getApp().data.servsers + 'storage/storageListForCourier',
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            list: res.data.data
-          })
-        }
-      })
+      if (that.data.role=='仓管员'){
+        wx.request({
+          url: getApp().data.servsers + 'storage/storageList',
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
+            that.setData({
+              list: res.data.data
+            })
+          }
+        })
+      } else if (that.data.role == '配送员') {
+        wx.request({
+          url: getApp().data.servsers + 'storage/storageListForCourier',
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
+            that.setData({
+              list: res.data.data
+            })
+          }
+        })
+      }
     }
-    
   },
 
   stateBoxhide: function (e) {
@@ -67,6 +72,9 @@ Page({
 
   stateCheck: function (e) {
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     that.setData({
       stateChecked: e.currentTarget.dataset.stateid
     })
@@ -83,7 +91,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
+              wx.hideLoading()
               that.setData({
                 list: res.data.data
               })
@@ -97,7 +105,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
+              wx.hideLoading()
               that.setData({
                 list: res.data.data
               })
@@ -115,7 +123,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
+              wx.hideLoading()
               that.setData({
                 list: res.data.data
               })
@@ -130,7 +138,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
-              console.log(res)
+              wx.hideLoading()
               that.setData({
                 list: res.data.data
               })
@@ -162,7 +170,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
@@ -170,42 +177,50 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var tokenRoles = wx.getStorageSync('tokenRoles')
-    var role = wx.getStorageSync('role')
-    that.setData({
-      token: tokenRoles.token,
-      role: role.role_name
-    })
-    console.log(that.data.role)
-    if (that.data.role == '仓管员') {
-      wx.request({
-        url: getApp().data.servsers + 'storage/storageList',
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            list: res.data.data
-          })
-        }
+    if (!that.data.firstin) {
+      wx.showLoading({
+        title: '加载中',
       })
-    } else if (that.data.role == '配送员') {
-      wx.request({
-        url: getApp().data.servsers + 'storage/storageListForCourier',
-        data: {
-          token: that.data.token
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res)
-          that.setData({
-            list: res.data.data
-          })
-        }
+      var tokenRoles = wx.getStorageSync('tokenRoles')
+      var role = wx.getStorageSync('role')
+      that.setData({
+        token: tokenRoles.token,
+        role: role.role_name
       })
+      console.log(that.data.role)
+      if (that.data.role == '仓管员') {
+        wx.request({
+          url: getApp().data.servsers + 'storage/storageList',
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
+            that.setData({
+              list: res.data.data
+            })
+          }
+        })
+      } else if (that.data.role == '配送员') {
+        wx.request({
+          url: getApp().data.servsers + 'storage/storageListForCourier',
+          data: {
+            token: that.data.token
+          },
+          method: 'POST',
+          success: function (res) {
+            wx.hideLoading()
+            that.setData({
+              list: res.data.data
+            })
+          }
+        })
+      }
     }
+    that.setData({
+      firstin: false
+    })
   },
 
   /**
