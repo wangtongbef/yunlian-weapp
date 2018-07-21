@@ -63,6 +63,9 @@ Page({
         currentTab: e.target.dataset.current
       })
       if (e.target.dataset.current == 1){
+        wx.showLoading({
+          title: '加载中',
+        })
         wx.request({
           url: getApp().data.servsers + 'shop_inventory/inTransport', //获取快递单列表
           data: {
@@ -70,7 +73,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',

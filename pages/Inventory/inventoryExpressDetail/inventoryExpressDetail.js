@@ -21,6 +21,9 @@ Page({
       token: wx.getStorageSync('tokenRoles').token
     })
     console.log(that.data.waybill)
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'shop_inventory/detailInTransport', 
       data: {

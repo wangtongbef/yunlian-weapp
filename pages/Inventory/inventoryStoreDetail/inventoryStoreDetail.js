@@ -63,6 +63,9 @@ Page({
     if (that.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
+      wx.showLoading({
+        title: '加载中',
+      })
       that.setData({
         currentTab: e.target.dataset.current
       })
