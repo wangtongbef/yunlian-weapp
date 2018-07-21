@@ -9,7 +9,7 @@
     <block wx:if='{{products.length!=0}}' wx:for='{{products}}' wx:key="name">
       <view class='productsDetail'>
         <text class='productName'>{{item.name}}</text>
-        <text class='productAmount'>{{item.amount}}</text>
+        <text class='productAmount'>{{item.count}}</text>
         <text  class='productMeasure'>个</text>
       </view>
     </block>
