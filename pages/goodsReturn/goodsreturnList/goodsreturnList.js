@@ -62,7 +62,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -91,7 +90,6 @@ Page({
               }, 1000)
             } else {
               storeList = [{ id: -1, name: '全部门店' }].concat(res.data.data)
-              console.log(storeList)
               that.setData({
                 staterightShow: true,
                 statesRight: storeList
@@ -118,7 +116,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -145,7 +142,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -172,7 +168,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -199,7 +194,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -221,7 +215,6 @@ Page({
   },
 
   stateBoxhide: function () {
-    console.log('stateBoxhide');
     var that = this;
     that.setData({
       stateBoxstate: !that.data.stateBoxstate,
@@ -264,7 +257,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -293,7 +285,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -324,7 +315,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -352,7 +342,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -382,7 +371,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -411,7 +399,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -441,7 +428,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -469,7 +455,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -498,7 +483,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -526,7 +510,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -555,7 +538,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -583,7 +565,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -627,7 +608,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -656,7 +636,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -687,7 +666,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -715,7 +693,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -745,7 +722,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -774,7 +750,6 @@ Page({
                   })
                 }, 1000)
               } else {
-                console.log(res)
                 that.setData({
                   list: res.data.data
                 })
@@ -789,7 +764,6 @@ Page({
         staterightBoxstate: !that.data.staterightBoxstate
       })
     }, 10)
-    console.log(e.currentTarget.dataset.staterightid)
     return false;
   },
 
@@ -898,7 +872,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -925,7 +898,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -952,7 +924,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })
@@ -979,7 +950,6 @@ Page({
                 })
               }, 1000)
             } else {
-              console.log(res)
               that.setData({
                 list: res.data.data
               })

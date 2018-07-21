@@ -82,6 +82,7 @@ page{
 }
 .remarks{
   padding-top: 60rpx;
+  padding-bottom: 0;
   background-color: #fff
 }
 .remarksTest{
