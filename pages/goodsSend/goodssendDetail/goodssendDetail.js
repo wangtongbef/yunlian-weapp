@@ -399,6 +399,9 @@ Page({
   onShow: function () {
     var that = this
     if (!that.data.firstIn){
+      wx.showLoading({
+        title: '加载中',
+      })
       that.setData({
         token: wx.getStorageSync('tokenRoles').token,
         role: wx.getStorageSync('role').role_name
@@ -411,6 +414,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -423,7 +427,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             that.setData({
               sendStep: that.data.steptext[res.data.data.base_info.status],
               sendType: that.data.sendTypetext[res.data.data.give_info.delivery_type],
@@ -486,40 +489,5 @@ Page({
         }
       })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

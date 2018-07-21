@@ -19,6 +19,9 @@ Page({
     that.setData({
       token: tokenRoles.token
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'shop/signingShopsForChargePerson', //获取门店列表
       data: {
@@ -26,6 +29,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',

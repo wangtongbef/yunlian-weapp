@@ -18,11 +18,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var that = this
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
       id: options.id
+    })
+    wx.showLoading({
+      title: '加载中',
     })
     wx.request({
       url: getApp().data.servsers + 'delivery/logisticsCompany', //获取快递公司列表
@@ -31,6 +33,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
@@ -43,7 +46,6 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
           that.setData({
             companylist: res.data.data
           })
@@ -100,6 +102,9 @@ Page({
         })
       }, 1000)
     }else {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.request({
         url: getApp().data.servsers + 'return_documents/sendOut', //退货单发货
         data: {
@@ -110,6 +115,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',

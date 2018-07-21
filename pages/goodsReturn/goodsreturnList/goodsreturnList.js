@@ -37,6 +37,9 @@ Page({
       token: tokenRoles.token
     })
     if (that.data.firstin){
+      wx.showLoading({
+        title: '加载中',
+      })
       if (that.data.role == '仓管员'){
         that.setData({
           staterightShow: true,
@@ -50,6 +53,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -104,6 +108,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -130,6 +135,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -156,6 +162,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -182,6 +189,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -235,6 +243,9 @@ Page({
     that.setData({
       stateChecked: e.currentTarget.dataset.stateid //选中的stateid==status+1
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role == '仓管员') {
       if (that.data.stateChecked == 0){
         wx.request({
@@ -245,6 +256,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -273,6 +285,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -303,6 +316,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -330,6 +344,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -359,6 +374,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -387,6 +403,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -416,6 +433,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -443,6 +461,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -471,6 +490,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -498,6 +518,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -526,6 +547,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -553,6 +575,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -583,6 +606,9 @@ Page({
 
   staterightCheck: function (e) { //退货状态接口与门店状态接口
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     that.setData({
       staterightChecked: e.currentTarget.dataset.staterightid
     })
@@ -596,6 +622,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -624,6 +651,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -654,6 +682,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -681,6 +710,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -710,6 +740,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -738,6 +769,7 @@ Page({
             },
             method: 'POST',
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code == -3) {
                 wx.showToast({
                   title: 'token过期',
@@ -817,6 +849,9 @@ Page({
   onShow: function () {
     var that = this;
     if (!that.data.firstin) {
+      wx.showLoading({
+        title: '加载中',
+      })
       that.setData({
         role: wx.getStorageSync('role').role_name,
         token: wx.getStorageSync('tokenRoles').token
@@ -834,6 +869,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -860,6 +896,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -886,6 +923,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -912,6 +950,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',
@@ -938,6 +977,7 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
                 title: 'token过期',

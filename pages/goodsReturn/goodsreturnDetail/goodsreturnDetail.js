@@ -43,6 +43,9 @@ Page({
       token: tokenRoles.token
     })
     if (that.data.firstin) {
+      wx.showLoading({
+        title: '加载中',
+      })
       if (options.receiveorsend){
         that.setData({
           receiveorsend: options.receiveorsend
@@ -56,6 +59,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -68,7 +72,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             that.setData({
               statet: that.data.stateArr[res.data.data.base_info.status],
               productsList: res.data.data.product_list,
@@ -145,6 +148,9 @@ Page({
 
   receive: function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     if (that.data.role == '仓管员'){
       wx.request({
         url: getApp().data.servsers + 'return_documents/confirm', //退货单确认收货
@@ -154,6 +160,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -166,7 +173,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             if (res.data.code == 0) {
               that.setData({
                 maskshow_2: true,
@@ -200,6 +206,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -212,7 +219,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             if (res.data.code == 0) {
               that.setData({
                 maskshow_2: true,
@@ -242,6 +248,9 @@ Page({
 
   getgoods:function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'return_documents/confirmCourier', //退货单确认取货
       data: {
@@ -250,6 +259,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
@@ -262,7 +272,6 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
           if (res.data.code == 0) {
             that.setData({
               maskshow_2: true,
@@ -309,6 +318,9 @@ Page({
 
   yes: function () {
     //确认取消
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     that.setData({
       maskshow: false,
@@ -321,6 +333,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
@@ -333,7 +346,6 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
           if(res.data.code == 0){
             that.setData({
               maskshow_2: true,
@@ -380,6 +392,9 @@ Page({
   onShow: function () {
     var that = this
     if (!that.data.firstin) {
+      wx.showLoading({
+        title: '加载中',
+      })
       wx.request({
         url: getApp().data.servsers + 'return_documents/returnDetail', //获取退货单详情
         data: {
@@ -388,6 +403,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -400,7 +416,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             that.setData({
               statet: that.data.stateArr[res.data.data.base_info.status],
               productsList: res.data.data.product_list,
@@ -476,40 +491,5 @@ Page({
     that.setData({
       firstin: false
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

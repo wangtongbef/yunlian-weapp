@@ -73,9 +73,11 @@ Page({
 
   confirm: function () { //确认产品数量
     var that = this
-    console.log(that.data.returnList)
     var role = wx.getStorageSync('role').role_name
     var storeId = wx.getStorageSync('storeDetail').id
+    wx.showLoading({
+      title: '加载中',
+    })
     if(role == '仓管员'){
       wx.request({
         url: getApp().data.servsers + 'return_documents/returnInfo',
@@ -85,7 +87,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -141,7 +143,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',
@@ -198,7 +200,7 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
+          wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',

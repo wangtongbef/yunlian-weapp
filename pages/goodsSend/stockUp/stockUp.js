@@ -76,6 +76,9 @@ Page({
 
   confirm: function(){
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'delivery/prepare',
       data: {
@@ -85,6 +88,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         console.log(res)
         if (res.data.code == -3) {
           wx.showToast({
