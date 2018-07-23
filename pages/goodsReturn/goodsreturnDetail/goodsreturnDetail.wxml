@@ -79,9 +79,9 @@
     <view class='title'>备注</view>
     <view class='remarks'>
       <view class='remarksTest'>{{des}}</view>
-      <view  wx:if='{{imagelist.length!=0}}' style='margin-left:40rpx;height:160rpx;padding-bottom:60rpx'>
+      <view  wx:if='{{imagelist.length!=0}}' style='margin-left:38rpx;height:160rpx;padding-bottom:60rpx;position:relative;top:40rpx'>
         <block wx:for='{{imagelist}}' wx:key="text">
-          <image src='{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 10rpx 0 0'></image>
+          <image src='{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 11rpx 0 0'></image>
         </block>
       </view>
     </view>

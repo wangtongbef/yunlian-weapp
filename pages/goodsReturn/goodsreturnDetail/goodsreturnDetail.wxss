@@ -82,7 +82,7 @@ page{
 }
 .remarks{
   padding-top: 60rpx;
-  padding-bottom: 0;
+  padding-bottom: 40rpx;
   background-color: #fff
 }
 .remarksTest{
@@ -90,7 +90,6 @@ page{
   height: 120rpx;
   padding:20rpx;
   margin-left: 38rpx;
-  margin-bottom: 40rpx;
   border: 2rpx dashed #a7a7a7;
   font-size:24rpx;
   color:rgb(88, 88, 88);
