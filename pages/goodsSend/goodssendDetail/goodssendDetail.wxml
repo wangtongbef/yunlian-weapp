@@ -24,9 +24,17 @@
     <view>
     <view class='title'>发货方信息</view>
     <view class='content'>
-      <view>
+      <view wx:if='{{from_info.from_warehouse}}'>
         <text class='ct'>发货仓库</text>
         <text class='cc'>{{from_info.from_warehouse}}</text>
+      </view>
+      <view wx:if='{{from_info.prepare_person}}'>
+        <text class='ct'>备货人</text>
+        <text class='cc'>{{from_info.prepare_person}}</text>
+      </view>
+      <view wx:if='{{from_info.out_person}}'>
+        <text class='ct'>发货人</text>
+        <text class='cc'>{{from_info.out_person}}</text>
       </view>
     </view>
   </view>
