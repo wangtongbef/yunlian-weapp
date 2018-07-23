@@ -56,19 +56,23 @@ Page({
 
   bindinput:function(event){
     var that = this
-    // var str = ''
-    // var value = event.detail.value.replace(" ", "")
-    // for (var i = 0; i < value.length;i++){
-    //   if (i%4==3){
-    //     str = str+value[i]+' '
-    //   }else{
-    //     str = str + value[i]
-    //   }
-    // }
+    var str = ''
+    var value =''
+    if (event.detail.value.length < that.data.inputValue.length){ //删除操作
+      value = that.data.inputValue.replace(/ /g, "").slice(0, str.length - 1)
+    } else if (event.detail.value.length > that.data.inputValue.length){ //输入操作
+      value = event.detail.value.replace(/ /g, "")
+    }
+    for (var i = 0; i < value.length; i++) {
+      if (i % 4 == 3 && i != value.length-1) {
+        str = str + value[i] + ' '
+      } else {
+        str = str + value[i]
+      }
+    }
     that.setData({
-      inputValue: event.detail.value
+      inputValue: str
     })
-    console.log(that.data.inputValue)
   },
 
   companycheck:function(e){
@@ -80,8 +84,9 @@ Page({
 
   confirm:function(){
     var that = this
-    console.log(that.data.inputValue, that.data.companyChecked, that.data.id)
-    if (that.data.inputValue.length==0){
+    var inputValue = that.data.inputValue.replace(/ /g, "")
+    console.log(inputValue, that.data.companyChecked, that.data.id)
+    if (inputValue.length==0){
       that.setData({
         markedWords: '你还没输入运单号',
         maskshow: true
@@ -91,7 +96,7 @@ Page({
           maskshow: false
         })
       }, 1000)
-    } else if (that.data.inputValue.length < 8){
+    } else if (inputValue.length < 8){
       that.setData({
         markedWords: '运单号不能少于8位',
         maskshow: true
@@ -111,7 +116,7 @@ Page({
           token: that.data.token,
           return_id: that.data.id,
           logistics_company_id: that.data.companyChecked,
-          waybill_number: that.data.inputValue
+          waybill_number: inputValue
         },
         method: 'POST',
         success: function (res) {
