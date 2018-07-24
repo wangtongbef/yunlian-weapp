@@ -58,13 +58,9 @@ Page({
     var that = this
     var str = ''
     var value =''
-    if (event.detail.value.length < that.data.inputValue.length){ //删除操作
-      value = that.data.inputValue.replace(/ /g, "").slice(0, str.length - 1)
-    } else if (event.detail.value.length > that.data.inputValue.length){ //输入操作
-      value = event.detail.value.replace(/ /g, "")
-    }
+    value = event.detail.value.replace(/ /g, "")
     for (var i = 0; i < value.length; i++) {
-      if (i % 4 == 3 && i != value.length-1) {
+      if (i % 4 == 3 && i != value.length - 1) {
         str = str + value[i] + ' '
       } else {
         str = str + value[i]
