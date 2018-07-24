@@ -41,17 +41,17 @@
   <view>
     <view class='title'>送货方信息</view>
     <view class='content' wx:if='{{give_info.delivery_type==0}}'>
-      <view>
+      <view wx:if='{{give_info.courier}}'>
         <text class='ct'>配送员</text>
         <text class='cc'>{{give_info.courier}}</text>
       </view>
     </view>
     <view class='content' wx:if='{{give_info.delivery_type==1}}'>
-      <view>
+      <view wx:if='{{give_info.logistics_company}}'>
         <text class='ct'>物流公司</text>
         <text class='cc'>{{give_info.logistics_company}}</text>
       </view>
-      <view>
+      <view wx:if='{{give_info.waybill_number}}'>
         <text class='ct'>运单号</text>
         <text class='cc'>{{give_info.waybill_number}}</text>
       </view>
@@ -62,7 +62,10 @@
     <view class='content'>
       <view>
         <text class='ct'>收货机构</text>
-        <text class='cc' catchtap='getlocation'>{{receive_info.name}}</text>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{receive_info.name}}</text>
+        <view style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+          <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
+        </view>
       </view>
     </view>
   </view>

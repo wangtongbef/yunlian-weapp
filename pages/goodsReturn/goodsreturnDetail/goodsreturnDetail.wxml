@@ -24,11 +24,11 @@
     <view>
     <view class='title'>退货方信息</view>
     <view class='content'>
-      <view>
+      <view wx:if='{{return_info.return_warehouse}}'>
         <text class='ct'>退货机构</text>
         <text class='cc'>{{return_info.return_warehouse}}</text>
       </view>
-      <view>
+      <view wx:if='{{return_info.return_person}}'>
         <text class='ct'>提交人</text>
         <text class='cc'>{{return_info.return_person}}</text>
       </view>

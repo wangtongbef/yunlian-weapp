@@ -295,7 +295,7 @@ Page({
       data: {
         token: that.data.token,
         id: that.data.receive_info.id,
-        type: that.data.receive_info.receive_type
+        type: that.data.receive_info.receiving_type
       },
       method: 'POST',
       success: function (res) {
@@ -312,6 +312,13 @@ Page({
           }, 1000)
         } else {
           console.log(res)
+          wx.openLocation({
+            latitude: parseFloat(res.data.data.latitude),
+            longitude: parseFloat(res.data.data.longitude),
+            name: that.data.receive_info.name,
+            address: res.data.data.address,
+            scale: 28
+          })
         }
       }
     })
