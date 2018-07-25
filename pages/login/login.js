@@ -40,22 +40,30 @@ Page({
             },
             success: function (res) {
               if (res.data.code === 0) {
+                var tokenRoles = res.data.data
+                var roles = []
+                for (var i = 0; i < tokenRoles.roles.length; i++){
+                  if (tokenRoles.roles[i].role_name == '门店销售员' || tokenRoles.roles[i].role_name == '门店负责人' || tokenRoles.roles[i].role_name == '商务专员' || tokenRoles.roles[i].role_name == '仓管员' || tokenRoles.roles[i].role_name == '配送员' || tokenRoles.roles[i].role_name =='生产经理'){
+                    roles.push(tokenRoles.roles[i])
+                  }
+                }
+                tokenRoles.roles = roles
                 wx.hideLoading()
                 var token = res.data.data.token
                 that.setData({
                   token: token
                 })
-                wx.setStorageSync('tokenRoles', res.data.data)// 存储token
+                wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
                 if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
                   that.setData({
                     isHiddenLogin: false
                   })
                 } else if (res.data.data.bind_phone === 1) {
-                  if (res.data.data.roles.length === 1) {
+                  if (tokenRoles.roles.length === 1) {
                     wx.showLoading({
                       title: '加载中',
                     })
-                    var role = res.data.data.roles[0]
+                    var role = tokenRoles.roles[0]
                     wx.setStorageSync('role', role)
                     wx.request({
                       url: getApp().data.servsers + 'login/role',
@@ -72,7 +80,7 @@ Page({
                     wx.redirectTo({
                       url: '../index/index'
                     })
-                  } else if (res.data.data.roles.length > 1) {
+                  } else if (tokenRoles.roles.length > 1) {
                     wx.redirectTo({
                       url: '../rolesCheck/rolesCheck'
                     })

@@ -33,8 +33,8 @@ Page({
       that.setData({
         list: [{ text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scan/scan' },
           { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
-        List_storage: [{ text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+        List_storage: [{ text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
           { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '门店负责人') {
@@ -43,9 +43,9 @@ Page({
           { text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scanStorecheck/scanStorecheck' },
           { text: '报表', icon: '../../img/baobiao-icon.png', url: '../form/saleForm/saleForm' },
           { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
-        List_storage: [{ text: '存货', icon: '../../img/cunhuo-icon.png', url: '../Inventory/inventoryList/inventoryList' },
+        List_storage: [{ text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
           { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '存货', icon: '../../img/cunhuo-icon.png', url: '../Inventory/inventoryList/inventoryList' },
           { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '商务专员') {
@@ -58,27 +58,19 @@ Page({
       })
     } else if (that.data.role.role_name == '仓管员'){
       that.setData({
-        phone_number: '110110110',
-        role: { role_id: 5, role_name: '仓管员' },
-        List_storage: [{
-          text: '入库单', icon: '../../img/rukudan-icon.png', url: '../godownEntry/godownEntryList/godownEntryList' },
-          { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
+        List_storage: [{ text: '入库单', icon: '../../img/rukudan-icon.png', url: '../godownEntry/godownEntryList/godownEntryList' },
           { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
+          { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
           { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
     } else if (that.data.role.role_name == '配送员'){
       that.setData({
-        phone_number: '110110110',
-        role: { role_id: 6, role_name: '配送员' },
         List_storage: [{ text: '入库单', icon: '../../img/rukudan-icon.png', url: '../godownEntry/godownEntryList/godownEntryList' },
-          { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
-          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }]
+          { text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' }, 
+          { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' }]
       })
     } else if (that.data.role.role_name == '生产经理') {
       that.setData({
-        phone_number: '110110110',
-        role: { role_id: 6, role_name: '生产经理' },
-        list: [],
         List_storage: [{ text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' }]
       })
     }

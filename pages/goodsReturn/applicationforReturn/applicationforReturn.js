@@ -10,7 +10,7 @@ Page({
     imgList: [],
     productType: 2,
     token:'',
-    des:'',
+    des:'123456',
     markedWords: '',
     maskshow: false
   },
