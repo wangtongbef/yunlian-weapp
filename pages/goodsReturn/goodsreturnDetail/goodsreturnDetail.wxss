@@ -14,7 +14,7 @@ page{
   background-color: #fff;
   padding:40rpx 0;
 }
-.content view{
+.content>view{
   height:70rpx;
   width: calc(100% - 80rpx);
   padding: 0 40rpx;

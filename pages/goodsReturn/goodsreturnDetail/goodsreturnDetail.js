@@ -19,6 +19,7 @@ Page({
     imagelist:[],
 
     statet:'',
+    state:0,
     role:'',
     token:'',
     sendtype:'',
@@ -72,6 +73,7 @@ Page({
               })
             }, 1000)
           } else {
+            console.log(res)
             that.setData({
               statet: that.data.stateArr[res.data.data.base_info.status],
               productsList: res.data.data.product_list,
@@ -85,7 +87,7 @@ Page({
 
             if (that.data.give_info.delivery_type==0){
               that.setData({
-                sendtype: '配送员'
+                sendtype: '配送员配送'
               })
             } else if (that.data.give_info.delivery_type == 1) {
               that.setData({
@@ -298,6 +300,42 @@ Page({
     })
   },
 
+  getlocation: function (e) {
+    var that = this
+    wx.request({
+      url: getApp().data.servsers + 'delivery/address',
+      data: {
+        token: that.data.token,
+        id: e.currentTarget.dataset.id,
+        type: e.currentTarget.dataset.type
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          console.log(res)
+          wx.openLocation({
+            latitude: parseFloat(res.data.data.latitude),
+            longitude: parseFloat(res.data.data.longitude),
+            name: e.currentTarget.dataset.name,
+            address: res.data.data.address,
+            scale: 28
+          })
+        }
+      }
+    })
+  },
+
   clear: function(){
     var that = this
     that.setData({
@@ -429,7 +467,7 @@ Page({
 
             if (that.data.give_info.delivery_type == 0) {
               that.setData({
-                sendtype: '配送员'
+                sendtype: '配送员配送'
               })
             } else if (that.data.give_info.delivery_type == 1) {
               that.setData({

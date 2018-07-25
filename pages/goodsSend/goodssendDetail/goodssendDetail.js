@@ -36,7 +36,7 @@ Page({
       token: wx.getStorageSync('tokenRoles').token,
       role: wx.getStorageSync('role').role_name,
       id: options.id,
-      WHkeperType: options.WHkeperType
+      WHkeperType: options.WHkeperType ? options.WHkeperType:''
     })
     wx.request({
       url: getApp().data.servsers + 'delivery/deliveryDetail', //获取送货单列表

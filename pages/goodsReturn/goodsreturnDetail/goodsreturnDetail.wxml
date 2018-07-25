@@ -12,10 +12,6 @@
         <text class='cn'>{{base_info.id}}</text>
       </view>
       <view>
-        <text class='ct'>收货人</text>
-        <text class='cc'>{{receiving_info}}</text>
-      </view>
-      <view>
         <text class='ct'>生成时间</text>
         <text class='cn'>{{base_info.create_time}}</text>
       </view>
@@ -26,7 +22,10 @@
     <view class='content'>
       <view wx:if='{{return_info.return_warehouse}}'>
         <text class='ct'>退货机构</text>
-        <text class='cc'>{{return_info.return_warehouse}}</text>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{return_info.return_warehouse}}</text>
+        <view data-id='{{return_info.return_warehouse_id}}' data-type='{{return_info.return_type}}' data-name='{{return_info.return_warehouse}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+          <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
+        </view>
       </view>
       <view wx:if='{{return_info.return_person}}'>
         <text class='ct'>提交人</text>
@@ -58,7 +57,11 @@
     <view class='content'>
       <view>
         <text class='ct'>收货机构</text>
-        <text class='cc'>{{receiving_info}}</text>
+        <text class='cc' wx:if='{{!receiving_info.id}}'>{{receiving_info}}</text>
+        <text class='cc' wx:if='{{receiving_info.id}}' style='flex-grow:2;text-align:right'>{{receiving_info.name}}</text>
+        <view wx:if='{{receiving_info.id}}' data-id='{{receiving_info.id}}' data-type='{{0}}' data-name='{{receiving_info.name}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+          <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
+        </view>
       </view>
     </view>
   </view>
