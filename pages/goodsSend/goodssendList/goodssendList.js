@@ -186,7 +186,6 @@ Page({
   },
 
   stateBoxhide: function () {
-    console.log('stateBoxhide');
     var that = this;
     that.setData({
       stateBoxstate: !that.data.stateBoxstate,
@@ -705,7 +704,6 @@ Page({
         staterightBoxstate: !that.data.staterightBoxstate
       })
     }, 10)
-    console.log(e.currentTarget.dataset.staterightid)
     return false;
   },
 
