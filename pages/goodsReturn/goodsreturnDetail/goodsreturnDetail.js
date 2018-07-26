@@ -6,18 +6,14 @@ Page({
    */
   data: {
     stateArr:['待审核','审核不过','待取货','运送中','已完成','已返厂','已取消'],
-    productsList: [],
     id: '',
     statecolor:'',
 
-    base_info:{},
-    des:'',
-    give_info:{},
-    receiving_info:{},
-    return_info:{},
-    quality:-1,
+    resdata:{},
     imagelist:[],
-
+    quality:-1,
+    productsList: [],
+    
     statet:'',
     state:0,
     role:'',
@@ -75,21 +71,18 @@ Page({
           } else {
             console.log(res)
             that.setData({
+              resdata:res.data.data,
               statet: that.data.stateArr[res.data.data.base_info.status],
               productsList: res.data.data.product_list,
-              base_info: res.data.data.base_info,
-              des: res.data.data.des,
-              give_info: res.data.data.give_info,
-              receiving_info: res.data.data.receiving_info,
-              return_info: res.data.data.return_info,
-              quality: res.data.data.quality
+              quality: res.data.data.quality,
+              imagelist: res.data.data.image
             })
 
-            if (that.data.give_info.delivery_type==0){
+            if (that.data.resdata.give_info.delivery_type==0){
               that.setData({
                 sendtype: '配送员配送'
               })
-            } else if (that.data.give_info.delivery_type == 1) {
+            } else if (that.data.resdata.give_info.delivery_type == 1) {
               that.setData({
                 sendtype: '物流配送'
               })
@@ -346,7 +339,7 @@ Page({
   send: function () {
     var that = this
     wx.navigateTo({
-      url: '../logisticsChoose/logisticsChoose?id=' + that.data.base_info.id
+      url: '../logisticsChoose/logisticsChoose?id=' + that.data.resdata.base_info.id
     })
   },
 
@@ -455,21 +448,18 @@ Page({
             }, 1000)
           } else {
             that.setData({
+              resdata: res.data.data,
               statet: that.data.stateArr[res.data.data.base_info.status],
               productsList: res.data.data.product_list,
-              base_info: res.data.data.base_info,
-              des: res.data.data.des,
-              give_info: res.data.data.give_info,
-              receiving_info: res.data.data.receiving_info,
-              return_info: res.data.data.return_info,
-              quality: res.data.data.quality
+              quality: res.data.data.quality,
+              imagelist: res.data.data.image
             })
 
-            if (that.data.give_info.delivery_type == 0) {
+            if (that.data.resdata.give_info.delivery_type == 0) {
               that.setData({
                 sendtype: '配送员配送'
               })
-            } else if (that.data.give_info.delivery_type == 1) {
+            } else if (that.data.resdata.give_info.delivery_type == 1) {
               that.setData({
                 sendtype: '物流配送'
               })

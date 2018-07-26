@@ -10,7 +10,7 @@ Page({
     imgList: [],
     productType: 2,
     token:'',
-    des:'123456',
+    des:'',
     markedWords: '',
     maskshow: false
   },
@@ -38,6 +38,7 @@ Page({
         productType: e.currentTarget.dataset.type
       })
     }
+    console.log(this.data.productType)
   },
 
   getdes:function(e){
@@ -60,7 +61,6 @@ Page({
         that.setData({
           imgList: list
         }) 
-        console.log(that.data.imgList)
       }
     })
   },
@@ -74,12 +74,98 @@ Page({
     })
   },
 
-  submit: function(){ //传图片还有问题
+  submit: function(){
     var that = this
+    var uploadImglist = function (return_id, imglist) {
+      console.log(return_id, imglist)
+      var unUploadimglist = []
+      var count = 0
+      var i = 0
+      var uploadimg = function (){
+        wx.uploadFile({
+          url: getApp().data.servsers + 'return_documents/uploadImg', //接口地址
+          filePath: imglist[i],
+          name: 'image',
+          formData: {
+            token: that.data.token,
+            return_id: return_id
+          },
+          success: function (res) {
+            count++
+            if (i == imglist.length - 1) {
+              wx:wx.hideLoading()
+              console.log(count, imglist.length)
+              if (count == imglist.length) {
+                wx.hideLoading()
+                that.setData({
+                  maskshow: true,
+                  markedWords: '操作成功'
+                })
+                setTimeout(function () {
+                  that.setData({
+                    maskshow: false
+                  })
+                  wx.navigateBack({
+                    delta: 2
+                  })
+                }, 1000)
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: imglist.length - count + '张图片未上传',
+                  showCancel: false,
+                  confirmText: '继续上传',
+                  success: function (res) {
+                    if (res.confirm) {
+                      uploadImglist(return_id, unUploadimglist)
+                    }
+                  }
+                })
+              }
+            }else{
+              i++
+              uploadimg()
+            }
+          },
+          fail: function () {
+            unUploadimglist.push(imglist[i])
+            if (i == imglist.length - 1) {
+              if (count != imglist.length) {
+                wx.showModal({
+                  title: '提示',
+                  content: imglist.length - count + '张图片未上传',
+                  showCancel: false,
+                  confirmText: '继续上传',
+                  success: function (res) {
+                    if (res.confirm) {
+                      uploadImglist(return_id, unUploadimglist)
+                    }
+                  }
+                })
+              }
+            } else {
+              i++
+              uploadimg()
+            }
+          }
+        })
+      }
+      uploadimg()
+    }
     if (that.data.des.length==0){
       that.setData({
         maskshow: true,
         markedWords: '备注不能为空'
+      })
+      setTimeout(function () {
+        that.setData({
+          maskshow: false
+        })
+      }, 1000)
+    } else if (that.data.productType == 0) {
+      that.setData({
+        maskshow: true,
+        markedWords: '请选择质量类型'
       })
       setTimeout(function () {
         that.setData({
@@ -96,7 +182,7 @@ Page({
           maskshow: false
         })
       }, 1000)
-    } else if (that.data.imgList.length == 0) {
+    } else if (that.data.productType==2 && that.data.imgList.length == 0) {
       that.setData({
         maskshow: true,
         markedWords: '你还没上传照片'
@@ -107,6 +193,9 @@ Page({
         })
       }, 1000)
     }else{
+      wx.showLoading({
+        title: '提交中',
+      })
       if (wx.getStorageSync('role').role_name=='仓管员'){
         wx.request({
           url: getApp().data.servsers + 'return_documents/returnSubmit',
@@ -120,21 +209,23 @@ Page({
           success: function (res) {
             console.log(res)
             var return_id = res.data.data.return_id
-            // for (var i = 0; i < that.data.imgList.length; i++) {
-              wx.uploadFile({
-                url: getApp().data.servsers + 'return_documents/uploadImg', //接口地址
-                filePath: that.data.imgList[0],
-                name: 'file',
-                formData: {
-                  token: that.data.token,
-                  return_id: return_id
-                },
-                success: function (res) {
-                  console.log(res)
-                  var data = res.data
-                }
+            if (that.data.productType == 2){
+              uploadImglist(return_id, that.data.imgList)
+            } else {
+              wx.hideLoading()
+              that.setData({
+                maskshow: true,
+                markedWords: '操作成功'
               })
-            // }
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 2
+                })
+              }, 1000)
+            }
           }
         })
       } else if (wx.getStorageSync('role').role_name == '门店负责人'){
@@ -151,24 +242,25 @@ Page({
           success: function (res) {
             console.log(res)
             var return_id = res.data.data.return_id
-            // for (var i = 0; i < that.data.imgList.length; i++) {
-            wx.uploadFile({
-              url: getApp().data.servsers + 'return_documents/uploadImg', //接口地址
-              filePath: that.data.imgList[0],
-              name: 'file',
-              formData: {
-                token: that.data.token,
-                return_id: return_id
-              },
-              success: function (res) {
-                console.log(res)
-                var data = res.data
-              }
-            })
-            // }
+            if (that.data.productType == 2) {
+              uploadImglist(return_id, that.data.imgList)
+            } else {
+              wx.hideLoading()
+              that.setData({
+                maskshow: true,
+                markedWords: '操作成功'
+              })
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 2
+                })
+              }, 1000)
+            }
           }
         })
-
       } else if (wx.getStorageSync('role').role_name == '门店销售员') {
         wx.request({
           url: getApp().data.servsers + 'return_documents/returnSubmitSales',
@@ -182,20 +274,22 @@ Page({
           success: function (res) {
             console.log(res)
             var return_id = res.data.data.return_id
-            for (var i = 0; i < that.data.imgList.length; i++) {
-              wx.uploadFile({
-                url: getApp().data.servsers + 'return_documents/uploadImg',
-                filePath: that.data.imgList[i],
-                name: 'image',
-                formData: {
-                  token: that.data.token,
-                  return_id: return_id
-                },
-                success: function (res) {
-                  console.log(res)
-                  var data = res.data
-                }
+            if (that.data.productType == 2) {
+              uploadImglist(return_id, that.data.imgList)
+            } else {
+              wx.hideLoading()
+              that.setData({
+                maskshow: true,
+                markedWords: '操作成功'
               })
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 2
+                })
+              }, 1000)
             }
           }
         })

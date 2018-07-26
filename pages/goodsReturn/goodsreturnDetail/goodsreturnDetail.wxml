@@ -9,46 +9,46 @@
       </view>
       <view>
         <text class='ct'>编号</text>
-        <text class='cn'>{{base_info.id}}</text>
+        <text class='cn'>{{resdata.base_info.id}}</text>
       </view>
       <view>
         <text class='ct'>生成时间</text>
-        <text class='cn'>{{base_info.create_time}}</text>
+        <text class='cn'>{{resdata.base_info.create_time}}</text>
       </view>
     </view>
   </view>
     <view>
     <view class='title'>退货方信息</view>
     <view class='content'>
-      <view wx:if='{{return_info.return_warehouse}}'>
+      <view wx:if='{{resdata.return_info.return_warehouse}}'>
         <text class='ct'>退货机构</text>
-        <text class='cc' style='flex-grow:2;text-align:right'>{{return_info.return_warehouse}}</text>
-        <view data-id='{{return_info.return_warehouse_id}}' data-type='{{return_info.return_type}}' data-name='{{return_info.return_warehouse}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.return_info.return_warehouse}}</text>
+        <view data-id='{{resdata.return_info.return_warehouse_id}}' data-type='{{resdata.return_info.return_type}}' data-name='{{resdata.return_info.return_warehouse}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
       </view>
-      <view wx:if='{{return_info.return_person}}'>
+      <view wx:if='{{resdata.return_info.return_person}}'>
         <text class='ct'>提交人</text>
-        <text class='cc'>{{return_info.return_person}}</text>
+        <text class='cc'>{{resdata.return_info.return_person}}</text>
       </view>
     </view>
   </view>
   <view>
     <view class='title'>送货方信息</view>
-    <view wx:if="{{give_info.delivery_type==0}}" class='content'>
+    <view wx:if="{{resdata.give_info.delivery_type==0}}" class='content'>
       <view>
         <text class='ct'>配送员</text>
-        <text class='cc'>{{give_info.courier}}</text>
+        <text class='cc'>{{resdata.give_info.courier}}</text>
       </view>
     </view>
-    <view wx:if="{{give_info.delivery_type==1}}" class='content'>
+    <view wx:if="{{resdata.give_info.delivery_type==1}}" class='content'>
       <view>
         <text class='ct'>物流公司</text>
-        <text class='cc'>{{give_info.logistics_company}}</text>
+        <text class='cc'>{{resdata.give_info.logistics_company}}</text>
       </view>
       <view>
         <text class='ct'>物流单号</text>
-        <text class='cc'>{{give_info.waybill_number}}</text>
+        <text class='cc'>{{resdata.give_info.waybill_number}}</text>
       </view>
     </view>
   </view>
@@ -57,9 +57,8 @@
     <view class='content'>
       <view>
         <text class='ct'>收货机构</text>
-        <text class='cc' wx:if='{{!receiving_info.id}}'>{{receiving_info}}</text>
-        <text class='cc' wx:if='{{receiving_info.id}}' style='flex-grow:2;text-align:right'>{{receiving_info.name}}</text>
-        <view wx:if='{{receiving_info.id}}' data-id='{{receiving_info.id}}' data-type='{{0}}' data-name='{{receiving_info.name}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receiving_info.name}}</text>
+        <view wx:if='{{resdata.receiving_info.id}}' data-id='{{resdata.receiving_info.id}}' data-type='{{0}}' data-name='{{resdata.receiving_info.name}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
       </view>
@@ -81,10 +80,10 @@
   <view>
     <view class='title'>备注</view>
     <view class='remarks'>
-      <view class='remarksTest'>{{des}}</view>
+      <view class='remarksTest'>{{resdata.des}}</view>
       <view  wx:if='{{imagelist.length!=0}}' style='margin-left:38rpx;height:160rpx;padding-bottom:60rpx;position:relative;top:40rpx'>
         <block wx:for='{{imagelist}}' wx:key="text">
-          <image src='{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 11rpx 0 0'></image>
+          <image src='https://dev2.lystrong.cn{{item}}' mode='aspectFill' style='width:160rpx;height:160rpx;margin:0 11rpx 0 0'></image>
         </block>
       </view>
     </view>
