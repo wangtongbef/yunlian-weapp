@@ -9,51 +9,51 @@
       </view>
       <view>
         <text class='ct'>编号</text>
-        <text class='cn'>{{base_info.id}}</text>
+        <text class='cn'>{{resdata.base_info.id}}</text>
       </view>
       <view>
         <text class='ct'>类型</text>
-        <text class='cc'>{{base_info.type==0?'普通':'紧急'}}</text>
+        <text class='cc'>{{resdata.base_info.type==0?'普通':'紧急'}}</text>
       </view>
       <view>
         <text class='ct'>生成时间</text>
-        <text class='cn'>{{base_info.create_time}}</text>
+        <text class='cn'>{{resdata.base_info.create_time}}</text>
       </view>
     </view>
   </view>
     <view>
     <view class='title'>发货方信息</view>
     <view class='content'>
-      <view wx:if='{{from_info.from_warehouse}}'>
+      <view wx:if='{{resdata.from_info.from_warehouse}}'>
         <text class='ct'>发货仓库</text>
-        <text class='cc'>{{from_info.from_warehouse}}</text>
+        <text class='cc'>{{resdata.from_info.from_warehouse}}</text>
       </view>
-      <view wx:if='{{from_info.prepare_person}}'>
+      <view wx:if='{{resdata.from_info.prepare_person}}'>
         <text class='ct'>备货人</text>
-        <text class='cc'>{{from_info.prepare_person}}</text>
+        <text class='cc'>{{resdata.from_info.prepare_person}}</text>
       </view>
-      <view wx:if='{{from_info.out_person}}'>
+      <view wx:if='{{resdata.from_info.out_person}}'>
         <text class='ct'>发货人</text>
-        <text class='cc'>{{from_info.out_person}}</text>
+        <text class='cc'>{{resdata.from_info.out_person}}</text>
       </view>
     </view>
   </view>
   <view>
     <view class='title'>送货方信息</view>
-    <view class='content' wx:if='{{give_info.delivery_type==0}}'>
-      <view wx:if='{{give_info.courier}}'>
+    <view class='content' wx:if='{{resdata.give_info.delivery_type==0}}'>
+      <view wx:if='{{resdata.give_info.courier}}'>
         <text class='ct'>配送员</text>
-        <text class='cc'>{{give_info.courier}}</text>
+        <text class='cc'>{{resdata.give_info.courier}}</text>
       </view>
     </view>
-    <view class='content' wx:if='{{give_info.delivery_type==1}}'>
-      <view wx:if='{{give_info.logistics_company}}'>
+    <view class='content' wx:if='{{resdata.give_info.delivery_type==1}}'>
+      <view wx:if='{{resdata.give_info.logistics_company}}'>
         <text class='ct'>物流公司</text>
-        <text class='cc'>{{give_info.logistics_company}}</text>
+        <text class='cc'>{{resdata.give_info.logistics_company}}</text>
       </view>
-      <view wx:if='{{give_info.waybill_number}}'>
+      <view wx:if='{{resdata.give_info.waybill_number}}'>
         <text class='ct'>运单号</text>
-        <text class='cc'>{{give_info.waybill_number}}</text>
+        <text class='cc'>{{resdata.give_info.waybill_number}}</text>
       </view>
     </view>
   </view>
@@ -62,7 +62,7 @@
     <view class='content'>
       <view>
         <text class='ct'>收货机构</text>
-        <text class='cc' style='flex-grow:2;text-align:right'>{{receive_info.name}}</text>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receive_info.name}}</text>
         <view style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
@@ -72,7 +72,7 @@
   <view>
     <view class='title'>货物清单</view>
     <view class='listBox'>
-      <block wx:for='{{product_list}}' wx:key="name">
+      <block wx:for='{{resdata.product_list}}' wx:key="name">
         <view class='list'>
           <text class='productName'>{{item.product_name}}</text>
           <text class='productAmount'>{{item.product_count}}</text>

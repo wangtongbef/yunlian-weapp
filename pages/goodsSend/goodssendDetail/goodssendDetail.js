@@ -19,11 +19,7 @@ Page({
     maskshow_2: false,
     markedWords: '',
 
-    base_info:{},
-    from_info:{},
-    give_info:{},
-    receive_info:{},
-    product_list:{}
+    resdata:{}
   },
 
   /**
@@ -58,15 +54,11 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
+          // console.log(res)
           that.setData({
             sendStep: that.data.steptext[res.data.data.base_info.status],
             sendType: that.data.sendTypetext[res.data.data.give_info.delivery_type],
-            base_info: res.data.data.base_info,
-            from_info: res.data.data.from_info,
-            give_info: res.data.data.give_info,
-            receive_info: res.data.data.receive_info,
-            product_list: res.data.data.product_list
+            resdata: res.data.data
           })
         }
       }, 
@@ -128,7 +120,7 @@ Page({
   stockUp:function(){
     var that = this
     wx.navigateTo({
-      url: '../stockUp/stockUp?id=' + that.data.base_info.id
+      url: '../stockUp/stockUp?id=' + that.data.resdata.base_info.id
     })
   },
 
@@ -148,7 +140,7 @@ Page({
       url: getApp().data.servsers + 'delivery/confirmCourier', //确认取货
       data: {
         token: that.data.token,
-        id: that.data.base_info.id
+        id: that.data.resdata.base_info.id
       },
       method: 'POST',
       success: function (res) {
@@ -164,7 +156,7 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
+          // console.log(res)
           if (res.data.code == 0) {
             that.setData({
               maskshow_2: true,
@@ -214,7 +206,7 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
+            // console.log(res)
             if (res.data.code == 0) {
               that.setData({
                 maskshow_2: true,
@@ -260,7 +252,7 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
+            // console.log(res)
             if (res.data.code == 0) {
               that.setData({
                 maskshow_2: true,
@@ -294,8 +286,8 @@ Page({
       url: getApp().data.servsers + 'delivery/address',
       data: {
         token: that.data.token,
-        id: that.data.receive_info.id,
-        type: that.data.receive_info.receiving_type
+        id: that.data.resdata.receive_info.id,
+        type: that.data.resdata.receive_info.receiving_type
       },
       method: 'POST',
       success: function (res) {
@@ -315,7 +307,7 @@ Page({
           wx.openLocation({
             latitude: parseFloat(res.data.data.latitude),
             longitude: parseFloat(res.data.data.longitude),
-            name: that.data.receive_info.name,
+            name: that.data.resdata.receive_info.name,
             address: res.data.data.address,
             scale: 28
           })
@@ -337,7 +329,7 @@ Page({
       url: getApp().data.servsers + 'delivery/cancelDelivery', //取消送货单
       data: {
         token: that.data.token,
-        id: that.data.base_info.id
+        id: that.data.resdata.base_info.id
       },
       method: 'POST',
       success: function (res) {
@@ -353,7 +345,7 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
+          // console.log(res)
           if (res.data.code == 0) {
             that.setData({
               maskshow_2: true,
@@ -390,7 +382,7 @@ Page({
   send:function(){
     var that = this
     wx.navigateTo({
-      url: '../logisticsChoose/logisticsChoose?id=' + that.data.base_info.id
+      url: '../logisticsChoose/logisticsChoose?id=' + that.data.resdata.base_info.id
     })
   },
   /**
@@ -437,11 +429,7 @@ Page({
             that.setData({
               sendStep: that.data.steptext[res.data.data.base_info.status],
               sendType: that.data.sendTypetext[res.data.data.give_info.delivery_type],
-              base_info: res.data.data.base_info,
-              from_info: res.data.data.from_info,
-              give_info: res.data.data.give_info,
-              receive_info: res.data.data.receive_info,
-              product_list: res.data.data.product_list
+              resdata: res.data.data
             })
           }
         },
