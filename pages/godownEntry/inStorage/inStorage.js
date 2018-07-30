@@ -137,7 +137,7 @@ Page({
               wx.navigateBack({
                 delta: 1
               })
-            }, 1000)
+            }, 2000)
           }
         }
       },
