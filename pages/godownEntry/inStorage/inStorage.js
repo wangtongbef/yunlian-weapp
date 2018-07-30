@@ -27,6 +27,7 @@ Page({
     wx.scanCode({
       onlyFromCamera: false,
       success: (res) => {
+        console.log(res)
         if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
           var detail = res.result.split("?")[1].split("&")
           var obj = {'code_sn': detail[0].split("=")[1], 'code_type': detail[1].split("=")[1]}
@@ -104,11 +105,26 @@ Page({
           }, 1000)
         } else {
           if (res.data.code == 0) {
-            that.setData({
-              productList: res.data.data.product_list,
-              sendType: res.data.data.from_type,
-              comfirmState: 2
-            })
+            if (res.data.data.product_list.length == 0){
+              that.setData({
+                markedWords: '扫描结果没有对应的产品',
+                maskshow: true
+              })
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            }else{
+              that.setData({
+                productList: res.data.data.product_list,
+                sendType: res.data.data.from_type,
+                comfirmState: 2
+              })
+            }
           } else if (res.data.code != 0){
             that.setData({
               markedWords: res.data.msg,
