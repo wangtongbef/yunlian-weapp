@@ -181,20 +181,19 @@ Page({
                 markedWords: '入库单已提交，等待配送员确认',
                 maskshow: true
               })
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
             } else {
-              that.setData({
-                markedWords: '入库成功',
-                maskshow: true
-              })
-            }
-            setTimeout(function () {
-              that.setData({
-                maskshow: false
-              })
               wx.navigateBack({
                 delta: 1
               })
-            }, 1000)
+            }
           } else if (res.data.code == 1) {
             that.setData({
               markedWords: '入库失败',
