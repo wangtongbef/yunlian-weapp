@@ -1,5 +1,5 @@
 <!--pages/scanGoods/scanGoods/scanGoods.wxml-->
-<view wx:if='{{list.length!=0}}'>
+<view wx:if='{{list.length!=0 && !err}}'>
   <view class='title'>产品清单</view>
   <view>
     <block wx:for='{{list}}' wx:key="{{index}}">
@@ -11,7 +11,7 @@
       </block>
   </view>
 </view>
-<view wx:if='{{list.length==0}}' class='nodata'>
+<view wx:if='{{list.length==0 && !err}}' class='nodata'>
   <image src='../../../img/no.png'></image>
   <text>没有产品</text>
 </view>
