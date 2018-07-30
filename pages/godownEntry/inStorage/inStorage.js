@@ -117,7 +117,7 @@ Page({
                 wx.navigateBack({
                   delta: 1
                 })
-              }, 1000)
+              }, 2000)
             }else{
               that.setData({
                 productList: res.data.data.product_list,

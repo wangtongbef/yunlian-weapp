@@ -42,48 +42,74 @@ Page({
               if (res.data.code === 0) {
                 var tokenRoles = res.data.data
                 var roles = []
-                for (var i = 0; i < tokenRoles.roles.length; i++){
-                  if (tokenRoles.roles[i].role_name == '门店销售员' || tokenRoles.roles[i].role_name == '门店负责人' || tokenRoles.roles[i].role_name == '商务专员' || tokenRoles.roles[i].role_name == '仓管员' || tokenRoles.roles[i].role_name == '配送员' || tokenRoles.roles[i].role_name =='生产经理'){
-                    roles.push(tokenRoles.roles[i])
-                  }
-                }
-                tokenRoles.roles = roles
-                wx.hideLoading()
-                var token = res.data.data.token
-                that.setData({
-                  token: token
-                })
-                wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
-                if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
-                  that.setData({
-                    isHiddenLogin: false
+                if (tokenRoles.roles.length == 0){
+                  wx.showToast({
+                    title: '没有访问权限',
+                    icon: 'none',
+                    duration: 1000
                   })
-                } else if (res.data.data.bind_phone === 1) {
-                  if (tokenRoles.roles.length === 1) {
-                    wx.showLoading({
-                      title: '加载中',
+                  setTimeout(function () {
+                    that.setData({
+                      isHiddenLogin: false
                     })
-                    var role = tokenRoles.roles[0]
-                    wx.setStorageSync('role', role)
-                    wx.request({
-                      url: getApp().data.servsers + 'login/role',
-                      data: {
-                        role_id: role.role_id,
+                  }, 1000)
+                } else {
+                  for (var i = 0; i < tokenRoles.roles.length; i++) {
+                    if (tokenRoles.roles[i].role_name == '门店销售员' || tokenRoles.roles[i].role_name == '门店负责人' || tokenRoles.roles[i].role_name == '商务专员' || tokenRoles.roles[i].role_name == '仓管员' || tokenRoles.roles[i].role_name == '配送员' || tokenRoles.roles[i].role_name == '生产经理') {
+                      roles.push(tokenRoles.roles[i])
+                    }
+                    if (i == tokenRoles.roles.length - 1) {
+                      tokenRoles.roles = roles
+                      wx.hideLoading()
+                      var token = res.data.data.token
+                      that.setData({
                         token: token
-                      },
-                      method: 'POST',
-                      success: function (res) {
-                        wx.hideLoading()
-                        wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
+                      })
+                      wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
+                      if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
+                        that.setData({
+                          isHiddenLogin: false
+                        })
+                      } else if (res.data.data.bind_phone === 1) {
+                        if (tokenRoles.roles.length === 1) {
+                          wx.showLoading({
+                            title: '加载中',
+                          })
+                          var role = tokenRoles.roles[0]
+                          wx.setStorageSync('role', role)
+                          wx.request({
+                            url: getApp().data.servsers + 'login/role',
+                            data: {
+                              role_id: role.role_id,
+                              token: token
+                            },
+                            method: 'POST',
+                            success: function (res) {
+                              wx.hideLoading()
+                              wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
+                            }
+                          })
+                          wx.redirectTo({
+                            url: '../index/index'
+                          })
+                        } else if (tokenRoles.roles.length > 1) {
+                          wx.redirectTo({
+                            url: '../rolesCheck/rolesCheck'
+                          })
+                        } else if (tokenRoles.roles.length == 0){
+                          wx.showToast({
+                            title: '没有访问权限',
+                            icon: 'none',
+                            duration: 1000
+                          })
+                          setTimeout(function () {
+                            that.setData({
+                              isHiddenLogin: false
+                            })
+                          }, 1000)
+                        }
                       }
-                    })
-                    wx.redirectTo({
-                      url: '../index/index'
-                    })
-                  } else if (tokenRoles.roles.length > 1) {
-                    wx.redirectTo({
-                      url: '../rolesCheck/rolesCheck'
-                    })
+                    }
                   }
                 }
               } else if (res.data.code === 1) {
