@@ -95,7 +95,7 @@ Page({
   todetail: function (e){
     var that = this
     wx.navigateTo({
-      url: '../scanGoodsdetail/scanGoodsdetail?code_sn=' + that.data.code_sn + '&code_type=' + that.data.code_sn + '&id=' + e.currentTarget.dataset.id,
+      url: '../scanGoodsdetail/scanGoodsdetail?code_sn=' + that.data.code_sn + '&code_type=' + that.data.code_type + '&id=' + e.currentTarget.dataset.id,
     })
   },
   /**

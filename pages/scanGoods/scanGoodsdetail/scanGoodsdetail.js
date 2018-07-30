@@ -7,7 +7,8 @@ Page({
   data: {
     name:'',
     Type:'',
-    product_ids:[]
+    product_ids:[],
+    options:{}
   },
 
   /**
@@ -16,6 +17,9 @@ Page({
   onLoad: function (options) {
     var that = this
     console.log(options)
+    that.setData({
+      options: options
+    })
     wx.showLoading({
       title: '加载中',
     })

@@ -156,7 +156,6 @@ Page({
   },
 
   inStorage: function(){
-    console.log('扫一扫')
     wx.navigateTo({
       url: '../../godownEntry/inStorage/inStorage'   //扫码页面
     })
@@ -186,7 +185,6 @@ Page({
         token: tokenRoles.token,
         role: role.role_name
       })
-      console.log(that.data.role)
       if (that.data.role == '仓管员') {
         wx.request({
           url: getApp().data.servsers + 'storage/storageList',

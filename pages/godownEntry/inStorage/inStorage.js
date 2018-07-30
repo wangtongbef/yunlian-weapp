@@ -34,7 +34,8 @@ Page({
           arr.push(obj)
           that.setData({
             sendList: arr,
-            codenumber: detail[0].split("=")[1]
+            codenumber: detail[0].split("=")[1],
+            codedetail: true
           })
         } else {
           that.setData({
@@ -63,7 +64,8 @@ Page({
           arr.push(obj)
           that.setData({
             sendList: arr,
-            codenumber: detail[0].split("=")[1]
+            codenumber: detail[0].split("=")[1],
+            codedetail: true
           })
         } else {
           that.setData({
@@ -105,27 +107,22 @@ Page({
             that.setData({
               productList: res.data.data.product_list,
               sendType: res.data.data.from_type,
-              markedWords: '确认成功',
-              maskshow: true
+              comfirmState: 2
             })
           } else if (res.data.code != 0){
             that.setData({
               markedWords: res.data.msg,
               maskshow: true
             })
-          }
-          setTimeout(function(){that.setData({
-              maskshow: false
-            })
-            if (that.data.markedWords == '确认成功') {
+            setTimeout(function () {
               that.setData({
-                comfirmState: 2,
+                maskshow: false
               })
-            } else {
               wx.navigateBack({
                 delta: 1
               })
-          }}, 1000)
+            }, 1000)
+          }
         }
       },
       fail: function(){

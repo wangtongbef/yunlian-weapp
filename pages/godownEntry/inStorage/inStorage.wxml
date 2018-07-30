@@ -11,7 +11,7 @@
   </view>
   <view class='button'>
     <view style='background-color:rgb(1,144,210)' catchtap='Continue'>继续扫描</view>
-    <view style='background-color:rgb(2,181,19)' catchtap='confirm'>确定</view>
+    <view style='background-color:rgb(2,181,19)' catchtap='confirm'>完成</view>
   </view>
 </view>
 <view wx:if='{{comfirmState==2}}'>

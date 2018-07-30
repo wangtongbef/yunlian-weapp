@@ -5,11 +5,16 @@
 </view>
 <view class='detailbottom'>
   <view class='bottomtitle'>产品编号</view>
-  <view class='productids'>
+  <view wx:if='{{product_ids.length!=0}}' class='productids'>
     <block wx:for='{{product_ids}}' wx:key="{{index}}">
       <view class='productid'>
         {{item}}
       </view>
     </block>
+  </view>
+  <view wx:if='{{product_ids.length==0}}' class='productids'>
+    <view class='productid'>
+      {{options.code_sn}}
+    </view>
   </view>
 </view>
