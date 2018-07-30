@@ -101,31 +101,45 @@ Page({
             }, 1000)
           } else {
             if (res.data.code == 0) {
-              that.setData({
-                productList: res.data.data,
-                markedWords: '确认成功',
-                maskshow: true
-              })
+              if (res.data.data.length == 0){
+                that.setData({
+                  markedWords: '扫描结果没有对应产品',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  that.setData({
+                    maskshow: false
+                  })
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 2000)
+              }else{
+                that.setData({
+                  productList: res.data.data,
+                  markedWords: '确认成功',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+                  })
+                }, 2000)
+              }
             } else if (res.data.code != 0) {
               that.setData({
                 markedWords: res.data.msg,
                 maskshow: true
               })
-            }
-            setTimeout(function () {
-              that.setData({
-                maskshow: false
-              })
-              if (that.data.markedWords == '确认成功') {
-                wx.navigateTo({
-                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
                 })
-              } else {
                 wx.navigateBack({
                   delta: 1
                 })
-              }
-            }, 1000)
+              }, 2000)
+            }
           }
         },
         fail: function () {
@@ -157,31 +171,45 @@ Page({
             }, 1000)
           } else {
             if (res.data.code == 0) {
-              that.setData({
-                productList: res.data.data,
-                markedWords: '确认成功',
-                maskshow: true
-              })
+              if (res.data.data.length == 0) {
+                that.setData({
+                  markedWords: '扫描结果没有对应产品',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  that.setData({
+                    maskshow: false
+                  })
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 2000)
+              } else {
+                that.setData({
+                  productList: res.data.data,
+                  markedWords: '确认成功',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+                  })
+                }, 2000)
+              }
             } else if (res.data.code != 0) {
               that.setData({
                 markedWords: res.data.msg,
                 maskshow: true
               })
-            }
-            setTimeout(function () {
-              that.setData({
-                maskshow: false
-              })
-              if (that.data.markedWords == '确认成功') {
-                wx.navigateTo({
-                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
                 })
-              } else {
                 wx.navigateBack({
                   delta: 1
                 })
-              }
-            }, 1000)
+              }, 2000)
+            }
           }
         },
         fail: function () {
@@ -214,31 +242,45 @@ Page({
             }, 1000)
           } else {
             if (res.data.code == 0) {
-              that.setData({
-                productList: res.data.data,
-                markedWords: '确认成功',
-                maskshow: true
-              })
+              if (res.data.data.length == 0) {
+                that.setData({
+                  markedWords: '扫描结果没有对应产品',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  that.setData({
+                    maskshow: false
+                  })
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 2000)
+              } else {
+                that.setData({
+                  productList: res.data.data,
+                  markedWords: '确认成功',
+                  maskshow: true
+                })
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+                  })
+                }, 2000)
+              }
             } else if (res.data.code != 0) {
               that.setData({
                 markedWords: res.data.msg,
                 maskshow: true
               })
-            }
-            setTimeout(function () {
-              that.setData({
-                maskshow: false
-              })
-              if (that.data.markedWords == '确认成功') {
-                wx.navigateTo({
-                  url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
+              setTimeout(function () {
+                that.setData({
+                  maskshow: false
                 })
-              } else {
                 wx.navigateBack({
                   delta: 1
                 })
-              }
-            }, 1000)
+              }, 2000)
+            }
           }
         },
         fail: function () {
