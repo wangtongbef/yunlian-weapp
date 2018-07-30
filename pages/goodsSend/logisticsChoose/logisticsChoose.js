@@ -56,15 +56,6 @@ Page({
 
   bindinput:function(event){
     var that = this
-    // var str = ''
-    // var value = event.detail.value.replace(" ", "")
-    // for (var i = 0; i < value.length;i++){
-    //   if (i%4==3){
-    //     str = str+value[i]+' '
-    //   }else{
-    //     str = str + value[i]
-    //   }
-    // }
     that.setData({
       inputValue: event.detail.value
     })

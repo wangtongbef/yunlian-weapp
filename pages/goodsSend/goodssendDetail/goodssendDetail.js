@@ -385,13 +385,7 @@ Page({
       url: '../logisticsChoose/logisticsChoose?id=' + that.data.resdata.base_info.id
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
