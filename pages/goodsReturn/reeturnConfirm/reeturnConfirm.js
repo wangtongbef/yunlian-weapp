@@ -103,7 +103,7 @@ Page({
             if (res.data.code == 0) {
               if (res.data.data.length == 0){
                 that.setData({
-                  markedWords: '扫描结果没有对应产品',
+                  markedWords: '扫描结果没有对应的产品',
                   maskshow: true
                 })
                 setTimeout(function () {
@@ -171,7 +171,7 @@ Page({
             if (res.data.code == 0) {
               if (res.data.data.length == 0) {
                 that.setData({
-                  markedWords: '扫描结果没有对应产品',
+                  markedWords: '扫描结果没有对应的产品',
                   maskshow: true
                 })
                 setTimeout(function () {
@@ -240,7 +240,7 @@ Page({
             if (res.data.code == 0) {
               if (res.data.data.length == 0) {
                 that.setData({
-                  markedWords: '扫描结果没有对应产品',
+                  markedWords: '扫描结果没有对应的产品',
                   maskshow: true
                 })
                 setTimeout(function () {
