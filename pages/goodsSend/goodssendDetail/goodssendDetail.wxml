@@ -60,10 +60,10 @@
   <view>
     <view class='title'>收货方信息</view>
     <view class='content'>
-      <view>
+      <view bindtap='getlocation'>
         <text class='ct'>收货机构</text>
         <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receive_info.name}}</text>
-        <view style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+        <view style='width:20rpx;height:36rpx;margin-left:20rpx'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
       </view>

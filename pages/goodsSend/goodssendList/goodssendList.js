@@ -708,7 +708,7 @@ Page({
   },
 
   toDetail: function (e) {
-    console.log(this.data.list[e.currentTarget.dataset.index])
+    // console.log(this.data.list[e.currentTarget.dataset.index])
     if (this.data.role == '仓管员'){
       wx.navigateTo({
         url: '../../goodsSend/goodssendDetail/goodssendDetail?role=' + this.data.role + '&id=' + e.currentTarget.dataset.id + '&WHkeperType=' + this.data.WHkeperType

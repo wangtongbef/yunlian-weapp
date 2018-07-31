@@ -104,24 +104,27 @@ Page({
         } else {
           if (res.data.code == 0) {
             that.setData({
-              productList: res.data.data,
-              markedWords: '确认成功',
-              maskshow: true
+              productList: res.data.data
             })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 2
+              })
+            }, 20)
           } else if (res.data.code != 0) {
             that.setData({
               markedWords: res.data.msg,
               maskshow: true
             })
+            setTimeout(function () {
+              that.setData({
+                maskshow: false
+              })
+              wx.navigateBack({
+                delta: 2
+              })
+            }, 2000)
           }
-          setTimeout(function () {
-            that.setData({
-              maskshow: false
-            })
-            wx.navigateBack({
-              delta: 2
-            })
-          }, 1000)
         }
       },
       fail: function () {

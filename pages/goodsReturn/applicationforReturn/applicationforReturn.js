@@ -97,18 +97,11 @@ Page({
               console.log(count, imglist.length)
               if (count == imglist.length) {
                 wx.hideLoading()
-                that.setData({
-                  maskshow: true,
-                  markedWords: '操作成功'
-                })
                 setTimeout(function () {
-                  that.setData({
-                    maskshow: false
-                  })
                   wx.navigateBack({
                     delta: 2
                   })
-                }, 1000)
+                }, 10)
               } else {
                 wx.showModal({
                   title: '提示',
@@ -213,18 +206,11 @@ Page({
               uploadImglist(return_id, that.data.imgList)
             } else {
               wx.hideLoading()
-              that.setData({
-                maskshow: true,
-                markedWords: '操作成功'
-              })
               setTimeout(function () {
-                that.setData({
-                  maskshow: false
-                })
                 wx.navigateBack({
                   delta: 2
                 })
-              }, 1000)
+              }, 10)
             }
           }
         })
@@ -246,18 +232,11 @@ Page({
               uploadImglist(return_id, that.data.imgList)
             } else {
               wx.hideLoading()
-              that.setData({
-                maskshow: true,
-                markedWords: '操作成功'
-              })
               setTimeout(function () {
-                that.setData({
-                  maskshow: false
-                })
                 wx.navigateBack({
                   delta: 2
                 })
-              }, 1000)
+              }, 10)
             }
           }
         })
@@ -278,18 +257,11 @@ Page({
               uploadImglist(return_id, that.data.imgList)
             } else {
               wx.hideLoading()
-              that.setData({
-                maskshow: true,
-                markedWords: '操作成功'
-              })
               setTimeout(function () {
-                that.setData({
-                  maskshow: false
-                })
                 wx.navigateBack({
                   delta: 2
                 })
-              }, 1000)
+              }, 10)
             }
           }
         })

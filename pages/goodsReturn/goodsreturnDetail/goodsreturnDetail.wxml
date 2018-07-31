@@ -20,10 +20,10 @@
     <view>
     <view class='title'>退货方信息</view>
     <view class='content'>
-      <view wx:if='{{resdata.return_info.return_warehouse}}'>
+      <view wx:if='{{resdata.return_info.return_warehouse}}'  data-id='{{resdata.return_info.return_warehouse_id}}' data-type='{{resdata.return_info.return_type}}' data-name='{{resdata.return_info.return_warehouse}}' bindtap='getlocation'>
         <text class='ct'>退货机构</text>
         <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.return_info.return_warehouse}}</text>
-        <view data-id='{{resdata.return_info.return_warehouse_id}}' data-type='{{resdata.return_info.return_type}}' data-name='{{resdata.return_info.return_warehouse}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+        <view style='width:20rpx;height:36rpx;margin-left:20rpx'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
       </view>
@@ -55,12 +55,16 @@
   <view>
     <view class='title'>收货方信息</view>
     <view class='content'>
-      <view>
+      <view wx:if='{{resdata.receiving_info.id}}' data-id='{{resdata.receiving_info.id}}' data-type='{{resdata.receiving_info.type}}' data-name='{{resdata.receiving_info.name}}' bindtap='getlocation'>
         <text class='ct'>收货机构</text>
         <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receiving_info.name}}</text>
-        <view wx:if='{{resdata.receiving_info.id}}' data-id='{{resdata.receiving_info.id}}' data-type='{{0}}' data-name='{{resdata.receiving_info.name}}' style='width:20rpx;height:36rpx;margin-left:20rpx' catchtap='getlocation'>
+        <view style='width:20rpx;height:36rpx;margin-left:20rpx'>
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
+      </view>
+      <view wx:else>
+        <text class='ct'>收货机构</text>
+        <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receiving_info.name}}</text>
       </view>
     </view>
   </view>

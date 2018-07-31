@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    console.log(options)
+    // console.log(options)
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
       role: wx.getStorageSync('role').role_name,
@@ -282,12 +282,15 @@ Page({
 
   getlocation: function(){ 
     var that = this  
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'delivery/address',
       data: {
         token: that.data.token,
         id: that.data.resdata.receive_info.id,
-        type: that.data.resdata.receive_info.receiving_type
+        type: that.data.resdata.receive_info.receive_type
       },
       method: 'POST',
       success: function (res) {
@@ -303,7 +306,7 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
+          wx.hideLoading()
           wx.openLocation({
             latitude: parseFloat(res.data.data.latitude),
             longitude: parseFloat(res.data.data.longitude),
@@ -347,15 +350,11 @@ Page({
         } else {
           // console.log(res)
           if (res.data.code == 0) {
-            that.setData({
-              maskshow_2: true,
-              markedWords: res.data.msg
-            })
             setTimeout(function () {
               wx.navigateBack({
                 delta: 1
               })
-            }, 1000)
+            }, 10)
           } else if (res.data.code == 1) {
             that.setData({
               maskshow_2: true,

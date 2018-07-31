@@ -295,6 +295,9 @@ Page({
 
   getlocation: function (e) {
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: getApp().data.servsers + 'delivery/address',
       data: {
@@ -316,7 +319,7 @@ Page({
             })
           }, 1000)
         } else {
-          console.log(res)
+          wx.hideLoading()
           wx.openLocation({
             latitude: parseFloat(res.data.data.latitude),
             longitude: parseFloat(res.data.data.longitude),
