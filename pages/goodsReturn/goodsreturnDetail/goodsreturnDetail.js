@@ -103,7 +103,7 @@ Page({
                 that.setData({
                   state: 4
                 })
-              } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')) {
+              } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货' && that.data.quality == 0)) {
                 if (that.data.sendtype == '物流配送') {
                   that.setData({
                     state: 3
@@ -113,6 +113,10 @@ Page({
                     state: 2
                   })
                 }
+              } else if (that.data.role == '仓管员' && that.data.receiveorsend == '退货' && that.data.quality == 1){
+                that.setData({
+                  state: 5
+                })
               }
             } else if (that.data.statet == '运送中') {
               if ((that.data.role == '仓管员' && that.data.receiveorsend == '收货') || that.data.role == '生产经理') {
@@ -123,7 +127,7 @@ Page({
                 that.setData({
                   state: 2
                 })
-              } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货')) {
+              } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货' && that.data.quality == 0)) {
                 if (that.data.sendtype == '物流配送') {
                   that.setData({
                     state: 2

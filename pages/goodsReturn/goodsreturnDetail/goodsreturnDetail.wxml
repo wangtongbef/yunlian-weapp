@@ -99,6 +99,7 @@
     <view class='send' bindtap='send'>发 货</view>
   </view>
   <view class='returnButton returnButton-1' wx:if='{{state==4}}' bindtap='getgoods'>确认取货</view>
+  <view class='returnButton returnButton-1' wx:if='{{state==5}}' bindtap='send'>发 货</view>
 </view>
  <view wx:if='{{maskshow}}' class='mask' catchtouchmove='endtouchmove'>
   <view class='maskbox'>
