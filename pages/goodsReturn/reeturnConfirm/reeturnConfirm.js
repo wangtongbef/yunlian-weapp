@@ -116,15 +116,13 @@ Page({
                 }, 2000)
               }else{
                 that.setData({
-                  productList: res.data.data,
-                  markedWords: '确认成功',
-                  maskshow: true
+                  productList: res.data.data
                 })
                 setTimeout(function () {
                   wx.navigateTo({
                     url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
                   })
-                }, 2000)
+                }, 20)
               }
             } else if (res.data.code != 0) {
               that.setData({
@@ -186,15 +184,13 @@ Page({
                 }, 2000)
               } else {
                 that.setData({
-                  productList: res.data.data,
-                  markedWords: '确认成功',
-                  maskshow: true
+                  productList: res.data.data
                 })
                 setTimeout(function () {
                   wx.navigateTo({
                     url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
                   })
-                }, 2000)
+                }, 20)
               }
             } else if (res.data.code != 0) {
               that.setData({
@@ -257,15 +253,13 @@ Page({
                 }, 2000)
               } else {
                 that.setData({
-                  productList: res.data.data,
-                  markedWords: '确认成功',
-                  maskshow: true
+                  productList: res.data.data
                 })
                 setTimeout(function () {
                   wx.navigateTo({
                     url: '../applicationforReturn/applicationforReturn?productlist=' + JSON.stringify(that.data.productList) + '&returnList=' + JSON.stringify(that.data.returnList)
                   })
-                }, 2000)
+                }, 20)
               }
             } else if (res.data.code != 0) {
               that.setData({
