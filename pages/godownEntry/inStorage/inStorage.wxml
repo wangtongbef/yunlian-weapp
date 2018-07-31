@@ -26,17 +26,17 @@
     <view wx:if='{{sendType==1}}' class='content'>
       <view>
         <text class='ct'>配送员</text>
-        <text class='cc'>小明</text>
+        <text class='cc'>{{courier}}</text>
       </view>
     </view>
     <view wx:if='{{sendType==2}}' class='content'>
       <view>
         <text class='ct'>物流</text>
-        <text class='cc'>顺丰</text>
+        <text class='cc'>{{logistics_company}}</text>
       </view>
       <view>
         <text class='ct'>运单号</text>
-        <text class='cn'>1110000</text>
+        <text class='cn'>{{waybill_number}}</text>
       </view>
     </view>
   </view>

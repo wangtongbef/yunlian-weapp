@@ -41,17 +41,17 @@
   <view>
     <view class='title'>送货方信息</view>
     <view class='content' wx:if='{{resdata.give_info.delivery_type==0}}'>
-      <view wx:if='{{resdata.give_info.courier}}'>
+      <view>
         <text class='ct'>配送员</text>
         <text class='cc'>{{resdata.give_info.courier}}</text>
       </view>
     </view>
     <view class='content' wx:if='{{resdata.give_info.delivery_type==1}}'>
-      <view wx:if='{{resdata.give_info.logistics_company}}'>
+      <view>
         <text class='ct'>物流公司</text>
         <text class='cc'>{{resdata.give_info.logistics_company}}</text>
       </view>
-      <view wx:if='{{resdata.give_info.waybill_number}}'>
+      <view>
         <text class='ct'>运单号</text>
         <text class='cc'>{{resdata.give_info.waybill_number}}</text>
       </view>

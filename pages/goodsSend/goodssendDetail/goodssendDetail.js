@@ -290,7 +290,7 @@ Page({
       data: {
         token: that.data.token,
         id: that.data.resdata.receive_info.id,
-        type: that.data.resdata.receive_info.receive_type
+        type: that.data.resdata.receive_info.receiving_type
       },
       method: 'POST',
       success: function (res) {

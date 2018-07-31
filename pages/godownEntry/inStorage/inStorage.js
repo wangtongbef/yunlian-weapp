@@ -9,6 +9,9 @@ Page({
     productList:[],
     sendList:[],
     sendType:-1,
+    courier:'',
+    logistics_company:'',
+    waybill_number:'',
     codedetail:true,
     codenumber:'',
     comfirmState:1,
@@ -124,6 +127,16 @@ Page({
                 sendType: res.data.data.from_type,
                 comfirmState: 2
               })
+              if (res.data.data.from_type == 1){
+                that.setData({
+                  courier: res.data.data.courier
+                })
+              } else if (res.data.data.from_type == 2){
+                that.setData({
+                  logistics_company: res.data.data.logistics_company,
+                  waybill_number: res.data.data.waybill_number
+                })
+              }
             }
           } else if (res.data.code != 0){
             that.setData({
