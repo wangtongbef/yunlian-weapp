@@ -2,7 +2,7 @@
 
 // var getUser = require('../../utils/getUser.js');
 
-var API = require('../../utils/api.js')
+// var API = require('../../utils/api.js')
 Page({
 
   /**

@@ -1,6 +1,6 @@
 var getLocation = require('../../../utils/getLocation.js');
 // pages/storeDetail/storeDetail.js
-var API = require('../../../utils/api.js')
+// var API = require('../../../utils/api.js')
 Page({
 
   /**

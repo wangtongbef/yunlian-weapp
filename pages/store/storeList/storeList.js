@@ -1,4 +1,4 @@
-var API = require('../../../utils/api.js')
+// var API = require('../../../utils/api.js')
 Page({
 
   /**
