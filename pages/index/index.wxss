@@ -3,7 +3,7 @@ page{
   background-color: rgb(238, 238, 238)
 }
 .userInfo{
-  width: 670rpx;
+  /* width: 670rpx; */
   padding: 0 40rpx; 
   height: 260rpx;
   background: linear-gradient(#018fe8,#0072b1);
