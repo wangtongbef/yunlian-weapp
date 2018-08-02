@@ -124,17 +124,13 @@ Page({
               })
             }, 1000)
           } else {
+            console.log(res)
             if (res.data.code == 0){
-              wx.showToast({
-                title: '确认入库成功',
-                icon: 'none',
-                duration: 1000
-              })
               setTimeout(function () {
                 wx.navigateBack({
                   delta: 1
                 })
-              }, 1000)
+              }, 10)
             } else if (res.data.code == 1) {
               wx.showToast({
                 title: '确认入库单失败,入库单可能已取消',
@@ -150,13 +146,6 @@ Page({
 
   endtouchmove: function (){
     return false;
-  },
-
-  clear: function () {
-    var that = this
-    that.setData({
-      maskshow: true
-    })
   },
 
   yes:function(){
