@@ -31,6 +31,10 @@
         <text class='ct'>提交人</text>
         <text class='cc'>{{resdata.return_info.return_preson}}</text>
       </view>
+      <view wx:if='{{resdata.return_info.out_preson}}'>
+        <text class='ct'>发货人</text>
+        <text class='cc'>{{resdata.return_info.out_preson}}</text>
+      </view>
     </view>
   </view>
   <view>

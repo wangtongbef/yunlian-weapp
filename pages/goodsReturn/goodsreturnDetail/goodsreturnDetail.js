@@ -127,7 +127,7 @@ Page({
                 that.setData({
                   state: 2
                 })
-              } else if (that.data.role == '门店负责人' || that.data.role == '门店销售员' || (that.data.role == '仓管员' && that.data.receiveorsend == '退货' && that.data.quality == 0)) {
+              } else if (that.data.role == '仓管员' && that.data.receiveorsend == '退货' && that.data.quality == 0) {
                 if (that.data.sendtype == '物流配送') {
                   that.setData({
                     state: 2
@@ -385,15 +385,11 @@ Page({
           }, 1000)
         } else {
           if(res.data.code == 0){
-            that.setData({
-              maskshow_2: true,
-              markedWords: res.data.msg
-            })
             setTimeout(function () {
               wx.navigateBack({
                 delta: 1
               })
-            }, 1000)
+            }, 10)
           } else if (res.data.code == 1){
             that.setData({
               maskshow_2: true,
