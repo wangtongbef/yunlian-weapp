@@ -67,6 +67,10 @@
           <image src='../../../img/arrow-right.png' style='height:35rpx;width:20rpx'></image>
         </view>
       </view>
+      <view wx:if='{{resdata.receive_info.receiving_preson}}'>
+        <text class='ct'>收货人</text>
+        <text class='cc'>{{resdata.receive_info.receiving_preson}}</text>
+      </view>
     </view>
   </view>
   <view>
