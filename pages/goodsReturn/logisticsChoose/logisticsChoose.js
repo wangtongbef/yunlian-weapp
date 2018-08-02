@@ -78,11 +78,11 @@ Page({
     })
   },
 
-  confirm:function(){
+  confirm: function () {
     var that = this
     var inputValue = that.data.inputValue.replace(/ /g, "")
     console.log(inputValue, that.data.companyChecked, that.data.id)
-    if (inputValue.length==0){
+    if (inputValue.length == 0) {
       that.setData({
         markedWords: '你还没输入运单号',
         maskshow: true
@@ -92,7 +92,7 @@ Page({
           maskshow: false
         })
       }, 1000)
-    } else if (inputValue.length < 8){
+    } else if (inputValue.length < 8) {
       that.setData({
         markedWords: '运单号不能少于8位',
         maskshow: true
@@ -102,7 +102,7 @@ Page({
           maskshow: false
         })
       }, 1000)
-    }else {
+    } else {
       wx.showLoading({
         title: '加载中',
       })
@@ -130,21 +130,29 @@ Page({
             }, 1000)
           } else {
             console.log(res)
-            that.setData({
-              markedWords: res.data.msg,
-              maskshow: true
-            })
-            setTimeout(function () {
+            if(res.data.code == 0){
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 20)
+            } else if (res.data.code == 1){
               that.setData({
-                maskshow: false
+                markedWords: res.data.msg,
+                maskshow: true
               })
-              wx.navigateBack({
-                delta: 1
-              })
-            }, 1000)
+              setTimeout(function() {
+                that.setData({
+                  maskshow: false
+                })
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 2000)
+            }
           }
         }
-      })  
+      })
     }
   }
 })
