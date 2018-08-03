@@ -23,7 +23,8 @@ Page({
     role: '',
     token:'',
     WHkeperType:'发货',
-    firstin: true
+    firstin: true,
+    sendlistShow:false
   },
 
   /**
@@ -52,6 +53,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              sendlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -108,6 +112,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              sendlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -135,6 +142,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              sendlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -162,6 +172,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              sendlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({

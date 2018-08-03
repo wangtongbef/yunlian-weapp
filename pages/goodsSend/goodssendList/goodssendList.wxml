@@ -34,7 +34,7 @@
   </view>
 </view>
 <!-- list -->
-<view class='list'>
+<view wx:if='{{sendlistShow}}' class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
     <view class='listCell' data-id='{{item.id}}' data-index='{{index}}' bindtap='toDetail'>
       <view class='listCellL'>

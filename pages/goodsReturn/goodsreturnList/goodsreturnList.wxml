@@ -33,7 +33,7 @@
     </block>
   </view>
 </view>
-<view class='list'>
+<view wx:if='{{returnlistShow}}' class='list'>
   <block wx:if='{{list.length > 0}}' wx:for='{{list}}' wx:key="text">
     <view class='listCell' data-id='{{item.id}}' bindtap='toDetail'>
       <view class='listCellL'>

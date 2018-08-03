@@ -22,7 +22,8 @@ Page({
     role: '',
     token:'',
     applicationButton: false,
-    firstin:true
+    firstin:true,
+    returnlistShow:false
   },
 
   /**
@@ -53,6 +54,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              returnlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -108,6 +112,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              returnlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -135,6 +142,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              returnlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -162,6 +172,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              returnlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
@@ -189,6 +202,9 @@ Page({
           },
           method: 'POST',
           success: function (res) {
+            that.setData({
+              returnlistShow: true
+            })
             wx.hideLoading()
             if (res.data.code == -3) {
               wx.showToast({
