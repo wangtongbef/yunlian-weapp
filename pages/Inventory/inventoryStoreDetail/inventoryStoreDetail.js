@@ -16,7 +16,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var that = this
     that.setData({
       token: wx.getStorageSync('tokenRoles').token,
@@ -34,7 +33,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
@@ -55,7 +53,6 @@ Page({
         }
       }
     })
-    console.log(that.data.products)
   },
 
   swichNav: function (e) {
@@ -78,7 +75,6 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res)
           wx.hideLoading()
           if (res.data.code == -3) {
             wx.showToast({

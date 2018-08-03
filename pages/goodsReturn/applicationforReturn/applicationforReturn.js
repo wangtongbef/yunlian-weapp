@@ -38,7 +38,6 @@ Page({
         productType: e.currentTarget.dataset.type
       })
     }
-    console.log(this.data.productType)
   },
 
   getdes:function(e){
@@ -77,7 +76,6 @@ Page({
   submit: function(){
     var that = this
     var uploadImglist = function (return_id, imglist) {
-      console.log(return_id, imglist)
       var unUploadimglist = []
       var count = 0
       var i = 0
@@ -94,7 +92,6 @@ Page({
             count++
             if (i == imglist.length - 1) {
               wx:wx.hideLoading()
-              console.log(count, imglist.length)
               if (count == imglist.length) {
                 wx.hideLoading()
                 setTimeout(function () {
@@ -154,7 +151,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     } else if (that.data.productType == 0) {
       that.setData({
         maskshow: true,
@@ -164,7 +161,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     }else if (that.data.des.length <= 4) {
       that.setData({
         maskshow: true,
@@ -174,7 +171,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     } else if (that.data.productType==2 && that.data.imgList.length == 0) {
       that.setData({
         maskshow: true,
@@ -184,7 +181,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     }else{
       wx.showLoading({
         title: '提交中',
@@ -200,7 +197,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             var return_id = res.data.data.return_id
             if (that.data.productType == 2){
               uploadImglist(return_id, that.data.imgList)
@@ -226,7 +222,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             var return_id = res.data.data.return_id
             if (that.data.productType == 2) {
               uploadImglist(return_id, that.data.imgList)
@@ -251,7 +246,6 @@ Page({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res)
             var return_id = res.data.data.return_id
             if (that.data.productType == 2) {
               uploadImglist(return_id, that.data.imgList)

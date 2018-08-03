@@ -30,7 +30,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var tokenRoles = wx.getStorageSync('tokenRoles')
     var role = wx.getStorageSync('role')
     var that = this
@@ -69,7 +68,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             that.setData({
               resdata:res.data.data,
               statet: that.data.stateArr[res.data.data.base_info.status],
@@ -78,7 +76,6 @@ Page({
               imagelist: res.data.data.image
             })
             if (res.data.code == 0) {
-              console.log(that.data.statet)
               if (that.data.resdata.give_info.delivery_type == 0) {
                 that.setData({
                   sendtype: '配送员配送'
@@ -422,7 +419,6 @@ Page({
         method: 'POST',
         success: function (res) {
           wx.hideLoading()
-          console.log(res)
           if (res.data.code == -3) {
             wx.showToast({
               title: 'token过期',

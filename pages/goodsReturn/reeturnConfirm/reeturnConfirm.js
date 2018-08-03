@@ -49,7 +49,6 @@ Page({
 
   Continue: function () {
     var that = this
-    console.log(that.data.returnList)
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {

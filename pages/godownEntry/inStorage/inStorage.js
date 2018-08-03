@@ -30,7 +30,6 @@ Page({
     wx.scanCode({
       onlyFromCamera: false,
       success: (res) => {
-        console.log(res)
         if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
           var detail = res.result.split("?")[1].split("&")
           var obj = {'code_sn': detail[0].split("=")[1], 'code_type': detail[1].split("=")[1]}
@@ -57,7 +56,6 @@ Page({
 
   Continue:function(){
     var that = this
-    console.log(that.data.sendList)
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
@@ -94,7 +92,6 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        console.log(res.data.data.product_list)
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
@@ -201,7 +198,7 @@ Page({
                 wx.navigateBack({
                   delta: 1
                 })
-              }, 1000)
+              }, 2000)
             } else {
               wx.navigateBack({
                 delta: 1
@@ -219,7 +216,7 @@ Page({
               wx.navigateBack({
                 delta: 1
               })
-            }, 1000)
+            }, 2000)
           }
         }
       }

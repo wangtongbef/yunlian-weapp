@@ -31,7 +31,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
@@ -108,7 +107,6 @@ Page({
   },
 
   navigatExp: function (e) {
-    console.log(e)
     var that = this;
     var expressNumbers = that.data.expressList[e.currentTarget.dataset.index].waybill_number
     wx.navigateTo({

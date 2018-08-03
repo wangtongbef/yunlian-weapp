@@ -52,7 +52,6 @@ Page({
 
   Continue: function () {
     var that = this
-    console.log(that.data.stockupList)
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
@@ -89,7 +88,6 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.hideLoading()
-        console.log(res)
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',

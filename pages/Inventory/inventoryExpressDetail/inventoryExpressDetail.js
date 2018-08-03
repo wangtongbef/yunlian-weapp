@@ -32,7 +32,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
@@ -50,7 +49,6 @@ Page({
             billdata: res.data.data,
             productsList: res.data.data.product_list
           })
-          console.log(that.data.billdata)
         }
       }
     })

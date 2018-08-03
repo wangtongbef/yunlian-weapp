@@ -91,7 +91,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     } else if (inputValue.length < 8) {
       that.setData({
         markedWords: '运单号不能少于8位',
@@ -101,7 +101,7 @@ Page({
         that.setData({
           maskshow: false
         })
-      }, 1000)
+      }, 2000)
     } else {
       wx.showLoading({
         title: '加载中',
@@ -129,7 +129,6 @@ Page({
               })
             }, 1000)
           } else {
-            console.log(res)
             if (res.data.code == 0) {
               setTimeout(function () {
                 wx.navigateBack({
