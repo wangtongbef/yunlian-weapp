@@ -208,15 +208,11 @@ Page({
           } else {
             // console.log(res)
             if (res.data.code == 0) {
-              that.setData({
-                maskshow_2: true,
-                markedWords: res.data.msg
-              })
               setTimeout(function () {
                 wx.navigateBack({
                   delta: 1
                 })
-              }, 1000)
+              }, 10)
             } else if (res.data.code == 1) {
               that.setData({
                 maskshow_2: true,
@@ -226,7 +222,7 @@ Page({
                 that.setData({
                   maskshow_2: false
                 })
-              }, 1000)
+              }, 2000)
             }
           }
         }
@@ -254,15 +250,11 @@ Page({
           } else {
             // console.log(res)
             if (res.data.code == 0) {
-              that.setData({
-                maskshow_2: true,
-                markedWords: res.data.msg
-              })
               setTimeout(function () {
                 wx.navigateBack({
                   delta: 1
                 })
-              }, 1000)
+              }, 10)
             } else if (res.data.code == 1) {
               that.setData({
                 maskshow_2: true,
@@ -272,7 +264,7 @@ Page({
                 that.setData({
                   maskshow_2: false
                 })
-              }, 1000)
+              }, 2000)
             }
           }
         }
@@ -364,7 +356,7 @@ Page({
               that.setData({
                 maskshow_2: false
               })
-            }, 1000)
+            }, 2000)
           }
         }
       }
