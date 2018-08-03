@@ -79,7 +79,13 @@
     <view>
       <view class='detailTitle'>门店销售员</view>
       <view class='backgroundColor businessListBox'>
-        <block wx:for='{{businessList}}' wx:key='{{index}}'>
+        <view wx:if='{{businessList.length==1}}'>
+          <text>{{businessList[0].name}}</text>
+          <view>
+            <text data-phonenumber='{{businessList[0].phone_number}}' bindtap='call'>{{businessList[0].phone_number}}</text>
+          </view>
+        </view>
+        <block wx:if='{{businessList.length>1}}' wx:for='{{businessList}}' wx:key='{{index}}'>
           <view>
             <text>{{item.name}}</text>
             <view>
