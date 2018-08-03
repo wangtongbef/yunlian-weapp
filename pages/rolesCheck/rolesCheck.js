@@ -43,6 +43,9 @@ Page({
           }, 1000)
         }else{
           wx.setStorageSync('auth', res.data.data.auth)
+          if (event.currentTarget.dataset.rolecheck.role_name == '门店销售员') {
+            wx.setStorageSync('salesCount', res.data.data.sales_person_count)
+          }
           if (res.data.code == 0) {
             wx.redirectTo({
               url: '../index/index'

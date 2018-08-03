@@ -31,12 +31,20 @@ Page({
     
     if (that.data.role.role_name == '门店销售员') {
       that.setData({
-        list: [{ text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scan/scan' },
-          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }],
         List_storage: [{ text: '送货单', icon: '../../img/songhuodan-icon.png', url: '../goodsSend/goodssendList/goodssendList' },
           { text: '退货单', icon: '../../img/tuihuodan-icon.png', url: '../goodsReturn/goodsreturnList/goodsreturnList' },
           { text: '扫码看货', icon: '../../img/saomakanhuo-icon.png', url: '../scanGoods/scanGoods/scanGoods' }]
       })
+      if(wx.getStorageSync('salesCount')==1){
+        that.setData({
+          list: [{ text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
+        })
+      } else if (wx.getStorageSync('salesCount') > 1){
+        that.setData({
+          list: [{ text: '售后扫码', icon: '../../img/saoyisao-icon.png', url: '../scan/scan' },
+          { text: '资金', icon: '../../img/zijin-icon.png', url: '../wallet/walletCenter/walletCenter' }]
+        })
+      }
     } else if (that.data.role.role_name == '门店负责人') {
       that.setData({
         list: [{ text: '门店', icon: '../../img/mendian_icon.png', url: '../store/storeList/storeList' },

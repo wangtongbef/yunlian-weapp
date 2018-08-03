@@ -87,6 +87,9 @@ Page({
                             success: function (res) {
                               wx.hideLoading()
                               wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
+                              if (role.role_name == '门店销售员'){
+                                wx.setStorageSync('salesCount', res.data.data.sales_person_count)
+                              }
                             }
                           })
                           wx.redirectTo({

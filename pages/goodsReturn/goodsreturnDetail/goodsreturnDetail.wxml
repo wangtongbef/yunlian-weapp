@@ -59,7 +59,7 @@
   <view>
     <view class='title'>收货方信息</view>
     <view class='content'>
-      <view wx:if='{{resdata.receiving_info.id}}' data-id='{{resdata.receiving_info.id}}' data-type='{{resdata.receiving_info.type}}' data-name='{{resdata.receiving_info.name}}' bindtap='getlocation'>
+      <view wx:if='{{resdata.receiving_info.type==1}}' data-id='{{resdata.receiving_info.id}}' data-type='{{resdata.receiving_info.type-1}}' data-name='{{resdata.receiving_info.name}}' bindtap='getlocation'>
         <text class='ct'>收货机构</text>
         <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receiving_info.name}}</text>
         <view style='width:20rpx;height:36rpx;margin-left:20rpx'>
@@ -69,6 +69,10 @@
       <view wx:else>
         <text class='ct'>收货机构</text>
         <text class='cc' style='flex-grow:2;text-align:right'>{{resdata.receiving_info.name}}</text>
+      </view>
+      <view wx:if='{{resdata.receiving_info.receiving_preson}}'>
+        <text class='ct'>收货人</text>
+        <text class='cc'>{{resdata.receiving_info.receiving_preson}}</text>
       </view>
     </view>
   </view>

@@ -391,6 +391,9 @@ Page({
   onShow: function () {
     var that = this
     if (!that.data.firstIn){
+      that.setData({
+        state: 0
+      })
       wx.showLoading({
         title: '加载中',
       })
