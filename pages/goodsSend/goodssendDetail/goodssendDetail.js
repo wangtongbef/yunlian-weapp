@@ -300,8 +300,8 @@ Page({
         } else {
           wx.hideLoading()
           wx.openLocation({
-            latitude: parseFloat(res.data.data.latitude),
-            longitude: parseFloat(res.data.data.longitude),
+            latitude: parseFloat(res.data.data.latitude) - 0.0060,
+            longitude: parseFloat(res.data.data.longitude) - 0.0065,
             name: that.data.resdata.receive_info.name,
             address: res.data.data.address,
             scale: 28
