@@ -7,7 +7,8 @@ Page({
   data: {
     token:'',
     chargePstore: [],
-    checkedIndex: 999
+    checkedIndex: 999,
+    storelistShow:false
   },
 
   /**
@@ -54,6 +55,10 @@ Page({
                   url: '../../goodsReturn/reeturnConfirm/reeturnConfirm'
                 })
               }
+            })
+          }else{
+            that.setData({
+              storelistShow: true
             })
           }
         }

@@ -10,7 +10,8 @@ Page({
     codenumber: '',
     markedWords: '',
     returnList:[],
-    productList:[]
+    productList:[],
+    returnconfirmShow:false
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
     wx.scanCode({
       onlyFromCamera: false,
       success: (res) => {
+        that.setData({
+          returnconfirmShow: true
+        })
         if (res.result.indexOf("code_type") >= 0 && res.result.indexOf("code_sn") >= 0) {
           var detail = res.result.split("?")[1].split("&")
           var obj = { 'code_sn': detail[0].split("=")[1], 'code_type': detail[1].split("=")[1] }

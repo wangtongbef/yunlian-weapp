@@ -1,5 +1,5 @@
 <!--pages/goodsReturn/reeturnConfirm/reeturnConfirm.wxml-->
-<view>
+<view wx:if='{{returnconfirmShow}}'>
   <view class='scantop'>
     <view wx:if='{{codedetail}}'>
       <view class='numTitle'>二维码编号</view>

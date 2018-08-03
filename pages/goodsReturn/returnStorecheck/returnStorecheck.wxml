@@ -1,5 +1,5 @@
 <!--pages/goodsReturn/returnStorecheck/returnStorecheck.wxml-->
-<view class='borderBtmBox'>
+<view wx:if='{{storelistShow}}' class='borderBtmBox'>
   <block wx:for='{{chargePstore}}' wx:key="index">
     <view class='{{checkedIndex==index?"storeChecked":"storeChecking"}}' bindtap='checkStore' data-index='{{index}}'>
       <text>{{item.name}}</text>
