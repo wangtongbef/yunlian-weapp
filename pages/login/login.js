@@ -39,10 +39,15 @@ Page({
               wx_code: res.code
             },
             success: function (res) {
+              wx.hideLoading()
               if (res.data.code === 0) {
                 var tokenRoles = res.data.data
+                var token = res.data.data.token
+                that.setData({
+                  token: token
+                })
                 var roles = []
-                if (tokenRoles.roles.length == 0){
+                if (!tokenRoles.roles||tokenRoles.roles.length == 0){
                   wx.showToast({
                     title: '没有访问权限',
                     icon: 'none',
@@ -60,11 +65,6 @@ Page({
                     }
                     if (i == tokenRoles.roles.length - 1) {
                       tokenRoles.roles = roles
-                      wx.hideLoading()
-                      var token = res.data.data.token
-                      that.setData({
-                        token: token
-                      })
                       wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
                       if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
                         that.setData({
@@ -115,7 +115,7 @@ Page({
                     }
                   }
                 }
-              } else if (res.data.code === 1) {
+              } else if (res.data.code === 1) { //仅仅是获取openID失败，并不是没有openid
                 wx.showToast({
                   title: '此openid不存在',
                   icon: 'none',
@@ -124,7 +124,7 @@ Page({
                 that.setData({
                   isHiddenLogin: true
                 })
-                var t = setTimeout(function () {
+                setTimeout(function () {
                   wx.redirectTo({
                     url: '../login/login'
                   })
