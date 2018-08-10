@@ -47,69 +47,65 @@ Page({
                   token: token
                 })
                 var roles = []
-                if (!tokenRoles.roles||tokenRoles.roles.length == 0){
-                  wx.showToast({
-                    title: '没有访问权限',
-                    icon: 'none',
-                    duration: 1000
+                if (res.data.data.bind_phone == 0){
+                  that.setData({
+                    isHiddenLogin: false
                   })
-                  setTimeout(function () {
-                    that.setData({
-                      isHiddenLogin: false
+                } else if (res.data.data.bind_phone == 1){
+                  if (!tokenRoles.roles||tokenRoles.roles.length == 0){
+                    wx.showModal({
+                      title: '提示',
+                      content: '没有访问权限',
+                      showCancel: false
                     })
-                  }, 1000)
-                } else {
-                  for (var i = 0; i < tokenRoles.roles.length; i++) {
-                    if (tokenRoles.roles[i].role_name == '门店销售员' || tokenRoles.roles[i].role_name == '门店负责人' || tokenRoles.roles[i].role_name == '商务专员' || tokenRoles.roles[i].role_name == '仓管员' || tokenRoles.roles[i].role_name == '配送员' || tokenRoles.roles[i].role_name == '生产经理') {
-                      roles.push(tokenRoles.roles[i])
-                    }
-                    if (i == tokenRoles.roles.length - 1) {
-                      tokenRoles.roles = roles
-                      wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
-                      if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
-                        that.setData({
-                          isHiddenLogin: false
-                        })
-                      } else if (res.data.data.bind_phone === 1) {
-                        if (tokenRoles.roles.length === 1) {
-                          wx.showLoading({
-                            title: '加载中',
+                  } else {
+                    for (var i = 0; i < tokenRoles.roles.length; i++) {
+                      if (tokenRoles.roles[i].role_name == '门店销售员' || tokenRoles.roles[i].role_name == '门店负责人' || tokenRoles.roles[i].role_name == '商务专员' || tokenRoles.roles[i].role_name == '仓管员' || tokenRoles.roles[i].role_name == '配送员' || tokenRoles.roles[i].role_name == '生产经理') {
+                        roles.push(tokenRoles.roles[i])
+                      }
+                      if (i == tokenRoles.roles.length - 1) {
+                        tokenRoles.roles = roles
+                        wx.setStorageSync('tokenRoles', tokenRoles)// 存储token
+                        if (res.data.data.bind_phone === 0) { //res.data.data.bind_phone判定互换
+                          that.setData({
+                            isHiddenLogin: false
                           })
-                          var role = tokenRoles.roles[0]
-                          wx.setStorageSync('role', role)
-                          wx.request({
-                            url: getApp().data.servsers + 'login/role',
-                            data: {
-                              role_id: role.role_id,
-                              token: token
-                            },
-                            method: 'POST',
-                            success: function (res) {
-                              wx.hideLoading()
-                              wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
-                              if (role.role_name == '门店销售员'){
-                                wx.setStorageSync('salesCount', res.data.data.sales_person_count)
-                              }
-                            }
-                          })
-                          wx.redirectTo({
-                            url: '../index/index'
-                          })
-                        } else if (tokenRoles.roles.length > 1) {
-                          wx.redirectTo({
-                            url: '../rolesCheck/rolesCheck'
-                          })
-                        } else if (tokenRoles.roles.length == 0){
-                          wx.showToast({
-                            title: '没有访问权限',
-                            icon: 'none',
-                            duration: 1000
-                          })
-                          setTimeout(function () {
-                            that.setData({
-                              isHiddenLogin: false
+                        } else if (res.data.data.bind_phone === 1) {
+                          if (tokenRoles.roles.length === 1) {
+                            wx.showLoading({
+                              title: '加载中',
                             })
-                          }, 1000)
+                            var role = tokenRoles.roles[0]
+                            wx.setStorageSync('role', role)
+                            wx.request({
+                              url: getApp().data.servsers + 'login/role',
+                              data: {
+                                role_id: role.role_id,
+                                token: token
+                              },
+                              method: 'POST',
+                              success: function (res) {
+                                wx.hideLoading()
+                                wx.setStorageSync('auth', res.data.data.auth) //存储相应角色路由map
+                                if (role.role_name == '门店销售员'){
+                                  wx.setStorageSync('salesCount', res.data.data.sales_person_count)
+                                }
+                              }
+                            })
+                            wx.redirectTo({
+                              url: '../index/index'
+                            })
+                          } else if (tokenRoles.roles.length > 1) {
+                            wx.redirectTo({
+                              url: '../rolesCheck/rolesCheck'
+                            })
+                          } else if (tokenRoles.roles.length == 0){
+                            wx.showModal({
+                              title: '提示',
+                              content: '没有访问权限',
+                              showCancel: false
+                            })
+                          }
                         }
                       }
                     }
@@ -117,7 +113,7 @@ Page({
                 }
               } else if (res.data.code === 1) { //仅仅是获取openID失败，并不是没有openid
                 wx.showToast({
-                  title: '此openid不存在',
+                  title: '获取openid失败',
                   icon: 'none',
                   duration: 1000
                 })
@@ -207,7 +203,13 @@ Page({
               })
             }
           }, 1000)
-        } else if(e.data.code !== 0){
+        } else if (e.data.code == 2) {
+          wx.showToast({
+            title: '用户不存在',
+            icon: 'none',
+            duration: 1000
+          })
+        }else{
           wx.showToast({
             title: e.data.msg,
             icon: 'none',
