@@ -243,6 +243,74 @@ Page({
       url: '../addPerson/addPerson?title=更换门店负责人',
     })
   },
+
+  delPerson(){
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: getApp().data.servsers + 'shop/deleteShopChargePerson',
+      data: {
+        token: that.data.token,
+        id: that.data.storeDetailres.shop.id,
+        charge_person_id: that.data.chargePerson.id
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.code == -3) {
+          wx.showToast({
+            title: 'token过期',
+            icon: 'none',
+            duration: 1000
+          })
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '../../login/login'
+            })
+          }, 1000)
+        } else {
+          if (res.data.code == 0) {
+            wx.request({
+              url: getApp().data.servsers + 'shop/shopInfoForCommissioner', //获取门店详情
+              data: {
+                token: that.data.token,
+                id: that.data.storeDetailres.shop.id
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.hideLoading()
+                if (res.data.code == -3) {
+                  wx.showToast({
+                    title: 'token过期',
+                    icon: 'none',
+                    duration: 1000
+                  })
+                  setTimeout(function () {
+                    wx.redirectTo({
+                      url: '../../login/login'
+                    })
+                  }, 1000)
+                } else {
+                  that.setData({
+                    chargePerson: res.data.data.charge_person
+                  })
+                }
+              }
+            })
+          } else if (res.data.code == 1) {
+            wx.hideLoading()
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 1000
+            })
+          }
+        }
+      }
+    })
+  },
   deleteBusiness(e){
     wx.showLoading({
       title: '加载中',
