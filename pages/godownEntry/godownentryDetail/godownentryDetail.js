@@ -99,6 +99,7 @@ Page({
       title: '加载中',
     })
     if (that.data.role == '仓管员'){
+      wx.hideLoading()
       that.setData({
         maskshow: true
       })
