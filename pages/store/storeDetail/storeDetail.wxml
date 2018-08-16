@@ -93,7 +93,7 @@
           <text>{{businessList[0].name}}</text>
           <view>
             <text data-phonenumber='{{businessList[0].phone_number}}' bindtap='call'>{{businessList[0].phone_number}}</text>
-            <image src='../../../img/icon-rubbish.svg' data-index='{{index}}' class='iconRubbish' bindtap='deleteBusiness'></image>
+            <image src='../../../img/icon-rubbish.svg' data-index='{{0}}' class='iconRubbish' bindtap='deleteBusiness'></image>
           </view>
         </view>
         <block wx:if='{{businessList.length>1}}' wx:for='{{businessList}}' wx:key='{{index}}'>

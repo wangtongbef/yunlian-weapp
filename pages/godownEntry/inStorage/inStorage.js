@@ -204,9 +204,9 @@ Page({
                 delta: 1
               })
             }
-          } else if (res.data.code == 1) {
+          } else if (res.data.code != 0) {
             that.setData({
-              markedWords: '入库失败',
+              markedWords: res.data.msg,
               maskshow: true
             })
             setTimeout(function () {

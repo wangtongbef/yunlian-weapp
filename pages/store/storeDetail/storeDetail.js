@@ -317,6 +317,7 @@ Page({
     })
     var that = this
     var index = e.currentTarget.dataset.index
+    console.log(that.data.storeDetailres.shop.id, that.data.businessList[index].id)
     wx.request({
       url: getApp().data.servsers + 'shop/deleteShopSalesPerson',
       data: {
@@ -326,6 +327,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == -3) {
           wx.showToast({
             title: 'token过期',
@@ -372,7 +374,6 @@ Page({
               duration: 1000
             })
           } else if(res.data.code == 1) {
-            wx.hideLoading()
             wx.showToast({
               title: res.data.msg,
               icon: 'none',
