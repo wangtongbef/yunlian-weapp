@@ -108,7 +108,7 @@ Page({
 
   navigatExp: function (e) {
     var that = this;
-    var expressNumbers = that.data.expressList[e.currentTarget.dataset.index].waybill_number
+    var expressNumbers = that.data.expressList[e.currentTarget.dataset.index].id
     wx.navigateTo({
       url: '../inventoryExpressDetail/inventoryExpressDetail?numbers=' + expressNumbers
     })

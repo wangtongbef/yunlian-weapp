@@ -46,8 +46,18 @@ Page({
             })
           }, 1000)
         } else {
+          var Products = []
+          if (res.data.data.product_list.length!==0) {
+            for (var i = 0; i < res.data.data.product_list.length; i++) {
+              if (res.data.data.product_list[i].count != 0) {
+                Products.push(res.data.data.product_list[i])
+              }
+            }
+          }else{
+            Products = res.data.data.product_list
+          }
           that.setData({
-            products: res.data.data.product_list,
+            products: Products,
             storetitle: res.data.data.shop_name
           })
         }
@@ -88,8 +98,18 @@ Page({
               })
             }, 1000)
           } else {
+            var Products = []
+            if (res.data.data.product_list.length !== 0) {
+              for (var i = 0; i < res.data.data.product_list.length; i++) {
+                if (res.data.data.product_list[i].count != 0) {
+                  Products.push(res.data.data.product_list[i])
+                }
+              }
+            } else {
+              Products = res.data.data.product_list
+            }
             that.setData({
-              products: res.data.data.product_list
+              products: Products
             })
           }
         }
