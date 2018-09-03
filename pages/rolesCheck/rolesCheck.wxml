@@ -8,4 +8,6 @@
       </view>
     </block>
   </view>
+  <view class='background list' bindtap='getCode'>获取二维码</view>
+  <image src='https://dev2.lystrong.cn/upload/12345687985.jpg'></image>
 </view>

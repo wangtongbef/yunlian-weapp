@@ -60,5 +60,18 @@ Page({
         }
       }
     })
+  },
+  getCode:function(){
+    var that=this
+    wx.request({
+      url: 'https://dev2.lystrong.cn/wxacode',
+      data: {
+        scene:'111'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+      }
+    })
   }
 })
